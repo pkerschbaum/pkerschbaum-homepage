@@ -1,12 +1,13 @@
-import * as React from 'react';
 import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
 import type { GetStaticProps } from 'next';
+import Link from 'next/link';
+import path from 'path';
+import * as React from 'react';
 import styled from 'styled-components';
 
-import type { FrontMatterData } from '../components/types';
+import { POSTS_PATH } from '~/constants';
+import type { FrontMatterData } from '~/types';
 
 type HomeProps = {
   posts: Post[];
@@ -39,8 +40,6 @@ const PostTileAnchor = styled.a`
   color: var(--color-fg);
   text-decoration: none;
 `;
-
-const POSTS_PATH = 'posts';
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const files = await fs.promises.readdir(POSTS_PATH);

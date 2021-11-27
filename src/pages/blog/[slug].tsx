@@ -1,13 +1,14 @@
-import * as React from 'react';
 import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
-import invariant from 'tiny-invariant';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import path from 'path';
+import * as React from 'react';
+import invariant from 'tiny-invariant';
 
-import type { FrontMatterData } from '../../components/types';
+import { POSTS_PATH } from '~/constants';
+import type { FrontMatterData } from '~/types';
 
 type PostPageProps = {
   frontMatter: FrontMatterData;
@@ -24,7 +25,7 @@ const PostPage: React.FC<PostPageProps> = ({ frontMatter: { title }, mdxSource }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join('posts'));
+  const files = await fs.promises.readdir(POSTS_PATH);
   const paths = files.map((filename) => ({
     params: {
       slug: filename.replace('.mdx', ''),
@@ -36,14 +37,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-const POSTS_PATH = 'posts';
-
 export const getStaticProps: GetStaticProps<PostPageProps, { slug: string }> = async ({
   params,
 }) => {
   invariant(params?.slug);
   const markdownWithMeta = await fs.promises.readFile(
-    path.join(POSTS_PATH, params.slug + '.mdx'),
+    path.join(POSTS_PATH, `${params.slug}.mdx`),
     'utf-8',
   );
   const frontMatterFile = matter(markdownWithMeta);

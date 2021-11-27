@@ -12,6 +12,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "baseUrl": "src",
+    "paths": {
+      "~/*": ["./*"]
+    },
 
     /* JavaScript Support */
     "allowJs": true,

@@ -1,8 +1,8 @@
-import * as React from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import * as React from 'react';
 
-import { CSSReset } from '../styles/css-reset';
+import { CSSReset } from '~/styles/css-reset';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
