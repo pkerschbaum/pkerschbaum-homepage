@@ -15,12 +15,16 @@
   "devDependencies": {
     "@types/node": "16.11.10",
     "@types/react": "17.0.37",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
+    "gray-matter": "^4.0.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
+    "next-mdx-remote": "^3.0.8",
     "prettier": "^2.5.0",
+    "react-syntax-highlighter": "^15.4.5",
     "typescript": "4.5.2"
   }
 }
