@@ -1,25 +1,77 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import * as React from 'react';
+import Link from 'next/link';
+import type React from 'react';
+import styled from 'styled-components';
 
+import { Nav } from '~/components/nav';
+import { SocialMediaLinks } from '~/components/social-media-links';
+import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Index</title>
-        <meta name="description" content="Index page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <CSSReset />
+      <AppGlobalStyle />
 
-      <main>
-        <Component {...pageProps} />
-      </main>
+      <RootContainer>
+        <Header>
+          <Nav />
+
+          <SocialMediaLinks />
+        </Header>
+
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+
+        <Footer>
+          <span>2021</span>
+          <span>-</span>
+          <Link href="/">
+            <a>pkerschbaum</a>
+          </Link>
+        </Footer>
+      </RootContainer>
     </>
   );
 };
+
+const RootContainer = styled.div`
+  height: 100%;
+  max-width: 800px;
+  margin-inline: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+const Header = styled.header`
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+const Main = styled.main`
+  flex: 1;
+`;
+
+const Footer = styled.footer`
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: calc(1 * var(--spacing-base));
+`;
 
 export default MyApp;

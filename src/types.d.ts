@@ -12,4 +12,5 @@ export type FrontmatterData = {
   title: string;
   description: string;
   date: string;
+  tags: string[];
 };

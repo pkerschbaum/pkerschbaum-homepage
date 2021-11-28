@@ -23,7 +23,8 @@ export const CSSReset = createGlobalStyle`
     3. Allow percentage-based heights in the application
   */
   html,
-  body {
+  body,
+  #__next {
     height: 100%;
   }
 

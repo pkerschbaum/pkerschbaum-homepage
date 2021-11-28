@@ -1,32 +1,32 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
-import * as React from 'react';
+import type React from 'react';
 
 import { BlogOverview } from '~/components/blog-overview';
-import { WelcomeMessage } from '~/components/welcome-message';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 import type { MDXFile } from '~/types';
 
-type HomePageProps = {
+type BlogOverviewPageProps = {
   posts: MDXFile[];
 };
 
-const HomePage: React.FC<HomePageProps> = ({ posts }) => {
+const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>Patrick Kerschbaum</title>
-        <meta name="description" content="Homepage of Patrick Kerschbaum" />
+        <title>Patrick Kerschbaum - Blog</title>
+        <meta name="description" content="Blog of Patrick Kerschbaum" />
       </Head>
 
-      <WelcomeMessage />
+      <span>All Posts</span>
+
       <BlogOverview posts={posts} />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+export const getStaticProps: GetStaticProps<BlogOverviewPageProps> = async () => {
   const posts = await getAllMarkdownFiles(POSTS_PATH);
 
   return {
@@ -34,4 +34,4 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   };
 };
 
-export default HomePage;
+export default BlogOverviewPage;
