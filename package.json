@@ -6,16 +6,19 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compile": "tsc"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.1",
+    "dayjs": "^1.10.7",
     "esbuild": "^0.14.0",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^8.0.0",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-feather": "^2.0.9",
     "styled-components": "^5.3.3",
     "tiny-invariant": "^1.2.0"
   },

@@ -43,26 +43,36 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 };
 
 const RootContainer = styled.div`
-  height: 100%;
+  min-height: 100%;
   max-width: 800px;
-  margin-inline: auto;
+  margin: 0 auto;
 
+  padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
   display: flex;
   flex-direction: column;
-  gap: calc(2 * var(--spacing-base));
+  align-items: center;
+  gap: calc(4 * var(--spacing-base));
+
+  color: var(--color-fg);
 `;
 
 const Header = styled.header`
   flex-shrink: 0;
+  align-self: stretch;
 
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: calc(2 * var(--spacing-base));
+  gap: calc(4 * var(--spacing-base));
 `;
 
 const Main = styled.main`
   flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(4 * var(--spacing-base));
 `;
 
 const Footer = styled.footer`

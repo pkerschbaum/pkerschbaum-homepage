@@ -19,7 +19,7 @@ const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
         <meta name="description" content="Blog of Patrick Kerschbaum" />
       </Head>
 
-      <span>All Posts</span>
+      <h1>All Posts</h1>
 
       <BlogOverview posts={posts} />
     </>

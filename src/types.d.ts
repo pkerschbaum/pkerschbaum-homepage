@@ -1,16 +1,23 @@
 export type MDXFile = {
-  frontmatter: FrontmatterData;
   slug: string;
+  frontmatter: FrontmatterData;
 };
 
 export type MDXParseResult = {
-  frontmatter: FrontmatterData;
   code: string;
+  frontmatter: FrontmatterData;
 };
 
 export type FrontmatterData = {
   title: string;
   description: string;
-  date: string;
+  publishedAtISO: string;
   tags: string[];
+};
+
+export type Project = {
+  slug: string;
+  thumbnailUrl: string;
+  title: string;
+  description: string;
 };
