@@ -853,7 +853,7 @@ axobject-query@^2.2.0:
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
   integrity sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==
 
-"babel-plugin-styled-components@>= 1.12.0":
+"babel-plugin-styled-components@>= 1.12.0", babel-plugin-styled-components@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.1.tgz#4d1ea2169363887ffce5352f32080cba14d243cc"
   integrity sha512-U3wmORxerYBiqcRCo6thItIosEIga3F+ph0jJPkiOZJjyhpZyUZFQV9XvrZ2CbBIihJ3rDBC/itQ+Wx3VHMauw==

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^2.0.1",
     "esbuild": "^0.14.0",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^8.0.0",
