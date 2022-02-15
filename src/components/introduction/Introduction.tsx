@@ -1,5 +1,8 @@
+import Image from 'next/image';
 import type React from 'react';
 import styled, { css } from 'styled-components';
+
+import profilePic from '../../../public/profile-picture.jpg';
 
 export const nameHeadingStyles = css`
   font-size: var(--font-size-xl);
@@ -19,7 +22,14 @@ export const Introduction: React.FC = () => {
         I&apos;m currently based in Vienna, Austria. I have a history of working in the field of
         national-scaled web and mobile application engineering.
       </IntroductionMessageDetails>
-      <ProfilePicture src={'/profile-picture.jpg'} alt=""></ProfilePicture>
+      <ProfilePictureWrapper>
+        <ProfilePicture
+          src={profilePic}
+          alt="Picture of Patrick Kerschbaum"
+          width={120}
+          height={120}
+        />
+      </ProfilePictureWrapper>
     </IntroductionContainer>
   );
 };
@@ -27,9 +37,10 @@ export const Introduction: React.FC = () => {
 const IntroductionContainer = styled.section`
   max-width: 600px;
   margin-block: calc(8 * var(--spacing-base));
+  align-self: center;
 
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: max-content 1fr;
   grid-template-areas:
     'profile-picture heading'
     'profile-picture message'
@@ -46,14 +57,19 @@ const IntroductionHeading = styled.h1`
 
 const IntroductionMessage = styled.p`
   grid-area: message;
+  margin-bottom: calc(0.5 * var(--spacing-base));
 `;
 
 const IntroductionMessageDetails = styled.p`
   grid-area: message-details;
+  margin-bottom: calc(0.5 * var(--spacing-base));
 `;
 
-const ProfilePicture = styled.img`
+const ProfilePictureWrapper = styled.span`
   grid-area: profile-picture;
   margin-top: 8px;
+`;
+
+const ProfilePicture = styled(Image)`
   border-radius: 50%;
 `;

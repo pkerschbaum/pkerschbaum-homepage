@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write --ignore-unknown .",
     "compile": "tsc",
+    "compile:watch": "yarn run compile --watch",
     "prepare": "husky install"
   },
   "dependencies": {

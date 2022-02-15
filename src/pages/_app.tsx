@@ -50,7 +50,7 @@ const RootContainer = styled.div`
   padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: calc(4 * var(--spacing-base));
 
   color: var(--color-fg);
@@ -71,7 +71,7 @@ const Main = styled.main`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: calc(4 * var(--spacing-base));
 `;
 

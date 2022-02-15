@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
 
-import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements/Tile';
+import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements';
 import type { MDXFile } from '~/types';
 
 type BlogPostTileProps = {

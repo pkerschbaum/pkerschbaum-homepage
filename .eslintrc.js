@@ -1,3 +1,23 @@
+const noRestrictedSyntax_noTestBadPatterns = [
+  {
+    selector:
+      "MemberExpression[object.name='it'][property.name='only'], MemberExpression[object.name='test'][property.name='only']",
+    message:
+      'Do not check in spec files with tests using ".only" - the other tests of that spec file would be skipped!',
+  },
+  {
+    selector:
+      "MemberExpression[object.name='it'][property.name='skip'], MemberExpression[object.name='test'][property.name='skip']",
+    message: 'Do not check in dead tests. Either fix or delete them.',
+  },
+];
+const noRestrictedSyntax_preferNextJsImage = [
+  {
+    selector: "MemberExpression[object.name='styled'][property.name='img']",
+    message: 'Do not use the native <img> HTML element; use <Image> from "next/image" instead.',
+  },
+];
+
 module.exports = {
   parserOptions: {
     project: './tsconfig.json',
@@ -23,17 +43,8 @@ module.exports = {
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-restricted-syntax': [
       'error',
-      {
-        selector:
-          "MemberExpression[object.name='it'][property.name='only'], MemberExpression[object.name='test'][property.name='only']",
-        message:
-          'Do not check in spec files with tests using ".only" - the other tests of that spec file would be skipped!',
-      },
-      {
-        selector:
-          "MemberExpression[object.name='it'][property.name='skip'], MemberExpression[object.name='test'][property.name='skip']",
-        message: 'Do not check in dead tests. Either fix or delete them.',
-      },
+      ...noRestrictedSyntax_noTestBadPatterns,
+      ...noRestrictedSyntax_preferNextJsImage,
     ],
     'no-unneeded-ternary': 'error',
     'no-useless-computed-key': 'error',
@@ -127,4 +138,17 @@ module.exports = {
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unified-signatures': 'error',
   },
+  overrides: [
+    {
+      // allow default export for Storybook stories
+      files: ['src/elements/**/*'],
+      rules: {
+        'no-restricted-syntax': [
+          'error',
+          ...noRestrictedSyntax_noTestBadPatterns,
+          ...noRestrictedSyntax_preferNextJsImage,
+        ],
+      },
+    },
+  ],
 };
