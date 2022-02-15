@@ -25,9 +25,12 @@ const appGlobalStyle = css`
 
     /* design tokens */
     --color-fg: black;
-    --color-fg-darkgrey: hsl(0deg 0% 45%);
-    --color-fg-grey: hsl(0deg 0% 65%);
-    --color-fg-lightgrey: hsl(0deg 0% 85%);
+    --color-fg-darkgrey: hsl(0 0% 45%);
+    --color-fg-grey: hsl(0 0% 65%);
+    --color-fg-lightgrey: hsl(0 0% 85%);
+    --color-fg-teal: hsl(180 70% 45%);
+    --color-fg-lightteal: hsl(180 90% 45%);
+    --color-fg-emphasized: var(--color-fg-lightteal);
     --color-bg-emphasized: var(--color-fg-lightgrey);
     --color-fg-less-emphasized: var(--color-fg-darkgrey);
     --font-size-sm: 0.75rem;
@@ -55,6 +58,10 @@ const appGlobalStyle = css`
       10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
   }
 
+  #__next {
+    overflow-y: scroll;
+  }
+
   ul {
     padding: 0;
   }
@@ -62,6 +69,14 @@ const appGlobalStyle = css`
   ul ul li {
     text-indent: 0;
     list-style-type: none;
+  }
+
+  a {
+    color: var(--color-fg);
+
+    &:visited {
+      color: var(--color-fg);
+    }
   }
 `;
 

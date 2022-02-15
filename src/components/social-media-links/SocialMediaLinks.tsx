@@ -44,4 +44,8 @@ const SocialMediaLink = styled.a.attrs({
   rel: 'noopener noreferrer',
 })`
   color: inherit;
+
+  &:hover {
+    color: var(--color-fg-emphasized);
+  }
 `;

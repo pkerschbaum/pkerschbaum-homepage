@@ -44,7 +44,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 
 const RootContainer = styled.div`
   min-height: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 
   padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));

@@ -10,34 +10,50 @@ export const nameHeadingStyles = css`
 export const Introduction: React.FC = () => {
   return (
     <IntroductionContainer>
-      <WelcomeHeading>Patrick Kerschbaum</WelcomeHeading>
-      <WelcomeMessage>I&apos;m Patrick</WelcomeMessage>
-      <ProfilePicture>TODO</ProfilePicture>
+      <IntroductionHeading>Patrick Kerschbaum</IntroductionHeading>
+      <IntroductionMessage>
+        I&apos;m Patrick, a software developer with a great passion for web technologies and the
+        JavaScript ecosystem.
+      </IntroductionMessage>
+      <IntroductionMessageDetails>
+        I&apos;m currently based in Vienna, Austria. I have a history of working in the field of
+        national-scaled web and mobile application engineering.
+      </IntroductionMessageDetails>
+      <ProfilePicture src={'/profile-picture.jpg'} alt=""></ProfilePicture>
     </IntroductionContainer>
   );
 };
 
 const IntroductionContainer = styled.section`
+  max-width: 600px;
+  margin-block: calc(8 * var(--spacing-base));
+
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 120px 1fr;
   grid-template-areas:
     'profile-picture heading'
-    'profile-picture message';
-  grid-column-gap: calc(2 * var(--spacing-base));
+    'profile-picture message'
+    'profile-picture message-details';
+  grid-column-gap: calc(3 * var(--spacing-base));
   grid-row-gap: calc(0.5 * var(--spacing-base));
 `;
 
-const WelcomeHeading = styled.h1`
+const IntroductionHeading = styled.h1`
   grid-area: heading;
 
   ${nameHeadingStyles}
 `;
 
-const WelcomeMessage = styled.p`
+const IntroductionMessage = styled.p`
   grid-area: message;
 `;
 
-const ProfilePicture = styled.div`
+const IntroductionMessageDetails = styled.p`
+  grid-area: message-details;
+`;
+
+const ProfilePicture = styled.img`
   grid-area: profile-picture;
-  margin-top: 4px;
+  margin-top: 8px;
+  border-radius: 50%;
 `;
