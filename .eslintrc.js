@@ -12,10 +12,11 @@ module.exports = {
     'plugin:regexp/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:node/recommended',
     'plugin:eslint-comments/recommended',
     'next/core-web-vitals',
   ],
-  plugins: ['node', 'regexp'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'node', 'regexp', 'import'],
   rules: {
     curly: 'error',
     'no-console': 'error',
@@ -62,7 +63,12 @@ module.exports = {
         ],
       },
     ],
+    'node/no-extraneous-import': 'off',
+    'node/no-missing-import': 'off',
     'node/no-process-env': 'error',
+    'node/no-unpublished-import': 'off',
+    'node/no-unpublished-require': 'off',
+    'node/no-unsupported-features/es-syntax': 'off',
     '@typescript-eslint/ban-types': [
       'error',
       {
@@ -94,7 +100,6 @@ module.exports = {
     '@typescript-eslint/no-require-imports': 'error',
     '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
-    '@typescript-eslint/no-unnecessary-type-arguments': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-unused-vars': [
       'error',
