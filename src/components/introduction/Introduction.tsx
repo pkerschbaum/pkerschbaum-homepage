@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import profilePic from '../../../public/profile-picture.jpg';
 
 export const nameHeadingStyles = css`
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 `;
@@ -35,7 +35,7 @@ export const Introduction: React.FC = () => {
 };
 
 const IntroductionContainer = styled.section`
-  max-width: 600px;
+  max-width: var(--box-width-medium);
   margin-block: calc(8 * var(--spacing-base));
   align-self: center;
 

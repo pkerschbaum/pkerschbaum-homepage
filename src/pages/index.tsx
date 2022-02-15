@@ -45,7 +45,7 @@ const HomepageSection = styled.section`
 `;
 
 const SectionHeading = styled.h2`
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xxl);
 `;
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {

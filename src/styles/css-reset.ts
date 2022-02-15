@@ -37,6 +37,14 @@ const cssReset = css`
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+  }
 
   /*
     6. Improve media defaults

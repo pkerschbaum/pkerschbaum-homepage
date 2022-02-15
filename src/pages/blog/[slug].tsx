@@ -2,6 +2,7 @@ import { getMDXComponent } from 'mdx-bundler/client';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
+import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { POSTS_PATH } from '~/constants';
@@ -25,11 +26,25 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => {
         <meta name="description" content={mdxParseResult.frontmatter.description} />
       </Head>
 
-      <h1>{mdxParseResult.frontmatter.title}</h1>
-      <Component />
+      <Container>
+        <h1>{mdxParseResult.frontmatter.title}</h1>
+        <Component />
+      </Container>
     </>
   );
 };
+
+const Container = styled.div`
+  max-width: var(--box-width-medium);
+  align-self: center;
+
+  & p {
+    margin-bottom: var(--spacing-base);
+  }
+  & h1 {
+    margin-bottom: calc(2 * var(--spacing-base));
+  }
+`;
 
 export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }> = async ({
   params,

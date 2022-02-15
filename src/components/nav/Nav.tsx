@@ -42,7 +42,7 @@ const SubNavContainer = styled.div`
 
 const NavLink = styled.a`
   color: inherit;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   text-decoration: none;
 
   &:hover {

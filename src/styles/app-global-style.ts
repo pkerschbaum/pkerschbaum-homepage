@@ -34,10 +34,12 @@ const appGlobalStyle = css`
     --color-bg-emphasized: var(--color-fg-lightgrey);
     --color-fg-less-emphasized: var(--color-fg-darkgrey);
     --font-size-sm: 0.75rem;
-    --font-size-lg: 1.25rem;
-    --font-size-xl: 1.5rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xxl: 1.5rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
+    --box-width-medium: 600px;
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;
@@ -79,6 +81,14 @@ const appGlobalStyle = css`
     &:visited {
       color: var(--color-fg);
     }
+  }
+
+  p {
+    font-size: var(--font-size-lg);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
   }
 `;
 

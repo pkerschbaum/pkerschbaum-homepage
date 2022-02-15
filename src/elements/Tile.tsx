@@ -9,16 +9,17 @@ export const Tile = styled.article`
   height: 100%;
 
   color: inherit;
+  border: 1px solid lightgrey;
   border-radius: 4px;
-  box-shadow: var(--shadow-elevation-medium);
   /* hide overflow to "apply" box-shadow to children */
   overflow: hidden;
 
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
   will-change: transition;
 
   &:hover {
-    box-shadow: var(--shadow-elevation-high);
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-elevation-medium);
   }
 `;
 
