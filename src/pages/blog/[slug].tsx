@@ -5,6 +5,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
+import { CodeBlock } from '~/components/code-block';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
 import type { MDXParseResult } from '~/types';
@@ -28,7 +29,11 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => {
 
       <Container>
         <h1>{mdxParseResult.frontmatter.title}</h1>
-        <Component />
+        <Component
+          components={{
+            code: CodeBlock,
+          }}
+        />
       </Container>
     </>
   );

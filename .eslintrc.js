@@ -36,7 +36,13 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'next/core-web-vitals',
   ],
-  plugins: ['@typescript-eslint/eslint-plugin', 'node', 'regexp', 'import'],
+  /**
+   * add "only-warn" plugin to change all errors to warnings.
+   * ESLint is executed via Git hooks with --max-warnings 0 anyways. Transforming all errors to warnings
+   * allows to distinguish ESLint warnings from other errors (e.g. TypeScript compile errors) in the
+   * code editor (e.g. VS Code).
+   */
+  plugins: ['only-warn', '@typescript-eslint/eslint-plugin', 'node', 'regexp', 'import'],
   rules: {
     curly: 'error',
     'no-console': 'error',
@@ -54,6 +60,7 @@ module.exports = {
     'import/newline-after-import': 'error',
     'import/no-absolute-path': 'error',
     'import/no-cycle': 'error',
+    'import/no-default-export': 'error',
     'import/no-duplicates': 'error',
     'import/no-dynamic-require': 'error',
     'import/no-mutable-exports': 'error',
@@ -63,7 +70,7 @@ module.exports = {
       'error',
       {
         alphabetize: { order: 'asc', caseInsensitive: true },
-        'newlines-between': 'always-and-inside-groups',
+        'newlines-between': 'always',
         pathGroupsExcludedImportTypes: ['builtin'],
         groups: [['builtin', 'external'], ['parent', 'sibling'], 'index'],
         pathGroups: [
@@ -140,14 +147,10 @@ module.exports = {
   },
   overrides: [
     {
-      // allow default export for Storybook stories
-      files: ['src/elements/**/*'],
+      // allow default export for Next.js pages
+      files: ['src/pages/**/*'],
       rules: {
-        'no-restricted-syntax': [
-          'error',
-          ...noRestrictedSyntax_noTestBadPatterns,
-          ...noRestrictedSyntax_preferNextJsImage,
-        ],
+        'import/no-default-export': 'off',
       },
     },
   ],

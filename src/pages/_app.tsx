@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
@@ -9,38 +8,32 @@ import { SocialMediaLinks } from '~/components/social-media-links';
 import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <>
+    <CSSReset />
+    <AppGlobalStyle />
 
-      <CSSReset />
-      <AppGlobalStyle />
+    <RootContainer>
+      <Header>
+        <Nav />
 
-      <RootContainer>
-        <Header>
-          <Nav />
+        <SocialMediaLinks />
+      </Header>
 
-          <SocialMediaLinks />
-        </Header>
+      <Main>
+        <Component {...pageProps} />
+      </Main>
 
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-
-        <Footer>
-          <span>2021</span>
-          <span>-</span>
-          <Link href="/">
-            <a>pkerschbaum</a>
-          </Link>
-        </Footer>
-      </RootContainer>
-    </>
-  );
-};
+      <Footer>
+        <span>2021</span>
+        <span>-</span>
+        <Link href="/">
+          <a>pkerschbaum</a>
+        </Link>
+      </Footer>
+    </RootContainer>
+  </>
+);
 
 const RootContainer = styled.div`
   min-height: 100%;
