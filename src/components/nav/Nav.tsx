@@ -38,6 +38,7 @@ const NavAnchor = styled(Anchor)`
   text-decoration: none;
 
   &:hover {
+    color: inherit;
     text-decoration: revert;
   }
 `;

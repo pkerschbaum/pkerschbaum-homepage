@@ -29,7 +29,7 @@ const appGlobalStyle = css`
     --color-fg-grey: hsl(0 0% 65%);
     --color-fg-lightgrey: hsl(0 0% 85%);
     --color-fg-teal: hsl(180 70% 45%);
-    --color-fg-lightteal: hsl(180 90% 45%);
+    --color-fg-lightteal: hsl(180 100% 29%);
     --color-fg-emphasized: var(--color-fg-lightteal);
     --color-bg-emphasized: var(--color-fg-lightgrey);
     --color-fg-less-emphasized: var(--color-fg-darkgrey);
@@ -77,10 +77,12 @@ const appGlobalStyle = css`
 
   a {
     color: var(--color-fg);
-
-    &:visited {
-      color: var(--color-fg);
-    }
+  }
+  a:visited {
+    color: var(--color-fg);
+  }
+  a:hover {
+    color: var(--color-fg-emphasized);
   }
 
   p {

@@ -4,6 +4,10 @@ import { Anchor } from '~/elements/Anchor';
 
 export const TileAnchor = styled(Anchor)`
   text-decoration: none;
+
+  &:hover {
+    color: inherit;
+  }
 `;
 
 export const Tile = styled.article`

@@ -42,10 +42,4 @@ const LinkElement = styled.li``;
 const SocialMediaAnchor = styled(Anchor).attrs({
   target: '_blank',
   rel: 'noopener noreferrer',
-})`
-  color: inherit;
-
-  &:hover {
-    color: var(--color-fg-emphasized);
-  }
-`;
+})``;
