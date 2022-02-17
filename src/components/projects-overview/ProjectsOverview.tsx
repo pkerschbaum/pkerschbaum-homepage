@@ -1,7 +1,6 @@
 import type React from 'react';
 import styled from 'styled-components';
 
-import fileExplorerThumbnailUrl from '../../../public/file-explorer-thumbnail.png';
 import { ProjectTile } from '~/components/project-tile';
 import { QUERIES } from '~/constants';
 
@@ -15,7 +14,7 @@ export const ProjectsOverview: React.FC<ProjectsOverviewProps> = () => {
           slug: 'file-explorer',
           title: 'File Explorer',
           description: 'Description of file explorer',
-          thumbnailUrl: fileExplorerThumbnailUrl,
+          thumbnailUrl: '/file-explorer-thumbnail.png',
         }}
       />
     </ProjectsOverviewContainer>

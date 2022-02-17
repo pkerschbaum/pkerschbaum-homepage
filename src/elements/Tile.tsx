@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-export const TileAnchor = styled.a`
-  color: var(--color-fg);
+import { Anchor } from '~/elements/Anchor';
+
+export const TileAnchor = styled(Anchor)`
   text-decoration: none;
 `;
 

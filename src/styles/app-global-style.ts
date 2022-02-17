@@ -33,7 +33,7 @@ const appGlobalStyle = css`
     --color-fg-emphasized: var(--color-fg-lightteal);
     --color-bg-emphasized: var(--color-fg-lightgrey);
     --color-fg-less-emphasized: var(--color-fg-darkgrey);
-    --font-size-sm: 0.75rem;
+    --font-size-sm: 0.875rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
     --font-size-xxl: 1.5rem;

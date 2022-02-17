@@ -17,7 +17,7 @@ export type FrontmatterData = {
 
 export type Project = {
   slug: string;
-  thumbnailUrl: StaticImageData;
+  thumbnailUrl: string;
   title: string;
   description: string;
 };

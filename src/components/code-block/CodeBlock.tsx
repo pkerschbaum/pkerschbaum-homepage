@@ -7,6 +7,7 @@ import {
 } from '@codesandbox/sandpack-react';
 import { check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
+import styled from 'styled-components';
 
 import { logger } from '~/logger';
 
@@ -42,19 +43,32 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   const code = children.trimEnd();
 
   return (
-    <SandpackProvider
-      customSetup={{
-        entry: filename,
-        files: {
-          [filename]: {
-            code,
+    <CodeBlockContainer>
+      <SandpackProvider
+        customSetup={{
+          entry: filename,
+          files: {
+            [filename]: {
+              code,
+            },
           },
-        },
-      }}
-    >
-      <SandpackThemeProvider>
-        <SandpackCodeViewer key={code} showLineNumbers={false} />
-      </SandpackThemeProvider>
-    </SandpackProvider>
+        }}
+      >
+        <SandpackThemeProvider theme="github-light">
+          <SandpackCodeViewer key={code} showLineNumbers={false} />
+        </SandpackThemeProvider>
+      </SandpackProvider>
+    </CodeBlockContainer>
   );
 }
+
+const CodeBlockContainer = styled.div`
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-elevation-medium);
+  border-radius: 8px;
+  overflow: hidden;
+
+  & .cm-editor {
+    padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
+  }
+`;

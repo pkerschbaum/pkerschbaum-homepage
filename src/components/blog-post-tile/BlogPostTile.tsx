@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
 
@@ -14,22 +13,20 @@ export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => {
   const formattedPublishedAt = dayjs(post.frontmatter.publishedAtISO).format('MMMM D, YYYY');
 
   return (
-    <Link key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`} passHref>
-      <TileAnchor>
-        <Tile>
-          <PostTileContent>
-            <Title>{post.frontmatter.title}</Title>
-            <Description>{post.frontmatter.description}</Description>
-            <PublishedAt>{formattedPublishedAt}</PublishedAt>
-            <TagsArea>
-              {post.frontmatter.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </TagsArea>
-          </PostTileContent>
-        </Tile>
-      </TileAnchor>
-    </Link>
+    <TileAnchor key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`}>
+      <Tile>
+        <PostTileContent>
+          <Title>{post.frontmatter.title}</Title>
+          <Description>{post.frontmatter.description}</Description>
+          <PublishedAt>{formattedPublishedAt}</PublishedAt>
+          <TagsArea>
+            {post.frontmatter.tags.map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
+          </TagsArea>
+        </PostTileContent>
+      </Tile>
+    </TileAnchor>
   );
 };
 

@@ -17,6 +17,12 @@ const noRestrictedSyntax_preferNextJsImage = [
     message: 'Do not use the native <img> HTML element; use <Image> from "next/image" instead.',
   },
 ];
+const noRestrictedSyntax_preferElements = [
+  {
+    selector: "MemberExpression[object.name='styled'][property.name='a']",
+    message: 'Do not use the native <a> HTML element; use <Anchor> from "~/elements" instead.',
+  },
+];
 
 module.exports = {
   parserOptions: {
@@ -51,6 +57,7 @@ module.exports = {
       'error',
       ...noRestrictedSyntax_noTestBadPatterns,
       ...noRestrictedSyntax_preferNextJsImage,
+      ...noRestrictedSyntax_preferElements,
     ],
     'no-unneeded-ternary': 'error',
     'no-useless-computed-key': 'error',
@@ -151,6 +158,16 @@ module.exports = {
       files: ['src/pages/**/*'],
       rules: {
         'import/no-default-export': 'off',
+      },
+    },
+    {
+      files: ['src/elements/**/*'],
+      rules: {
+        'no-restricted-syntax': [
+          'error',
+          ...noRestrictedSyntax_noTestBadPatterns,
+          ...noRestrictedSyntax_preferNextJsImage,
+        ],
       },
     },
   ],

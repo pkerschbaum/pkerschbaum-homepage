@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
 
-import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements/Tile';
+import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements';
 import type { Project } from '~/types';
 
 type ProjectTileProps = {
@@ -12,25 +11,23 @@ type ProjectTileProps = {
 
 export const ProjectTile: React.FC<ProjectTileProps> = ({ project }) => {
   return (
-    <Link key={project.slug} href={`/project/${encodeURIComponent(project.slug)}`} passHref>
-      <TileAnchor>
-        <StyledTile>
-          <ThumbnailWrapper>
-            <Thumbnail
-              src={project.thumbnailUrl}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-              objectPosition="top center"
-            />
-          </ThumbnailWrapper>
-          <StyledTileContent>
-            <Title>{project.title}</Title>
-            <Description>{project.description}</Description>
-          </StyledTileContent>
-        </StyledTile>
-      </TileAnchor>
-    </Link>
+    <TileAnchor key={project.slug} href={`/projects/${encodeURIComponent(project.slug)}`}>
+      <StyledTile>
+        <ThumbnailWrapper>
+          <Thumbnail
+            src={project.thumbnailUrl}
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            objectPosition="top center"
+          />
+        </ThumbnailWrapper>
+        <StyledTileContent>
+          <Title>{project.title}</Title>
+          <Description>{project.description}</Description>
+        </StyledTileContent>
+      </StyledTile>
+    </TileAnchor>
   );
 };
 
