@@ -2,16 +2,15 @@
   "name": "pkerschbaum-homepage",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev",
-    "prebuild": "rimraf .next",
-    "build": "next build",
+    "build": "rimraf .next && next build",
     "export": "next export",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
     "format": "prettier --write --ignore-unknown .",
     "compile": "tsc",
-    "compile:watch": "yarn run compile --watch",
-    "prepare": "husky install"
+    "compile:watch": "npm run compile --watch"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^0.13.15",
@@ -50,7 +49,6 @@
   },
   "engines": {
     "node": "^16.13.2",
-    "npm": "^6.14.15",
-    "yarn": "^1.22.17"
+    "npm": "^8.1.2"
   }
 }

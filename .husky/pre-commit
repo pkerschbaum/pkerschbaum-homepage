@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn compile
-yarn run lint-staged
+npm run compile
+npm run lint-staged
