@@ -1,2 +1,2 @@
-export * from './Anchor';
-export * from './Tile';
+export * from '~/elements/Anchor';
+export * from '~/elements/Tile';

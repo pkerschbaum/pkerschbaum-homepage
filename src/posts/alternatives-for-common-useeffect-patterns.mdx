@@ -5,11 +5,15 @@ description: Description of post
 tags: ['React']
 ---
 
+import { Cool } from '../cool';
+
 This is an my second post.
 
 The title and description are pulled from the MDX file and processed using `mdx-bundler`.
 
 Now I will render a cool component from the same folder.
+
+<Cool />
 
 ```typescript
 export const test = 1;

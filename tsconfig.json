@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    /* Projects */
-    "incremental": true,
-
     /* Language and Environment */
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -26,12 +23,16 @@
 
     /* Interop Constraints */
     "esModuleInterop": true,
-    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
 
     /* Type Checking */
     "strict": true,
-    "useUnknownInCatchVariables": true,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Projects */
+    "incremental": true,
 
     /* Completeness */
     "skipLibCheck": true
