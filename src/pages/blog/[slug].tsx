@@ -1,9 +1,10 @@
-import { getMDXComponent } from 'mdx-bundler/client';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
+import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
+import { MDXViewer } from '~/components/mdx-client';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
 import type { MDXParseResult } from '~/types';
@@ -12,24 +13,38 @@ type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
 };
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => {
-  const Component = React.useMemo(
-    () => getMDXComponent(mdxParseResult.code),
-    [mdxParseResult.code],
-  );
+const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
+  <>
+    <Head>
+      <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
+      <meta name="description" content={mdxParseResult.frontmatter.description} />
+    </Head>
 
-  return (
-    <>
-      <Head>
-        <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
-        <meta name="description" content={mdxParseResult.frontmatter.description} />
-      </Head>
-
+    <Container>
       <h1>{mdxParseResult.frontmatter.title}</h1>
-      <Component />
-    </>
-  );
-};
+      <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+    </Container>
+  </>
+);
+
+const Container = styled.div`
+  max-width: var(--box-width-medium);
+  align-self: center;
+
+  & h2,
+  & h3 {
+    margin-block: 1.5em;
+  }
+  & p {
+    margin-block: 1em;
+  }
+  & ul {
+    margin-block: 0.75em;
+  }
+  & li {
+    margin-block: 0.25em;
+  }
+`;
 
 export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }> = async ({
   params,

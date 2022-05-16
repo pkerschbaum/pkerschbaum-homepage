@@ -25,16 +25,21 @@ const appGlobalStyle = css`
 
     /* design tokens */
     --color-fg: black;
-    --color-fg-darkgrey: hsl(0deg 0% 45%);
-    --color-fg-grey: hsl(0deg 0% 65%);
-    --color-fg-lightgrey: hsl(0deg 0% 85%);
+    --color-fg-darkgrey: hsl(0 0% 45%);
+    --color-fg-grey: hsl(0 0% 65%);
+    --color-fg-lightgrey: hsl(0 0% 85%);
+    --color-fg-teal: hsl(180 70% 45%);
+    --color-fg-lightteal: hsl(180 100% 29%);
+    --color-fg-emphasized: var(--color-fg-lightteal);
     --color-bg-emphasized: var(--color-fg-lightgrey);
     --color-fg-less-emphasized: var(--color-fg-darkgrey);
-    --font-size-sm: 0.75rem;
-    --font-size-lg: 1.25rem;
-    --font-size-xl: 1.5rem;
+    --font-size-sm: 0.875rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-xxl: 1.5rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
+    --box-width-medium: 800px;
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;
@@ -55,6 +60,12 @@ const appGlobalStyle = css`
       10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
   }
 
+  #__next {
+    overflow-y: scroll;
+    font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+
   ul {
     padding: 0;
   }
@@ -62,6 +73,24 @@ const appGlobalStyle = css`
   ul ul li {
     text-indent: 0;
     list-style-type: none;
+  }
+
+  a {
+    color: var(--color-fg);
+  }
+  a:visited {
+    color: var(--color-fg);
+  }
+  a:hover {
+    color: var(--color-fg-emphasized);
+  }
+
+  p {
+    font-size: var(--font-size-lg);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
   }
 `;
 

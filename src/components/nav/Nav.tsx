@@ -1,26 +1,18 @@
-import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
 
 import { nameHeadingStyles } from '~/components/introduction';
+import { Anchor } from '~/elements';
 
 export const Nav: React.FC = () => {
   return (
     <NavContainer>
-      <Link href="/" passHref>
-        <NavHomeLink>Patrick Kerschbaum</NavHomeLink>
-      </Link>
+      <NavHomeAnchor href="/">Patrick Kerschbaum</NavHomeAnchor>
 
       <SubNavContainer>
-        <Link href="/blog" passHref>
-          <NavLink>Blog</NavLink>
-        </Link>
-        <Link href="/projects" passHref>
-          <NavLink>Projects</NavLink>
-        </Link>
-        <Link href="/resume" passHref>
-          <NavLink>Resume</NavLink>
-        </Link>
+        <NavAnchor href="/blog">Blog</NavAnchor>
+        <NavAnchor href="/projects">Projects</NavAnchor>
+        <NavAnchor href="/resume">Resume</NavAnchor>
       </SubNavContainer>
     </NavContainer>
   );
@@ -40,17 +32,18 @@ const SubNavContainer = styled.div`
   gap: calc(3 * var(--spacing-base));
 `;
 
-const NavLink = styled.a`
+const NavAnchor = styled(Anchor)`
   color: inherit;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   text-decoration: none;
 
   &:hover {
+    color: inherit;
     text-decoration: revert;
   }
 `;
 
-const NavHomeLink = styled(NavLink)`
+const NavHomeAnchor = styled(NavAnchor)`
   width: min-content;
 
   line-height: 1;

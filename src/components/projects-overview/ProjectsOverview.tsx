@@ -22,12 +22,14 @@ export const ProjectsOverview: React.FC<ProjectsOverviewProps> = () => {
 };
 
 const ProjectsOverviewContainer = styled.div`
+  width: 100%;
+
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: calc(2 * var(--spacing-base));
   grid-column-gap: calc(2 * var(--spacing-base));
 
-  @media ${QUERIES.tabletAndUp} {
+  @media ${QUERIES.laptopAndUp} {
     grid-template-columns: 1fr 1fr;
   }
 `;

@@ -1,5 +1,5 @@
+import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import Link from 'next/link';
 import type React from 'react';
 import styled from 'styled-components';
@@ -9,48 +9,42 @@ import { SocialMediaLinks } from '~/components/social-media-links';
 import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <>
+    <CSSReset />
+    <AppGlobalStyle />
 
-      <CSSReset />
-      <AppGlobalStyle />
+    <RootContainer>
+      <Header>
+        <Nav />
 
-      <RootContainer>
-        <Header>
-          <Nav />
+        <SocialMediaLinks />
+      </Header>
 
-          <SocialMediaLinks />
-        </Header>
+      <Main>
+        <Component {...pageProps} />
+      </Main>
 
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-
-        <Footer>
-          <span>2021</span>
-          <span>-</span>
-          <Link href="/">
-            <a>pkerschbaum</a>
-          </Link>
-        </Footer>
-      </RootContainer>
-    </>
-  );
-};
+      <Footer>
+        <span>{dayjs().year()}</span>
+        <span>-</span>
+        <Link href="/">
+          <a>pkerschbaum</a>
+        </Link>
+      </Footer>
+    </RootContainer>
+  </>
+);
 
 const RootContainer = styled.div`
   min-height: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 
-  padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
+  padding: calc(3 * var(--spacing-base)) calc(2.5 * var(--spacing-base));
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: calc(4 * var(--spacing-base));
 
   color: var(--color-fg);
@@ -71,7 +65,7 @@ const Main = styled.main`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: calc(4 * var(--spacing-base));
 `;
 
