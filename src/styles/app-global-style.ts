@@ -39,7 +39,7 @@ const appGlobalStyle = css`
     --font-size-xxl: 1.5rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
-    --box-width-medium: 600px;
+    --box-width-medium: 800px;
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;

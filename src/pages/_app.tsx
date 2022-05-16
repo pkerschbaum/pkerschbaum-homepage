@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import type React from 'react';
@@ -25,7 +26,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
       </Main>
 
       <Footer>
-        <span>2021</span>
+        <span>{dayjs().year()}</span>
         <span>-</span>
         <Link href="/">
           <a>pkerschbaum</a>
@@ -40,7 +41,7 @@ const RootContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
 
-  padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
+  padding: calc(3 * var(--spacing-base)) calc(2.5 * var(--spacing-base));
   display: flex;
   flex-direction: column;
   align-items: stretch;
