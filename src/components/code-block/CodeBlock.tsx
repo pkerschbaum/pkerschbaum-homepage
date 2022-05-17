@@ -4,11 +4,14 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackCodeViewer,
+  SandpackThemeProp,
 } from '@codesandbox/sandpack-react';
-import { check } from '@pkerschbaum/ts-utils';
+import { assertIsUnreachable, check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
 import styled from 'styled-components';
 
+import { ColorTheme } from '~/constants';
+import { useColorTheme } from '~/context/color-theme';
 import { logger } from '~/logger';
 
 const CODESANDBOX_LANGUAGE = {
@@ -26,6 +29,8 @@ type CodeBlockProps = {
 };
 
 export function CodeBlock({ children, className }: CodeBlockProps) {
+  const { activeColorTheme } = useColorTheme();
+
   if (
     typeof children !== 'string' ||
     (typeof className === 'string' && !check.isValueInEnum(className, CODESANDBOX_LANGUAGE))
@@ -42,6 +47,20 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   const filename = `/index.${fileExtension}`;
   const code = children.trimEnd();
 
+  let sandpackThemeToUse: SandpackThemeProp;
+  switch (activeColorTheme) {
+    case ColorTheme.LIGHT: {
+      sandpackThemeToUse = 'github-light';
+      break;
+    }
+    case ColorTheme.DARK: {
+      sandpackThemeToUse = 'dark';
+      break;
+    }
+    default:
+      assertIsUnreachable(activeColorTheme);
+  }
+
   return (
     <CodeBlockContainer>
       <SandpackProvider
@@ -54,7 +73,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
           },
         }}
       >
-        <SandpackThemeProvider theme="github-light">
+        <SandpackThemeProvider theme={sandpackThemeToUse}>
           <SandpackCodeViewer key={code} showLineNumbers={false} />
         </SandpackThemeProvider>
       </SandpackProvider>

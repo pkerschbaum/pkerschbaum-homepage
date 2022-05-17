@@ -1,22 +1,29 @@
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
-import type React from 'react';
+import * as React from 'react';
+import { Moon } from 'react-feather';
 import styled from 'styled-components';
 
 import { Nav } from '~/components/nav';
 import { SocialMediaLinks } from '~/components/social-media-links';
+import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
+import { Button } from '~/elements';
 import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
-  <>
+  <ColorThemeProvider>
     <CSSReset />
     <AppGlobalStyle />
 
     <RootContainer>
       <Header>
         <Nav />
+
+        <ToggleColorThemeButtonContainer>
+          <SwitchThemeButton />
+        </ToggleColorThemeButtonContainer>
 
         <SocialMediaLinks />
       </Header>
@@ -33,8 +40,18 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         </Link>
       </Footer>
     </RootContainer>
-  </>
+  </ColorThemeProvider>
 );
+
+const SwitchThemeButton: React.FC = () => {
+  const { toggleColorTheme } = useColorTheme();
+
+  return (
+    <Button onClick={toggleColorTheme}>
+      <Moon aria-label="Switch to dark mode" />
+    </Button>
+  );
+};
 
 const RootContainer = styled.div`
   min-height: 100%;
@@ -46,8 +63,6 @@ const RootContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: calc(4 * var(--spacing-base));
-
-  color: var(--color-fg);
 `;
 
 const Header = styled.header`
@@ -58,6 +73,13 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   gap: calc(4 * var(--spacing-base));
+`;
+
+const ToggleColorThemeButtonContainer = styled.div`
+  flex-shrink: 0;
+  flex-grow: 1;
+
+  display: flex;
 `;
 
 const Main = styled.main`

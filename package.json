@@ -10,7 +10,7 @@
     "lint": "next lint --max-warnings 0",
     "format": "prettier --write --ignore-unknown .",
     "compile": "tsc",
-    "compile:watch": "npm run compile --watch"
+    "compile:watch": "npm run compile -- --watch"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^0.19.6",

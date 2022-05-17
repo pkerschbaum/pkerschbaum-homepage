@@ -28,6 +28,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
 );
 
 const Container = styled.div`
+  width: 100%;
   max-width: var(--box-width-medium);
   align-self: center;
 

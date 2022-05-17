@@ -9,12 +9,12 @@ const appGlobalStyle = css`
   }
   *::-webkit-scrollbar-thumb {
     border-radius: 1000px;
-    background-color: var(--color-fg-grey);
-    border: 2px solid var(--color-fg-grey);
+    background-color: var(--color-grey);
+    border: 2px solid var(--color-grey);
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-fg-darkgrey);
-    border: 2px solid var(--color-fg-darkgrey);
+    background-color: var(--color-darkgrey);
+    border: 2px solid var(--color-darkgrey);
   }
   ::-webkit-scrollbar-corner {
     background-color: rgba(0, 0, 0, 0);
@@ -22,17 +22,24 @@ const appGlobalStyle = css`
 
   html {
     font-family: sans-serif;
+    color: var(--color-fg);
+    background-color: var(--color-bg);
+
+    transition: background 200ms;
 
     /* design tokens */
-    --color-fg: black;
-    --color-fg-darkgrey: hsl(0 0% 45%);
-    --color-fg-grey: hsl(0 0% 65%);
-    --color-fg-lightgrey: hsl(0 0% 85%);
-    --color-fg-teal: hsl(180 70% 45%);
-    --color-fg-lightteal: hsl(180 100% 29%);
-    --color-fg-emphasized: var(--color-fg-lightteal);
-    --color-bg-emphasized: var(--color-fg-lightgrey);
-    --color-fg-less-emphasized: var(--color-fg-darkgrey);
+    --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
+    --color-black: hsl(225, 6%, 13%);
+    --color-darkgrey: hsl(0 0% 45%);
+    --color-grey: hsl(0 0% 65%);
+    --color-lightgrey: hsl(0 0% 85%);
+    --color-teal: hsl(180 70% 45%);
+    --color-lightteal: hsl(180 100% 29%);
+
+    --color-fg-emphasized: var(--color-lightteal);
+    --color-bg-emphasized: var(--color-lightgrey);
+
+    --color-fg-less-emphasized: var(--color-darkgrey);
     --font-size-sm: 0.875rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
@@ -60,6 +67,24 @@ const appGlobalStyle = css`
       10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
   }
 
+  :root {
+    --color-fg: var(--color-black);
+    --color-bg: var(--color-white);
+    --image-filter: grayscale(0%);
+  }
+
+  :root[data-theme='dark'] {
+    --color-fg: var(--color-white);
+    --color-bg: var(--color-black);
+    --color-bg-emphasized: var(--color-darkgrey);
+    --image-filter: grayscale(20%);
+  }
+
+  /* re-colorize and darken photographic images (https://web.dev/prefers-color-scheme/#re-colorize-and-darken-photographic-images) */
+  img:not([src*='.svg']) {
+    filter: var(--image-filter);
+  }
+
   #__next {
     overflow-y: scroll;
     font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -76,12 +101,23 @@ const appGlobalStyle = css`
   }
 
   a {
-    color: var(--color-fg);
+    color: inherit;
   }
   a:visited {
-    color: var(--color-fg);
+    color: inherit;
   }
   a:hover {
+    color: var(--color-fg-emphasized);
+  }
+
+  /* style buttons */
+  button {
+    border: none;
+    color: inherit;
+    background-color: inherit;
+  }
+  button:hover {
+    cursor: pointer;
     color: var(--color-fg-emphasized);
   }
 
