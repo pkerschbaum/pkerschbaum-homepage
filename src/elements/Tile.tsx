@@ -19,12 +19,12 @@ export const Tile = styled.article`
   /* hide overflow to "apply" box-shadow to children */
   overflow: hidden;
 
-  transition: box-shadow 0.3s ease, border 0.3s ease;
+  transition: box-shadow 0.3s ease, border 0.3s ease, background 200ms;
   will-change: transition;
 
   &:hover {
-    border: 1px solid transparent;
-    box-shadow: var(--shadow-elevation-medium);
+    border-color: var(--color-bg-interactive);
+    background-color: var(--color-bg-interactive);
   }
 `;
 

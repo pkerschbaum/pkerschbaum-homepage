@@ -29,17 +29,21 @@ const appGlobalStyle = css`
 
     /* design tokens */
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
-    --color-black: hsl(225, 6%, 13%);
+    --color-black-hsl: 225, 6%, 13%;
+    --color-black: hsl(var(--color-black-hsl));
     --color-darkgrey: hsl(0 0% 45%);
     --color-grey: hsl(0 0% 65%);
     --color-lightgrey: hsl(0 0% 85%);
+    --color-darkteal: hsl(180 70% 30%);
     --color-teal: hsl(180 70% 45%);
     --color-lightteal: hsl(180 100% 29%);
-
-    --color-fg-emphasized: var(--color-lightteal);
-    --color-bg-emphasized: var(--color-lightgrey);
+    --color-verylightteal: hsl(180 100% 40%);
 
     --color-fg-less-emphasized: var(--color-darkgrey);
+    --color-bg-emphasized: var(--color-lightgrey);
+    --color-fg-interactive: var(--color-lightteal);
+    --color-bg-interactive: var(--color-verylightteal);
+
     --font-size-sm: 0.875rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
@@ -75,8 +79,11 @@ const appGlobalStyle = css`
 
   :root[data-theme='dark'] {
     --color-fg: var(--color-white);
+    --color-fg-less-emphasized: var(--color-lightgrey);
     --color-bg: var(--color-black);
     --color-bg-emphasized: var(--color-darkgrey);
+    --color-bg-interactive: var(--color-darkteal);
+    --shadow-color: var(--color-black-hsl);
     --image-filter: grayscale(20%);
   }
 
@@ -107,7 +114,7 @@ const appGlobalStyle = css`
     color: inherit;
   }
   a:hover {
-    color: var(--color-fg-emphasized);
+    color: var(--color-fg-interactive);
   }
 
   /* style buttons */
@@ -118,7 +125,7 @@ const appGlobalStyle = css`
   }
   button:hover {
     cursor: pointer;
-    color: var(--color-fg-emphasized);
+    color: var(--color-fg-interactive);
   }
 
   p {

@@ -1,12 +1,14 @@
+import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import * as React from 'react';
-import { Moon } from 'react-feather';
+import { Moon, Sun } from 'react-feather';
 import styled from 'styled-components';
 
 import { Nav } from '~/components/nav';
 import { SocialMediaLinks } from '~/components/social-media-links';
+import { ColorTheme } from '~/constants';
 import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
 import { Button } from '~/elements';
 import { AppGlobalStyle } from '~/styles/app-global-style';
@@ -24,8 +26,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         <ToggleColorThemeButtonContainer>
           <SwitchThemeButton />
         </ToggleColorThemeButtonContainer>
-
-        <SocialMediaLinks />
       </Header>
 
       <Main>
@@ -33,24 +33,38 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
       </Main>
 
       <Footer>
-        <span>{dayjs().year()}</span>
-        <span>-</span>
-        <Link href="/">
-          <a>pkerschbaum</a>
-        </Link>
+        <SocialMediaLinks />
+
+        <YearAndContact>
+          <span>{dayjs().year()}</span>
+          <span>-</span>
+          <Link href="/">
+            <a>pkerschbaum</a>
+          </Link>
+        </YearAndContact>
       </Footer>
     </RootContainer>
   </ColorThemeProvider>
 );
 
 const SwitchThemeButton: React.FC = () => {
-  const { toggleColorTheme } = useColorTheme();
+  const { activeColorTheme, toggleColorTheme } = useColorTheme();
 
-  return (
-    <Button onClick={toggleColorTheme}>
-      <Moon aria-label="Switch to dark mode" />
-    </Button>
-  );
+  let iconToRender;
+  switch (activeColorTheme) {
+    case ColorTheme.LIGHT: {
+      iconToRender = <Moon aria-label="Switch to dark mode" />;
+      break;
+    }
+    case ColorTheme.DARK: {
+      iconToRender = <Sun aria-label="Switch to light mode" />;
+      break;
+    }
+    default:
+      assertIsUnreachable(activeColorTheme);
+  }
+
+  return <Button onClick={toggleColorTheme}>{iconToRender}</Button>;
 };
 
 const RootContainer = styled.div`
@@ -77,8 +91,6 @@ const Header = styled.header`
 
 const ToggleColorThemeButtonContainer = styled.div`
   flex-shrink: 0;
-  flex-grow: 1;
-
   display: flex;
 `;
 
@@ -95,8 +107,15 @@ const Footer = styled.footer`
   flex-shrink: 0;
 
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+const YearAndContact = styled.div`
+  display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   gap: calc(1 * var(--spacing-base));
 `;
 
