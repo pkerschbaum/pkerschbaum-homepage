@@ -4,6 +4,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
+import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-client';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
@@ -23,6 +24,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
     <Container>
       <h1>{mdxParseResult.frontmatter.title}</h1>
       <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+      <CommentsSection />
     </Container>
   </>
 );

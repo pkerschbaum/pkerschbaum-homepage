@@ -34,10 +34,10 @@ const appGlobalStyle = css`
     --color-darkgrey: hsl(0 0% 45%);
     --color-grey: hsl(0 0% 65%);
     --color-lightgrey: hsl(0 0% 85%);
-    --color-darkteal: hsl(180 70% 30%);
-    --color-teal: hsl(180 70% 45%);
+    --color-darkteal: hsl(180 100% 25%);
+    --color-teal: hsl(180 100% 45%);
     --color-lightteal: hsl(180 100% 29%);
-    --color-verylightteal: hsl(180 100% 40%);
+    --color-verylightteal: hsl(180 100% 75%);
 
     --color-fg-less-emphasized: var(--color-darkgrey);
     --color-bg-emphasized: var(--color-lightgrey);
