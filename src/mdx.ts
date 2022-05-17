@@ -3,7 +3,7 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
 
-import type { FrontmatterData, MDXFile, MDXParseResult } from '~/types';
+import { MDXFile, MDXParseResult, schema_frontmatterData } from '~/schema';
 
 export async function getAllMarkdownFiles(absolutePathToDirectory: string): Promise<MDXFile[]> {
   let files = await fs.promises.readdir(absolutePathToDirectory);
@@ -17,7 +17,7 @@ export async function getAllMarkdownFiles(absolutePathToDirectory: string): Prom
       );
 
       const slug = fileName.replace(/\.mdx$/, '');
-      const frontmatter = matter(source).data as FrontmatterData;
+      const frontmatter = schema_frontmatterData.parse(matter(source).data);
       const markdownFile: MDXFile = {
         frontmatter,
         slug,
@@ -44,7 +44,7 @@ export async function parseAndBundleMDXFile(
     cwd: absolutePathToDirectory,
   });
 
-  const frontmatter = bundleMDXResult.frontmatter as FrontmatterData;
+  const frontmatter = schema_frontmatterData.parse(bundleMDXResult.frontmatter);
   const code = bundleMDXResult.code;
   const mdxParseResult: MDXParseResult = {
     frontmatter,

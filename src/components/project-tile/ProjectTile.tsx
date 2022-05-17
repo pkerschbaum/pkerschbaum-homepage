@@ -3,7 +3,7 @@ import type React from 'react';
 import styled from 'styled-components';
 
 import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements';
-import type { Project } from '~/types';
+import type { Project } from '~/schema';
 
 type ProjectTileProps = {
   project: Project;

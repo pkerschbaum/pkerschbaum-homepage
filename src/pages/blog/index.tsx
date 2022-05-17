@@ -5,7 +5,7 @@ import type React from 'react';
 import { BlogOverview } from '~/components/blog-overview';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
-import type { MDXFile } from '~/types';
+import type { MDXFile } from '~/schema';
 
 type BlogOverviewPageProps = {
   posts: MDXFile[];

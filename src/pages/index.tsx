@@ -8,7 +8,7 @@ import { Introduction } from '~/components/introduction';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
-import type { MDXFile } from '~/types';
+import type { MDXFile } from '~/schema';
 
 type HomePageProps = {
   posts: MDXFile[];

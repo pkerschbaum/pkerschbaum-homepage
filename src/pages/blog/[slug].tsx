@@ -8,7 +8,7 @@ import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-client';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
-import type { MDXParseResult } from '~/types';
+import type { MDXParseResult } from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { BlogPostTile } from '~/components/blog-post-tile';
 import { QUERIES } from '~/constants';
-import type { MDXFile } from '~/types';
+import type { MDXFile } from '~/schema';
 
 type BlogOverviewProps = {
   posts: MDXFile[];

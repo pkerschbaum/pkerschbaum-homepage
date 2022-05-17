@@ -3,7 +3,7 @@ import type React from 'react';
 import styled from 'styled-components';
 
 import { Description, Tile, TileAnchor, TileContent, Title } from '~/elements';
-import type { MDXFile } from '~/types';
+import type { MDXFile } from '~/schema';
 
 type BlogPostTileProps = {
   post: MDXFile;
