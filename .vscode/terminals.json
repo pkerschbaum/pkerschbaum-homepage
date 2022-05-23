@@ -1,0 +1,11 @@
+{
+  "autorun": true,
+  "terminals": [
+    {
+      "name": "npm run dev",
+      "focus": true,
+      "execute": false,
+      "command": "npm run dev"
+    }
+  ]
+}

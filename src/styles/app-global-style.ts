@@ -31,23 +31,27 @@ const appGlobalStyle = css`
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
     --color-black-hsl: 225, 6%, 13%;
     --color-black: hsl(var(--color-black-hsl));
-    --color-darkgrey: hsl(0 0% 45%);
+    --color-darkgrey: hsl(0 0% 35%);
     --color-grey: hsl(0 0% 65%);
     --color-lightgrey: hsl(0 0% 85%);
+    --color-verylightgrey: hsl(0 0% 88%);
     --color-darkteal: hsl(180 100% 25%);
     --color-teal: hsl(180 100% 45%);
     --color-lightteal: hsl(180 100% 29%);
     --color-verylightteal: hsl(180 100% 75%);
 
     --color-fg-less-emphasized: var(--color-darkgrey);
-    --color-bg-emphasized: var(--color-lightgrey);
+    --color-bg-emphasized: var(--color-verylightgrey);
     --color-fg-interactive: var(--color-lightteal);
     --color-bg-interactive: var(--color-verylightteal);
 
     --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
     --font-size-xxl: 1.5rem;
+    --font-size-xxxl: 1.75rem;
+    --font-size-xxxxl: 2rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
     --box-width-medium: 800px;
@@ -94,7 +98,7 @@ const appGlobalStyle = css`
 
   #__next {
     overflow-y: scroll;
-    font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
@@ -128,12 +132,27 @@ const appGlobalStyle = css`
     color: var(--color-fg-interactive);
   }
 
-  p {
+  p,
+  ul,
+  ol {
     font-size: var(--font-size-lg);
   }
 
+  h1 {
+    font-size: var(--font-size-xxxxl);
+  }
+  h2 {
+    font-size: var(--font-size-xxl);
+  }
   h3 {
     font-size: var(--font-size-xl);
+  }
+
+  code {
+    font-size: var(--font-size-md);
+    padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
+    border-radius: 4px;
+    background-color: var(--color-bg-emphasized);
   }
 `;
 

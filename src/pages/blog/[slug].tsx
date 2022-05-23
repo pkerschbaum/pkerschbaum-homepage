@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
@@ -21,32 +22,65 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
       <meta name="description" content={mdxParseResult.frontmatter.description} />
     </Head>
 
-    <Container>
-      <h1>{mdxParseResult.frontmatter.title}</h1>
-      <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+    <BlogPostContainer>
+      <FrontMatter>
+        <h1>{mdxParseResult.frontmatter.title}</h1>
+        <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+          Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
+        </Time>
+      </FrontMatter>
+      <div>
+        <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+      </div>
       <CommentsSection />
-    </Container>
+    </BlogPostContainer>
   </>
 );
 
-const Container = styled.div`
+const BlogPostContainer = styled.article`
   width: 100%;
   max-width: var(--box-width-medium);
   align-self: center;
 
-  & h2,
-  & h3 {
-    margin-block: 1.5em;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-base));
+
   & p {
     margin-block: 1em;
   }
   & ul {
     margin-block: 0.75em;
+    padding-inline-start: 20px;
+  }
+  & ul li,
+  & ul ul li {
+    list-style-type: initial;
   }
   & li {
     margin-block: 0.25em;
   }
+
+  & h1,
+  & h2,
+  & h3 {
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+`;
+
+const FrontMatter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-base);
+
+  text-align: center;
+`;
+
+const Time = styled.time`
+  color: var(--color-fg-less-emphasized);
+  text-transform: uppercase;
 `;
 
 export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }> = async ({

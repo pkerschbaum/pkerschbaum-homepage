@@ -18,7 +18,6 @@ export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => {
         <PostTileContent>
           <Title>{post.frontmatter.title}</Title>
           <Description>{post.frontmatter.description}</Description>
-          <PublishedAt>{formattedPublishedAt}</PublishedAt>
           <TagsArea>
             {post.frontmatter.tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
@@ -49,14 +48,10 @@ const TagsArea = styled.ul`
 `;
 
 const Tag = styled.li`
-  padding: calc(0.5 * var(--spacing-base)) calc(1.5 * var(--spacing-base));
+  padding: calc(0.5 * var(--spacing-base)) calc(1 * var(--spacing-base));
 
   white-space: pre;
+  font-size: var(--font-size-sm);
   border-radius: 4px;
   background-color: var(--color-bg-emphasized);
-`;
-
-const PublishedAt = styled.p`
-  color: var(--color-fg-less-emphasized);
-  font-style: italic;
 `;

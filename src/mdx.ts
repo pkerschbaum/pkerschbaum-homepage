@@ -27,7 +27,9 @@ export async function getAllMarkdownFiles(absolutePathToDirectory: string): Prom
     }),
   );
 
-  return markdownFiles;
+  const publishedFiles = markdownFiles.filter((file) => file.frontmatter.published);
+
+  return publishedFiles;
 }
 
 export async function parseAndBundleMDXFile(

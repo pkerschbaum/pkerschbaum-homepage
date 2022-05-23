@@ -12,6 +12,7 @@ export type MDXParseResult = {
 
 export const schema_frontmatterData = z.object({
   title: z.string(),
+  published: z.boolean(),
   publishedAtISO: z.string(),
   description: z.string(),
   shortenedURL: z.string(),
