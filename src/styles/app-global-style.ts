@@ -135,7 +135,7 @@ const appGlobalStyle = css`
   p,
   ul,
   ol {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
   }
 
   h1 {

@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { CodeBlock } from '~/components/code-block';
 import { Anchor } from '~/elements';
+import { urlUtils } from '~/utils/url.utils';
 
 type MDXViewerProps = {
   codeOfMdxParseResult: string;
@@ -22,7 +23,18 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
           if (check.isNullishOrEmptyString(props.href)) {
             throw new Error(`the <a> element must have a href, but has not`);
           }
-          return <Anchor {...props} href={props.href} />;
+
+          let textToDisplay = props.children;
+          if (textToDisplay === 'AUTOGENERATE') {
+            const url = new URL(props.href);
+            textToDisplay = urlUtils.createReadableTextFromUrl(url);
+          }
+
+          return (
+            <Anchor {...props} href={props.href}>
+              {textToDisplay}
+            </Anchor>
+          );
         },
         code: CodeBlock,
       }}
