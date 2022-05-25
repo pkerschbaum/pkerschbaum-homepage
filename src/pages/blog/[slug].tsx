@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { CommentsSection } from '~/components/comments-section';
-import { MDXViewer } from '~/components/mdx-client';
+import { MDXViewer } from '~/components/mdx-viewer';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
 import type { MDXParseResult } from '~/schema';

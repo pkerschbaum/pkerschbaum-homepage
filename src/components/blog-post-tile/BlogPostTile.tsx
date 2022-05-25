@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import type React from 'react';
 import styled from 'styled-components';
 
@@ -9,25 +8,21 @@ type BlogPostTileProps = {
   post: MDXFile;
 };
 
-export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => {
-  const formattedPublishedAt = dayjs(post.frontmatter.publishedAtISO).format('MMMM D, YYYY');
-
-  return (
-    <TileAnchor key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`}>
-      <Tile>
-        <PostTileContent>
-          <Title>{post.frontmatter.title}</Title>
-          <Description>{post.frontmatter.description}</Description>
-          <TagsArea>
-            {post.frontmatter.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </TagsArea>
-        </PostTileContent>
-      </Tile>
-    </TileAnchor>
-  );
-};
+export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => (
+  <TileAnchor key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`}>
+    <Tile>
+      <PostTileContent>
+        <Title>{post.frontmatter.title}</Title>
+        <Description>{post.frontmatter.description}</Description>
+        <TagsArea>
+          {post.frontmatter.tags.map((tag) => (
+            <Tag key={tag}>{tag}</Tag>
+          ))}
+        </TagsArea>
+      </PostTileContent>
+    </Tile>
+  </TileAnchor>
+);
 
 const PostTileContent = styled(TileContent)`
   height: 100%;

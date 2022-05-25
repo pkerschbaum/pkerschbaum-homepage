@@ -1,4 +1,5 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
+import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
+import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
 import { Classes, ColorTheme, DataAttribute, LocalStorageKey } from '~/constants';
@@ -15,8 +16,10 @@ export default class MyDocument extends Document {
         });
 
       const initialProps = await Document.getInitialProps(ctx);
-      return {
+
+      const result: DocumentInitialProps = {
         ...initialProps,
+        // @ts-expect-error -- seems like Next.js has some typing issue with styles, expects an array here.
         styles: (
           <>
             {initialProps.styles}
@@ -24,6 +27,8 @@ export default class MyDocument extends Document {
           </>
         ),
       };
+
+      return result;
     } finally {
       sheet.seal();
     }

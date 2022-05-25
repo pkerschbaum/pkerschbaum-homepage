@@ -63,6 +63,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
 
   return (
     <CodeBlockContainer>
+      {/* @ts-expect-error -- typings of @codesandbox/sandpack-react seem to not have been updated for React 18 */}
       <SandpackProvider
         customSetup={{
           entry: filename,
@@ -73,6 +74,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
           },
         }}
       >
+        {/* @ts-expect-error -- typings of @codesandbox/sandpack-react seem to not have been updated for React 18 */}
         <SandpackThemeProvider theme={sandpackThemeToUse}>
           <SandpackCodeViewer key={code} showLineNumbers={false} />
         </SandpackThemeProvider>

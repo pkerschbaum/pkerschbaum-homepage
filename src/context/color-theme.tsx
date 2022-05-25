@@ -10,7 +10,11 @@ type ColorThemeContextValue = {
 };
 const colorThemeContext = reactUtils.createContext<ColorThemeContextValue>('ColorThemeContext');
 
-export const ColorThemeProvider: React.FC = ({ children }) => {
+type ColorThemeProviderProps = {
+  children: React.ReactNode;
+};
+
+export const ColorThemeProvider: React.FC<ColorThemeProviderProps> = ({ children }) => {
   const [activeColorTheme, setActiveColorTheme] = React.useState<ColorTheme | null>(null);
 
   React.useEffect(function readAndSetInitialTheme() {

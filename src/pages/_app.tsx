@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import styled from 'styled-components';
 
 import { Nav } from '~/components/nav';
@@ -14,37 +15,49 @@ import { Button } from '~/elements';
 import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
-  <ColorThemeProvider>
-    <CSSReset />
-    <AppGlobalStyle />
+  <QueryClientProvider client={queryClient}>
+    <ColorThemeProvider>
+      <CSSReset />
+      <AppGlobalStyle />
 
-    <RootContainer>
-      <Header>
-        <Nav />
+      <RootContainer>
+        <Header>
+          <Nav />
 
-        <ToggleColorThemeButtonContainer>
-          <SwitchThemeButton />
-        </ToggleColorThemeButtonContainer>
-      </Header>
+          <ToggleColorThemeButtonContainer>
+            <SwitchThemeButton />
+          </ToggleColorThemeButtonContainer>
+        </Header>
 
-      <Main>
-        <Component {...pageProps} />
-      </Main>
+        <Main>
+          <Component {...pageProps} />
+        </Main>
 
-      <Footer>
-        <SocialMediaLinks />
+        <Footer>
+          <SocialMediaLinks />
 
-        <YearAndContact>
-          <span>{dayjs().year()}</span>
-          <span>-</span>
-          <Link href="/">
-            <a>pkerschbaum</a>
-          </Link>
-        </YearAndContact>
-      </Footer>
-    </RootContainer>
-  </ColorThemeProvider>
+          <YearAndContact>
+            <span>{dayjs().year()}</span>
+            <span>-</span>
+            <Link href="/">
+              <a>pkerschbaum</a>
+            </Link>
+          </YearAndContact>
+        </Footer>
+      </RootContainer>
+    </ColorThemeProvider>
+  </QueryClientProvider>
 );
 
 const SwitchThemeButton: React.FC = () => {
