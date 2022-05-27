@@ -63,7 +63,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'next/core-web-vitals',
   ],
-  ignorePatterns: ['.eslintrc.js', 'next.config.js', 'lint-staged.config.js'],
+  ignorePatterns: ['.eslintrc.js', 'next.config.js'],
   rules: {
     curly: 'error',
     'no-console': 'error',
