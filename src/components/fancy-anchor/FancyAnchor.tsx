@@ -36,27 +36,29 @@ type StyledAnchorProps = {
 const StyledAnchor = styled(Anchor)<{ styleProps: StyledAnchorProps }>`
   word-break: break-all;
 
+  &&::before {
+    content: '';
+    display: inline-block;
+    vertical-align: sub;
+    margin-right: calc(0.5 * var(--spacing-base));
+    height: calc(1.2 * 1em);
+    width: 1em;
+
+    background-image: url(${(props) => props.styleProps.favicons?.lightIconDataURL});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1em 1em;
+  }
+
+  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] &&::before {
+    background-image: url(${(props) => props.styleProps.favicons?.darkIconDataURL});
+  }
+
   ${(props) =>
-    props.styleProps.favicons !== undefined &&
+    props.styleProps.favicons === undefined &&
     css`
-      &::before {
-        content: '';
-        display: inline-block;
-        vertical-align: sub;
-        margin-right: calc(0.5 * var(--spacing-base));
-        height: calc(1.2 * 1em);
-        width: 1em;
-
-        background-image: url(${props.styleProps.favicons.lightIconDataURL});
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 1em 1em;
-      }
-
-      *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
-        &::before {
-          background-image: url(${props.styleProps.favicons.darkIconDataURL});
-        }
+      &&::before {
+        display: none;
       }
     `};
 `;
