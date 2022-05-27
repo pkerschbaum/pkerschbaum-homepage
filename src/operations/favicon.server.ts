@@ -6,10 +6,19 @@ import { binaryUtils } from '~/utils/binary.utils';
 let browserPromise: Promise<puppeteer.Browser> | undefined;
 async function getBrowser() {
   if (!browserPromise) {
-    browserPromise = puppeteer.launch();
+    browserPromise = initializeBrowserInstance();
   }
 
   return await browserPromise;
+}
+
+async function initializeBrowserInstance() {
+  const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
+    headless: true,
+    ignoreHTTPSErrors: true,
+    args: ['--no-sandbox'],
+  };
+  return await puppeteer.launch(launchOptions);
 }
 
 export async function fetchFaviconDataURL(href: string) {
