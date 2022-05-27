@@ -3,6 +3,10 @@ import { createGlobalStyle, css } from 'styled-components';
 import { ColorTheme, DataAttribute } from '~/constants';
 
 const appGlobalStyle = css`
+  * {
+    transition: background 200ms;
+  }
+
   /* change scrollbar to a thin variant which lightens up on hover */
   *::-webkit-scrollbar {
     width: 8px;
@@ -20,10 +24,6 @@ const appGlobalStyle = css`
   }
   ::-webkit-scrollbar-corner {
     background-color: rgba(0, 0, 0, 0);
-  }
-
-  * {
-    transition: background 200ms;
   }
 
   html {

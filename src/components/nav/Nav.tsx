@@ -20,9 +20,6 @@ export const Nav: React.FC = () => {
 };
 
 const NavContainer = styled.nav`
-  padding-block-start: calc(1 * var(--spacing-base));
-  padding-block-end: calc(2 * var(--spacing-base));
-
   display: flex;
   align-items: center;
   flex-wrap: wrap;

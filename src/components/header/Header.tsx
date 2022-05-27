@@ -51,4 +51,9 @@ export const HeaderContainer = styled.header`
 
   background-color: var(--color-bg);
   overflow: hidden;
+
+  & > * {
+    padding-block-start: calc(1 * var(--spacing-base));
+    padding-block-end: calc(2 * var(--spacing-base));
+  }
 `;

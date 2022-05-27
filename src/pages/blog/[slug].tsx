@@ -56,7 +56,8 @@ const BlogPostContainer = styled.article`
   }
   & ul {
     margin-block: 0.75em;
-    padding-inline-start: 20px;
+    --ul-padding-inline-start: 20px;
+    padding-inline-start: var(--ul-padding-inline-start);
   }
   & ul li,
   & ul ul li {
@@ -64,6 +65,28 @@ const BlogPostContainer = styled.article`
   }
   & li {
     margin-block: 0.25em;
+  }
+
+  /* 
+    Code blocks should span entire width.
+    We have to undo the app padding and margin-inline-start of ul/ol list elements (if a code block is inside such an element).
+   */
+  & > pre {
+    max-width: var(--box-width-md);
+    width: calc(100% + 2 * var(--app-padding-inline));
+    margin-inline-start: calc(-1 * var(--app-padding-inline));
+  }
+  & ul > li > pre,
+  & ol > li > pre {
+    width: calc(100% + 2 * var(--app-padding-inline) + var(--ul-padding-inline-start));
+    margin-inline-start: calc(-1 * (var(--app-padding-inline) + var(--ul-padding-inline-start)));
+  }
+  & ul ul > li > pre,
+  & ol ol > li > pre {
+    width: calc(100% + 2 * var(--app-padding-inline) + 2 * var(--ul-padding-inline-start));
+    margin-inline-start: calc(
+      -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
+    );
   }
 
   & h1,
