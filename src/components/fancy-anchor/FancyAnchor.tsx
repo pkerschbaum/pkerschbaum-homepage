@@ -1,17 +1,12 @@
 import * as React from 'react';
-import { useQuery, UseQueryResult } from 'react-query';
 import styled, { css } from 'styled-components';
 
 import { Anchor, AnchorProps } from '~/elements';
-import { schema_faviconDataUrlResponse } from '~/schema';
+import { useFaviconDataURL, UseFaviconResult } from '~/global-cache/favicon';
 import { urlUtils } from '~/utils/url.utils';
 
 export function FancyAnchor({ href, children, ...delegated }: AnchorProps): React.ReactElement {
-  const { data: dataURL, status } = useQuery(['favicon', href], async () => {
-    const response = await fetch(`/api/favicon-data-url?url=${href}`);
-    const body = schema_faviconDataUrlResponse.parse(await response.json());
-    return body.dataURL;
-  });
+  const { data: dataURL, status } = useFaviconDataURL(href);
 
   let textToDisplay = children;
   if (textToDisplay === 'AUTOGENERATE') {
@@ -28,7 +23,7 @@ export function FancyAnchor({ href, children, ...delegated }: AnchorProps): Reac
 
 type StyledAnchorProps = {
   favicon: {
-    status: UseQueryResult['status'];
+    status: UseFaviconResult['status'];
     dataURL?: string;
   };
 };

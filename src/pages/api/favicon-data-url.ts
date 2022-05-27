@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { logger } from '~/logger';
+import { fetchFaviconDataURL } from '~/operations/favicon';
 import type { FaviconDataUrlResponse } from '~/schema';
-import { binaryUtils } from '~/utils/binary.utils';
 
 async function handleRequest(req: NextApiRequest): Promise<FaviconDataUrlResponse> {
   const urlToFetchFrom = req.query.url;
@@ -11,11 +11,7 @@ async function handleRequest(req: NextApiRequest): Promise<FaviconDataUrlRespons
     throw new Error(`invalid argument`);
   }
 
-  const dataURL = await binaryUtils.fetchUrlAndConvertToDataURL(
-    `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encodeURIComponent(
-      urlToFetchFrom,
-    )}&size=64`,
-  );
+  const dataURL = await fetchFaviconDataURL(urlToFetchFrom);
 
   return { dataURL };
 }

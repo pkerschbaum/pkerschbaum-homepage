@@ -8,5 +8,10 @@ module.exports = {
 
   eslint: {
     dirs: ['src'],
+    ignoreDuringBuilds: true,
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };

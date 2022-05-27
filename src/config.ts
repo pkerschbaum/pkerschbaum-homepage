@@ -2,4 +2,5 @@
 
 export const config = {
   isDevEnvironment: process.env.NODE_ENV === 'development',
+  isServer: typeof window === 'undefined',
 };

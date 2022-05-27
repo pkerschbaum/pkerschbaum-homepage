@@ -3,6 +3,7 @@ import matter from 'gray-matter';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
 
+import { createCollectHrefsFromJsxElementsPlugin } from '~/mdx/plugins';
 import { MDXFile, MDXParseResult, schema_frontmatterData } from '~/schema';
 
 export async function getAllMarkdownFiles(absolutePathToDirectory: string): Promise<MDXFile[]> {
@@ -41,9 +42,18 @@ export async function parseAndBundleMDXFile(
     'utf8',
   );
 
+  const collectedHrefs: string[] = [];
   const bundleMDXResult = await bundleMDX({
     source,
     cwd: absolutePathToDirectory,
+    mdxOptions: (options) => {
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        createCollectHrefsFromJsxElementsPlugin({ hrefs: collectedHrefs }),
+      ];
+
+      return options;
+    },
   });
 
   const frontmatter = schema_frontmatterData.parse(bundleMDXResult.frontmatter);
@@ -51,6 +61,7 @@ export async function parseAndBundleMDXFile(
   const mdxParseResult: MDXParseResult = {
     frontmatter,
     code,
+    collectedHrefs,
   };
 
   return mdxParseResult;

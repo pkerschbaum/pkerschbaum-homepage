@@ -2,13 +2,16 @@ import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
+import { dehydrate } from 'react-query';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { POSTS_PATH } from '~/constants';
+import { cacheKeys, createQueryClient } from '~/global-cache';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
+import { fetchFaviconDataURL } from '~/operations/favicon';
 import type { MDXParseResult } from '~/schema';
 
 type BlogPostPageProps = {
@@ -90,8 +93,20 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }
 
   const mdxParseResult = await parseAndBundleMDXFile(POSTS_PATH, params.slug);
 
+  const queryClient = createQueryClient();
+  await Promise.all(
+    mdxParseResult.collectedHrefs.map(async (href) => {
+      await queryClient.prefetchQuery(cacheKeys.favicon(href), async () => {
+        return await fetchFaviconDataURL(href);
+      });
+    }),
+  );
+
   return {
-    props: { mdxParseResult },
+    props: {
+      mdxParseResult,
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 };
 

@@ -8,6 +8,7 @@ export type MDXFile = {
 export type MDXParseResult = {
   code: string;
   frontmatter: FrontmatterData;
+  collectedHrefs: string[];
 };
 
 export const schema_frontmatterData = z.object({
