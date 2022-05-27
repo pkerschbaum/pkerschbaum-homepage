@@ -28,7 +28,8 @@ export type Project = {
   description: string;
 };
 
-export const schema_faviconDataUrlResponse = z.object({
-  dataURL: z.string().nonempty(),
+export const schema_faviconDataUrls = z.object({
+  lightIconDataURL: z.string().nonempty().optional(),
+  darkIconDataURL: z.string().nonempty().optional(),
 });
-export type FaviconDataUrlResponse = z.infer<typeof schema_faviconDataUrlResponse>;
+export type FaviconDataUrls = z.infer<typeof schema_faviconDataUrls>;

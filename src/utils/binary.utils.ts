@@ -1,6 +1,6 @@
 export const binaryUtils = { fetchUrlAndConvertToDataURL };
 
-async function fetchUrlAndConvertToDataURL(url: string): Promise<string> {
+async function fetchUrlAndConvertToDataURL(url: URL): Promise<string> {
   const response = await fetch(url);
   if (!response.ok || !`${response.status}`.startsWith('2')) {
     throw new Error(`could not fetch`);

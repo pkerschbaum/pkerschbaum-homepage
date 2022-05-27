@@ -1,12 +1,14 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 
+import { ColorTheme, DataAttribute } from '~/constants';
 import { Anchor, AnchorProps } from '~/elements';
 import { useFaviconDataURL, UseFaviconResult } from '~/global-cache/favicon';
+import type { FaviconDataUrls } from '~/schema';
 import { urlUtils } from '~/utils/url.utils';
 
 export function FancyAnchor({ href, children, ...delegated }: AnchorProps): React.ReactElement {
-  const { data: dataURL, status } = useFaviconDataURL(href);
+  const { data, status } = useFaviconDataURL(href);
 
   let textToDisplay = children;
   if (textToDisplay === 'AUTOGENERATE') {
@@ -15,7 +17,7 @@ export function FancyAnchor({ href, children, ...delegated }: AnchorProps): Reac
   }
 
   return (
-    <StyledAnchor styleProps={{ favicon: { status, dataURL } }} href={href} {...delegated}>
+    <StyledAnchor styleProps={{ favicon: { status, data } }} href={href} {...delegated}>
       {textToDisplay}
     </StyledAnchor>
   );
@@ -24,7 +26,7 @@ export function FancyAnchor({ href, children, ...delegated }: AnchorProps): Reac
 type StyledAnchorProps = {
   favicon: {
     status: UseFaviconResult['status'];
-    dataURL?: string;
+    data?: FaviconDataUrls;
   };
 };
 
@@ -43,7 +45,13 @@ const StyledAnchor = styled(Anchor)<{ styleProps: StyledAnchorProps }>`
       css`
         display: inline-block;
       `};
-    background: url(${(props) => props.styleProps.favicon.dataURL}) no-repeat center center;
+    background-image: url(${(props) => props.styleProps.favicon.data?.lightIconDataURL});
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 1em 1em;
+  }
+
+  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] &::before {
+    background-image: url(${(props) => props.styleProps.favicon.data?.darkIconDataURL});
   }
 `;

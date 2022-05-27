@@ -1,5 +1,7 @@
 import { createGlobalStyle, css } from 'styled-components';
 
+import { ColorTheme, DataAttribute } from '~/constants';
+
 const appGlobalStyle = css`
   /* change scrollbar to a thin variant which lightens up on hover */
   *::-webkit-scrollbar {
@@ -46,7 +48,7 @@ const appGlobalStyle = css`
     --color-bg-interactive: var(--color-verylightteal);
 
     --font-size-sm: 0.875rem;
-    --font-size-md: 1rem;
+    --font-size-base: 1rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
     --font-size-xxl: 1.5rem;
@@ -81,7 +83,7 @@ const appGlobalStyle = css`
     --image-filter: grayscale(0%);
   }
 
-  :root[data-theme='dark'] {
+  :root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
     --color-fg: var(--color-white);
     --color-fg-less-emphasized: var(--color-lightgrey);
     --color-bg: var(--color-black);
@@ -135,7 +137,7 @@ const appGlobalStyle = css`
   p,
   ul,
   ol {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base);
   }
 
   h1 {
@@ -149,7 +151,7 @@ const appGlobalStyle = css`
   }
 
   code {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base);
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
     border-radius: 4px;
     background-color: var(--color-bg-emphasized);

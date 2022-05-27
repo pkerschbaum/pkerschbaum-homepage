@@ -11,7 +11,7 @@ import { MDXViewer } from '~/components/mdx-viewer';
 import { POSTS_PATH } from '~/constants';
 import { cacheKeys, createQueryClient } from '~/global-cache';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
-import { fetchFaviconDataURL } from '~/operations/favicon';
+import { fetchFaviconDataURL } from '~/operations/favicon.server';
 import type { MDXParseResult } from '~/schema';
 
 type BlogPostPageProps = {
