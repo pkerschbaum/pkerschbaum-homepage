@@ -2,10 +2,10 @@
 
 import {
   SandpackProvider,
-  SandpackThemeProvider,
   SandpackCodeViewer,
   SandpackThemeProp,
 } from '@codesandbox/sandpack-react';
+import { githubLight, sandpackDark } from '@codesandbox/sandpack-themes';
 import { assertIsUnreachable, check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
 import styled from 'styled-components';
@@ -50,11 +50,11 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   let sandpackThemeToUse: SandpackThemeProp;
   switch (activeColorTheme) {
     case ColorTheme.LIGHT: {
-      sandpackThemeToUse = 'github-light';
+      sandpackThemeToUse = githubLight;
       break;
     }
     case ColorTheme.DARK: {
-      sandpackThemeToUse = 'dark';
+      sandpackThemeToUse = sandpackDark;
       break;
     }
     default:
@@ -63,21 +63,18 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
 
   return (
     <CodeBlockContainer>
-      {/* @ts-expect-error -- typings of @codesandbox/sandpack-react seem to not have been updated for React 18 */}
       <SandpackProvider
-        customSetup={{
-          entry: filename,
-          files: {
-            [filename]: {
-              code,
-            },
+        files={{
+          [filename]: {
+            code,
           },
         }}
+        customSetup={{
+          entry: filename,
+        }}
+        theme={sandpackThemeToUse}
       >
-        {/* @ts-expect-error -- typings of @codesandbox/sandpack-react seem to not have been updated for React 18 */}
-        <SandpackThemeProvider theme={sandpackThemeToUse}>
-          <SandpackCodeViewer key={code} showLineNumbers={false} />
-        </SandpackThemeProvider>
+        <SandpackCodeViewer key={code} wrapContent />
       </SandpackProvider>
     </CodeBlockContainer>
   );
@@ -88,8 +85,4 @@ const CodeBlockContainer = styled.div`
   box-shadow: var(--shadow-elevation-medium);
   border-radius: 8px;
   overflow: hidden;
-
-  & .cm-editor {
-    padding: calc(3 * var(--spacing-base)) calc(2 * var(--spacing-base));
-  }
 `;

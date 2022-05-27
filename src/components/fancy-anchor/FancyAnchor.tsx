@@ -53,8 +53,10 @@ const StyledAnchor = styled(Anchor)<{ styleProps: StyledAnchorProps }>`
         background-size: 1em 1em;
       }
 
-      *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] &::before {
-        background-image: url(${props.styleProps.favicons.darkIconDataURL});
+      *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
+        &::before {
+          background-image: url(${props.styleProps.favicons.darkIconDataURL});
+        }
       }
     `};
 `;
