@@ -4,7 +4,6 @@ import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
-import { DehydratedState, Hydrate, QueryClientProvider } from 'react-query';
 import styled from 'styled-components';
 
 import { Nav } from '~/components/nav';
@@ -12,56 +11,41 @@ import { SocialMediaLinks } from '~/components/social-media-links';
 import { ColorTheme } from '~/constants';
 import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
 import { Button } from '~/elements';
-import { createQueryClient } from '~/global-cache';
 import { AppGlobalStyle } from '~/styles/app-global-style';
 import { CSSReset } from '~/styles/css-reset';
 
-type MyAppProps = Omit<AppProps, 'pageProps'> & {
-  pageProps: {
-    dehydratedState: DehydratedState;
-  };
-};
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <ColorThemeProvider>
+    <CSSReset />
+    <AppGlobalStyle />
 
-const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
-  const [queryClient] = React.useState(() => createQueryClient());
+    <RootContainer>
+      <Header>
+        <Nav />
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ColorThemeProvider>
-          <CSSReset />
-          <AppGlobalStyle />
+        <ToggleColorThemeButtonContainer>
+          <SwitchThemeButton />
+        </ToggleColorThemeButtonContainer>
+      </Header>
 
-          <RootContainer>
-            <Header>
-              <Nav />
+      <Main>
+        <Component {...pageProps} />
+      </Main>
 
-              <ToggleColorThemeButtonContainer>
-                <SwitchThemeButton />
-              </ToggleColorThemeButtonContainer>
-            </Header>
+      <Footer>
+        <SocialMediaLinks />
 
-            <Main>
-              <Component {...(pageProps as any)} />
-            </Main>
-
-            <Footer>
-              <SocialMediaLinks />
-
-              <YearAndContact>
-                <span>{dayjs().year()}</span>
-                <span>-</span>
-                <Link href="/">
-                  <a>pkerschbaum</a>
-                </Link>
-              </YearAndContact>
-            </Footer>
-          </RootContainer>
-        </ColorThemeProvider>
-      </Hydrate>
-    </QueryClientProvider>
-  );
-};
+        <YearAndContact>
+          <span>{dayjs().year()}</span>
+          <span>-</span>
+          <Link href="/">
+            <a>pkerschbaum</a>
+          </Link>
+        </YearAndContact>
+      </Footer>
+    </RootContainer>
+  </ColorThemeProvider>
+);
 
 const SwitchThemeButton: React.FC = () => {
   const { activeColorTheme, toggleColorTheme } = useColorTheme();

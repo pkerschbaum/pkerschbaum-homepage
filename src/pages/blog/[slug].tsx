@@ -2,23 +2,22 @@ import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
-import { dehydrate } from 'react-query';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { CommentsSection } from '~/components/comments-section';
-import { MDXViewer } from '~/components/mdx-viewer';
+import { MDXViewer, MDXViewerProps } from '~/components/mdx-viewer';
 import { POSTS_PATH } from '~/constants';
-import { cacheKeys, createQueryClient } from '~/global-cache';
 import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
 import { fetchFaviconDataURL } from '~/operations/favicon.server';
 import type { MDXParseResult } from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
+  hrefToFaviconsMap: MDXViewerProps['hrefToFaviconsMap'];
 };
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
+const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => (
   <>
     <Head>
       <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
@@ -33,7 +32,10 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult }) => (
         </Time>
       </FrontMatter>
       <div>
-        <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+        <MDXViewer
+          codeOfMdxParseResult={mdxParseResult.code}
+          hrefToFaviconsMap={hrefToFaviconsMap}
+        />
       </div>
       <CommentsSection />
     </BlogPostContainer>
@@ -93,19 +95,18 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }
 
   const mdxParseResult = await parseAndBundleMDXFile(POSTS_PATH, params.slug);
 
-  const queryClient = createQueryClient();
+  const hrefToFaviconsMap: BlogPostPageProps['hrefToFaviconsMap'] = {};
   await Promise.all(
     mdxParseResult.collectedHrefs.map(async (href) => {
-      await queryClient.prefetchQuery(cacheKeys.favicon(href), async () => {
-        return await fetchFaviconDataURL(href);
-      });
+      const favicons = await fetchFaviconDataURL(href);
+      hrefToFaviconsMap[href] = favicons;
     }),
   );
 
   return {
     props: {
       mdxParseResult,
-      dehydratedState: dehydrate(queryClient),
+      hrefToFaviconsMap,
     },
   };
 };
