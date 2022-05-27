@@ -40,7 +40,7 @@ const StyledAnchor = styled(Anchor)<{ styleProps: StyledAnchorProps }>`
     content: '';
     display: inline-block;
     vertical-align: sub;
-    margin-right: calc(0.5 * var(--spacing-base));
+    margin-inline-end: calc(0.5 * var(--spacing-base));
     height: calc(1.2 * 1em);
     width: 1em;
 

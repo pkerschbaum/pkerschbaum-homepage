@@ -1,6 +1,7 @@
 import type React from 'react';
 import styled from 'styled-components';
 
+import { CLASSNAME_PINNED, HeaderContainer } from '~/components/header';
 import { nameHeadingStyles } from '~/components/introduction';
 import { Anchor } from '~/elements';
 
@@ -19,17 +20,21 @@ export const Nav: React.FC = () => {
 };
 
 const NavContainer = styled.nav`
+  padding-block-start: calc(1 * var(--spacing-base));
+  padding-block-end: calc(2 * var(--spacing-base));
+
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  column-gap: calc(4 * var(--spacing-base));
+  --nav-column-gap: calc(3 * var(--spacing-base));
+  column-gap: var(--nav-column-gap);
   row-gap: calc(1 * var(--spacing-base));
 `;
 
 const SubNavContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: calc(3 * var(--spacing-base));
+  gap: var(--nav-column-gap);
 `;
 
 const NavAnchor = styled(Anchor)`
@@ -44,8 +49,16 @@ const NavAnchor = styled(Anchor)`
 `;
 
 const NavHomeAnchor = styled(NavAnchor)`
-  width: min-content;
+  --nav-home-anchor-width: 180px;
+  width: var(--nav-home-anchor-width);
 
   line-height: 1;
   ${nameHeadingStyles}
+
+  /* animate home anchor out to the left if header is pinned */
+  transition: margin-inline-start 200ms;
+  margin-inline-start: 0px;
+  ${HeaderContainer}.${CLASSNAME_PINNED} & {
+    margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
+  }
 `;

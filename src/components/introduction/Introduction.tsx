@@ -35,7 +35,7 @@ export const Introduction: React.FC = () => {
 };
 
 const IntroductionContainer = styled.section`
-  max-width: var(--box-width-medium);
+  max-width: var(--box-width-md);
   margin-block: calc(8 * var(--spacing-base));
   align-self: center;
 
@@ -57,17 +57,17 @@ const IntroductionHeading = styled.h1`
 
 const IntroductionMessage = styled.p`
   grid-area: message;
-  margin-bottom: calc(0.5 * var(--spacing-base));
+  margin-block-end: calc(0.5 * var(--spacing-base));
 `;
 
 const IntroductionMessageDetails = styled.p`
   grid-area: message-details;
-  margin-bottom: calc(0.5 * var(--spacing-base));
+  margin-block-end: calc(0.5 * var(--spacing-base));
 `;
 
 const ProfilePictureWrapper = styled.span`
   grid-area: profile-picture;
-  margin-top: 8px;
+  margin-block-start: 8px;
 `;
 
 const ProfilePicture = styled(Image)`

@@ -33,8 +33,8 @@ const PostTileContent = styled(TileContent)`
 `;
 
 const TagsArea = styled.ul`
-  /* some margin-top for optical alignment */
-  margin-top: 4px;
+  /* some margin-block-start for optical alignment */
+  margin-block-start: 4px;
 
   display: flex;
   align-items: center;

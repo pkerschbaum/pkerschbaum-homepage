@@ -6,6 +6,7 @@ import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
 import styled from 'styled-components';
 
+import { Header } from '~/components/header';
 import { Nav } from '~/components/nav';
 import { SocialMediaLinks } from '~/components/social-media-links';
 import { ColorTheme } from '~/constants';
@@ -69,24 +70,16 @@ const SwitchThemeButton: React.FC = () => {
 
 const RootContainer = styled.div`
   min-height: 100%;
-  max-width: 1000px;
+  max-width: var(--box-width-md);
   margin: 0 auto;
 
-  padding: calc(3 * var(--spacing-base)) calc(2.5 * var(--spacing-base));
+  margin-block-start: calc(2 * var(--spacing-base));
+  padding-block-end: calc(3 * var(--spacing-base)) calc(2.5 * var(--spacing-base));
+  padding-inline: calc(2.5 * var(--spacing-base));
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: calc(4 * var(--spacing-base));
-`;
-
-const Header = styled.header`
-  flex-shrink: 0;
-  align-self: stretch;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: calc(4 * var(--spacing-base));
+  gap: calc(2 * var(--spacing-base));
 `;
 
 const ToggleColorThemeButtonContainer = styled.div`
@@ -104,6 +97,7 @@ const Main = styled.main`
 `;
 
 const Footer = styled.footer`
+  padding-block-start: calc(4 * var(--spacing-base));
   flex-shrink: 0;
 
   display: flex;

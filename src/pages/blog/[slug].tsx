@@ -44,7 +44,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
 
 const BlogPostContainer = styled.article`
   width: 100%;
-  max-width: var(--box-width-medium);
+  max-width: var(--box-width-md);
   align-self: center;
 
   display: flex;
@@ -69,8 +69,8 @@ const BlogPostContainer = styled.article`
   & h1,
   & h2,
   & h3 {
-    margin-top: 2em;
-    margin-bottom: 0.5em;
+    margin-block-start: 2em;
+    margin-block-end: 0.5em;
   }
 `;
 

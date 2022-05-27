@@ -22,12 +22,14 @@ const appGlobalStyle = css`
     background-color: rgba(0, 0, 0, 0);
   }
 
+  * {
+    transition: background 200ms;
+  }
+
   html {
     font-family: sans-serif;
     color: var(--color-fg);
     background-color: var(--color-bg);
-
-    transition: background 200ms;
 
     /* design tokens */
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
@@ -56,7 +58,7 @@ const appGlobalStyle = css`
     --font-size-xxxxl: 2rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
-    --box-width-medium: 800px;
+    --box-width-md: 800px;
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;
