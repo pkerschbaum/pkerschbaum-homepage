@@ -1,7 +1,7 @@
 import type React from 'react';
 import styled from 'styled-components';
 
-import { CLASSNAME_PINNED, HeaderContainer } from '~/components/header';
+import { CLASSNAME_SCROLLED, HeaderContainer } from '~/components/header';
 import { nameHeadingStyles } from '~/components/introduction';
 import { Anchor } from '~/elements';
 
@@ -55,7 +55,7 @@ const NavHomeAnchor = styled(NavAnchor)`
   /* animate home anchor out to the left if header is pinned */
   transition: margin-inline-start 200ms;
   margin-inline-start: 0px;
-  ${HeaderContainer}.${CLASSNAME_PINNED} & {
+  ${HeaderContainer}.${CLASSNAME_SCROLLED} & {
     margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
   }
 `;

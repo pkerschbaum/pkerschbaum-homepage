@@ -1,27 +1,29 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export const CLASSNAME_PINNED = 'pinned' as const;
-export const CLASSNAME_NOT_PINNED = 'not-pinned' as const;
+import { uiUtils } from '~/utils/ui.utils';
+
+export const CLASSNAME_SCROLLED = 'scrolled' as const;
+export const CLASSNAME_NOT_SCROLLED = 'not-scrolled' as const;
 
 export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [headerElem, setHeaderElem] = React.useState<HTMLElement | null>(null);
-  const [headerIsPinned, setHeaderIsPinned] = React.useState(false);
+  const [scrollParentIsScrolled, setScrollParentIsScrolled] = React.useState(false);
 
   React.useEffect(
-    function watchForHeaderGettingPinned() {
+    function watchForScrollParentIsScrolled() {
       if (!headerElem) {
         return;
       }
 
-      const observer = new IntersectionObserver(
-        ([element]) => setHeaderIsPinned(element.intersectionRatio < 1),
-        { threshold: [1] },
-      );
-      observer.observe(headerElem);
+      const scrollParent = uiUtils.getScrollParent(headerElem);
+      function onScroll() {
+        setScrollParentIsScrolled(scrollParent.scrollTop > 0);
+      }
+      scrollParent.addEventListener('scroll', onScroll, { passive: true });
 
       return function cleanup() {
-        observer.disconnect();
+        scrollParent.removeEventListener('scroll', onScroll);
       };
     },
     [headerElem],
@@ -30,7 +32,7 @@ export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <HeaderContainer
       ref={setHeaderElem}
-      className={headerIsPinned ? CLASSNAME_PINNED : CLASSNAME_NOT_PINNED}
+      className={scrollParentIsScrolled ? CLASSNAME_SCROLLED : CLASSNAME_NOT_SCROLLED}
     >
       {children}
     </HeaderContainer>
