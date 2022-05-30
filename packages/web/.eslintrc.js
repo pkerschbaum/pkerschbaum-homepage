@@ -30,6 +30,8 @@ const noRestrictedSyntax_preferElements = [
   },
 ];
 
+let baseNoRestrictedSyntax = baseEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
+
 module.exports = {
   ...baseEslintConfig,
   parserOptions: {
@@ -42,7 +44,7 @@ module.exports = {
     ...baseEslintConfig.rules,
     'no-restricted-syntax': [
       'error',
-      ...(baseEslintConfig.rules?.['no-restricted-syntax']?.[1] ?? []),
+      ...baseNoRestrictedSyntax,
       ...noRestrictedSyntax_noTestBadPatterns,
       ...noRestrictedSyntax_preferNextJsImage,
       ...noRestrictedSyntax_preferElements,

@@ -6,13 +6,13 @@ import {
   SandpackThemeProp,
 } from '@codesandbox/sandpack-react';
 import { githubLight, sandpackDark } from '@codesandbox/sandpack-themes';
+import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import { assertIsUnreachable, check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
 import styled from 'styled-components';
 
 import { ColorTheme } from '~/constants';
 import { useColorTheme } from '~/context/color-theme';
-import { logger } from '~/logger';
 
 const CODESANDBOX_LANGUAGE = {
   typescript: 'language-typescript',

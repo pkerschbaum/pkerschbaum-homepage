@@ -1,0 +1,53 @@
+{
+  "name": "@pkerschbaum-homepage/commons-node",
+  "private": true,
+  "version": "1.0.0",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/*/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "postinstall": "ts-patch install -s",
+    "nuke": "pnpm run nuke:build && pnpm run nuke:node-modules",
+    "nuke:build": "rimraf dist tsconfig.tsbuildinfo",
+    "nuke:node-modules": "rimraf node_modules",
+    "build": "tsc",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "pnpm run lint -- --fix",
+    "compile": "tsc --noEmit",
+    "compile:watch": "pnpm run compile -- --watch"
+  },
+  "dependencies": {
+    "@pkerschbaum/ts-utils": "^0.0.1",
+    "node-fetch": "^2.6.7",
+    "tiny-invariant": "^1.2.0",
+    "zod": "^3.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.25",
+    "@types/node-fetch": "^2.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-code-import-patterns": "^3.0.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-regexp": "^1.7.0",
+    "rimraf": "^3.0.2",
+    "ts-patch": "^2.0.1",
+    "typescript": "^4.7.2",
+    "typescript-transform-paths": "^3.3.1"
+  }
+}

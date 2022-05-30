@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
@@ -7,9 +8,13 @@ import invariant from 'tiny-invariant';
 
 import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-viewer';
-import { POSTS_PATH } from '~/constants';
-import { fetchFaviconsForAllHrefsPromise, getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
-import type { HrefsToFaviconDataUrlsMap, MDXParseResult } from '~/schema';
+import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
+import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
+import {
+  HrefsToFaviconDataUrlsMap,
+  MDXParseResult,
+  schema_hrefsToFaviconDataUrlsMap,
+} from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
@@ -110,20 +115,25 @@ const Time = styled.time`
   text-transform: uppercase;
 `;
 
+const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {
+  encoding: 'utf-8',
+});
 export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }> = async ({
   params,
 }) => {
   invariant(params?.slug);
 
-  const [mdxParseResult, hrefToFaviconsMap] = await Promise.all([
+  const [mdxParseResult, hrefToFaviconsMapString] = await Promise.all([
     parseAndBundleMDXFile(POSTS_PATH, params.slug),
-    fetchFaviconsForAllHrefsPromise,
+    hrefsToFaviconsReadPromise,
   ]);
 
   return {
     props: {
       mdxParseResult,
-      hrefToFaviconsMap,
+      hrefToFaviconsMap: schema_hrefsToFaviconDataUrlsMap.parse(
+        JSON.parse(hrefToFaviconsMapString),
+      ),
     },
   };
 };

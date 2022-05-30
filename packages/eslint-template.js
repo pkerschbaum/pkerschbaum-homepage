@@ -70,6 +70,7 @@ module.exports = {
     'import/no-dynamic-require': 'error',
     'import/no-mutable-exports': 'error',
     'import/no-self-import': 'error',
+    'import/no-unresolved': 'off',
     'import/no-useless-path-segments': 'error',
     'import/order': [
       'error',

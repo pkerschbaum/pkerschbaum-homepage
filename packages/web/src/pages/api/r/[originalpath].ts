@@ -1,7 +1,7 @@
+import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { POSTS_PATH } from '~/constants';
-import { logger } from '~/logger';
 import { getAllMarkdownFiles } from '~/mdx';
 
 async function loadURLsOfBlogPosts() {
