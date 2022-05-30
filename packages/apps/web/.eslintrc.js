@@ -1,4 +1,4 @@
-const baseEslintConfig = require('../eslint-template.js');
+const baseEslintConfig = require('../../eslint-template.js');
 
 const noRestrictedSyntax_noTestBadPatterns = [
   {
