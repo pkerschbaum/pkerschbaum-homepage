@@ -1,40 +1,9 @@
-const noRestrictedSyntax_noTestBadPatterns = [
-  {
-    selector:
-      "MemberExpression[object.name='it'][property.name='only'], MemberExpression[object.name='test'][property.name='only']",
-    message:
-      'Do not check in spec files with tests using ".only" - the other tests of that spec file would be skipped!',
-  },
-  {
-    selector:
-      "MemberExpression[object.name='it'][property.name='skip'], MemberExpression[object.name='test'][property.name='skip']",
-    message: 'Do not check in dead tests. Either fix or delete them.',
-  },
-];
-const noRestrictedSyntax_preferNextJsImage = [
-  {
-    selector: "MemberExpression[object.name='styled'][property.name='img']",
-    message: 'Do not use the native <img> HTML element; use <Image> from "next/image" instead.',
-  },
-];
-const noRestrictedSyntax_preferElements = [
-  {
-    selector: "MemberExpression[object.name='styled'][property.name='a']",
-    message: 'Do not use the native <a> HTML element; use <Anchor> from "~/elements" instead.',
-  },
-  {
-    selector: "MemberExpression[object.name='styled'][property.name='button']",
-    message: 'Do not use the native <button> HTML element; use <Button> from "~/elements" instead.',
-  },
-];
-
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
     sourceType: 'module',
-    tsconfigRootDir: __dirname,
   },
   plugins: [
     /**
@@ -61,20 +30,13 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:node/recommended',
     'plugin:eslint-comments/recommended',
-    'next/core-web-vitals',
   ],
-  ignorePatterns: ['.eslintrc.js', 'next.config.js'],
+  ignorePatterns: ['.eslintrc.js'],
   rules: {
     curly: 'error',
     'no-console': 'error',
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-promise-executor-return': 'error',
-    'no-restricted-syntax': [
-      'error',
-      ...noRestrictedSyntax_noTestBadPatterns,
-      ...noRestrictedSyntax_preferNextJsImage,
-      ...noRestrictedSyntax_preferElements,
-    ],
     'no-unneeded-ternary': 'error',
     'no-useless-computed-key': 'error',
     'object-shorthand': 'error',
@@ -133,6 +95,7 @@ module.exports = {
     'node/no-unpublished-import': 'off',
     'node/no-unpublished-require': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
+    'node/no-unsupported-features/node-builtins': 'off',
     '@typescript-eslint/ban-types': [
       'error',
       {
@@ -207,23 +170,4 @@ module.exports = {
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unified-signatures': 'error',
   },
-  overrides: [
-    {
-      // allow default export for Next.js pages
-      files: ['src/pages/**/*'],
-      rules: {
-        'import/no-default-export': 'off',
-      },
-    },
-    {
-      files: ['src/elements/**/*'],
-      rules: {
-        'no-restricted-syntax': [
-          'error',
-          ...noRestrictedSyntax_noTestBadPatterns,
-          ...noRestrictedSyntax_preferNextJsImage,
-        ],
-      },
-    },
-  ],
 };

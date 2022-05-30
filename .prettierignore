@@ -1,4 +1,10 @@
 **/dist
 **/build
 **/public
-/.next
+**/.next
+
+pnpm-lock.yaml
+
+# coverage
+**/.nyc_output/**
+**/coverage/**

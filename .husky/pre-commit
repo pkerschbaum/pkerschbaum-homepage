@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm run compile
-pnpm run lint
+pnpm run mr:compile
+pnpm run mr:lint
