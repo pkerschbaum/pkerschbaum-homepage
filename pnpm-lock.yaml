@@ -150,7 +150,7 @@ importers:
       eslint-plugin-import: 2.26.0_eslint@8.16.0
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-only-warn: 1.0.3
-      eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
+      eslint-plugin-prettier: 4.0.0_0ab7b1f907d74dedc0c1b67f9dc21b99
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
       next-remote-watch: 1.0.0
       rimraf: 3.0.2
@@ -2343,6 +2343,22 @@ packages:
   /eslint-plugin-only-warn/1.0.3:
     resolution: {integrity: sha512-XQOX/TfLoLw6h8ky51d29uUjXRTQHqBGXPylDEmy5fe/w7LIOnp8MA24b1OSMEn9BQoKow1q3g1kLe5/9uBTvw==}
     engines: {node: '>=6'}
+    dev: true
+
+  /eslint-plugin-prettier/4.0.0_0ab7b1f907d74dedc0c1b67f9dc21b99:
+    resolution: {integrity: sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      eslint: '>=7.28.0'
+      eslint-config-prettier: '*'
+      prettier: '>=2.0.0'
+    peerDependenciesMeta:
+      eslint-config-prettier:
+        optional: true
+    dependencies:
+      eslint: 8.16.0
+      eslint-config-prettier: 8.5.0_eslint@8.16.0
+      prettier-linter-helpers: 1.0.0
     dev: true
 
   /eslint-plugin-prettier/4.0.0_4fe3201cd09a8826bbd8050f2348cb2f:

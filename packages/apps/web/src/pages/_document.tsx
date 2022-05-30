@@ -38,7 +38,16 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+          <link rel="manifest" href="/favicons/site.webmanifest" />
+          <link rel="shortcut icon" href="/favicons/favicon.ico" sizes="any" />
+          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
+          <meta name="msapplication-TileColor" content="#da532c" />
+          <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
+          <meta name="theme-color" content="#ffffff" />
+
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
             rel="stylesheet"
