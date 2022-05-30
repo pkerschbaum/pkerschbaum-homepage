@@ -1,7 +1,12 @@
 import path from 'path';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src', 'posts');
-export const HREFS_TO_FAVICONS_PATH = path.join(process.cwd(), 'static', 'href-to-favicons.json');
+export const HREFS_TO_FAVICONS_PATH = path.join(
+  process.cwd(),
+  'src',
+  'static',
+  'href-to-favicons.json',
+);
 
 const BREAKPOINTS = {
   tabletMin: 600,

@@ -2,7 +2,14 @@
   "autorun": true,
   "terminals": [
     {
-      "name": "pnpm run dev",
+      "name": "pnpm run ",
+      "cwd": "[cwd]",
+      "execute": false,
+      "command": "pnpm run "
+    },
+    {
+      "name": "@pkerschbaum-homepage/web: pnpm run dev",
+      "cwd": "[cwd]/packages/apps/web",
       "focus": true,
       "execute": false,
       "command": "pnpm run dev"
