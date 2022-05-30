@@ -5,11 +5,11 @@ import * as React from 'react';
 import { CodeBlock } from '~/components/code-block';
 import { FancyAnchor, FancyAnchorProps } from '~/components/fancy-anchor';
 import { Anchor } from '~/elements';
-import type { FaviconDataUrls } from '~/schema';
+import type { HrefsToFaviconDataUrlsMap } from '~/schema';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;
-  hrefToFaviconsMap: { [href in string]?: FaviconDataUrls };
+  hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
 };
 
 export const MDXViewer: React.FC<MDXViewerProps> = ({

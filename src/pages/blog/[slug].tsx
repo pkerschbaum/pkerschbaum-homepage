@@ -6,15 +6,14 @@ import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { CommentsSection } from '~/components/comments-section';
-import { MDXViewer, MDXViewerProps } from '~/components/mdx-viewer';
+import { MDXViewer } from '~/components/mdx-viewer';
 import { POSTS_PATH } from '~/constants';
-import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
-import { fetchFaviconDataURL } from '~/operations/favicon.server';
-import type { MDXParseResult } from '~/schema';
+import { fetchFaviconsForAllHrefsPromise, getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
+import type { HrefsToFaviconDataUrlsMap, MDXParseResult } from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
-  hrefToFaviconsMap: MDXViewerProps['hrefToFaviconsMap'];
+  hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
 };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => (
@@ -116,15 +115,10 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }
 }) => {
   invariant(params?.slug);
 
-  const mdxParseResult = await parseAndBundleMDXFile(POSTS_PATH, params.slug);
-
-  const hrefToFaviconsMap: BlogPostPageProps['hrefToFaviconsMap'] = {};
-  await Promise.all(
-    mdxParseResult.collectedHrefs.map(async (href) => {
-      const favicons = await fetchFaviconDataURL(href);
-      hrefToFaviconsMap[href] = favicons;
-    }),
-  );
+  const [mdxParseResult, hrefToFaviconsMap] = await Promise.all([
+    parseAndBundleMDXFile(POSTS_PATH, params.slug),
+    fetchFaviconsForAllHrefsPromise,
+  ]);
 
   return {
     props: {

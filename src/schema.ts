@@ -33,3 +33,4 @@ export const schema_faviconDataUrls = z.object({
   darkIconDataURL: z.string().nonempty().optional(),
 });
 export type FaviconDataUrls = z.infer<typeof schema_faviconDataUrls>;
+export type HrefsToFaviconDataUrlsMap = { [href in string]?: FaviconDataUrls };
