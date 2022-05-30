@@ -29,12 +29,12 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({
             throw new Error(`the <a> element must have a href, but has not`);
           }
 
-          return <Anchor {...props} href={props.href} />;
+          return <Anchor target="_blank" {...props} href={props.href} />;
         },
         code: CodeBlock,
         FancyAnchor: (props: FancyAnchorProps) => {
           const favicons = hrefToFaviconsMap[props.href];
-          return <FancyAnchor {...props} favicons={favicons} />;
+          return <FancyAnchor target="_blank" {...props} favicons={favicons} />;
         },
       }}
     />
