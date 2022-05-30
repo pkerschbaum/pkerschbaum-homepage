@@ -1,3 +1,4 @@
+import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
@@ -8,7 +9,6 @@ import { Introduction } from '~/components/introduction';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
-import type { MDXFile } from '~/schema';
 
 type HomePageProps = {
   posts: MDXFile[];

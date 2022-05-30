@@ -1,9 +1,9 @@
+import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 import type React from 'react';
 import styled from 'styled-components';
 
 import { BlogPostTile } from '~/components/blog-post-tile';
 import { QUERIES } from '~/constants';
-import type { MDXFile } from '~/schema';
 
 type BlogOverviewProps = {
   posts: MDXFile[];

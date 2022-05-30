@@ -3,26 +3,35 @@ import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
 
 import { createCollectHrefsFromJsxElementsPlugin } from '~/plugins.js';
+import { MDXParseResult, schema_frontmatterData } from '~/schema.js';
 
 export async function parseMDXFileAndCollectHrefs(
   absolutePathToDirectory: string,
-  slug: string,
-): Promise<{ collectedHrefs: string[] }> {
-  const source = await fs.promises.readFile(path.join(absolutePathToDirectory, slug), 'utf8');
+  fileName: string,
+): Promise<MDXParseResult> {
+  const source = await fs.promises.readFile(path.join(absolutePathToDirectory, fileName), 'utf8');
 
   const collectedHrefs: string[] = [];
-  const collectHrefsFromJsxElementsPlugin = await createCollectHrefsFromJsxElementsPlugin({
-    hrefs: collectedHrefs,
-  });
-  await bundleMDX({
+  const bundleMDXResult = await bundleMDX({
     source,
     cwd: absolutePathToDirectory,
     mdxOptions: (options) => {
-      options.remarkPlugins = [...(options.remarkPlugins ?? []), collectHrefsFromJsxElementsPlugin];
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        createCollectHrefsFromJsxElementsPlugin({ hrefs: collectedHrefs }),
+      ];
 
       return options;
     },
   });
 
-  return { collectedHrefs };
+  const frontmatter = schema_frontmatterData.parse(bundleMDXResult.frontmatter);
+  const code = bundleMDXResult.code;
+  const mdxParseResult: MDXParseResult = {
+    frontmatter,
+    code,
+    collectedHrefs,
+  };
+
+  return mdxParseResult;
 }

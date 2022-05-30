@@ -7,8 +7,17 @@ import { fetchFaviconDataURLs, FetchFaviconDataURLsResult } from '~/favicon.js';
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const POSTS_PATH = path.join(__dirname, '..', '..', 'web', 'src', 'posts');
-const JSON_OUTPUT_PATH = path.join(__dirname, '..', '..', 'web', 'static', 'href-to-favicons.json');
+const POSTS_PATH = path.join(__dirname, '..', '..', '..', 'apps', 'web', 'src', 'posts');
+const JSON_OUTPUT_PATH = path.join(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'apps',
+  'web',
+  'static',
+  'href-to-favicons.json',
+);
 
 async function fetchFaviconsForAllHrefsAndWriteToFile() {
   let fileNamesOfPosts = await fs.promises.readdir(POSTS_PATH);

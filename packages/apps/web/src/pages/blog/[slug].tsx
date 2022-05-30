@@ -9,12 +9,8 @@ import invariant from 'tiny-invariant';
 import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
-import { getAllMarkdownFiles, parseAndBundleMDXFile } from '~/mdx';
-import {
-  HrefsToFaviconDataUrlsMap,
-  MDXParseResult,
-  schema_hrefsToFaviconDataUrlsMap,
-} from '~/schema';
+import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
+import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
@@ -124,7 +120,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }
   invariant(params?.slug);
 
   const [mdxParseResult, hrefToFaviconsMapString] = await Promise.all([
-    parseAndBundleMDXFile(POSTS_PATH, params.slug),
+    parseMDXFileAndCollectHrefs(POSTS_PATH, `${params.slug}.mdx`),
     hrefsToFaviconsReadPromise,
   ]);
 

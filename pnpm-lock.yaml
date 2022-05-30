@@ -75,6 +75,7 @@ importers:
       '@codesandbox/sandpack-themes': ^1.0.0
       '@pkerschbaum-homepage/commons': workspace:1.0.0
       '@pkerschbaum-homepage/fetch-favicon': workspace:1.0.0
+      '@pkerschbaum-homepage/mdx': workspace:1.0.0
       '@pkerschbaum/ts-utils': ^0.0.1
       '@types/mdast': ^3.0.10
       '@types/node': ^16.11.25
@@ -115,6 +116,7 @@ importers:
       '@codesandbox/sandpack-themes': 1.0.0
       '@pkerschbaum-homepage/commons': link:../../libs/commons
       '@pkerschbaum-homepage/fetch-favicon': link:../fetch-favicon
+      '@pkerschbaum-homepage/mdx': link:../../libs/mdx
       '@pkerschbaum/ts-utils': 0.0.1
       '@types/mdast': 3.0.10
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
