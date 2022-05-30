@@ -34,6 +34,7 @@
     "@types/mdast": "^3.0.10",
     "mdx-bundler": "^9.0.0",
     "puppeteer": "^14.1.1",
+    "safe-stable-stringify": "^2.3.1",
     "tiny-invariant": "^1.2.0",
     "unist-util-visit": "^4.1.0",
     "zod": "^3.16.0"

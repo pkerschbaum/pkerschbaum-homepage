@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import url from 'url';
 import puppeteer from 'puppeteer';
+// @ts-expect-error -- safe-stable-stringify does not provide typings for its esm wrapper...
+import safeStringify from 'safe-stable-stringify';
 
 import { fetchFaviconDataURLs, FetchFaviconDataURLsResult } from '~/favicon.js';
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
@@ -38,7 +40,7 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
   );
 
   await browser.close();
-  await fs.promises.writeFile(JSON_OUTPUT_PATH, JSON.stringify(hrefToFaviconsMap, null, 2), {
+  await fs.promises.writeFile(JSON_OUTPUT_PATH, safeStringify(hrefToFaviconsMap, null, 2), {
     encoding: 'utf-8',
   });
 }
