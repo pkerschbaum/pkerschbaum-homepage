@@ -74,8 +74,8 @@ const RootContainer = styled.div`
   max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
   margin: 0 auto;
 
-  margin-block-start: calc(2 * var(--spacing-base));
-  padding-block-end: calc(3 * var(--spacing-base)) calc(2.5 * var(--spacing-base));
+  padding-block-start: calc(2 * var(--spacing-base));
+  padding-block-end: calc(3 * var(--spacing-base));
   padding-inline: var(--app-padding-inline);
   display: flex;
   flex-direction: column;

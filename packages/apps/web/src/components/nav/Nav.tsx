@@ -1,10 +1,9 @@
-import Image from 'next/image';
 import type React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import { Favicon } from '~/components/favicon';
 import { CLASSNAME_NOT_SCROLLED, CLASSNAME_SCROLLED, HeaderContainer } from '~/components/header';
 import { nameHeadingStyles } from '~/components/introduction';
-import { ColorTheme, DataAttribute } from '~/constants';
 import { Anchor } from '~/elements';
 
 export const Nav: React.FC = () => {
@@ -13,8 +12,7 @@ export const Nav: React.FC = () => {
       <NavHomeAnchor href="/">
         <NavHomeAnchorText>Patrick Kerschbaum</NavHomeAnchorText>
         <NavHomeAnchorLogo>
-          <Image src="/favicons/favicon.svg" height={36} width={36} alt="Logo" />
-          <Image src="/favicons/favicon-dark.svg" height={36} width={36} alt="Logo" />
+          <Favicon width={36} height={36} />
         </NavHomeAnchorLogo>
       </NavHomeAnchor>
 
@@ -55,27 +53,33 @@ const NavAnchor = styled(Anchor)`
 
 const slideLeft = keyframes`
   0% {
-    transform: translateY(0%);
-  }
-  49.9% {
-    margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
+    transform: translateX(0%);
   }
   50% {
-    margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
+    transform: translateX(-100%);
+  }
+  50.1% {
+    transform: translateX(-100%);
+    display: none;
   }
   100% {
-    margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
+    transform: translateX(-100%);
+    display: none;
   }
 `;
 const slideRight = keyframes`
   0% {
-    margin-inline-start: calc(-1 * (var(--nav-column-gap) + var(--nav-home-anchor-width)));
+    transform: translateX(-100%);
+    display: none;
+  }
+  0.1% {
+    transform: translateX(-100%);
   }
   50% {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
 `;
 const NavHomeAnchor = styled(NavAnchor)`
@@ -85,10 +89,14 @@ const NavHomeAnchor = styled(NavAnchor)`
   line-height: 1;
   ${nameHeadingStyles}
 
+  transition: width 400ms;
+  width: 180px;
+  ${HeaderContainer}.${CLASSNAME_SCROLLED} & {
+    width: 40px;
+  }
+
   & > * {
     grid-area: container;
-
-    width: var(--nav-home-anchor-width);
 
     animation-name: ${slideRight};
     animation-duration: 400ms;
@@ -97,27 +105,17 @@ const NavHomeAnchor = styled(NavAnchor)`
 `;
 
 const NavHomeAnchorText = styled.div`
-  --nav-home-anchor-width: 180px;
   ${HeaderContainer}.${CLASSNAME_SCROLLED} & {
     animation-name: ${slideLeft};
   }
 `;
 
 const NavHomeAnchorLogo = styled.div`
-  --nav-home-anchor-width: 40px;
+  width: fit-content;
   display: flex;
+  align-items: center;
 
   ${HeaderContainer}.${CLASSNAME_NOT_SCROLLED} & {
     animation-name: ${slideLeft};
-  }
-
-  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] && > *:nth-child(1) {
-    display: none !important;
-  }
-  && > *:nth-child(2) {
-    display: none !important;
-  }
-  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] && > *:nth-child(2) {
-    display: initial !important;
   }
 `;
