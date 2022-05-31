@@ -1,29 +1,28 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { uiUtils } from '~/utils/ui.utils';
-
 export const CLASSNAME_SCROLLED = 'scrolled' as const;
 export const CLASSNAME_NOT_SCROLLED = 'not-scrolled' as const;
 
 export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [headerElem, setHeaderElem] = React.useState<HTMLElement | null>(null);
-  const [scrollParentIsScrolled, setScrollParentIsScrolled] = React.useState(false);
+  const [documentIsScrolled, setDocumentIsScrolled] = React.useState(
+    typeof window !== 'undefined' && window.scrollY > 0,
+  );
 
   React.useEffect(
-    function watchForScrollParentIsScrolled() {
+    function watchForDocumentIsScrolled() {
       if (!headerElem) {
         return;
       }
 
-      const scrollParent = uiUtils.getScrollParent(headerElem);
       function onScroll() {
-        setScrollParentIsScrolled(scrollParent.scrollTop > 0);
+        setDocumentIsScrolled(window.scrollY > 0);
       }
-      scrollParent.addEventListener('scroll', onScroll, { passive: true });
+      document.addEventListener('scroll', onScroll, { passive: true });
 
       return function cleanup() {
-        scrollParent.removeEventListener('scroll', onScroll);
+        document.removeEventListener('scroll', onScroll);
       };
     },
     [headerElem],
@@ -32,7 +31,7 @@ export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <HeaderContainer
       ref={setHeaderElem}
-      className={scrollParentIsScrolled ? CLASSNAME_SCROLLED : CLASSNAME_NOT_SCROLLED}
+      className={documentIsScrolled ? CLASSNAME_SCROLLED : CLASSNAME_NOT_SCROLLED}
     >
       {children}
     </HeaderContainer>
