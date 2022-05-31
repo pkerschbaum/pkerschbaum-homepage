@@ -46,6 +46,7 @@
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
+    "csstype": "^3.1.0",
     "eslint": "^8.16.0",
     "eslint-config-next": "^12.1.6",
     "eslint-config-prettier": "^8.5.0",
@@ -57,6 +58,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-regexp": "^1.7.0",
     "next-remote-watch": "^1.0.0",
+    "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.7.2"
   }

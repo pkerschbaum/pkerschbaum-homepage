@@ -1,15 +1,26 @@
-import type React from 'react';
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { Favicon } from '~/components/favicon';
-import { CLASSNAME_NOT_SCROLLED, CLASSNAME_SCROLLED, HeaderContainer } from '~/components/header';
 import { nameHeadingStyles } from '~/components/introduction';
+import { DataAttribute, IsScrolled } from '~/constants';
 import { Anchor } from '~/elements';
 
 export const Nav: React.FC = () => {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <NavContainer>
-      <NavHomeAnchor href="/">
+      <NavHomeAnchor
+        href="/"
+        style={{
+          '--animation-duration': !isMounted ? '0ms' : '400ms',
+        }}
+      >
         <NavHomeAnchorText>Patrick Kerschbaum</NavHomeAnchorText>
         <NavHomeAnchorLogo>
           <Favicon width={36} height={36} />
@@ -89,9 +100,9 @@ const NavHomeAnchor = styled(NavAnchor)`
   line-height: 1;
   ${nameHeadingStyles}
 
-  transition: width 400ms;
+  transition: width var(--animation-duration);
   width: 180px;
-  ${HeaderContainer}.${CLASSNAME_SCROLLED} & {
+  *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
     width: 40px;
   }
 
@@ -99,13 +110,13 @@ const NavHomeAnchor = styled(NavAnchor)`
     grid-area: container;
 
     animation-name: ${slideRight};
-    animation-duration: 400ms;
+    animation-duration: var(--animation-duration);
     animation-fill-mode: both;
   }
 `;
 
 const NavHomeAnchorText = styled.div`
-  ${HeaderContainer}.${CLASSNAME_SCROLLED} & {
+  *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
     animation-name: ${slideLeft};
   }
 `;
@@ -115,7 +126,7 @@ const NavHomeAnchorLogo = styled.div`
   display: flex;
   align-items: center;
 
-  ${HeaderContainer}.${CLASSNAME_NOT_SCROLLED} & {
+  *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.NO}'] & {
     animation-name: ${slideLeft};
   }
 `;

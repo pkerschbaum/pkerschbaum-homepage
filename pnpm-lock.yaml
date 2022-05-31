@@ -33,6 +33,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-regexp: ^1.7.0
       mdx-bundler: ^9.0.0
+      prettier: ^2.6.2
       puppeteer: ^14.1.1
       rimraf: ^3.0.2
       safe-stable-stringify: ^2.3.1
@@ -68,6 +69,7 @@ importers:
       eslint-plugin-only-warn: 1.0.3
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
+      prettier: 2.6.2
       rimraf: 3.0.2
       ts-patch: 2.0.1_typescript@4.7.2
       typescript: 4.7.2
@@ -89,6 +91,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.26.0
       '@typescript-eslint/parser': ^5.26.0
       babel-plugin-styled-components: ^2.0.7
+      csstype: ^3.1.0
       dayjs: ^1.11.2
       esbuild: ^0.14.39
       eslint: ^8.16.0
@@ -105,6 +108,7 @@ importers:
       mdx-bundler: ^9.0.0
       next: ^12.1.6
       next-remote-watch: ^1.0.0
+      prettier: ^2.6.2
       react: ^17.0.2
       react-dom: ^17.0.2
       react-feather: ^2.0.9
@@ -146,6 +150,7 @@ importers:
       '@types/styled-components': 5.1.25
       '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
       '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      csstype: 3.1.0
       eslint: 8.16.0
       eslint-config-next: 12.1.6_5794735a2262de3d29e0baaa885b5942
       eslint-config-prettier: 8.5.0_eslint@8.16.0
@@ -157,6 +162,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
       next-remote-watch: 1.0.0
+      prettier: 2.6.2
       rimraf: 3.0.2
       typescript: 4.7.2
 
@@ -174,6 +180,7 @@ importers:
       eslint-plugin-only-warn: ^1.0.3
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-regexp: ^1.7.0
+      prettier: ^2.6.2
       rimraf: ^3.0.2
       tiny-invariant: ^1.2.0
       ts-patch: ^2.0.1
@@ -196,6 +203,7 @@ importers:
       eslint-plugin-only-warn: 1.0.3
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
+      prettier: 2.6.2
       rimraf: 3.0.2
       ts-patch: 2.0.1_typescript@4.7.2
       typescript: 4.7.2
@@ -218,6 +226,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-regexp: ^1.7.0
       node-fetch: ^2.6.7
+      prettier: ^2.6.2
       rimraf: ^3.0.2
       tiny-invariant: ^1.2.0
       ts-patch: ^2.0.1
@@ -243,6 +252,7 @@ importers:
       eslint-plugin-only-warn: 1.0.3
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
+      prettier: 2.6.2
       rimraf: 3.0.2
       ts-patch: 2.0.1_typescript@4.7.2
       typescript: 4.7.2
@@ -266,6 +276,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-regexp: ^1.7.0
       mdx-bundler: ^9.0.0
+      prettier: ^2.6.2
       rimraf: ^3.0.2
       tiny-invariant: ^1.2.0
       ts-patch: ^2.0.1
@@ -294,6 +305,7 @@ importers:
       eslint-plugin-only-warn: 1.0.3
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
+      prettier: 2.6.2
       rimraf: 3.0.2
       ts-patch: 2.0.1_typescript@4.7.2
       typescript: 4.7.2

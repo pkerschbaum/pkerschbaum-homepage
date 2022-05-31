@@ -2,7 +2,7 @@ import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'ne
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
-import { Classes, ColorTheme, DataAttribute, LocalStorageKey } from '~/constants';
+import { Classes, ColorTheme, DataAttribute, IsScrolled, LocalStorageKey } from '~/constants';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: Parameters<typeof Document.getInitialProps>[0]) {
@@ -62,6 +62,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme.toString() }} />
+          <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled.toString() }} />
           <Main />
           <NextScript />
         </body>
@@ -96,5 +97,14 @@ const blockingSetInitialColorTheme = `(function() {
   if (colorTheme === '${ColorTheme.DARK}') {
     document.documentElement.setAttribute('${DataAttribute.THEME}', '${ColorTheme.DARK}');
   }
+})()
+`;
+
+const blockingSetDocumentIsScrolled = `(function() {
+  document.documentElement.setAttribute('${DataAttribute.IS_SCROLLED}', window.scrollY > 0 ? '${IsScrolled.YES}' : '${IsScrolled.NO}');
+  function onScroll() {
+    document.documentElement.setAttribute('${DataAttribute.IS_SCROLLED}', window.scrollY > 0 ? '${IsScrolled.YES}' : '${IsScrolled.NO}');
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
 })()
 `;

@@ -20,6 +20,7 @@ export const QUERIES = {
 
 export enum DataAttribute {
   THEME = 'data-theme',
+  IS_SCROLLED = 'data-is-scrolled',
 }
 
 export enum LocalStorageKey {
@@ -29,6 +30,11 @@ export enum LocalStorageKey {
 export enum ColorTheme {
   LIGHT = 'light',
   DARK = 'dark',
+}
+
+export enum IsScrolled {
+  YES = 'yes',
+  NO = 'no',
 }
 
 export enum Classes {
