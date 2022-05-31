@@ -19,7 +19,6 @@ export default class MyDocument extends Document {
 
       const result: DocumentInitialProps = {
         ...initialProps,
-        // @ts-expect-error -- seems like Next.js has some typing issue with styles, expects an array here.
         styles: (
           <>
             {initialProps.styles}

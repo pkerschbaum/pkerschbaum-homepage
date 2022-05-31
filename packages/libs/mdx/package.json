@@ -29,6 +29,7 @@
   "dependencies": {
     "@pkerschbaum/ts-utils": "^0.0.1",
     "@types/mdast": "^3.0.10",
+    "esbuild": "^0.14.39",
     "mdx-bundler": "^9.0.0",
     "tiny-invariant": "^1.2.0",
     "unist-util-visit": "^4.1.0",

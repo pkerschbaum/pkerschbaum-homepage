@@ -32,6 +32,7 @@
     "@pkerschbaum-homepage/mdx": "workspace:1.0.0",
     "@pkerschbaum/ts-utils": "^0.0.1",
     "@types/mdast": "^3.0.10",
+    "esbuild": "^0.14.39",
     "mdx-bundler": "^9.0.0",
     "puppeteer": "^14.1.1",
     "safe-stable-stringify": "^2.3.1",
