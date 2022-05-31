@@ -6,7 +6,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
-import { CommentsSection } from '~/components/comments-section';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
@@ -37,7 +36,6 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
           hrefToFaviconsMap={hrefToFaviconsMap}
         />
       </div>
-      <CommentsSection />
     </BlogPostContainer>
   </>
 );
