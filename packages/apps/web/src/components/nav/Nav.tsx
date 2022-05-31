@@ -126,7 +126,7 @@ const NavHomeAnchorLogo = styled.div`
   display: flex;
   align-items: center;
 
-  *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.NO}'] & {
+  *:root:not([${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}']) & {
     animation-name: ${slideLeft};
   }
 `;
