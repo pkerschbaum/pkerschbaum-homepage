@@ -4,6 +4,7 @@ import Head from 'next/head';
 import type React from 'react';
 
 import { BlogOverview } from '~/components/blog-overview';
+import { SeoHead } from '~/components/seo-head';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
@@ -15,8 +16,7 @@ const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>Patrick Kerschbaum - Blog</title>
-        <meta name="description" content="Blog of Patrick Kerschbaum" />
+        <SeoHead title="Blog Posts" description="Blog of Patrick Kerschbaum" />
       </Head>
 
       <h1>All Posts</h1>

@@ -10,6 +10,7 @@ import invariant from 'tiny-invariant';
 import { z } from 'zod';
 
 import { MDXViewer } from '~/components/mdx-viewer';
+import { SeoHead } from '~/components/seo-head';
 import { config } from '~/config';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
@@ -31,8 +32,10 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
   return (
     <>
       <Head>
-        <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
-        <meta name="description" content={mdxParseResult.frontmatter.description} />
+        <SeoHead
+          title={mdxParseResult.frontmatter.title}
+          description={mdxParseResult.frontmatter.description}
+        />
       </Head>
 
       <BlogPostContainer>

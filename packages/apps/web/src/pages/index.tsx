@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { BlogOverview } from '~/components/blog-overview';
 import { Introduction } from '~/components/introduction';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
+import { SeoHead } from '~/components/seo-head';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
@@ -18,8 +19,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>Patrick Kerschbaum</title>
-        <meta name="description" content="Homepage of Patrick Kerschbaum" />
+        <SeoHead title="Patrick Kerschbaum" description="Homepage of Patrick Kerschbaum" />
       </Head>
 
       <Introduction />
