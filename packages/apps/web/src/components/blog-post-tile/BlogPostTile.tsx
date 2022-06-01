@@ -9,7 +9,7 @@ type BlogPostTileProps = {
 };
 
 export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => (
-  <TileAnchor key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`}>
+  <TileAnchor key={post.segment} href={`/blog/${encodeURIComponent(post.segment)}`}>
     <Tile>
       <PostTileContent>
         <Title>{post.frontmatter.title}</Title>

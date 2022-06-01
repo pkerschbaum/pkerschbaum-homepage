@@ -7,6 +7,7 @@ import * as React from 'react';
 import { Twitter } from 'react-feather';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
+import { z } from 'zod';
 
 import { MDXViewer } from '~/components/mdx-viewer';
 import { config } from '~/config';
@@ -15,6 +16,9 @@ import { Anchor } from '~/elements';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
 import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
 
+const schema_staticProps = z.object({ segment: z.string().nonempty() });
+type StaticProps = z.infer<typeof schema_staticProps>;
+
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
   hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
@@ -22,8 +26,7 @@ type BlogPostPageProps = {
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => {
   const router = useRouter();
-  const { slug } = router.query;
-  invariant(typeof slug === 'string');
+  const { segment } = schema_staticProps.parse(router.query);
 
   return (
     <>
@@ -47,7 +50,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
         </div>
         <TwitterAnchor
           href={`https://twitter.com/search?q=${encodeURIComponent(
-            `${config.deploymentOrigin}/blog/${slug}`,
+            `${config.deploymentOrigin}/blog/${segment}`,
           )}`}
           target="_blank"
         >
@@ -139,13 +142,13 @@ const TwitterAnchor = styled(Anchor)`
 const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {
   encoding: 'utf-8',
 });
-export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }> = async ({
+export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
   params,
 }) => {
-  invariant(params?.slug);
+  invariant(params?.segment);
 
   const [mdxParseResult, hrefToFaviconsMapString] = await Promise.all([
-    parseMDXFileAndCollectHrefs(POSTS_PATH, `${params.slug}.mdx`),
+    parseMDXFileAndCollectHrefs(POSTS_PATH, `${params.segment}.mdx`),
     hrefsToFaviconsReadPromise,
   ]);
 
@@ -159,9 +162,9 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, { slug?: string }
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
   const posts = await getAllMarkdownFiles(POSTS_PATH);
-  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  const paths = posts.map((post) => ({ params: { segment: post.segment } }));
   return {
     paths,
     fallback: false,

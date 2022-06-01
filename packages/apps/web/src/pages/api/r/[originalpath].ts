@@ -11,7 +11,7 @@ async function loadURLsOfBlogPosts() {
   const posts = await getAllMarkdownFiles(POSTS_PATH);
 
   for (const post of posts) {
-    redirectMap[post.frontmatter.shortenedURL] = `/blog/${post.slug}`;
+    redirectMap[post.frontmatter.shortenedURL] = `/blog/${post.segment}`;
   }
 
   return redirectMap;

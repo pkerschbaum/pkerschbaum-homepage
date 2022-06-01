@@ -13,7 +13,7 @@ export const BlogOverview: React.FC<BlogOverviewProps> = ({ posts }) => {
   return (
     <BlogOverviewContainer>
       {posts.map((post) => (
-        <BlogPostTile key={post.slug} post={post} />
+        <BlogPostTile key={post.segment} post={post} />
       ))}
     </BlogOverviewContainer>
   );

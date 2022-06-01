@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export type Project = {
-  slug: string;
+  segment: string;
   thumbnailUrl: string;
   title: string;
   description: string;

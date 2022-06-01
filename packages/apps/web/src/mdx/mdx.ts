@@ -17,11 +17,11 @@ export async function getAllMarkdownFiles(absolutePathToDirectory: string): Prom
         'utf8',
       );
 
-      const slug = fileName.replace(/\.mdx$/, '');
+      const segment = fileName.replace(/\.mdx$/, '');
       const frontmatter = schema_frontmatterData.parse(matter(source).data);
       const markdownFile: MDXFile = {
         frontmatter,
-        slug,
+        segment,
       };
 
       return markdownFile;

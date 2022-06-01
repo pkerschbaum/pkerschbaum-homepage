@@ -11,7 +11,7 @@ export const ProjectsOverview: React.FC<ProjectsOverviewProps> = () => {
     <ProjectsOverviewContainer>
       <ProjectTile
         project={{
-          slug: 'file-explorer',
+          segment: 'file-explorer',
           title: 'File Explorer',
           description: 'Description of file explorer',
           thumbnailUrl: '/file-explorer-thumbnail.png',

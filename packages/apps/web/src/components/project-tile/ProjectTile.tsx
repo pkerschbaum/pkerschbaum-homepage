@@ -11,7 +11,7 @@ type ProjectTileProps = {
 
 export const ProjectTile: React.FC<ProjectTileProps> = ({ project }) => {
   return (
-    <TileAnchor key={project.slug} href={`/projects/${encodeURIComponent(project.slug)}`}>
+    <TileAnchor key={project.segment} href={`/projects/${encodeURIComponent(project.segment)}`}>
       <StyledTile>
         <ThumbnailWrapper>
           <Thumbnail

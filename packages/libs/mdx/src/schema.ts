@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export type MDXFile = {
-  slug: string;
+  segment: string;
   frontmatter: FrontmatterData;
 };
 
