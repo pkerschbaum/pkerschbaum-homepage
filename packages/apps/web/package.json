@@ -7,7 +7,7 @@
     "nuke:build": "rimraf .next tsconfig.tsbuildinfo",
     "nuke:node-modules": "rimraf node_modules",
     "dev": "next-remote-watch ./src/posts",
-    "build": "rimraf .next && next build",
+    "build": "rimraf .next && next build && next-sitemap",
     "export": "next export",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
@@ -58,6 +58,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-regexp": "^1.7.0",
     "next-remote-watch": "^1.0.0",
+    "next-sitemap": "^2.5.28",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.7.2"

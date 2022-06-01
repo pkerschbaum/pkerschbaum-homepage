@@ -108,6 +108,7 @@ importers:
       mdx-bundler: ^9.0.0
       next: ^12.1.6
       next-remote-watch: ^1.0.0
+      next-sitemap: ^2.5.28
       prettier: ^2.6.2
       react: ^17.0.2
       react-dom: ^17.0.2
@@ -162,6 +163,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_4fe3201cd09a8826bbd8050f2348cb2f
       eslint-plugin-regexp: 1.7.0_eslint@8.16.0
       next-remote-watch: 1.0.0
+      next-sitemap: 2.5.28_next@12.1.6
       prettier: 2.6.2
       rimraf: 3.0.2
       typescript: 4.7.2
@@ -661,6 +663,10 @@ packages:
   /@codesandbox/sandpack-themes/1.0.0:
     resolution: {integrity: sha512-t0T6b0jIA46u9MtPmTR7nQye3CJgpzauK70NslxSuRUH7W2J39gDMbcw0GuCgjmRqiM/4bBa401OKRRKDzUPpQ==}
     dev: false
+
+  /@corex/deepmerge/2.6.148:
+    resolution: {integrity: sha512-6QMz0/2h5C3ua51iAnXMPWFbb1QOU1UvSM4bKBw5mzdT+WtLgjbETBBIQZ+Sh9WvEcGwlAt/DEdRpIC3XlDBMA==}
+    dev: true
 
   /@emotion/is-prop-valid/1.1.2:
     resolution: {integrity: sha512-3QnhqeL+WW88YjYbQL5gUIkthuMw7a0NGbZ7wfFVk2kg/CK5w8w5FFa0RzWjyY1+sujN0NWbtSHH6OJmWHtJpQ==}
@@ -3936,6 +3942,18 @@ packages:
       chokidar: 3.5.3
       commander: 5.1.0
       express: 4.18.1
+    dev: true
+
+  /next-sitemap/2.5.28_next@12.1.6:
+    resolution: {integrity: sha512-rDMTa7nLE0ikYnu8JDCrwQufIRm4b4Sg8BK11DGdDAmYpXmcmw4Qvm+oVBR8gUL97E6i2ihTM+cRx8mgENDACA==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      next: '*'
+    dependencies:
+      '@corex/deepmerge': 2.6.148
+      minimist: 1.2.6
+      next: 12.1.6_react-dom@17.0.2+react@17.0.2
     dev: true
 
   /next-tick/1.1.0:

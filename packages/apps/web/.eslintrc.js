@@ -39,7 +39,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   extends: [...(baseEslintConfig.extends ?? []), 'next/core-web-vitals'],
-  ignorePatterns: [...(baseEslintConfig.ignorePatterns ?? []), 'next.config.js'],
+  ignorePatterns: [...(baseEslintConfig.ignorePatterns ?? []), 'next.config.js', 'next-sitemap.js'],
   rules: {
     ...baseEslintConfig.rules,
     'no-restricted-syntax': [
