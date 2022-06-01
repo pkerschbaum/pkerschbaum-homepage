@@ -1,5 +1,9 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withBundleAnalyzer({
   staticPageGenerationTimeout: 60,
 
   reactStrictMode: true,
@@ -43,4 +47,4 @@ module.exports = {
 
     return config;
   },
-};
+});
