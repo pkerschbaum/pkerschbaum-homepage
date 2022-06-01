@@ -86,7 +86,10 @@ const CodeBlockContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
 
-  & .cm-content {
+  && .cm-scroller {
+    padding-block: calc(2.5 * var(--spacing-base));
+  }
+  && .cm-content {
     padding-inline: calc(2.5 * var(--spacing-base));
   }
 `;

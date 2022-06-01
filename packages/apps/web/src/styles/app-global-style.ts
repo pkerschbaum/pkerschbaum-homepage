@@ -152,7 +152,7 @@ const appGlobalStyle = css`
   }
 
   code {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
     border-radius: 4px;
     background-color: var(--color-bg-emphasized);

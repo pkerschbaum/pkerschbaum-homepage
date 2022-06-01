@@ -89,6 +89,9 @@ const BlogPostContainer = styled.article`
   & li {
     margin-block: 0.5em;
   }
+  & li:first-of-type {
+    margin-block-start: 0;
+  }
 
   /* 
     Code blocks should span entire width.
