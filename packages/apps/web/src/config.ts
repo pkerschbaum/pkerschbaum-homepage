@@ -3,6 +3,8 @@
 let deploymentOrigin;
 if (typeof window !== 'undefined') {
   deploymentOrigin = window.location.origin;
+} else if (process.env.DEPLOYMENT_ORIGIN) {
+  deploymentOrigin = process.env.DEPLOYMENT_ORIGIN;
 } else if (process.env.VERCEL_URL) {
   deploymentOrigin = `https://${process.env.VERCEL_URL}`;
 } else {
