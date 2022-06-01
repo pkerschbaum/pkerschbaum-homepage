@@ -85,4 +85,8 @@ const CodeBlockContainer = styled.div`
   box-shadow: var(--shadow-elevation-medium);
   border-radius: 8px;
   overflow: hidden;
+
+  & .cm-content {
+    padding-inline: calc(2.5 * var(--spacing-base));
+  }
 `;

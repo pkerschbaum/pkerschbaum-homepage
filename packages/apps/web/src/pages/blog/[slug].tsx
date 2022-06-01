@@ -2,12 +2,16 @@ import dayjs from 'dayjs';
 import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+import { Twitter } from 'react-feather';
 import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { MDXViewer } from '~/components/mdx-viewer';
+import { config } from '~/config';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
+import { Anchor } from '~/elements';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
 import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
 
@@ -16,29 +20,44 @@ type BlogPostPageProps = {
   hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
 };
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => (
-  <>
-    <Head>
-      <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
-      <meta name="description" content={mdxParseResult.frontmatter.description} />
-    </Head>
+const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => {
+  const router = useRouter();
+  const { slug } = router.query;
+  invariant(typeof slug === 'string');
 
-    <BlogPostContainer>
-      <FrontMatter>
-        <h1>{mdxParseResult.frontmatter.title}</h1>
-        <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-          Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
-        </Time>
-      </FrontMatter>
-      <div>
-        <MDXViewer
-          codeOfMdxParseResult={mdxParseResult.code}
-          hrefToFaviconsMap={hrefToFaviconsMap}
-        />
-      </div>
-    </BlogPostContainer>
-  </>
-);
+  return (
+    <>
+      <Head>
+        <title>{mdxParseResult.frontmatter.title} - Patrick Kerschbaum</title>
+        <meta name="description" content={mdxParseResult.frontmatter.description} />
+      </Head>
+
+      <BlogPostContainer>
+        <FrontMatter>
+          <h1>{mdxParseResult.frontmatter.title}</h1>
+          <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+            Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
+          </Time>
+        </FrontMatter>
+        <div>
+          <MDXViewer
+            codeOfMdxParseResult={mdxParseResult.code}
+            hrefToFaviconsMap={hrefToFaviconsMap}
+          />
+        </div>
+        <TwitterAnchor
+          href={`https://twitter.com/search?q=${encodeURIComponent(
+            `${config.deploymentOrigin}/blog/${slug}`,
+          )}`}
+          target="_blank"
+        >
+          <Twitter />
+          Discuss on Twitter
+        </TwitterAnchor>
+      </BlogPostContainer>
+    </>
+  );
+};
 
 const BlogPostContainer = styled.article`
   width: 100%;
@@ -62,7 +81,7 @@ const BlogPostContainer = styled.article`
     list-style-type: initial;
   }
   & li {
-    margin-block: 0.25em;
+    margin-block: 0.5em;
   }
 
   /* 
@@ -107,6 +126,14 @@ const FrontMatter = styled.div`
 const Time = styled.time`
   color: var(--color-fg-less-emphasized);
   text-transform: uppercase;
+`;
+
+const TwitterAnchor = styled(Anchor)`
+  display: inline-flex;
+  align-items: center;
+  gap: calc(0.75 * var(--spacing-base));
+
+  font-size: var(--font-size-sm);
 `;
 
 const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {
