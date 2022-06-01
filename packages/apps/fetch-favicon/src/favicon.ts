@@ -1,6 +1,8 @@
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
 
+const PUPPETEER_NAVIGATION_TIMEOUT = 2 * 60 * 1000; // 2 minutes
+
 type FetchFaviconDataURLsOptions = { browser: any };
 export type FetchFaviconDataURLsResult = {
   lightIconDataURL: any;
@@ -28,7 +30,7 @@ export async function fetchFaviconDataURLs(
 
 async function gotoPageAndExtractFaviconFromPage(page: any, href: string) {
   // Goto given href
-  await page.goto(href, { waitUntil: 'networkidle0' });
+  await page.goto(href, { waitUntil: 'networkidle0', timeout: PUPPETEER_NAVIGATION_TIMEOUT });
 
   // Extract iconHref from html
   const iconHref = await page
