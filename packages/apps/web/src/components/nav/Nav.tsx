@@ -67,24 +67,24 @@ const slideLeft = keyframes`
     transform: translateX(0%);
   }
   50% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
   }
   50.1% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
     display: none;
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
     display: none;
   }
 `;
 const slideRight = keyframes`
   0% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
     display: none;
   }
   0.1% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
   }
   50% {
     transform: translateX(0%);

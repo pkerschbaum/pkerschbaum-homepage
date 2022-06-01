@@ -71,7 +71,8 @@ const SwitchThemeButton: React.FC = () => {
 const RootContainer = styled.div`
   min-height: 100%;
   --app-padding-inline: calc(2.5 * var(--spacing-base));
-  max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
+  --app-max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
+  max-width: var(--app-max-width);
   margin: 0 auto;
 
   padding-block-start: calc(2 * var(--spacing-base));
@@ -91,6 +92,7 @@ const ToggleColorThemeButtonContainer = styled.div`
 const Main = styled.main`
   flex: 1;
 
+  padding-block-start: 84px;
   display: flex;
   flex-direction: column;
   align-items: stretch;

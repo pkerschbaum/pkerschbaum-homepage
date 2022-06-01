@@ -8,10 +8,16 @@ export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 export const HeaderContainer = styled.header`
   flex-shrink: 0;
   align-self: stretch;
-  position: sticky;
-  top: -1px; /* allows to detect if sticky element is "pinned", see http://localhost:3000/blog/collect-code-coverage-of-api-tests-using-playwright */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
 
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  padding-block-start: var(--spacing-base);
+  padding-inline: var(--app-padding-inline);
   display: flex;
   align-items: center;
   justify-content: space-between;
