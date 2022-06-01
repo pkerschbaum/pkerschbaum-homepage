@@ -1,13 +1,17 @@
 import Head from 'next/head';
 import type React from 'react';
 
-import { SeoHead } from '~/components/seo-head';
-
 const ResumePage: React.FC = () => {
+  const title = 'Resume | Patrick Kerschbaum';
+  const description = 'Resume of Patrick Kerschbaum';
+
   return (
     <>
       <Head>
-        <SeoHead title="Resume | Patrick Kerschbaum" description="Resume of Patrick Kerschbaum" />
+        <title>{title}</title>
+        <meta name="description" content={description} key="desc" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
       </Head>
 
       <span>TODO ResumePage</span>

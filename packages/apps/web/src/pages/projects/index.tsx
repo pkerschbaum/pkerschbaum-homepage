@@ -2,13 +2,18 @@ import Head from 'next/head';
 import type React from 'react';
 
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
-import { SeoHead } from '~/components/seo-head';
 
 const ProjectsPage: React.FC = () => {
+  const title = 'Projects';
+  const description = 'Projects of Patrick Kerschbaum';
+
   return (
     <>
       <Head>
-        <SeoHead title="Projects" description="Projects of Patrick Kerschbaum" />
+        <title>{title}</title>
+        <meta name="description" content={description} key="desc" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
       </Head>
 
       <h1>All Projects</h1>
