@@ -5,7 +5,7 @@ import {
   SandpackCodeViewer,
   SandpackThemeProp,
 } from '@codesandbox/sandpack-react';
-import { githubLight, sandpackDark } from '@codesandbox/sandpack-themes';
+import { githubLight, monokaiPro } from '@codesandbox/sandpack-themes';
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import { assertIsUnreachable, check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
@@ -54,7 +54,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
       break;
     }
     case ColorTheme.DARK: {
-      sandpackThemeToUse = sandpackDark;
+      sandpackThemeToUse = monokaiPro;
       break;
     }
     default:

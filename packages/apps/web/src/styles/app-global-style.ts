@@ -4,7 +4,11 @@ import { ColorTheme, DataAttribute } from '~/constants';
 
 const appGlobalStyle = css`
   * {
-    transition: background 200ms;
+    transition: background 150ms;
+  }
+  a,
+  svg * {
+    transition: color 150ms, fill 150ms;
   }
 
   /* change scrollbar to a thin variant which lightens up on hover */

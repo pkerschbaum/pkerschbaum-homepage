@@ -120,7 +120,7 @@ const BlogPostContainer = styled.article`
   & h1,
   & h2,
   & h3 {
-    margin-block-start: 2em;
+    margin-block-start: 2.5em;
     margin-block-end: 0.5em;
   }
 `;
