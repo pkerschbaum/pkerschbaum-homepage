@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 import { Favicon } from '~/components/favicon';
 import { nameHeadingStyles } from '~/components/introduction';
+import { config } from '~/config';
 import { DataAttribute, IsScrolled } from '~/constants';
 import { Anchor } from '~/elements';
 
@@ -30,7 +31,9 @@ export const Nav: React.FC = () => {
       <SubNavContainer>
         <NavAnchor href="/blog">Blog</NavAnchor>
         <NavAnchor href="/projects">Projects</NavAnchor>
-        <NavAnchor href="/resume">Resume</NavAnchor>
+        <NavAnchor href={config.socialMediaLinks.linkedIn} target="_blank">
+          Resume (LinkedIn)
+        </NavAnchor>
       </SubNavContainer>
     </NavContainer>
   );

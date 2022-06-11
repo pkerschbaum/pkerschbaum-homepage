@@ -15,4 +15,7 @@ export const config = {
   isDevEnvironment: process.env.NODE_ENV === 'development',
   isServer: typeof window === 'undefined',
   deploymentOrigin,
+  socialMediaLinks: {
+    linkedIn: 'https://www.linkedin.com/in/patrick-kerschbaum/',
+  },
 };

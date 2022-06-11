@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { BlogOverview } from '~/components/blog-overview';
 import { Introduction } from '~/components/introduction';
+import { Main } from '~/components/main';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
@@ -27,20 +28,29 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <Introduction />
+      <HomepageContainer>
+        <Introduction />
 
-      <HomepageSection>
-        <SectionHeading>Latest posts</SectionHeading>
-        <BlogOverview posts={posts} />
-      </HomepageSection>
+        <HomepageSection>
+          <SectionHeading>Latest posts</SectionHeading>
+          <BlogOverview posts={posts} />
+        </HomepageSection>
 
-      <HomepageSection>
-        <SectionHeading>Projects</SectionHeading>
-        <ProjectsOverview />
-      </HomepageSection>
+        <HomepageSection>
+          <SectionHeading>Projects</SectionHeading>
+          <ProjectsOverview />
+        </HomepageSection>
+      </HomepageContainer>
     </>
   );
 };
+
+const HomepageContainer = styled(Main)`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(8 * var(--spacing-base));
+`;
 
 const HomepageSection = styled.section`
   display: flex;
@@ -50,6 +60,7 @@ const HomepageSection = styled.section`
 `;
 
 const SectionHeading = styled.h2`
+  margin-block: 0;
   font-size: var(--font-size-xxl);
 `;
 

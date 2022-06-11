@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import type React from 'react';
 
+import { Main } from '~/components/main';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 
 const ProjectsPage: React.FC = () => {
@@ -16,9 +17,11 @@ const ProjectsPage: React.FC = () => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <h1>All Projects</h1>
+      <Main>
+        <h1>All Projects</h1>
 
-      <ProjectsOverview />
+        <ProjectsOverview />
+      </Main>
     </>
   );
 };

@@ -2,28 +2,26 @@ import type React from 'react';
 import { GitHub, Linkedin, Twitter } from 'react-feather';
 import styled from 'styled-components';
 
+import { config } from '~/config';
 import { Anchor } from '~/elements';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>
     <LinkElement title="GitHub">
-      <SocialMediaAnchor href="https://github.com/pkerschbaum/">
-        <GitHub aria-label="GitHub" />
+      <SocialMediaAnchor href="https://github.com/pkerschbaum/" aria-label="GitHub">
+        <GitHub />
       </SocialMediaAnchor>
     </LinkElement>
 
     <LinkElement title="LinkedIn">
-      <SocialMediaAnchor
-        href="https://www.linkedin.com/in/patrick-kerschbaum/"
-        aria-label="LinkedIn"
-      >
+      <SocialMediaAnchor href={config.socialMediaLinks.linkedIn} aria-label="LinkedIn">
         <Linkedin />
       </SocialMediaAnchor>
     </LinkElement>
 
     <LinkElement title="Twitter">
-      <SocialMediaAnchor href="https://twitter.com/pkerschbaum/">
-        <Twitter aria-label="Twitter" />
+      <SocialMediaAnchor href="https://twitter.com/pkerschbaum/" aria-label="Twitter">
+        <Twitter />
       </SocialMediaAnchor>
     </LinkElement>
   </LinksList>

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import type React from 'react';
 
 import { BlogOverview } from '~/components/blog-overview';
+import { Main } from '~/components/main';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
@@ -24,9 +25,11 @@ const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
         <meta property="og:description" content={description} />
       </Head>
 
-      <h1>All Posts</h1>
+      <Main>
+        <h1>All Posts</h1>
 
-      <BlogOverview posts={posts} />
+        <BlogOverview posts={posts} />
+      </Main>
     </>
   );
 };

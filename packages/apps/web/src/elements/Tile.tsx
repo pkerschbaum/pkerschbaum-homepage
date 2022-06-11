@@ -33,7 +33,9 @@ export const TileContent = styled.div`
   gap: calc(0.5 * var(--spacing-base));
 `;
 
-export const Title = styled.h3``;
+export const Title = styled.h3`
+  margin-block: 0;
+`;
 
 export const Description = styled.p`
   flex-grow: 1;

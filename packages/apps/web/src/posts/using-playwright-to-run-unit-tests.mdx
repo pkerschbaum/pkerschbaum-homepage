@@ -7,47 +7,38 @@ shortenedURL: use-playwright-test-for-unit-tests
 tags: ['#playwright', '#testing', '#code-coverage']
 ---
 
-I have used Playwright for a couple of my projects so far, and I had such a good experience that it got my E2E test automation tool of choice.  
-Recently, I started using Playwright Test, the test runner of Playwright ([`@playwright/test`](https://www.npmjs.com/package/@playwright/test)) for unit tests also.
+I have used Playwright for a couple of my projects so far, and I had such a good experience that it got my E2E test automation tool of choice.
+
+Recently, I started using Playwright Test, the test runner of Playwright ([`@playwright/test`](https://www.npmjs.com/package/@playwright/test)) **for unit tests** also.  
+By unit test I mean the test subject **is executed directly**; this differs from the "usual" way of using Playwright to open a browser, navigate to a web page, and test that web page.
 
 In this blog post, I want to
 
 - describe what I like about Playwright and why I think it is a good idea to use it for unit tests
-- outline things missing from Playwright compared to other test frameworks, and how to fill those gaps
+- outline things missing from Playwright compared to other test frameworks (and how to fill some of those gaps)
 - suggest some minor tweaks to make Playwright more suitable for unit tests
 
 ## Why to use Playwright Test for unit tests
 
-I had used "traditional" test runners before, mainly Jest (but also Mocha a few years ago).  
-But I think there are some advantages of using Playwright for unit tests (and also in general):
+I had used "traditional" test runners before, mainly Jest, but also Mocha a few years ago.  
+I think there are some advantages of using Playwright for unit tests:
 
 - **Same tool for E2E tests and unit tests:**
   One tool less in your setup means one tool less to learn, configure, update, etc.
 - **Out-of-the-box support for TypeScript:**
   Playwright Test supports TypeScript _out-of-the-box_.  
-  If you use Jest or Mocha for tests in a TypeScript project, you have to configure some transform (Babel, `ts-jest`, etc.), or run the test runner with `ts-node`, or compile the test cases before running them (see also <FancyAnchor href="https://jestjs.io/docs/getting-started#using-typescript">AUTOGENERATE</FancyAnchor>)).
-- **Support for (ES) module features:**
-  When I used Playwright Test I did never have any issues with the CommonJS or ES module system.
-  Code would run with Playwright Test the same way as it would run with Node.js (or bundled for the browser with some bundler), even if I used "advanced" module features like the `exports` field of a `package.json`.
-
-  With Jest, however, I experienced issues when it comes to `import` / `require` statements.  
-  This could for example happen because Jest did not support the `exports` field of a `package.json` (until Jest 28, which was released just a few weeks ago, <FancyAnchor href="https://jestjs.io/blog/2022/04/25/jest-28#packagejson-exports">AUTOGENERATE</FancyAnchor>).  
-  It seems like Jest has some kind of custom module implementation; fact is that its support for module system features _deviates_ from that of the Node.js version/bundler you are using.  
-  Since work on ES module features is still ongoing (see e.g. "import maps") this is something I would like to avoid.
-
+  For all other test runners I am aware of you have to configure some transform (Babel, `ts-jest`, etc.), or run the test runner with `ts-node`, or compile the test cases before running them (see e.g. <FancyAnchor href="https://jestjs.io/docs/getting-started#using-typescript">"Using Typescript" of the Jest docs</FancyAnchor>).
 - **Access to features unique to Playwright:**
   Playwright has some very useful features, e.g.:
-  - "fixtures" allow to prepare resources per test case or worker (<FancyAnchor href="https://playwright.dev/docs/test-fixtures">AUTOGENERATE</FancyAnchor>).
+
+  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-fixtures">"fixtures"</FancyAnchor> allow to prepare resources per test case or worker.  
     This is in my opinion much better than the `beforeEach` / `afterEach` fiddling you have to do with other test runners.
-  - "projects" allow to run "the same or different tests in multiple configurations" (<FancyAnchor href="https://playwright.dev/docs/test-advanced#projects">AUTOGENERATE</FancyAnchor>).
+  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-advanced#projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
+    For example a while ago I had to make sure that some client/server interaction based on <FancyAnchor href="https://socket.io">socket.io</FancyAnchor> works with both WebSockets and HTTP long-polling.
+    Setting up two Playwright projects with different project parameters allowed me to run the same tests with two configurations, once using WebSockets and once using HTTP long-polling.
+
 - **Development funded by a big company:**
-  Playwright is a product of Microsoft and has been maintained very actively over the last two or three years.
-  Jest, on the other hand, has not been maintained by Facebook anymore for a couple of years, and many issues has been open for a long time.
-  At least it seems like it is getting more traction again in these days (Jest got some releases in the last couple of weeks and got transferred to the OpenJS Foundation, <FancyAnchor href="https://jestjs.io/blog/2022/05/11/jest-joins-openjs">AUTOGENERATE</FancyAnchor>).
-
-  Please note that I don't want to blame anyone that Jest did not get the attention it would have needed; this is the fate many OSS projects suffer when no funding is provided and developers spend their spare time to maintain them.  
-  Still, as software engineers, we have the responsability to consider development and maintenance of technologies we use in our projects.
-
+  Playwright is a product of Microsoft and has been maintained very actively over the last couple of years.
 - **No use of globals:** Playwright does not use any globals for its test runner.
   You import from `@playwright/test` just what you need in your test files.
 
@@ -73,6 +64,7 @@ Fortunately, we can fill those gaps using libraries from the Node.js ecosystem:
   Use [`sinon`](https://www.npmjs.com/package/sinon), see this commit of the example repository I made: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">AUTOGENERATE</FancyAnchor>.
 - **CommonJS/ES module mocking:**
   Jest provides a way to mock CommonJS modules via `jest.mock` (ESM is not supported at the time of writing: <FancyAnchor href="https://github.com/facebook/jest/issues/10025">AUTOGENERATE</FancyAnchor>); since Playwright Test is executed with Node.js, [`testdouble`](https://github.com/testdouble/testdouble.js) should work (but not tested).
+- **Watch mode:** https://github.com/microsoft/playwright/issues/7035
 
 ## Other things to consider
 

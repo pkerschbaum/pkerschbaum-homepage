@@ -29,9 +29,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         </ToggleColorThemeButtonContainer>
       </Header>
 
-      <Main>
-        <Component {...pageProps} />
-      </Main>
+      <Component {...pageProps} />
 
       <Footer>
         <SocialMediaLinks />
@@ -87,16 +85,6 @@ const RootContainer = styled.div`
 const ToggleColorThemeButtonContainer = styled.div`
   flex-shrink: 0;
   display: flex;
-`;
-
-const Main = styled.main`
-  flex: 1;
-
-  padding-block-start: 84px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: calc(4 * var(--spacing-base));
 `;
 
 const Footer = styled.footer`

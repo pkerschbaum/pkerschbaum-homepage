@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import invariant from 'tiny-invariant';
 import { z } from 'zod';
 
+import { Main } from '~/components/main';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { config } from '~/config';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
@@ -40,29 +41,31 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
         <meta property="og:description" content={description} />
       </Head>
 
-      <BlogPostContainer>
-        <FrontMatter>
-          <h1>{mdxParseResult.frontmatter.title}</h1>
-          <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-            Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
-          </Time>
-        </FrontMatter>
-        <div>
-          <MDXViewer
-            codeOfMdxParseResult={mdxParseResult.code}
-            hrefToFaviconsMap={hrefToFaviconsMap}
-          />
-        </div>
-        <TwitterAnchor
-          href={`https://twitter.com/search?q=${encodeURIComponent(
-            `${config.deploymentOrigin}/blog/${segment}`,
-          )}`}
-          target="_blank"
-        >
-          <Twitter />
-          Discuss on Twitter
-        </TwitterAnchor>
-      </BlogPostContainer>
+      <Main>
+        <BlogPostContainer>
+          <FrontMatter>
+            <h1>{mdxParseResult.frontmatter.title}</h1>
+            <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+              Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
+            </Time>
+          </FrontMatter>
+          <div>
+            <MDXViewer
+              codeOfMdxParseResult={mdxParseResult.code}
+              hrefToFaviconsMap={hrefToFaviconsMap}
+            />
+          </div>
+          <TwitterAnchor
+            href={`https://twitter.com/search?q=${encodeURIComponent(
+              `${config.deploymentOrigin}/blog/${segment}`,
+            )}`}
+            target="_blank"
+          >
+            <Twitter />
+            Discuss on Twitter
+          </TwitterAnchor>
+        </BlogPostContainer>
+      </Main>
     </>
   );
 };
@@ -115,13 +118,6 @@ const BlogPostContainer = styled.article`
     margin-inline-start: calc(
       -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
     );
-  }
-
-  & h1,
-  & h2,
-  & h3 {
-    margin-block-start: 2.5em;
-    margin-block-end: 0.5em;
   }
 `;
 
