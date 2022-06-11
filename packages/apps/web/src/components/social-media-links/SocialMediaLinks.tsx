@@ -7,8 +7,8 @@ import { Anchor } from '~/elements';
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>
     <LinkElement title="GitHub">
-      <SocialMediaAnchor href="https://github.com/pkerschbaum/">
-        <GitHub aria-label="GitHub" />
+      <SocialMediaAnchor href="https://github.com/pkerschbaum/" aria-label="GitHub">
+        <GitHub />
       </SocialMediaAnchor>
     </LinkElement>
 
@@ -22,8 +22,8 @@ export const SocialMediaLinks: React.FC = () => (
     </LinkElement>
 
     <LinkElement title="Twitter">
-      <SocialMediaAnchor href="https://twitter.com/pkerschbaum/">
-        <Twitter aria-label="Twitter" />
+      <SocialMediaAnchor href="https://twitter.com/pkerschbaum/" aria-label="Twitter">
+        <Twitter />
       </SocialMediaAnchor>
     </LinkElement>
   </LinksList>

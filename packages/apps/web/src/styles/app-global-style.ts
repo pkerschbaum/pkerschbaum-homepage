@@ -39,6 +39,8 @@ const appGlobalStyle = css`
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
     --color-black-hsl: 225, 6%, 13%;
     --color-black: hsl(var(--color-black-hsl));
+    --color-bluegray-hsl: 230, 16%, 23%;
+    --color-bluegray: hsl(var(--color-bluegray-hsl));
     --color-darkgrey: hsl(0 0% 35%);
     --color-grey: hsl(0 0% 65%);
     --color-lightgrey: hsl(0 0% 85%);
@@ -92,10 +94,10 @@ const appGlobalStyle = css`
   :root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
     --color-fg: var(--color-white);
     --color-fg-less-emphasized: var(--color-lightgrey);
-    --color-bg: var(--color-black);
+    --color-bg: var(--color-bluegray);
     --color-bg-emphasized: var(--color-darkgrey);
     --color-bg-interactive: var(--color-darkteal);
-    --shadow-color: var(--color-black-hsl);
+    --shadow-color: var(--color-bluegray-hsl);
     --image-filter: grayscale(20%);
   }
 

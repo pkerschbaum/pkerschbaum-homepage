@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type React from 'react';
+import { MapPin } from 'react-feather';
 import styled, { css } from 'styled-components';
 
 import profilePic from '../../../public/profile-picture.jpg';
@@ -19,8 +20,8 @@ export const Introduction: React.FC = () => {
         JavaScript ecosystem.
       </IntroductionMessage>
       <IntroductionMessageDetails>
-        I&apos;m currently based in Vienna, Austria. I have a history of working in the field of
-        national-scaled web and mobile application engineering.
+        <MapPin size="1.25em" />
+        Vienna, Austria
       </IntroductionMessageDetails>
       <ProfilePictureWrapper>
         <ProfilePicture
@@ -63,6 +64,10 @@ const IntroductionMessage = styled.p`
 const IntroductionMessageDetails = styled.p`
   grid-area: message-details;
   margin-block-end: calc(0.5 * var(--spacing-base));
+
+  display: flex;
+  align-items: center;
+  gap: calc(0.75 * var(--spacing-base));
 `;
 
 const ProfilePictureWrapper = styled.span`

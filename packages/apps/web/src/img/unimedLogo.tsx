@@ -1,0 +1,16 @@
+import Image from 'next/image';
+import React from 'react';
+
+type UnimedLogoProps = {
+  className?: string;
+};
+
+export const UnimedLogo: React.FC<UnimedLogoProps> = ({ ...delegated }) => (
+  <Image
+    layout="fill"
+    objectFit="contain"
+    alt="Logo von Unimed"
+    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKkAAAAeCAYAAABXGj7iAAAEOklEQVR4nO2bT4hVVRzHPzO9mWS0mMRjDUktCpUChYnMFknUIg4S/cEiDLKdtNCYlIjgQHYWEZSp0MIWNa4CSVy0ONIiEGZRZmWQYuViEp3E41QONjljM9Pi3sHr9Z47791337133pwPPN6Z8/ud8/u+937M+XdPBwsMIVUv8JfDPGCN3lOknoWEkGoP8HqC6bI1ujf0eQp4EhgDlgK7O4uT6PGkI6QSwAbgFmAGGAZ2+iT1VIn1wFfAYuB2YAqY8EnqqRJ/APcCF4DvgfNAj09ST2WwRh8H1gBnCf6jbgC+qZWqqhz+BQYctqNFCvEk8iawEXgFOGCN/mnBJak1egLwK/iKYo2eBr6M1tWEVK86/E9Yo09kCSSk2gQsSTCdsUYPhT7rgAey9F8Hk8CvwI/W6KmYtm5gs6PdMWv0qdDvCeCeFumLchX4GThpjZ5xOQmpuoB+4H6gK4e4M8AI8J01+u80RyFVH/AQsKzJmJl+7xrwmcO2C8iUpMAHBBPgOAeAobC8meQ9szw5J6QasEZ/Eanrwf2ZB4BTYXk78EwrxcX4RUi11Rp905RDSLUFeB+4swVxJ4VU+4G3rNHjsbh3AR8DzwEdLYhdF+2+cFoBHAw3iKvOKuCIkGpttFJI9SIwSGsSFKAb2AZ8EovbBRwBnqfEBIX2T1IIvuB3yxZRJ4uAt2N1uqDYLwupVkX+fgFY63IukoWQpAAPC6kWlS2iTh6bLQiplgMry4gdK5dKVVf3WbeCVgJ9CfUdBOfAI5kVXecf4HhC/WqSh+Qprs/Do6wB7kioF45ynBHgtxS7i2XAgw5bPbFngG+BiQZiLiZY7N1NhsVXJZPUGv14lnZCqjeADx3m7syCbuRMkj4h1SCwJcH/isN/H8FcME70N0lbxStr9KepShMQUi0FRh3mWx06opy2Rj/aaNwwtusBk1TabbifLltAAzSrNWv7ZuNONtm+YdotST1tiE9ST+Wp5JzUUxf9QqrUkyJgnJuH5yJO0XLFJ+n8ZRvJC69mcN1YKBU/3HuiZNnSajk+ST2zXAC+LltEEj5JPRBcenvJGn21bCFJ+Dnp/GUUuNJE+2sEp1ZHgf3W6PO5qGoBPknnLzut0YNliyiCtCTtF1I9m7HfnoztPPWzTkg1nHOfw9boufpcHj4t1cjZ/SyZtr9qBMdkSXPTp8OXpzwup9heC195sgt4JyyPO3z6gNM5x3XeSIAgOSu57eAB4BzBxcEy+L3AWGfTjJ3A5wUJ8TSINfoacLCk8IcLjHUozdgJvEdwx9lTTXaQ/a5ZZqzRx4DdBYT6AfgozaFmjZ4UUklgE8F9ltVAb4sEXYqU/yT/IWUspc//wvfpFJ+xSPmiw8/14PQlh/9YQh3U+fmt0aNCqvUE99A3AvcBt83VLiM3PAtgjd4hpBoCtgKPkF9eTAAnCUaJvXPtz/4P1ZwEdDEMOHkAAAAASUVORK5CYII="
+    {...delegated}
+  />
+);
