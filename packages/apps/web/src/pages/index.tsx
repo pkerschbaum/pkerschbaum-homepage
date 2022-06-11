@@ -8,6 +8,7 @@ import { BlogOverview } from '~/components/blog-overview';
 import { Introduction } from '~/components/introduction';
 import { Main } from '~/components/main';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
+import { config } from '~/config';
 import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
@@ -36,10 +37,12 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
           <BlogOverview posts={posts} />
         </HomepageSection>
 
-        <HomepageSection>
-          <SectionHeading>Projects</SectionHeading>
-          <ProjectsOverview />
-        </HomepageSection>
+        {config.featureFlags.projects && (
+          <HomepageSection>
+            <SectionHeading>Projects</SectionHeading>
+            <ProjectsOverview />
+          </HomepageSection>
+        )}
       </HomepageContainer>
     </>
   );

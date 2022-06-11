@@ -30,7 +30,7 @@ export const Nav: React.FC = () => {
 
       <SubNavContainer>
         <NavAnchor href="/blog">Blog</NavAnchor>
-        <NavAnchor href="/projects">Projects</NavAnchor>
+        {config.featureFlags.projects && <NavAnchor href="/projects">Projects</NavAnchor>}
         <NavAnchor href={config.socialMediaLinks.linkedIn} target="_blank">
           Resume (LinkedIn)
         </NavAnchor>

@@ -46,7 +46,8 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
           <FrontMatter>
             <h1>{mdxParseResult.frontmatter.title}</h1>
             <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-              Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMM, YYYY')}
+              Published on{' '}
+              {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
             </Time>
           </FrontMatter>
           <div>
@@ -77,7 +78,7 @@ const BlogPostContainer = styled.article`
 
   display: flex;
   flex-direction: column;
-  gap: calc(2 * var(--spacing-base));
+  gap: calc(4 * var(--spacing-base));
 
   & p {
     margin-block: 1em;

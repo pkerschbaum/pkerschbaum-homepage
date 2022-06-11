@@ -11,10 +11,14 @@ if (typeof window !== 'undefined') {
   deploymentOrigin = 'http://localhost:3000';
 }
 
+const isDevEnvironment = process.env.NODE_ENV === 'development';
 export const config = {
-  isDevEnvironment: process.env.NODE_ENV === 'development',
+  isDevEnvironment,
   isServer: typeof window === 'undefined',
   deploymentOrigin,
+  featureFlags: {
+    projects: isDevEnvironment,
+  },
   socialMediaLinks: {
     linkedIn: 'https://www.linkedin.com/in/patrick-kerschbaum/',
   },

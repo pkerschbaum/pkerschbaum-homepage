@@ -1,7 +1,7 @@
 ---
 title: Using Playwright Test to run Unit Tests
 published: true
-publishedAtISO: '2022-05-17T18:00:00.000Z'
+publishedAtISO: '2022-06-13T18:00:00.000Z'
 description: How to use Playwright Test as a test runner for unit tests (as an alternative to Jest/Mocha) and fill in missing pieces (e.g. code coverage).
 shortenedURL: use-playwright-test-for-unit-tests
 tags: ['#playwright', '#testing', '#code-coverage']
@@ -52,8 +52,9 @@ I think there are some advantages of using Playwright for unit tests:
 
 ## Things missing from Playwright (and how to fill the gaps)
 
-Compared to Jest, there are some things missing from Playwright Test which are often needed when running unit tests.  
-Fortunately, we can fill those gaps using libraries from the Node.js ecosystem:
+Compared to Jest, there are some things missing from Playwright Test which are often needed when running unit tests.
+
+The following things are missing but can be filled by libraries from the Node.js ecosystem:
 
 - **Code coverage:**
   A simple setup using the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) does the job.  
@@ -62,29 +63,38 @@ Fortunately, we can fill those gaps using libraries from the Node.js ecosystem:
   Use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - **Fake timers:**
   Use [`sinon`](https://www.npmjs.com/package/sinon), see this commit of the example repository I made: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">AUTOGENERATE</FancyAnchor>.
+
+Unfortunately, some things are not supported and fixable:
+
+- **Watch mode:** Not supported at the time of writing but "planned work": <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.
 - **CommonJS/ES module mocking:**
-  Jest provides a way to mock CommonJS modules via `jest.mock` (ESM is not supported at the time of writing: <FancyAnchor href="https://github.com/facebook/jest/issues/10025">AUTOGENERATE</FancyAnchor>); since Playwright Test is executed with Node.js, [`testdouble`](https://github.com/testdouble/testdouble.js) should work (but not tested).
-- **Watch mode:** https://github.com/microsoft/playwright/issues/7035
+  Jest provides a way to mock CommonJS modules via `jest.mock`, and support for ESM is on its way at the time of writing: <FancyAnchor href="https://github.com/facebook/jest/issues/10025">AUTOGENERATE</FancyAnchor>.  
+  Unfortunately, Node.js module mocking libraries like [`testdouble`](https://github.com/testdouble/testdouble.js) don't work for Playwright because it does some of the module loading itself (<FancyAnchor href="https://github.com/microsoft/playwright/issues/14398">AUTOGENERATE</FancyAnchor>).  
+  If you want to get module mocking support in Playwright, you can upvote this feature request: <FancyAnchor href="https://github.com/microsoft/playwright/issues/14572">AUTOGENERATE</FancyAnchor>.
+
+  This is the biggest downside of using Playwright for unit tests in my opinion.  
+  For now, if you want to test modules isolated from others you have to adapt the codebase to use some kind of dependency injection.
+  Be it that dependencies are just passed as arguments when calling functions, or using a dependency injection solution like <FancyAnchor href="https://docs.nestjs.com/standalone-applications">NestJS IoC containers</FancyAnchor> (which I have used very successfully in the past).
 
 ## Other things to consider
 
-- **Snapshot Suffix:**
-  Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.  
-  At the time of writing, Playwright will append a platform-specific suffix to the name of the file the snapshot is stored in.
-  This makes sense for screenshots (since screenshots taken on differend platforms will deviate slightly, for example because of text rendering), but usually it does not make sense in case of textual/binary data.
+**Snapshot Suffix:**
+Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.  
+ At the time of writing, Playwright will append a platform-specific suffix to the name of the file the snapshot is stored in.
+This makes sense for screenshots (since screenshots taken on differend platforms will deviate slightly, for example because of text rendering), but usually it does not make sense in case of textual/binary data.
 
-  This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>), for now we can disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:
+This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>), for now we can disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:
 
-  ```typescript
-  import { test as base } from '@playwright/test';
+```typescript
+import { test as base } from '@playwright/test';
 
-  export const test = base.extend<{ _autoSnapshotSuffix: void }>({
-    _autoSnapshotSuffix: [
-      async ({}, use, testInfo) => {
-        testInfo.snapshotSuffix = '';
-        await use();
-      },
-      { auto: true },
-    ],
-  });
-  ```
+export const test = base.extend<{ _autoSnapshotSuffix: void }>({
+  _autoSnapshotSuffix: [
+    async ({}, use, testInfo) => {
+      testInfo.snapshotSuffix = '';
+      await use();
+    },
+    { auto: true },
+  ],
+});
+```

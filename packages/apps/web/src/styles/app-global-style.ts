@@ -46,13 +46,15 @@ const appGlobalStyle = css`
     --color-lightgrey: hsl(0 0% 85%);
     --color-verylightgrey: hsl(0 0% 88%);
     --color-darkteal: hsl(180 100% 25%);
-    --color-teal: hsl(180 100% 45%);
-    --color-lightteal: hsl(180 100% 29%);
+    --color-teal: hsl(180 100% 29%);
+    --color-lightteal: hsl(180 100% 45%);
     --color-verylightteal: hsl(180 100% 75%);
 
+    --color-fg: var(--color-black);
     --color-fg-less-emphasized: var(--color-darkgrey);
+    --color-fg-interactive: var(--color-teal);
+    --color-bg: var(--color-white);
     --color-bg-emphasized: var(--color-verylightgrey);
-    --color-fg-interactive: var(--color-lightteal);
     --color-bg-interactive: var(--color-verylightteal);
 
     --font-size-sm: 0.875rem;
@@ -65,6 +67,7 @@ const appGlobalStyle = css`
     --font-weight-bold: 700;
     --spacing-base: 8px;
     --box-width-md: 800px;
+    --image-filter: grayscale(0%);
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;
@@ -85,15 +88,10 @@ const appGlobalStyle = css`
       10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
   }
 
-  :root {
-    --color-fg: var(--color-black);
-    --color-bg: var(--color-white);
-    --image-filter: grayscale(0%);
-  }
-
   :root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
     --color-fg: var(--color-white);
     --color-fg-less-emphasized: var(--color-lightgrey);
+    --color-fg-interactive: var(--color-lightteal);
     --color-bg: var(--color-bluegray);
     --color-bg-emphasized: var(--color-darkgrey);
     --color-bg-interactive: var(--color-darkteal);
