@@ -30,10 +30,12 @@ const appGlobalStyle = css`
     background-color: rgba(0, 0, 0, 0);
   }
 
-  html {
+  *:root {
     font-family: sans-serif;
     color: var(--color-fg);
     background-color: var(--color-bg);
+    overflow-y: scroll;
+    scrollbar-gutter: stable both-edges;
 
     /* design tokens */
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */

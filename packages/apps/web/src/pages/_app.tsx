@@ -68,7 +68,7 @@ const SwitchThemeButton: React.FC = () => {
 
 const RootContainer = styled.div`
   min-height: 100%;
-  --app-padding-inline: calc(2.5 * var(--spacing-base));
+  --app-padding-inline: calc(1.5 * var(--spacing-base));
   --app-max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
   max-width: var(--app-max-width);
   margin: 0 auto;
