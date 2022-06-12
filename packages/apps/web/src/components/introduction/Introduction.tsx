@@ -1,34 +1,29 @@
 import Image from 'next/image';
 import type React from 'react';
 import { MapPin } from 'react-feather';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import profilePic from '../../../public/profile-picture.jpg';
-
-export const nameHeadingStyles = css`
-  font-size: var(--font-size-xxl);
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-`;
+import { commonStyles } from '~/styles/common.styles';
 
 export const Introduction: React.FC = () => {
   return (
     <IntroductionContainer>
-      <IntroductionHeading>Patrick Kerschbaum</IntroductionHeading>
-      <IntroductionMessage>
+      <VisuallyHiddenHeadline>Patrick Kerschbaum homepage</VisuallyHiddenHeadline>
+      <Message>
         I&apos;m Patrick, a software developer with a great passion for web technologies and the
         JavaScript ecosystem.
-      </IntroductionMessage>
-      <IntroductionMessageDetails>
+      </Message>
+      <Location>
         <MapPin size="1.25em" />
         Vienna, Austria
-      </IntroductionMessageDetails>
+      </Location>
       <ProfilePictureWrapper>
         <ProfilePicture
           src={profilePic}
           alt="Picture of Patrick Kerschbaum"
-          width={120}
-          height={120}
+          width={110}
+          height={110}
           objectFit="cover"
         />
       </ProfilePictureWrapper>
@@ -36,8 +31,12 @@ export const Introduction: React.FC = () => {
   );
 };
 
+const VisuallyHiddenHeadline = styled.h1`
+  ${commonStyles.visuallyHidden}
+`;
+
 const IntroductionContainer = styled.section`
-  max-width: var(--box-width-md);
+  max-width: var(--box-width-sm);
   margin-block-start: calc(8 * var(--spacing-base));
   margin-block-end: calc(4 * var(--spacing-base));
   align-self: center;
@@ -45,27 +44,21 @@ const IntroductionContainer = styled.section`
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-areas:
-    'profile-picture heading'
     'profile-picture message'
     'profile-picture message-details';
   grid-column-gap: calc(3 * var(--spacing-base));
   grid-row-gap: calc(0.5 * var(--spacing-base));
 `;
 
-const IntroductionHeading = styled.h1`
-  grid-area: heading;
-  margin-block: 0;
-
-  ${nameHeadingStyles}
-`;
-
-const IntroductionMessage = styled.p`
+const Message = styled.p`
   grid-area: message;
+  align-self: end;
   margin-block-end: calc(0.5 * var(--spacing-base));
 `;
 
-const IntroductionMessageDetails = styled.p`
+const Location = styled.p`
   grid-area: message-details;
+  align-self: start;
   margin-block-end: calc(0.5 * var(--spacing-base));
 
   display: flex;

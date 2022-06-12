@@ -69,6 +69,7 @@ const appGlobalStyle = css`
     --font-weight-bold: 700;
     --spacing-base: 8px;
     --box-width-md: 800px;
+    --box-width-sm: 600px;
     --image-filter: grayscale(0%);
 
     /* https://www.joshwcomeau.com/shadow-palette/ */

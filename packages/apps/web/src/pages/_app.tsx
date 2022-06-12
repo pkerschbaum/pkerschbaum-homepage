@@ -12,8 +12,8 @@ import { SocialMediaLinks } from '~/components/social-media-links';
 import { ColorTheme } from '~/constants';
 import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
 import { Button } from '~/elements';
-import { AppGlobalStyle } from '~/styles/app-global-style';
-import { CSSReset } from '~/styles/css-reset';
+import { CSSReset } from '~/styles/css-reset.styles';
+import { AppGlobalStyle } from '~/styles/global-app.styles';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <ColorThemeProvider>

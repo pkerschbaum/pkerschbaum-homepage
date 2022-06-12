@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { Favicon } from '~/components/favicon';
-import { nameHeadingStyles } from '~/components/introduction';
 import { config } from '~/config';
 import { DataAttribute, IsScrolled } from '~/constants';
 import { Anchor } from '~/elements';
@@ -101,7 +100,9 @@ const NavHomeAnchor = styled(NavAnchor)`
   grid-template: 'container';
 
   line-height: 1;
-  ${nameHeadingStyles}
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
 
   transition: width var(--animation-duration);
   width: 180px;
