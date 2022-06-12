@@ -2,9 +2,9 @@
 title: Using Playwright Test to run Unit Tests
 published: true
 publishedAtISO: '2022-06-13T18:00:00.000Z'
-description: Reasons for using Playwright Test as a test runner for unit tests, and how to fill in missing pieces (e.g. code coverage).
+description: Why you might want to use Playwright Test as a test runner for unit tests, and how to fill in missing pieces (e.g. code coverage).
 shortenedURL: use-playwright-test-for-unit-tests
-tags: ['#playwright', '#testing']
+tags: ['#playwright', '#testing', '#unit-test']
 ---
 
 I have used Playwright for a couple of my projects so far, and I had such a good experience that it got my E2E test automation tool of choice.
@@ -52,9 +52,8 @@ I think there are some advantages of using Playwright for unit tests:
 
 ## Things missing from Playwright (and how to fill the gaps)
 
-Compared to Jest, there are some things missing from Playwright Test which are often needed when running unit tests.
-
-The following things are missing but can be filled by libraries from the Node.js ecosystem:
+Compared to Jest, there are some things missing from Playwright Test which are often needed when running unit tests.  
+Most of those things can be substituted by using libraries of the Node.js ecosystem:
 
 - **Code coverage:**
   A simple setup using the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) does the job.  
@@ -63,10 +62,9 @@ The following things are missing but can be filled by libraries from the Node.js
   Use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - **Fake timers:**
   Use [`sinon`](https://www.npmjs.com/package/sinon), see this commit of the example repository I made: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">AUTOGENERATE</FancyAnchor>.
-
-Unfortunately, some things are not supported and fixable:
-
-- **Watch mode:** Not supported at the time of writing but "planned work": <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.
+- **Watch mode:**
+  Not supported but "planned work" at the time of writing: <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.  
+  There are some workarounds in the related issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
 - **CommonJS/ES module mocking:**
   Jest provides a way to mock CommonJS modules via `jest.mock`, and support for ESM is on its way at the time of writing: <FancyAnchor href="https://github.com/facebook/jest/issues/10025">AUTOGENERATE</FancyAnchor>.  
   Unfortunately, Node.js module mocking libraries like [`testdouble`](https://github.com/testdouble/testdouble.js) don't work for Playwright because it does some of the module loading itself (<FancyAnchor href="https://github.com/microsoft/playwright/issues/14398">AUTOGENERATE</FancyAnchor>).  
@@ -98,3 +96,7 @@ export const test = base.extend<{ _autoSnapshotSuffix: void }>({
   ],
 });
 ```
+
+## Example repository
+
+A ready-to-use configuration can be found here: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example">AUTOGENERATE</FancyAnchor>.
