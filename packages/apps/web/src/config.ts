@@ -20,6 +20,6 @@ export const config = {
     projects: isDevEnvironment,
   },
   socialMediaLinks: {
-    linkedIn: 'https://www.linkedin.com/in/patrick-kerschbaum/',
+    linkedIn: 'https://www.linkedin.com/in/pkerschbaum',
   },
 };

@@ -50,12 +50,12 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
               {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
             </Time>
           </FrontMatter>
-          <div>
+          <BlogPostContent>
             <MDXViewer
               codeOfMdxParseResult={mdxParseResult.code}
               hrefToFaviconsMap={hrefToFaviconsMap}
             />
-          </div>
+          </BlogPostContent>
           <TwitterAnchor
             href={`https://twitter.com/search?q=${encodeURIComponent(
               `${config.deploymentOrigin}/blog/${segment}`,
@@ -79,7 +79,9 @@ const BlogPostContainer = styled.article`
   display: flex;
   flex-direction: column;
   gap: calc(4 * var(--spacing-base));
+`;
 
+const BlogPostContent = styled.div`
   & p {
     margin-block: 1em;
   }
@@ -88,8 +90,7 @@ const BlogPostContainer = styled.article`
     --ul-padding-inline-start: 20px;
     padding-inline-start: var(--ul-padding-inline-start);
   }
-  & ul li,
-  & ul ul li {
+  & ul li {
     list-style-type: initial;
   }
   & li {
@@ -104,9 +105,8 @@ const BlogPostContainer = styled.article`
     We have to undo the app padding and margin-inline-start of ul/ol list elements (if a code block is inside such an element).
    */
   & > pre {
-    max-width: var(--box-width-md);
-    width: calc(100% + 2 * var(--app-padding-inline));
     margin-inline-start: calc(-1 * var(--app-padding-inline));
+    margin-inline-end: calc(-1 * var(--app-padding-inline));
   }
   & ul > li > pre,
   & ol > li > pre {
