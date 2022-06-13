@@ -21,9 +21,9 @@
     "nuke:node-modules": "rimraf node_modules",
     "build": "tsc",
     "lint": "eslint --max-warnings 0",
-    "lint:fix": "pnpm run lint -- --fix",
+    "lint:fix": "pnpm run lint --fix",
     "compile": "tsc --noEmit",
-    "compile:watch": "pnpm run compile -- --watch"
+    "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
     "@pkerschbaum/ts-utils": "^0.0.1",

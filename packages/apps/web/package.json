@@ -11,9 +11,9 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "lint:fix": "pnpm run lint -- --fix",
+    "lint:fix": "pnpm run lint --fix",
     "compile": "tsc --noEmit",
-    "compile:watch": "pnpm run compile -- --watch"
+    "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^1.0.4",
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
+    "@next/eslint-plugin-next": "^12.1.6",
     "@types/node": "^16.11.25",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",

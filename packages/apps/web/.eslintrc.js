@@ -38,7 +38,11 @@ module.exports = {
     ...baseEslintConfig.parserOptions,
     tsconfigRootDir: __dirname,
   },
-  extends: [...(baseEslintConfig.extends ?? []), 'next/core-web-vitals'],
+  extends: [
+    ...(baseEslintConfig.extends ?? []),
+    './eslint-config-next-core-web-vitals-fixed.js',
+    'plugin:@next/next/core-web-vitals',
+  ],
   ignorePatterns: [...(baseEslintConfig.ignorePatterns ?? []), 'next.config.js', 'next-sitemap.js'],
   rules: {
     ...baseEslintConfig.rules,

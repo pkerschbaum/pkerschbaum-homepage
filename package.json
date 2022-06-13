@@ -7,7 +7,7 @@
     "mr:nuke:build": "pnpm run --parallel nuke:build",
     "mr:nuke:node-modules": "pnpm run --parallel nuke:node-modules && rimraf node_modules",
     "mr:lint": "pnpm run --parallel lint",
-    "mr:lint:fix": "pnpm run --parallel lint -- --fix",
+    "mr:lint:fix": "pnpm run --parallel lint --fix",
     "mr:format": "prettier --write --ignore-unknown .",
     "mr:build": "pnpm run --recursive build",
     "mr:compile": "pnpm run --recursive compile"
@@ -19,6 +19,6 @@
   },
   "engines": {
     "node": "^16.14.0",
-    "pnpm": "^6.32.7"
+    "pnpm": "^7.1.2"
   }
 }

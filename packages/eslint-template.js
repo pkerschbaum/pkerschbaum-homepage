@@ -16,7 +16,6 @@ module.exports = {
     '@typescript-eslint/eslint-plugin',
     'node',
     'regexp',
-    'import',
     'code-import-patterns',
   ],
   extends: [

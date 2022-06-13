@@ -22,9 +22,9 @@
     "nuke:node-modules": "rimraf node_modules",
     "build": "tsc && node ./dist/index.js",
     "lint": "eslint --max-warnings 0",
-    "lint:fix": "pnpm run lint -- --fix",
+    "lint:fix": "pnpm run lint --fix",
     "compile": "tsc --noEmit",
-    "compile:watch": "pnpm run compile -- --watch"
+    "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
