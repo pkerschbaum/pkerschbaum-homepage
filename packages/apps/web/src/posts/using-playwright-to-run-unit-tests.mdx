@@ -9,12 +9,12 @@ tags: ['#playwright', '#testing', '#unit-test']
 
 I have used Playwright for a couple of my projects so far, and I had such a good experience that it got my E2E test automation tool of choice.
 
-Recently, I started using Playwright Test, the test runner of Playwright ([`@playwright/test`](https://www.npmjs.com/package/@playwright/test)) **for unit tests** also.  
-By unit test I mean the test subject **is executed directly**; this differs from the "usual" way of using Playwright to open a browser, navigate to a web page, and test that web page.
+Recently, I started using Playwright Test, the test runner of Playwright ([`@playwright/test`](https://www.npmjs.com/package/@playwright/test)) for **unit tests** also.  
+This means the test subject **is executed directly**; this differs from the "usual" way of using Playwright to open a browser, navigate to a web page, and test that web page.
 
 In this blog post, I want to
 
-- describe what I like about Playwright and why I think it is a good idea to use it for unit tests
+- describe what I like about Playwright and why I think it can be a good choice for unit testing
 - outline things missing from Playwright compared to other test frameworks (and how to fill some of those gaps)
 - suggest some minor tweaks to make Playwright more suitable for unit tests
 
@@ -31,16 +31,97 @@ I think there are some advantages of using Playwright for unit tests:
 - **Access to features unique to Playwright:**
   Playwright has some very useful features, e.g.:
 
-  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-fixtures">"fixtures"</FancyAnchor> allow to prepare resources per test case or worker.  
+  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-fixtures">"fixtures"</FancyAnchor> allow to prepare resources per test case on an "opt-in" basis.  
     This is in my opinion much better than the `beforeEach` / `afterEach` fiddling you have to do with other test runners.
+
+    ```typescript
+    // base.ts
+    import { test as base } from '@playwright/test';
+    import * as sinon from 'sinon';
+
+    export const test = base.extend<{ fakeClock: sinon.SinonFakeTimers }>({
+      fakeClock: [
+        async ({}, use) => {
+          const clock = sinon.useFakeTimers();
+          await use(clock);
+          clock.restore();
+        },
+        { scope: 'test' },
+      ],
+    });
+
+    // bar.spec.ts
+    import { test } from './base';
+
+    test('with real clock', ({}) => {
+      /*
+       * this test case does not use the "fakeClock" fixture,
+       * thus the fixture does not get set up
+       */
+    });
+    test('with fake clock', ({ fakeClock }) => {
+      /*
+       * fake timers will get set up for this test case
+       * because "fakeClock" fixture is used
+       */
+    });
+    ```
+
   - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-advanced#projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
-    For example a while ago I had to make sure that some client/server interaction based on <FancyAnchor href="https://socket.io">socket.io</FancyAnchor> works with both WebSockets and HTTP long-polling.
-    Setting up two Playwright projects with different project parameters allowed me to run the same tests with two configurations, once using WebSockets and once using HTTP long-polling.
+    For example a while ago I had to make sure that some client/server interaction based on <FancyAnchor href="https://socket.io">socket.io</FancyAnchor> works with both WebSockets and HTTP long-polling.  
+    Setting up two Playwright projects with different project parameters allowed me to run the same tests with two configurations, once using WebSockets and once using HTTP long-polling:
+
+    ```typescript
+    // playwright.config.ts
+    import { PlaywrightTestConfig } from '@playwright/test';
+
+    interface TestOptions {
+      transport: 'websocket' | 'polling';
+    }
+
+    const config: PlaywrightTestConfig<TestOptions> = {
+      projects: [
+        {
+          name: 'using transport: websocket',
+          use: { transport: 'websocket' },
+        },
+        {
+          name: 'using transport: polling',
+          use: { transport: 'polling' },
+        },
+      ],
+    };
+
+    export default config;
+
+    // bar.spec.ts
+    import { test } from '@playwright/test';
+
+    test('socket.io connection', ({ transport }) => {
+      /*
+       * this test case will get run twice,
+       * with "transport" set once to "websocket" and once to "polling"
+       */
+      initializeSocket(transport);
+      // ...
+    });
+    ```
 
 - **Development funded by a big company:**
   Playwright is a product of Microsoft and has been maintained very actively over the last couple of years.
 - **No use of globals:** Playwright does not use any globals for its test runner.
-  You import from `@playwright/test` just what you need in your test files.
+  You import from `@playwright/test` just what you need in your test files:
+
+  ```typescript
+  // bar.spec.ts
+  import { expect, test } from '@playwright/test';
+
+  test.describe('describe title', () => {
+    test('test title', ({}) => {
+      expect(1 + 1).toEqual(2);
+    });
+  });
+  ```
 
   Compare that to existing test runners like Jest and Mocha (and Cypress, using Mocha under-the-hood).
   Those test runners set up their test functions as globals (`it`, `expect`, `describe`, `beforeEach` etc.).  
@@ -53,15 +134,15 @@ I think there are some advantages of using Playwright for unit tests:
 ## Things missing from Playwright (and how to fill the gaps)
 
 Compared to Jest, there are some things missing from Playwright Test which are often needed when running unit tests.  
-Most of those things can be substituted by using libraries of the Node.js ecosystem:
+Most of those things can be substituted by using libraries of the Node.js ecosystem.  
+Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example">the example repository I made</FancyAnchor> to see how to set up those things!
 
-- **Code coverage:**
-  A simple setup using the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) does the job.  
-  See this commit of the example repository I made: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/base-setup...code-coverage">AUTOGENERATE</FancyAnchor>.
-- **Fakes/Spies/Stubs/Mocks:**
+- **Mocks & Spies:**
   Use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - **Fake timers:**
-  Use [`sinon`](https://www.npmjs.com/package/sinon), see this commit of the example repository I made: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">AUTOGENERATE</FancyAnchor>.
+  Use [`sinon`](https://www.npmjs.com/package/sinon) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">See code changes</FancyAnchor>).
+- **Code coverage:**
+  A simple setup using the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) does the job (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/base-setup...code-coverage">See code changes</FancyAnchor>).
 - **Watch mode:**
   Not supported but "planned work" at the time of writing: <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.  
   There are some workarounds in the related issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
@@ -96,7 +177,3 @@ export const test = base.extend<{ _autoSnapshotSuffix: void }>({
   ],
 });
 ```
-
-## Example repository
-
-A ready-to-use configuration can be found here: <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example">AUTOGENERATE</FancyAnchor>.

@@ -13,7 +13,7 @@ module.exports = withBundleAnalyzer({
   },
 
   eslint: {
-    dirs: ['src'],
+    dirs: ['.'],
     ignoreDuringBuilds: true,
   },
 

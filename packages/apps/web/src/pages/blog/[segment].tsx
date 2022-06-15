@@ -50,12 +50,14 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
               {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
             </Time>
           </FrontMatter>
+
           <BlogPostContent>
             <MDXViewer
               codeOfMdxParseResult={mdxParseResult.code}
               hrefToFaviconsMap={hrefToFaviconsMap}
             />
           </BlogPostContent>
+
           <TwitterAnchor
             href={`https://twitter.com/search?q=${encodeURIComponent(
               `${config.deploymentOrigin}/blog/${segment}`,

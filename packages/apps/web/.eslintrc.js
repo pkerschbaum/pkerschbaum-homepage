@@ -43,7 +43,12 @@ module.exports = {
     './eslint-config-next-core-web-vitals-fixed.js',
     'plugin:@next/next/core-web-vitals',
   ],
-  ignorePatterns: [...(baseEslintConfig.ignorePatterns ?? []), 'next.config.js', 'next-sitemap.js'],
+  ignorePatterns: [
+    ...(baseEslintConfig.ignorePatterns ?? []),
+    'eslint-config-next-core-web-vitals-fixed.js',
+    'next.config.js',
+    'next-sitemap.js',
+  ],
   rules: {
     ...baseEslintConfig.rules,
     'no-restricted-syntax': [
