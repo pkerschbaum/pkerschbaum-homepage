@@ -1,9 +1,15 @@
+const path = require('path');
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const withRemoteRefresh = require('next-remote-refresh')({
+  paths: [path.resolve(__dirname, 'src', 'posts')],
+});
+
 /** @type {import('next').NextConfig} */
-module.exports = withBundleAnalyzer({
+const nextConfig = {
   staticPageGenerationTimeout: 60,
 
   reactStrictMode: true,
@@ -47,4 +53,6 @@ module.exports = withBundleAnalyzer({
 
     return config;
   },
-});
+};
+
+module.exports = withRemoteRefresh(nextConfig);

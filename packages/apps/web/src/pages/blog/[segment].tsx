@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
+import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -26,6 +27,8 @@ type BlogPostPageProps = {
 };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => {
+  useRemoteRefresh();
+
   const router = useRouter();
   const { segment } = schema_staticProps.parse(router.query);
 
