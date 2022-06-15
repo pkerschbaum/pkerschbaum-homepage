@@ -1,6 +1,7 @@
 import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import Link from 'next/link';
 import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
@@ -11,39 +12,45 @@ import { Nav } from '~/components/nav';
 import { SocialMediaLinks } from '~/components/social-media-links';
 import { ColorTheme } from '~/constants';
 import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
-import { Button } from '~/elements';
+import { IconButton } from '~/elements/IconButton';
 import { CSSReset } from '~/styles/css-reset.styles';
-import { AppGlobalStyle } from '~/styles/global-app.styles';
+import { GlobalAppStyles } from '~/styles/global-app.styles';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
-  <ColorThemeProvider>
-    <CSSReset />
-    <AppGlobalStyle />
+  <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
 
-    <RootContainer>
-      <Header>
-        <Nav />
+    <ColorThemeProvider>
+      <CSSReset />
+      <GlobalAppStyles />
 
-        <ToggleColorThemeButtonContainer>
-          <SwitchThemeButton />
-        </ToggleColorThemeButtonContainer>
-      </Header>
+      <RootContainer>
+        <Header>
+          <Nav />
 
-      <Component {...pageProps} />
+          <ToggleColorThemeButtonContainer>
+            <SwitchThemeButton />
+          </ToggleColorThemeButtonContainer>
+        </Header>
 
-      <Footer>
-        <SocialMediaLinks />
+        <Component {...pageProps} />
 
-        <YearAndContact>
-          <span>{dayjs().year()}</span>
-          <span>-</span>
-          <Link href="/">
-            <a>pkerschbaum</a>
-          </Link>
-        </YearAndContact>
-      </Footer>
-    </RootContainer>
-  </ColorThemeProvider>
+        <Footer>
+          <SocialMediaLinks />
+
+          <YearAndContact>
+            <span>{dayjs().year()}</span>
+            <span>-</span>
+            <Link href="/">
+              <a>pkerschbaum</a>
+            </Link>
+          </YearAndContact>
+        </Footer>
+      </RootContainer>
+    </ColorThemeProvider>
+  </>
 );
 
 const SwitchThemeButton: React.FC = () => {
@@ -63,7 +70,7 @@ const SwitchThemeButton: React.FC = () => {
       assertIsUnreachable(activeColorTheme);
   }
 
-  return <Button onClick={toggleColorTheme}>{iconToRender}</Button>;
+  return <IconButton onClick={toggleColorTheme}>{iconToRender}</IconButton>;
 };
 
 const RootContainer = styled.div`

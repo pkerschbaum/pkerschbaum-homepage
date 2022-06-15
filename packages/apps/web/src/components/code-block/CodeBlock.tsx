@@ -23,7 +23,7 @@ const CODESANDBOX_LANGUAGE_TO_FILE_EXTENSION_MAP = {
   'language-typescript': 'ts',
 };
 
-type CodeBlockProps = {
+export type CodeBlockProps = {
   children?: React.ReactNode;
   className?: string;
 };
@@ -82,7 +82,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
 
 const CodeBlockContainer = styled.div`
   font-size: var(--font-size-sm);
-  box-shadow: var(--shadow-elevation-medium);
+  box-shadow: var(--shadow-elevation-low);
   border-radius: 8px;
   overflow: hidden;
 

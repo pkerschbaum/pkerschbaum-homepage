@@ -15,6 +15,7 @@ import { MDXViewer } from '~/components/mdx-viewer';
 import { config } from '~/config';
 import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
+import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
 import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
 
@@ -70,6 +71,18 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
             <Twitter />
             Discuss on Twitter
           </TwitterAnchor>
+
+          <ContactAdvertisementWrapper>
+            <ContactAdvertisement>
+              <Anchor
+                href="https://twitter.com/pkerschbaum"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Follow me on Twitter
+              </Anchor>
+            </ContactAdvertisement>
+          </ContactAdvertisementWrapper>
         </BlogPostContainer>
       </Main>
     </>
@@ -78,7 +91,8 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
 
 const BlogPostContainer = styled.article`
   width: 100%;
-  max-width: var(--box-width-md);
+  --max-width: var(--box-width-md);
+  max-width: var(--max-width);
   align-self: center;
 
   display: flex;
@@ -147,6 +161,17 @@ const TwitterAnchor = styled(Anchor)`
   gap: calc(0.75 * var(--spacing-base));
 
   font-size: var(--font-size-sm);
+`;
+
+const ContactAdvertisementWrapper = styled(FullBleedWrapper)`
+  padding-block: calc(2 * var(--spacing-base));
+  padding-inline: var(--app-padding-inline);
+  background-color: var(--color-bg-emphasized);
+`;
+
+const ContactAdvertisement = styled.div`
+  margin-inline: auto;
+  max-width: var(--max-width);
 `;
 
 const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Classes } from '~/constants';
 
-type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
+export type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
 
 export const Button = styled(
   React.forwardRef<HTMLButtonElement, React.PropsWithChildren<ButtonProps>>(function ButtonWithRef(

@@ -10,9 +10,10 @@ export const Introduction: React.FC = () => {
   return (
     <IntroductionContainer>
       <VisuallyHiddenHeadline>Patrick Kerschbaum homepage</VisuallyHiddenHeadline>
+      <Greeting>👋 Hi, I&apos;m Patrick</Greeting>
       <Message>
-        I&apos;m Patrick, a software developer with a great passion for web technologies and the
-        JavaScript ecosystem.
+        I&apos;m a software developer with a great passion for <strong>web technologies</strong> and{' '}
+        <strong>the JavaScript ecosystem</strong>.
       </Message>
       <Location>
         <MapPin size="1.25em" />
@@ -22,8 +23,8 @@ export const Introduction: React.FC = () => {
         <ProfilePicture
           src={profilePic}
           alt="Picture of Patrick Kerschbaum"
-          width={110}
-          height={110}
+          width={120}
+          height={120}
           objectFit="cover"
         />
       </ProfilePictureWrapper>
@@ -44,10 +45,18 @@ const IntroductionContainer = styled.section`
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-template-areas:
+    'profile-picture greeting'
     'profile-picture message'
     'profile-picture message-details';
   grid-column-gap: calc(3 * var(--spacing-base));
   grid-row-gap: calc(0.5 * var(--spacing-base));
+  align-items: center;
+`;
+
+const Greeting = styled.h2`
+  margin-block: 0;
+  grid-area: greeting;
+  align-self: end;
 `;
 
 const Message = styled.p`
@@ -59,7 +68,6 @@ const Message = styled.p`
 const Location = styled.p`
   grid-area: message-details;
   align-self: start;
-  margin-block-end: calc(0.5 * var(--spacing-base));
 
   display: flex;
   align-items: center;

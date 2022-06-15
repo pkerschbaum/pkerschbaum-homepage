@@ -33,7 +33,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
         <Introduction />
 
         <HomepageSection>
-          <SectionHeading>Latest posts</SectionHeading>
+          <SectionHeading>Blog Posts</SectionHeading>
           <BlogOverview posts={posts} />
         </HomepageSection>
 

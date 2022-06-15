@@ -2,8 +2,9 @@ import { createGlobalStyle, css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
 
-const appGlobalStyle = css`
-  * {
+const globalAppStyles = css`
+  *,
+  *::-webkit-scrollbar {
     transition: background 150ms;
   }
   a,
@@ -11,23 +12,29 @@ const appGlobalStyle = css`
     transition: color 150ms, fill 150ms;
   }
 
-  /* change scrollbar to a thin variant which lightens up on hover */
+  /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */
+  *:root {
+    --color-thumb: var(--color-fg-less-emphasized);
+    --color-thumb-hover: var(--color-fg);
+    --color-track: transparent;
+
+    scrollbar-color: var(--color-thumb) var(--color-track);
+    scrollbar-width: thin;
+  }
   *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--color-track);
   }
   *::-webkit-scrollbar-thumb {
     border-radius: 1000px;
-    background-color: var(--color-grey);
-    border: 2px solid var(--color-grey);
+    background-color: var(--color-thumb);
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-darkgrey);
-    border: 2px solid var(--color-darkgrey);
+    background-color: var(--color-thumb-hover);
   }
   ::-webkit-scrollbar-corner {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--color-track);
   }
 
   *:root {
@@ -35,7 +42,7 @@ const appGlobalStyle = css`
     color: var(--color-fg);
     background-color: var(--color-bg);
     overflow-y: scroll;
-    scrollbar-gutter: stable both-edges;
+    overflow-x: hidden;
 
     /* design tokens */
     --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
@@ -91,7 +98,7 @@ const appGlobalStyle = css`
       10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
   }
 
-  :root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
+  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
     --color-fg: var(--color-white);
     --color-fg-less-emphasized: var(--color-lightgrey);
     --color-fg-interactive: var(--color-lightteal);
@@ -172,6 +179,6 @@ const appGlobalStyle = css`
   }
 `;
 
-export const AppGlobalStyle = createGlobalStyle`
-  ${appGlobalStyle}
+export const GlobalAppStyles = createGlobalStyle`
+  ${globalAppStyles}
 `;
