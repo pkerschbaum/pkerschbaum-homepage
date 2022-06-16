@@ -34,7 +34,7 @@ const cssReset = css`
     5. Improve text rendering
   */
   body {
-    line-height: 1.6;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
   h1,
