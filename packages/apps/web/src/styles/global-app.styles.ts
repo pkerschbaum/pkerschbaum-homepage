@@ -178,7 +178,7 @@ const globalAppStyles = css`
     background-color: var(--color-bg-emphasized);
   }
   /* disable custom code formatting for @codesandbox/sandpack-react code blocks */
-  .sp-code-editor code {
+  *.sp-code-editor code {
     font-size: unset;
     padding: unset;
     border-radius: unset;

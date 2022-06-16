@@ -1,17 +1,13 @@
 // adapted based on https://github.com/reactjs/reactjs.org/blob/0209e1b5be86d47d0a915e58a9a7a47a409ab57d/beta/src/components/MDX/CodeBlock/CodeBlock.tsx
 
-import {
-  SandpackProvider,
-  SandpackCodeViewer,
-  SandpackThemeProp,
-} from '@codesandbox/sandpack-react';
+import { SandpackProvider, SandpackCodeViewer } from '@codesandbox/sandpack-react';
 import { githubLight, monokaiPro } from '@codesandbox/sandpack-themes';
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
-import { assertIsUnreachable, check } from '@pkerschbaum/ts-utils';
+import { check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
 import styled from 'styled-components';
 
-import { ColorTheme } from '~/constants';
+import { ColorTheme, DataAttribute } from '~/constants';
 import { useColorTheme } from '~/context/color-theme';
 
 const CODESANDBOX_LANGUAGE = {
@@ -47,32 +43,20 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   const filename = `/index.${fileExtension}`;
   const code = children.trimEnd();
 
-  let sandpackThemeToUse: SandpackThemeProp;
-  switch (activeColorTheme) {
-    case ColorTheme.LIGHT: {
-      sandpackThemeToUse = githubLight;
-      break;
-    }
-    case ColorTheme.DARK: {
-      sandpackThemeToUse = monokaiPro;
-      break;
-    }
-    default:
-      assertIsUnreachable(activeColorTheme);
-  }
-
   return (
-    <CodeBlockContainer>
+    <CodeBlockContainer styleProps={{ activeColorTheme }}>
       <SandpackProvider
-        files={{
-          [filename]: {
-            code,
-          },
-        }}
-        customSetup={{
-          entry: filename,
-        }}
-        theme={sandpackThemeToUse}
+        files={{ [filename]: { code } }}
+        customSetup={{ entry: filename }}
+        theme={githubLight}
+      >
+        <SandpackCodeViewer key={code} wrapContent />
+      </SandpackProvider>
+
+      <SandpackProvider
+        files={{ [filename]: { code } }}
+        customSetup={{ entry: filename }}
+        theme={monokaiPro}
       >
         <SandpackCodeViewer key={code} wrapContent />
       </SandpackProvider>
@@ -80,16 +64,40 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   );
 }
 
-const CodeBlockContainer = styled.div`
+type StyleProps = {
+  activeColorTheme: ColorTheme;
+};
+
+const CodeBlockContainer = styled.div<{ styleProps: StyleProps }>`
   font-size: var(--font-size-sm);
   box-shadow: var(--shadow-elevation-low);
   border-radius: 8px;
   overflow: hidden;
 
-  && .cm-scroller {
-    padding-block: calc(2.5 * var(--spacing-base));
+  /* 
+    Sandpack is rendered two times, once with light theme, once with dark theme.
+    We set "display: none" for that Sandpack element which should not get displayed because of the active theme.
+   */
+  *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] && > *:nth-of-type(1) {
+    display: none;
   }
-  && .cm-content {
-    padding-inline: calc(2.5 * var(--spacing-base));
+  *:root:not([${DataAttribute.THEME}='${ColorTheme.DARK}']) && > *:nth-of-type(2) {
+    display: none;
+  }
+
+  /* adjust padding/margin of @codesandbox/sandpack-react to spacing values of application */
+  /* "sp-pre-placeholder" is the class used by sandpack *before* hydration */
+  && *.sp-pre-placeholder {
+    padding-block: var(--app-padding-inline);
+    padding-inline: var(--app-padding-inline);
+    /* sandpack applies some margin-left via "style" tag. so we have to use !important to clear that margin */
+    margin-left: 0 !important;
+  }
+  /* "cm-scroller" and "cm-content" are the classes used by sandpack *after* hydration */
+  && *.cm-scroller {
+    padding-block: var(--app-padding-inline);
+  }
+  && *.cm-content {
+    padding-inline: var(--app-padding-inline);
   }
 `;
