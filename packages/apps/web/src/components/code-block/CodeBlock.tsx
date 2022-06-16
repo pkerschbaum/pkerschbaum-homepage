@@ -8,7 +8,6 @@ import type React from 'react';
 import styled from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
-import { useColorTheme } from '~/context/color-theme';
 
 const CODESANDBOX_LANGUAGE = {
   typescript: 'language-typescript',
@@ -25,8 +24,6 @@ export type CodeBlockProps = {
 };
 
 export function CodeBlock({ children, className }: CodeBlockProps) {
-  const { activeColorTheme } = useColorTheme();
-
   if (
     typeof children !== 'string' ||
     (typeof className === 'string' && !check.isValueInEnum(className, CODESANDBOX_LANGUAGE))
@@ -44,7 +41,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   const code = children.trimEnd();
 
   return (
-    <CodeBlockContainer styleProps={{ activeColorTheme }}>
+    <CodeBlockContainer>
       <SandpackProvider
         files={{ [filename]: { code } }}
         customSetup={{ entry: filename }}
@@ -64,11 +61,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   );
 }
 
-type StyleProps = {
-  activeColorTheme: ColorTheme;
-};
-
-const CodeBlockContainer = styled.div<{ styleProps: StyleProps }>`
+const CodeBlockContainer = styled.div`
   font-size: var(--font-size-sm);
   box-shadow: var(--shadow-elevation-low);
   border-radius: 8px;

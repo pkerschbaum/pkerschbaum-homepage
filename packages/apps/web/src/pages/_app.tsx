@@ -1,18 +1,15 @@
-import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Link from 'next/link';
 import * as React from 'react';
-import { Moon, Sun } from 'react-feather';
 import styled from 'styled-components';
 
 import { Header } from '~/components/header';
 import { Nav } from '~/components/nav';
 import { SocialMediaLinks } from '~/components/social-media-links';
-import { ColorTheme } from '~/constants';
-import { ColorThemeProvider, useColorTheme } from '~/context/color-theme';
-import { IconButton } from '~/elements/IconButton';
+import { ToggleThemeButton } from '~/components/toggle-theme-button';
+import { ColorThemeProvider } from '~/context/color-theme';
 import { CSSReset } from '~/styles/css-reset.styles';
 import { GlobalAppStyles } from '~/styles/global-app.styles';
 
@@ -30,9 +27,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         <Header>
           <Nav />
 
-          <ToggleColorThemeButtonContainer>
-            <SwitchThemeButton />
-          </ToggleColorThemeButtonContainer>
+          <ToggleThemeButton />
         </Header>
 
         <Component {...pageProps} />
@@ -53,26 +48,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   </>
 );
 
-const SwitchThemeButton: React.FC = () => {
-  const { activeColorTheme, toggleColorTheme } = useColorTheme();
-
-  let iconToRender;
-  switch (activeColorTheme) {
-    case ColorTheme.LIGHT: {
-      iconToRender = <Moon aria-label="Switch to dark mode" />;
-      break;
-    }
-    case ColorTheme.DARK: {
-      iconToRender = <Sun aria-label="Switch to light mode" />;
-      break;
-    }
-    default:
-      assertIsUnreachable(activeColorTheme);
-  }
-
-  return <IconButton onClick={toggleColorTheme}>{iconToRender}</IconButton>;
-};
-
 const RootContainer = styled.div`
   min-height: 100%;
   --app-padding-inline: calc(1.5 * var(--spacing-base));
@@ -87,11 +62,6 @@ const RootContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: calc(2 * var(--spacing-base));
-`;
-
-const ToggleColorThemeButtonContainer = styled.div`
-  flex-shrink: 0;
-  display: flex;
 `;
 
 const Footer = styled.footer`
