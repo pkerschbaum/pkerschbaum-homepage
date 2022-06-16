@@ -50,7 +50,7 @@ const globalAppStyles = css`
     --color-black: hsl(var(--color-black-hsl));
     --color-bluegray-hsl: 230, 16%, 17%;
     --color-bluegray: hsl(var(--color-bluegray-hsl));
-    --color-darkgrey: hsl(0 0% 35%);
+    --color-darkgrey: hsl(0 0% 30%);
     --color-grey: hsl(0 0% 65%);
     --color-lightgrey: hsl(0 0% 85%);
     --color-verylightgrey: hsl(0 0% 88%);

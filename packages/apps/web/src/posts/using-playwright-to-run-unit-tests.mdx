@@ -4,7 +4,7 @@ published: true
 publishedAtISO: '2022-06-13T18:00:00.000Z'
 description: Why you might want to use Playwright Test as a test runner for unit tests, and how to fill in missing pieces (e.g. code coverage).
 shortenedURL: use-playwright-test-for-unit-tests
-tags: ['#playwright', '#testing', '#unit-test']
+tags: ['playwright', 'testing', 'unittest']
 ---
 
 I have used Playwright for a couple of my projects so far, and I had such a good experience that it got my E2E test automation tool of choice.
@@ -144,7 +144,7 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 - **Watch mode** is not supported but "planned work" at the time of writing: <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.  
   There are some workarounds in the related issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
 - Some test frameworks provide a way to **mock CommonJS/ECMAScript modules**.  
-  That allows to replace the "thing" returned by `require`/`import` statements by some fake instance.
+  Module mocking allows to replace the "thing" returned by `require`/`import` statements by some fake instance.
 
   Unfortunately, this is not possible in Playwright. Although there are some Node.js libraries that allow module mocking (like [`testdouble`](https://github.com/testdouble/testdouble.js)), they don't work because Playwright does some of the module loading itself (<FancyAnchor href="https://github.com/microsoft/playwright/issues/14398">AUTOGENERATE</FancyAnchor>).  
   If you want to get module mocking support in Playwright, you can upvote this feature request: <FancyAnchor href="https://github.com/microsoft/playwright/issues/14572">AUTOGENERATE</FancyAnchor>.
@@ -153,12 +153,12 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
   For now, if you want to test modules isolated from others you probably have to adapt the codebase to use some kind of dependency injection.
   Be it that dependencies are just passed as arguments when calling functions, or using a dependency injection solution like <FancyAnchor href="https://docs.nestjs.com/standalone-applications">NestJS IoC containers</FancyAnchor> (which I have used very successfully in the past).
 
-## Other things to consider
+## One last thing
 
-**Snapshot Suffix:**
-Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.  
- At the time of writing, Playwright will append a platform-specific suffix like `debian` to the name of the file the snapshot is stored in.
-This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but usually it does not make sense in case of textual/binary data.
+Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.
+
+At the time of writing, Playwright will append a platform-specific suffix (like `debian`) to the name of the file the snapshot is stored in.
+This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but it rarely makes sense in case of textual/binary data.
 
 This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>). An easy workaround is to disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:
 

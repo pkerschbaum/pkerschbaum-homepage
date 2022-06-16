@@ -5,9 +5,8 @@ import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { Twitter } from 'react-feather';
+import { Share2, Twitter } from 'react-feather';
 import styled from 'styled-components';
-import invariant from 'tiny-invariant';
 import { z } from 'zod';
 
 import { Main } from '~/components/main';
@@ -19,9 +18,6 @@ import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
 import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
 
-const schema_staticProps = z.object({ segment: z.string().nonempty() });
-type StaticProps = z.infer<typeof schema_staticProps>;
-
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
   hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
@@ -31,7 +27,21 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
   useRemoteRefresh();
 
   const router = useRouter();
-  const { segment } = schema_staticProps.parse(router.query);
+
+  let blogPostUrl = config.deploymentOrigin;
+  blogPostUrl = new URL(router.basePath, blogPostUrl);
+  blogPostUrl = new URL(router.asPath, blogPostUrl);
+  const blogPostHref = blogPostUrl.href;
+
+  const twitterShareUrl = new URL(`https://twitter.com/intent/tweet`);
+  twitterShareUrl.searchParams.set('url', blogPostHref);
+  twitterShareUrl.searchParams.set('text', mdxParseResult.frontmatter.title);
+  twitterShareUrl.searchParams.set('via', 'pkerschbaum');
+  twitterShareUrl.searchParams.set('hashtags', mdxParseResult.frontmatter.tags.join(','));
+  const twitterShareHref = twitterShareUrl.href;
+  const twitterDiscussUrl = new URL(`https://twitter.com/search`);
+  twitterDiscussUrl.searchParams.set('q', blogPostHref);
+  const twitterDiscussHref = twitterDiscussUrl.href;
 
   const title = mdxParseResult.frontmatter.title;
   const description = mdxParseResult.frontmatter.description;
@@ -62,27 +72,33 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
             />
           </BlogPostContent>
 
-          <TwitterAnchor
-            href={`https://twitter.com/search?q=${encodeURIComponent(
-              `${config.deploymentOrigin}/blog/${segment}`,
-            )}`}
-            target="_blank"
-          >
-            <Twitter />
-            Discuss on Twitter
-          </TwitterAnchor>
+          <InteractionSection>
+            <InteractionAnchor href={twitterShareHref} target="_blank">
+              <Share2 />
+              Share on Twitter
+            </InteractionAnchor>
 
-          <ContactAdvertisementWrapper>
-            <ContactAdvertisement>
-              <Anchor
-                href="https://twitter.com/pkerschbaum"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Follow me on Twitter
-              </Anchor>
-            </ContactAdvertisement>
-          </ContactAdvertisementWrapper>
+            <InteractionAnchor href={twitterDiscussHref} target="_blank">
+              <Twitter />
+              Discuss on Twitter
+            </InteractionAnchor>
+          </InteractionSection>
+
+          <ContactTeaserWrapper>
+            <ContactTeaser>
+              <ContactTeaserHeadline>Let&apos;s keep in touch!</ContactTeaserHeadline>
+
+              <p>
+                <Anchor
+                  href="https://twitter.com/pkerschbaum"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Follow me on Twitter
+                </Anchor>
+              </p>
+            </ContactTeaser>
+          </ContactTeaserWrapper>
         </BlogPostContainer>
       </Main>
     </>
@@ -141,6 +157,11 @@ const BlogPostContent = styled.div`
   }
 `;
 
+const InteractionSection = styled.div`
+  display: flex;
+  gap: calc(4 * var(--spacing-base));
+`;
+
 const FrontMatter = styled.div`
   display: flex;
   flex-direction: column;
@@ -155,35 +176,41 @@ const Time = styled.time`
   text-transform: uppercase;
 `;
 
-const TwitterAnchor = styled(Anchor)`
+const InteractionAnchor = styled(Anchor)`
   display: inline-flex;
   align-items: center;
-  gap: calc(0.75 * var(--spacing-base));
+  gap: calc(1 * var(--spacing-base));
 
   font-size: var(--font-size-sm);
 `;
 
-const ContactAdvertisementWrapper = styled(FullBleedWrapper)`
+const ContactTeaserWrapper = styled(FullBleedWrapper)`
   padding-block: calc(2 * var(--spacing-base));
   padding-inline: var(--app-padding-inline);
-  background-color: var(--color-bg-emphasized);
+  background-color: var(--color-bg-interactive);
 `;
 
-const ContactAdvertisement = styled.div`
+const ContactTeaser = styled.div`
   margin-inline: auto;
   max-width: var(--max-width);
 `;
 
+const ContactTeaserHeadline = styled.h2`
+  margin-block: 0;
+`;
+
+const schema_staticProps = z.object({ segment: z.string().min(1) });
+type StaticProps = z.infer<typeof schema_staticProps>;
 const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {
   encoding: 'utf-8',
 });
 export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
   params,
 }) => {
-  invariant(params?.segment);
+  const parsedParams = schema_staticProps.parse(params);
 
   const [mdxParseResult, hrefToFaviconsMapString] = await Promise.all([
-    parseMDXFileAndCollectHrefs(POSTS_PATH, `${params.segment}.mdx`),
+    parseMDXFileAndCollectHrefs(POSTS_PATH, `${parsedParams.segment}.mdx`),
     hrefsToFaviconsReadPromise,
   ]);
 

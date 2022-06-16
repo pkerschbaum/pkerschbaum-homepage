@@ -16,7 +16,7 @@ export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => (
         <Description>{post.frontmatter.description}</Description>
         <TagsArea>
           {post.frontmatter.tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
+            <Tag key={tag}>#{tag}</Tag>
           ))}
         </TagsArea>
       </PostTileContent>
