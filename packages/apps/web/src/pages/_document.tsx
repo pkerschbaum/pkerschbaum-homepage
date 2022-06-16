@@ -1,3 +1,4 @@
+import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
@@ -35,7 +36,7 @@ export default class MyDocument extends Document {
 
   public render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           {/* favicons block generated with https://realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
@@ -60,6 +61,9 @@ export default class MyDocument extends Document {
               }`}
             </style>
           </noscript>
+
+          {/* https://sandpack.codesandbox.io/docs/getting-started/ssr#nextjs */}
+          <style dangerouslySetInnerHTML={{ __html: getSandpackCssText() }} id="sandpack" />
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme.toString() }} />

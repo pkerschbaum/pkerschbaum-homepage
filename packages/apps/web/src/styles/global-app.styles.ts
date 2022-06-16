@@ -177,6 +177,13 @@ const globalAppStyles = css`
     border-radius: 4px;
     background-color: var(--color-bg-emphasized);
   }
+  /* disable custom code formatting for @codesandbox/sandpack-react code blocks */
+  .sp-code-editor code {
+    font-size: unset;
+    padding: unset;
+    border-radius: unset;
+    background-color: unset;
+  }
 `;
 
 export const GlobalAppStyles = createGlobalStyle`
