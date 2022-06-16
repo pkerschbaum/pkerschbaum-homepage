@@ -49,10 +49,6 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
 
           <meta property="og:image" content="/favicons/favicon-32x32.png" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
-            rel="stylesheet"
-          />
           <noscript>
             <style type="text/css">
               {`

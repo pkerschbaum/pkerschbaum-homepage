@@ -3,6 +3,7 @@ import { createGlobalStyle, css } from 'styled-components';
 import { ColorTheme, DataAttribute } from '~/constants';
 
 const globalAppStyles = css`
+  /* some animations */
   *,
   *::-webkit-scrollbar {
     transition: background 150ms;
@@ -38,7 +39,7 @@ const globalAppStyles = css`
   }
 
   *:root {
-    font-family: sans-serif;
+    font-size: ${17 / 16}rem;
     color: var(--color-fg);
     background-color: var(--color-bg);
     overflow-y: scroll;
@@ -115,8 +116,8 @@ const globalAppStyles = css`
   }
 
   #__next {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
+      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
   ul {
