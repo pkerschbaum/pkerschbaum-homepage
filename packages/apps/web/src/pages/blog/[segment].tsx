@@ -86,9 +86,10 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
 
           <ContactTeaserWrapper>
             <ContactTeaser>
-              <ContactTeaserHeadline>Let&apos;s keep in touch!</ContactTeaserHeadline>
+              <ContactTeaserHeadline>Did you like this blog post?</ContactTeaserHeadline>
 
               <p>
+                Great, then let&apos;s keep in touch!{' '}
                 <Anchor
                   href="https://twitter.com/pkerschbaum"
                   target="_blank"
@@ -96,11 +97,8 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
                 >
                   Follow me on Twitter
                 </Anchor>
-                <span>
-                  {' '}
-                  to get informed when I publish new blog posts, I also tweet about TypeScript,
-                  JavaScript and testing.
-                </span>
+                , I tweet about TypeScript, testing and web development in general - and of course
+                about updates on my own blog posts.
               </p>
             </ContactTeaser>
           </ContactTeaserWrapper>
