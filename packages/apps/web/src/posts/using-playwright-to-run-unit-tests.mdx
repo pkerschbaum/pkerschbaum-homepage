@@ -157,7 +157,7 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 
 Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.
 
-At the time of writing, Playwright will append a platform-specific suffix (like `debian`) to the name of the file the snapshot is stored in.
+At the time of writing, Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
 This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but it rarely makes sense in case of textual/binary data.
 
 This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>). An easy workaround is to disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:

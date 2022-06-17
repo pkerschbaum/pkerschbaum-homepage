@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 
@@ -16,6 +17,13 @@ import { CSSReset } from '~/styles/css-reset.styles';
 import { GlobalAppStyles } from '~/styles/global-app.styles';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const router = useRouter();
+
+  let pageUrl = config.deploymentOrigin;
+  pageUrl = new URL(router.basePath, pageUrl);
+  pageUrl = new URL(router.asPath, pageUrl);
+  const pageHref = pageUrl.href;
+
   const imageUrl = new URL('/favicons/android-chrome-512x512.png', config.deploymentOrigin);
 
   return (
@@ -24,7 +32,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={imageUrl.href} />
+        <meta property="og:site_name" content="pkerschbaum.com" />
+        <meta property="og:url" content={pageHref} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@pkerschbaum" />
         <meta name="twitter:creator" content="@pkerschbaum" />
       </Head>
 
