@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { Header } from '~/components/header';
 import { Nav } from '~/components/nav';
+import { RssFeedAnchor } from '~/components/rss-feed-anchor';
 import { SocialMediaLinks } from '~/components/social-media-links';
 import { ToggleThemeButton } from '~/components/toggle-theme-button';
 import { ColorThemeProvider } from '~/context/color-theme';
@@ -27,7 +28,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         <Header>
           <Nav />
 
-          <ToggleThemeButton />
+          <AnchorAndButtonsArea>
+            <RssFeedAnchor />
+
+            <ToggleThemeButton />
+          </AnchorAndButtonsArea>
         </Header>
 
         <Component {...pageProps} />
@@ -62,6 +67,13 @@ const RootContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: calc(2 * var(--spacing-base));
+`;
+
+const AnchorAndButtonsArea = styled.div`
+  flex-shrink: 0;
+
+  display: flex;
+  gap: calc(3 * var(--spacing-base));
 `;
 
 const Footer = styled.footer`

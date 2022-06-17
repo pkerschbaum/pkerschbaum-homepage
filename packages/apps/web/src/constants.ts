@@ -7,6 +7,11 @@ export const HREFS_TO_FAVICONS_PATH = path.join(
   'static',
   'href-to-favicons.json',
 );
+const PUBLIC_DIR_PATH = path.join(process.cwd(), 'public');
+export const RSS_FEED_XML_SLUG = 'rss.xml';
+export const RSS_FEED_JSON_SLUG = 'rss.json';
+export const RSS_FEED_XML_PATH = path.join(PUBLIC_DIR_PATH, RSS_FEED_XML_SLUG);
+export const RSS_FEED_JSON_PATH = path.join(PUBLIC_DIR_PATH, RSS_FEED_JSON_SLUG);
 
 const BREAKPOINTS = {
   tabletMin: 600,

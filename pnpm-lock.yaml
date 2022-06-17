@@ -107,6 +107,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-react-hooks: ^4.6.0
       eslint-plugin-regexp: ^1.7.0
+      feed: ^4.2.2
       gray-matter: ^4.0.3
       mdx-bundler: ^9.0.0
       next: ^12.1.6
@@ -135,6 +136,7 @@ importers:
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
       dayjs: 1.11.3
       esbuild: 0.14.43
+      feed: 4.2.2
       gray-matter: 4.0.3
       mdx-bundler: 9.0.1_esbuild@0.14.43
       next: 12.1.6_sfoxds7t5ydpegc3knd667wn6m
@@ -2689,6 +2691,13 @@ packages:
       pend: 1.2.0
     dev: false
 
+  /feed/4.2.2:
+    resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==}
+    engines: {node: '>=0.4.0'}
+    dependencies:
+      xml-js: 1.6.11
+    dev: false
+
   /fetch-blob/3.1.5:
     resolution: {integrity: sha512-N64ZpKqoLejlrwkIAnb9iLSA3Vx/kjgzpcDhygcqJ2KKjky8nCgUQ+dzXtbrLaWZGZNmNfQTsiQ0weZ1svglHg==}
     engines: {node: ^12.20 || >= 14.13}
@@ -4451,6 +4460,10 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /sax/1.2.4:
+    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
+    dev: false
+
   /scheduler/0.20.2:
     resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
     dependencies:
@@ -5109,6 +5122,13 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  /xml-js/1.6.11:
+    resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==}
+    hasBin: true
+    dependencies:
+      sax: 1.2.4
+    dev: false
 
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}

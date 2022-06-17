@@ -96,6 +96,11 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
                 >
                   Follow me on Twitter
                 </Anchor>
+                <span>
+                  {' '}
+                  to get informed when I publish new blog posts, I also tweet about TypeScript,
+                  JavaScript and testing.
+                </span>
               </p>
             </ContactTeaser>
           </ContactTeaserWrapper>
@@ -196,7 +201,7 @@ const ContactTeaser = styled.div`
 `;
 
 const ContactTeaserHeadline = styled.h2`
-  margin-block: 0;
+  margin-block-start: 0;
 `;
 
 const schema_staticProps = z.object({ segment: z.string().min(1) });
