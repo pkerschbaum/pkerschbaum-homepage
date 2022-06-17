@@ -1,3 +1,4 @@
 public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
+src/static/href-to-favicons.json
