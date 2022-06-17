@@ -10,48 +10,57 @@ import { Nav } from '~/components/nav';
 import { RssFeedAnchor } from '~/components/rss-feed-anchor';
 import { SocialMediaLinks } from '~/components/social-media-links';
 import { ToggleThemeButton } from '~/components/toggle-theme-button';
+import { config } from '~/config';
 import { ColorThemeProvider } from '~/context/color-theme';
 import { CSSReset } from '~/styles/css-reset.styles';
 import { GlobalAppStyles } from '~/styles/global-app.styles';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
-  <>
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </Head>
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const imageUrl = new URL('/favicons/android-chrome-512x512.png', config.deploymentOrigin);
 
-    <ColorThemeProvider>
-      <CSSReset />
-      <GlobalAppStyles />
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={imageUrl.href} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@pkerschbaum" />
+      </Head>
 
-      <RootContainer>
-        <Header>
-          <Nav />
+      <ColorThemeProvider>
+        <CSSReset />
+        <GlobalAppStyles />
 
-          <AnchorAndButtonsArea>
-            <RssFeedAnchor />
+        <RootContainer>
+          <Header>
+            <Nav />
 
-            <ToggleThemeButton />
-          </AnchorAndButtonsArea>
-        </Header>
+            <AnchorAndButtonsArea>
+              <RssFeedAnchor />
 
-        <Component {...pageProps} />
+              <ToggleThemeButton />
+            </AnchorAndButtonsArea>
+          </Header>
 
-        <Footer>
-          <SocialMediaLinks />
+          <Component {...pageProps} />
 
-          <YearAndContact>
-            <span>{dayjs().year()}</span>
-            <span>-</span>
-            <Link href="/">
-              <a>pkerschbaum</a>
-            </Link>
-          </YearAndContact>
-        </Footer>
-      </RootContainer>
-    </ColorThemeProvider>
-  </>
-);
+          <Footer>
+            <SocialMediaLinks />
+
+            <YearAndContact>
+              <span>{dayjs().year()}</span>
+              <span>-</span>
+              <Link href="/">
+                <a>pkerschbaum</a>
+              </Link>
+            </YearAndContact>
+          </Footer>
+        </RootContainer>
+      </ColorThemeProvider>
+    </>
+  );
+};
 
 const RootContainer = styled.div`
   min-height: 100%;
