@@ -27,3 +27,13 @@ function createContext<ContextValue>(name: string) {
 
   return { useContextValue, Provider };
 }
+
+export function useIsMounted() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  return isMounted;
+}

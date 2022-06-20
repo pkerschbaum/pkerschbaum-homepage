@@ -1,17 +1,34 @@
-import { createGlobalStyle, css } from 'styled-components';
+import * as styled from 'styled-components';
+import { css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
 
-const globalAppStyles = css`
-  /* some animations */
-  *,
-  *::-webkit-scrollbar {
-    transition: background 150ms;
-  }
-  a,
-  svg * {
-    transition: color 150ms, fill 150ms;
-  }
+type StyleProps = {
+  disableAnimations: boolean;
+};
+
+export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps }>`
+  ${(props) =>
+    props.styleProps.disableAnimations
+      ? css`
+          /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
+          * {
+            animation-duration: 0ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0ms !important;
+          }
+        `
+      : css`
+          /* some animations */
+          *,
+          *::-webkit-scrollbar {
+            transition: background 0ms;
+          }
+          a,
+          svg * {
+            transition: color 150ms, fill 150ms;
+          }
+        `}
 
   /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */
   *:root {
@@ -185,8 +202,4 @@ const globalAppStyles = css`
     border-radius: unset;
     background-color: unset;
   }
-`;
-
-export const GlobalAppStyles = createGlobalStyle`
-  ${globalAppStyles}
 `;

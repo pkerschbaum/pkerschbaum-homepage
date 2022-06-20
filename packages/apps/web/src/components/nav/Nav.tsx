@@ -7,20 +7,9 @@ import { DataAttribute, IsScrolled } from '~/constants';
 import { Anchor } from '~/elements';
 
 export const Nav: React.FC = () => {
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   return (
     <NavContainer>
-      <NavHomeAnchor
-        href="/"
-        style={{
-          '--animation-duration': !isMounted ? '0ms' : '400ms',
-        }}
-      >
+      <NavHomeAnchor href="/">
         <NavHomeAnchorText>Patrick Kerschbaum</NavHomeAnchorText>
         <NavHomeAnchorLogo>
           <Favicon width={36} height={36} />
@@ -101,6 +90,7 @@ const NavHomeAnchor = styled(NavAnchor)`
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 
+  --animation-duration: 400ms;
   transition: width var(--animation-duration);
   width: 180px;
   *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
