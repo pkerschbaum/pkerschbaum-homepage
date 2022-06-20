@@ -58,6 +58,9 @@ export default class MyDocument extends Document {
             </style>
           </noscript>
 
+          {/* Plausible analytics */}
+          <script defer data-domain="pkerschbaum.com" src="https://plausible.io/js/plausible.js" />
+
           {/* https://sandpack.codesandbox.io/docs/getting-started/ssr#nextjs */}
           <style dangerouslySetInnerHTML={{ __html: getSandpackCssText() }} id="sandpack" />
         </Head>
