@@ -53,7 +53,7 @@ export default class MyDocument extends Document {
             <style type="text/css">
               {`
               .${Classes.JS_REQUIRED} {
-                display:none;
+                display:none !important;
               }`}
             </style>
           </noscript>

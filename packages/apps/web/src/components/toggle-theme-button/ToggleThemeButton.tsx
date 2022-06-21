@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
 import styled, { keyframes } from 'styled-components';
 
-import { ColorTheme, DataAttribute } from '~/constants';
+import { Classes, ColorTheme, DataAttribute } from '~/constants';
 import { useColorTheme } from '~/context/color-theme';
 import { IconButton } from '~/elements/IconButton';
 
@@ -10,7 +10,7 @@ export const ToggleThemeButton: React.FC = () => {
   const { toggleColorTheme } = useColorTheme();
 
   return (
-    <ToggleThemeIconButton onClick={toggleColorTheme}>
+    <ToggleThemeIconButton onClick={toggleColorTheme} className={Classes.JS_REQUIRED}>
       <AnimatedMoon aria-label="Switch to dark mode" />
       <AnimatedSun aria-label="Switch to light mode" />
     </ToggleThemeIconButton>
