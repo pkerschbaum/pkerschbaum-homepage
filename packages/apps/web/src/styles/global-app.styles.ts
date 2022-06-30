@@ -4,7 +4,7 @@ import { css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
 
-export const monoFontFamily = `'Cascadia Code', ${githubLight.font.mono}`;
+export const monoFontFamily = `'CascadiaCodeVariable', ${githubLight.font.mono}`;
 
 type StyleProps = {
   disableAnimations: boolean;
@@ -136,7 +136,7 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
   }
 
   #__next {
-    font-family: 'Rubik', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
+    font-family: 'RubikVariable', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 

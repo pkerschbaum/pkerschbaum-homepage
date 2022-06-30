@@ -1,3 +1,5 @@
+import '@fontsource/rubik/variable.css';
+
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';

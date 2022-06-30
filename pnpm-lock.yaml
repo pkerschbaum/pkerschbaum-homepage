@@ -79,6 +79,7 @@ importers:
     specifiers:
       '@codesandbox/sandpack-react': ^1.1.5
       '@codesandbox/sandpack-themes': ^1.0.0
+      '@fontsource/rubik': ^4.5.10
       '@next/bundle-analyzer': ^12.1.6
       '@next/eslint-plugin-next': ^12.1.6
       '@pkerschbaum-homepage/commons': workspace:1.0.0
@@ -129,6 +130,7 @@ importers:
     dependencies:
       '@codesandbox/sandpack-react': 1.1.5_sfoxds7t5ydpegc3knd667wn6m
       '@codesandbox/sandpack-themes': 1.0.0
+      '@fontsource/rubik': 4.5.10
       '@pkerschbaum-homepage/commons': link:../../libs/commons
       '@pkerschbaum-homepage/fetch-favicon': link:../fetch-favicon
       '@pkerschbaum-homepage/mdx': link:../../libs/mdx
@@ -741,6 +743,10 @@ packages:
 
   /@fal-works/esbuild-plugin-global-externals/2.1.2:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
+    dev: false
+
+  /@fontsource/rubik/4.5.10:
+    resolution: {integrity: sha512-VQuuko0lAKgI6p9lylpeJ/xcG/FpQqUYgPC+NUwVGvYvZNSQYT20UT13MKjPk2bPuxSuSHeeOyZ9x/6eRy4pfQ==}
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
