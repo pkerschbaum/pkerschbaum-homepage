@@ -1,7 +1,10 @@
+import { githubLight } from '@codesandbox/sandpack-themes';
 import * as styled from 'styled-components';
 import { css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
+
+export const monoFontFamily = `'Cascadia Code', ${githubLight.font.mono}`;
 
 type StyleProps = {
   disableAnimations: boolean;
@@ -84,7 +87,7 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
     --color-bg-emphasized: var(--color-verylightgrey);
     --color-bg-interactive: var(--color-verylightteal);
 
-    --font-size-sm: 0.875rem;
+    --font-size-sm: 0.85rem;
     --font-size-base: 1rem;
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
@@ -133,8 +136,8 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
   }
 
   #__next {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
-      'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Rubik', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
   ul {
@@ -190,6 +193,7 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
   }
 
   code {
+    font-family: ${monoFontFamily};
     font-size: var(--font-size-sm);
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
     border-radius: 4px;

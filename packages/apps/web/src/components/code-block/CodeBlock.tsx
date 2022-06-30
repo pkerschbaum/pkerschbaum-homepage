@@ -9,20 +9,20 @@ import { nord as nordBase } from 'sandpack-theme-nord';
 import styled from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
+import { monoFontFamily } from '~/styles/global-app.styles';
 
-// add font "Cascadia Code" to the themes
 const githubLight: SandpackTheme = {
   ...githubLightBase,
   font: {
     ...githubLightBase.font,
-    mono: `'Cascadia Code', ${githubLightBase.font.mono}`,
+    mono: monoFontFamily,
   },
 };
 const nord: SandpackTheme = {
   ...nordBase,
   font: {
     ...nordBase.font,
-    mono: `'Cascadia Code', ${nordBase.font.mono}`,
+    mono: monoFontFamily,
   },
 };
 

@@ -38,6 +38,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Rubik font */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+
           {/* favicons block generated with https://realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
