@@ -1,13 +1,30 @@
 // adapted based on https://github.com/reactjs/reactjs.org/blob/0209e1b5be86d47d0a915e58a9a7a47a409ab57d/beta/src/components/MDX/CodeBlock/CodeBlock.tsx
 
-import { SandpackProvider, SandpackCodeViewer } from '@codesandbox/sandpack-react';
-import { githubLight, monokaiPro } from '@codesandbox/sandpack-themes';
+import { SandpackProvider, SandpackCodeViewer, SandpackTheme } from '@codesandbox/sandpack-react';
+import { githubLight as githubLightBase } from '@codesandbox/sandpack-themes';
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import { check } from '@pkerschbaum/ts-utils';
 import type React from 'react';
+import { nord as nordBase } from 'sandpack-theme-nord';
 import styled from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
+
+// add font "Cascadia Code" to the themes
+const githubLight: SandpackTheme = {
+  ...githubLightBase,
+  font: {
+    ...githubLightBase.font,
+    mono: `'Cascadia Code', ${githubLightBase.font.mono}`,
+  },
+};
+const nord: SandpackTheme = {
+  ...nordBase,
+  font: {
+    ...nordBase.font,
+    mono: `'Cascadia Code', ${nordBase.font.mono}`,
+  },
+};
 
 const CODESANDBOX_LANGUAGE = {
   typescript: 'language-typescript',
@@ -53,7 +70,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
       <SandpackProvider
         files={{ [filename]: { code } }}
         customSetup={{ entry: filename }}
-        theme={monokaiPro}
+        theme={nord}
       >
         <SandpackCodeViewer key={code} wrapContent />
       </SandpackProvider>
