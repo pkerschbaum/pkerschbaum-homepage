@@ -22,11 +22,6 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
           }
         `
       : css`
-          /* some animations */
-          *,
-          *::-webkit-scrollbar {
-            transition: background 0ms;
-          }
           a,
           svg * {
             transition: color 150ms, fill 150ms;
