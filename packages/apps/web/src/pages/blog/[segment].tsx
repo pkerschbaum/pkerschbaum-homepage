@@ -16,11 +16,11 @@ import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
 import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
-import { HrefsToFaviconDataUrlsMap, schema_hrefsToFaviconDataUrlsMap } from '~/schema';
+import { HrefToFaviconsMap, schema_hrefToFaviconsMap } from '~/schema';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
-  hrefToFaviconsMap: HrefsToFaviconDataUrlsMap;
+  hrefToFaviconsMap: HrefToFaviconsMap;
 };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => {
@@ -220,9 +220,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
   return {
     props: {
       mdxParseResult,
-      hrefToFaviconsMap: schema_hrefsToFaviconDataUrlsMap.parse(
-        JSON.parse(hrefToFaviconsMapString),
-      ),
+      hrefToFaviconsMap: schema_hrefToFaviconsMap.parse(JSON.parse(hrefToFaviconsMapString)),
     },
   };
 };

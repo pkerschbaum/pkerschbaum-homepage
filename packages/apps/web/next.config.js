@@ -10,8 +10,6 @@ const withRemoteRefresh = require('next-remote-refresh')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  staticPageGenerationTimeout: 60,
-
   reactStrictMode: true,
 
   compiler: {

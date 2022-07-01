@@ -7,13 +7,13 @@ export type Project = {
   description: string;
 };
 
-export const schema_faviconDataUrls = z.object({
-  lightIconDataURL: z.string().nonempty().optional(),
-  darkIconDataURL: z.string().nonempty().optional(),
+export const schema_hrefToFaviconHrefsMap = z.object({
+  lightIconHref: z.string().min(1).optional(),
+  darkIconHref: z.string().min(1).optional(),
 });
-export type FaviconDataUrls = z.infer<typeof schema_faviconDataUrls>;
-export const schema_hrefsToFaviconDataUrlsMap = z.record(
-  z.string(),
-  schema_faviconDataUrls.optional(),
-);
-export type HrefsToFaviconDataUrlsMap = z.infer<typeof schema_hrefsToFaviconDataUrlsMap>;
+export type HrefToFaviconHrefsMap = z.infer<typeof schema_hrefToFaviconHrefsMap>;
+export const schema_hrefToFaviconsMap = z.object({
+  hrefToFaviconHrefsMap: z.record(z.string(), schema_hrefToFaviconHrefsMap.optional()),
+  iconHrefToDataURLsMap: z.record(z.string(), z.string().min(1).optional()),
+});
+export type HrefToFaviconsMap = z.infer<typeof schema_hrefToFaviconsMap>;
