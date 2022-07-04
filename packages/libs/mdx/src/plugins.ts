@@ -1,6 +1,6 @@
 import type { Root } from 'mdast';
 import { z } from 'zod';
-import { visit } from "unist-util-visit";
+import { visit } from 'unist-util-visit';
 
 type CreateCollectHrefsFromJsxElementsPluginArgs = {
   hrefs: string[];

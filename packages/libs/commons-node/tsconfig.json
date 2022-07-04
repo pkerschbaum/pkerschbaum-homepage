@@ -4,7 +4,7 @@
     "target": "ES2018",
 
     /* Modules */
-    "module": "commonjs",
+    "module": "node16",
     "paths": {
       "~/*": ["./src/*"]
     },

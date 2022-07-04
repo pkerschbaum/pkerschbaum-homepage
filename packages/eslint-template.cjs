@@ -30,7 +30,7 @@ module.exports = {
     'plugin:node/recommended',
     'plugin:eslint-comments/recommended',
   ],
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', '.eslintrc.cjs'],
   rules: {
     curly: 'error',
     'no-console': 'error',
