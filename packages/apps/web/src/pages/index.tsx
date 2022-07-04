@@ -2,13 +2,13 @@ import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 import { Feed } from 'feed';
 import fs from 'fs';
 import type { GetStaticProps } from 'next';
-import Head from 'next/head';
 import * as React from 'react';
 import styled from 'styled-components';
 
 import { BlogOverview } from '~/components/blog-overview';
 import { Introduction } from '~/components/introduction';
 import { Main } from '~/components/main';
+import { MetadataTags } from '~/components/metadata-tags';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 import { config } from '~/config';
 import {
@@ -25,17 +25,9 @@ type HomePageProps = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ posts }) => {
-  const title = 'Patrick Kerschbaum';
-  const description = 'Homepage of Patrick Kerschbaum';
-
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} key="desc" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-      </Head>
+      <MetadataTags title="Patrick Kerschbaum" description="Homepage of Patrick Kerschbaum" />
 
       <HomepageContainer>
         <Introduction />

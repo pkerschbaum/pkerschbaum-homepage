@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
@@ -15,6 +14,7 @@ import { z } from 'zod';
 import { StyledAnchor } from '~/components/fancy-anchor';
 import { Main } from '~/components/main';
 import { MDXViewer } from '~/components/mdx-viewer';
+import { MetadataTags } from '~/components/metadata-tags';
 import { config } from '~/config';
 import { ColorTheme, DataAttribute, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
@@ -60,17 +60,12 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
   twitterDiscussUrl.searchParams.set('q', blogPostHref);
   const twitterDiscussHref = twitterDiscussUrl.href;
 
-  const title = mdxParseResult.frontmatter.title;
-  const description = mdxParseResult.frontmatter.description;
-
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} key="desc" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-      </Head>
+      <MetadataTags
+        title={mdxParseResult.frontmatter.title}
+        description={mdxParseResult.frontmatter.description}
+      />
 
       <Main>
         <BlogPostContainer>
