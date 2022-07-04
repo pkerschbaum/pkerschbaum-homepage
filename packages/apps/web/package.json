@@ -17,8 +17,6 @@
     "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^1.2.2",
-    "@codesandbox/sandpack-themes": "^1.0.0",
     "@fontsource/rubik": "^4.5.10",
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
     "@pkerschbaum-homepage/fetch-favicon": "workspace:1.0.0",
@@ -36,7 +34,6 @@
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-is": "^17.0.2",
-    "sandpack-theme-nord": "^1.0.0",
     "sharp": "^0.30.7",
     "styled-components": "^5.3.5",
     "tiny-invariant": "^1.2.0",

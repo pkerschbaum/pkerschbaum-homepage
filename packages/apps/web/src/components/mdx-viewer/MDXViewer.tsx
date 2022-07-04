@@ -2,7 +2,6 @@ import { check } from '@pkerschbaum/ts-utils';
 import { getMDXComponent } from 'mdx-bundler/client';
 import * as React from 'react';
 
-import { CodeBlock } from '~/components/code-block';
 import { FancyAnchor, FancyAnchorProps } from '~/components/fancy-anchor';
 import { Anchor } from '~/elements';
 
@@ -26,7 +25,6 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
 
           return <Anchor target="_blank" {...props} href={props.href} />;
         },
-        code: CodeBlock,
         FancyAnchor: (props: FancyAnchorProps) => {
           return <FancyAnchor target="_blank" {...props} />;
         },

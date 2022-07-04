@@ -1,10 +1,7 @@
-import { githubLight } from '@codesandbox/sandpack-themes';
 import * as styled from 'styled-components';
 import { css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
-
-export const monoFontFamily = `'CascadiaCodeVariable', ${githubLight.font.mono}`;
 
 type StyleProps = {
   disableAnimations: boolean;
@@ -188,17 +185,15 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
   }
 
   code {
-    font-family: ${monoFontFamily};
+    /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus "CascadiaCodeVariable" added. */
+    font-family: 'CascadiaCodeVariable', 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
+      'Liberation Mono', Monaco, 'Lucida Console', monospace;
     font-size: var(--font-size-sm);
+  }
+
+  *:not(pre) > code {
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
     border-radius: 4px;
     background-color: var(--color-bg-emphasized);
-  }
-  /* disable custom code formatting for @codesandbox/sandpack-react code blocks */
-  *.sp-code-editor code {
-    font-size: unset;
-    padding: unset;
-    border-radius: unset;
-    background-color: unset;
   }
 `;

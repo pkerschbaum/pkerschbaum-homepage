@@ -1,4 +1,3 @@
-import { getSandpackCssText } from '@codesandbox/sandpack-react';
 import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
@@ -80,9 +79,6 @@ export default class MyDocument extends Document {
 
           {/* Plausible analytics */}
           <script defer data-domain="pkerschbaum.com" src="https://plausible.io/js/plausible.js" />
-
-          {/* https://sandpack.codesandbox.io/docs/getting-started/ssr#nextjs */}
-          <style dangerouslySetInnerHTML={{ __html: getSandpackCssText() }} id="sandpack" />
         </Head>
         <body>
           <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme.toString() }} />
