@@ -34,6 +34,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="canonical" href={pageHref} key="canonical" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={imageUrl.href} />
         <meta property="og:site_name" content="pkerschbaum.com" />
