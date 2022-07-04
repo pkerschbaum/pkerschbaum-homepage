@@ -1,12 +1,6 @@
 import path from 'path';
 
 export const POSTS_PATH = path.join(process.cwd(), 'src', 'posts');
-export const HREFS_TO_FAVICONS_PATH = path.join(
-  process.cwd(),
-  'src',
-  'static',
-  'href-to-favicons.json',
-);
 const PUBLIC_DIR_PATH = path.join(process.cwd(), 'public');
 export const RSS_FEED_XML_SLUG = 'rss.xml';
 export const RSS_FEED_JSON_SLUG = 'rss.json';

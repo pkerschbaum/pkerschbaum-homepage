@@ -17,6 +17,7 @@ importers:
       '@pkerschbaum-homepage/commons': workspace:1.0.0
       '@pkerschbaum-homepage/commons-node': workspace:1.0.0
       '@pkerschbaum-homepage/mdx': workspace:1.0.0
+      '@pkerschbaum-homepage/shared-node': workspace:1.0.0
       '@pkerschbaum/ts-utils': ^0.0.1
       '@types/mdast': ^3.0.10
       '@types/node': ^16.11.25
@@ -47,6 +48,7 @@ importers:
       '@pkerschbaum-homepage/commons': link:../../libs/commons
       '@pkerschbaum-homepage/commons-node': link:../../libs/commons-node
       '@pkerschbaum-homepage/mdx': link:../../libs/mdx
+      '@pkerschbaum-homepage/shared-node': link:../../libs/shared-node
       '@pkerschbaum/ts-utils': 0.0.1
       '@types/mdast': 3.0.10
       esbuild: 0.14.48
@@ -85,6 +87,7 @@ importers:
       '@pkerschbaum-homepage/commons': workspace:1.0.0
       '@pkerschbaum-homepage/fetch-favicon': workspace:1.0.0
       '@pkerschbaum-homepage/mdx': workspace:1.0.0
+      '@pkerschbaum-homepage/shared-node': workspace:1.0.0
       '@pkerschbaum/ts-utils': ^0.0.1
       '@types/mdast': ^3.0.10
       '@types/node': ^16.11.25
@@ -133,6 +136,7 @@ importers:
       '@pkerschbaum-homepage/commons': link:../../libs/commons
       '@pkerschbaum-homepage/fetch-favicon': link:../fetch-favicon
       '@pkerschbaum-homepage/mdx': link:../../libs/mdx
+      '@pkerschbaum-homepage/shared-node': link:../../libs/shared-node
       '@pkerschbaum/ts-utils': 0.0.1
       '@types/mdast': 3.0.10
       dayjs: 1.11.3
@@ -303,6 +307,49 @@ importers:
       mdx-bundler: 9.0.1_esbuild@0.14.48
       tiny-invariant: 1.2.0
       unist-util-visit: 4.1.0
+      zod: 3.17.3
+    devDependencies:
+      '@types/node': 16.11.42
+      '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
+      '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
+      eslint: 8.18.0
+      eslint-config-prettier: 8.5.0_eslint@8.18.0
+      eslint-plugin-code-import-patterns: 3.0.0
+      eslint-plugin-eslint-comments: 3.2.0_eslint@8.18.0
+      eslint-plugin-import: 2.26.0_wno36sjfnklvt2ocf7qbhb2izy
+      eslint-plugin-node: 11.1.0_eslint@8.18.0
+      eslint-plugin-only-warn: 1.0.3
+      eslint-plugin-prettier: 4.2.1_xu6ewijrtliw5q5lksq5uixwby
+      eslint-plugin-regexp: 1.7.0_eslint@8.18.0
+      prettier: 2.7.1
+      rimraf: 3.0.2
+      ts-patch: 2.0.1_typescript@4.7.4
+      typescript: 4.7.4
+      typescript-transform-paths: 3.3.1_typescript@4.7.4
+
+  packages/libs/shared-node:
+    specifiers:
+      '@types/node': ^16.11.25
+      '@typescript-eslint/eslint-plugin': ^5.30.0
+      '@typescript-eslint/parser': ^5.30.0
+      eslint: ^8.16.0
+      eslint-config-prettier: ^8.5.0
+      eslint-plugin-code-import-patterns: ^3.0.0
+      eslint-plugin-eslint-comments: ^3.2.0
+      eslint-plugin-import: ^2.26.0
+      eslint-plugin-node: ^11.1.0
+      eslint-plugin-only-warn: ^1.0.3
+      eslint-plugin-prettier: ^4.2.1
+      eslint-plugin-regexp: ^1.7.0
+      prettier: ^2.7.1
+      rimraf: ^3.0.2
+      tiny-invariant: ^1.2.0
+      ts-patch: ^2.0.1
+      typescript: ^4.7.4
+      typescript-transform-paths: ^3.3.1
+      zod: ^3.17.3
+    dependencies:
+      tiny-invariant: 1.2.0
       zod: 3.17.3
     devDependencies:
       '@types/node': 16.11.42
@@ -1642,7 +1689,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   /core-js-pure/3.22.8:
     resolution: {integrity: sha512-bOxbZIy9S5n4OVH63XaLVXZ49QKicjowDx/UELyJ68vxfCRpYsbyh/WNZNfEfAk+ekA8vSjt+gCDpvh672bc3w==}
@@ -2170,7 +2217,7 @@ packages:
     resolution: {integrity: sha512-0En0w03NRVMn9Uiyn8YRPDKvWjxCWkslUEhGNTdGx15RvPJYQ+lbOlqrlNI2vEAs4pDYK4f/HN2TbDmk5TP0iw==}
     dependencies:
       debug: 3.2.7
-      resolve: 1.22.0
+      resolve: 1.22.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2367,7 +2414,7 @@ packages:
       eslint-utils: 2.1.0
       ignore: 5.2.0
       minimatch: 3.1.2
-      resolve: 1.22.0
+      resolve: 1.22.1
       semver: 6.3.0
     dev: true
 

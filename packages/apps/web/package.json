@@ -1,13 +1,14 @@
 {
   "name": "@pkerschbaum-homepage/web",
   "private": true,
+  "type": "module",
   "version": "1.0.0",
   "scripts": {
     "nuke": "pnpm run nuke:build && pnpm run nuke:node-modules",
     "nuke:build": "rimraf .next tsconfig.tsbuildinfo",
     "nuke:node-modules": "rimraf node_modules",
     "dev": "next dev",
-    "build": "rimraf .next && next build && next-sitemap",
+    "build": "rimraf .next && next build && next-sitemap --config next-sitemap.cjs",
     "export": "next export",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
@@ -22,6 +23,7 @@
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
     "@pkerschbaum-homepage/fetch-favicon": "workspace:1.0.0",
     "@pkerschbaum-homepage/mdx": "workspace:1.0.0",
+    "@pkerschbaum-homepage/shared-node": "workspace:1.0.0",
     "@pkerschbaum/ts-utils": "^0.0.1",
     "@types/mdast": "^3.0.10",
     "dayjs": "^1.11.3",

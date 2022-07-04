@@ -2,15 +2,17 @@ import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 
 const PUPPETEER_NAVIGATION_TIMEOUT = 2 * 60 * 1000; // 2 minutes
 
-type FetchFaviconHrefsOptions = { browser: any };
-export type FetchFaviconHrefsResult = {
-  lightIconHref: undefined | string;
-  darkIconHref: undefined | string;
+type FetchFaviconURLsOptions = { browser: any };
+export type FetchFaviconURLsResult = {
+  icons: {
+    light: undefined | URL;
+    dark: undefined | URL;
+  };
 };
-export async function fetchFaviconHrefs(
-  href: string,
-  options: FetchFaviconHrefsOptions,
-): Promise<FetchFaviconHrefsResult> {
+export async function fetchFaviconURLs(
+  website: URL,
+  options: FetchFaviconURLsOptions,
+): Promise<FetchFaviconURLsResult> {
   // Open two pages, one for light/dark color scheme each
   const [pageLight, pageDark] = await Promise.all([
     options.browser.newPage(),
@@ -18,31 +20,31 @@ export async function fetchFaviconHrefs(
   ]);
   await pageDark.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
 
-  // Fetch Favicons Hrefs in parallel
-  const [lightIconHref, darkIconHref] = await Promise.all([
-    gotoPageAndExtractFaviconHrefFromPage(pageLight, href),
-    gotoPageAndExtractFaviconHrefFromPage(pageDark, href),
+  // Fetch URLs of Favicons in parallel
+  const [light, dark] = await Promise.all([
+    gotoPageAndExtractFaviconURLFromPage(pageLight, website),
+    gotoPageAndExtractFaviconURLFromPage(pageDark, website),
   ]);
 
-  return { lightIconHref, darkIconHref };
+  return { icons: { light, dark } };
 }
 
-async function gotoPageAndExtractFaviconHrefFromPage(page: any, href: string) {
-  // Goto given href
-  await page.goto(href, { waitUntil: 'networkidle0', timeout: PUPPETEER_NAVIGATION_TIMEOUT });
+async function gotoPageAndExtractFaviconURLFromPage(page: any, website: URL) {
+  // Goto given url
+  await page.goto(website, { waitUntil: 'networkidle0', timeout: PUPPETEER_NAVIGATION_TIMEOUT });
 
-  // Extract iconHref from html
-  const maybeRelativeIconHref = await page
+  // Extract href of icon from html
+  const maybeRelativeIconURL = await page
     .$("link[rel='icon']")
     .then((handle: any) => handle?.getProperty('href'))
     .then((jsHandle: any) => jsHandle?.jsonValue());
-  if (typeof maybeRelativeIconHref !== 'string') {
-    logger.warn(`could not fetch icon from url`);
+  if (typeof maybeRelativeIconURL !== 'string') {
+    logger.warn(`could not fetch icon from website! website.href=${website.href}`);
     return;
   }
 
-  // Construct absolute URL for iconHref
-  const absoluteIconURL = new URL(maybeRelativeIconHref, href);
+  // Construct absolute URL (based on the website URL)
+  const absoluteIconURL = new URL(maybeRelativeIconURL, website);
 
-  return absoluteIconURL.href;
+  return absoluteIconURL;
 }

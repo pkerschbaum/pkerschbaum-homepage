@@ -1,3 +1,5 @@
+import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
+import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 import dayjs from 'dayjs';
 import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
@@ -14,31 +16,30 @@ import { StyledAnchor } from '~/components/fancy-anchor';
 import { Main } from '~/components/main';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { config } from '~/config';
-import { ColorTheme, DataAttribute, HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
+import { ColorTheme, DataAttribute, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
 import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
-import { schema_hrefToFaviconsMap } from '~/schema';
 
-type IconHrefToAssociatedAnchorsMap = {
-  [iconHref in string]?: {
+type IconURLToAssociatedWebsitesMap = {
+  [iconURL in string]?: {
     iconDataURL: string;
-    associatedAnchors: string[];
+    associatedWebsites: string[];
   };
 };
-type PureHrefToFaviconDataURLsMap = {
-  lightIcons: IconHrefToAssociatedAnchorsMap;
-  darkIcons: IconHrefToAssociatedAnchorsMap;
+type FaviconDataURLsForWebsiteURLs = {
+  lightIcons: IconURLToAssociatedWebsitesMap;
+  darkIcons: IconURLToAssociatedWebsitesMap;
 };
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
-  pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap;
+  faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
 };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({
   mdxParseResult,
-  pureHrefToFaviconDataURLsMap,
+  faviconDataURLsForWebsiteURLs,
 }) => {
   useRemoteRefresh();
 
@@ -81,7 +82,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
             </Time>
           </FrontMatter>
 
-          <BlogPostContent styleProps={{ pureHrefToFaviconDataURLsMap }}>
+          <BlogPostContent styleProps={{ faviconDataURLsForWebsiteURLs }}>
             <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
           </BlogPostContent>
 
@@ -133,49 +134,10 @@ const BlogPostContainer = styled.article`
 `;
 
 type StyleProps = {
-  pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap;
+  faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
 };
 
 const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
-  & ${StyledAnchor}::before {
-    display: none;
-  }
-
-  ${({ styleProps }) => {
-    const lightIconsCss = Object.values(styleProps.pureHrefToFaviconDataURLsMap.lightIcons).map(
-      (blah) => {
-        invariant(blah);
-        return css`
-          ${blah.associatedAnchors
-            .map((anchorHref) => `& ${StyledAnchor}[href="${anchorHref}"]::before`)
-            .join(', ')} {
-            display: inline-block;
-            background-image: url(${blah.iconDataURL});
-          }
-        `;
-      },
-    );
-
-    const darkIconsCss = Object.values(styleProps.pureHrefToFaviconDataURLsMap.darkIcons).map(
-      (blah) => {
-        invariant(blah);
-        return css`
-          ${blah.associatedAnchors
-            .map(
-              (anchorHref) =>
-                `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] & ${StyledAnchor}[href="${anchorHref}"]::before`,
-            )
-            .join(', ')} {
-            display: inline-block;
-            background-image: url(${blah.iconDataURL});
-          }
-        `;
-      },
-    );
-
-    return [...lightIconsCss, ...darkIconsCss];
-  }}
-
   & p {
     margin-block: 1em;
   }
@@ -193,6 +155,58 @@ const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
   & li:first-of-type {
     margin-block-start: 0;
   }
+
+  /* 
+    Add icons to FancyAnchors.
+    We construct CSS such that we transmit every data URL only once and apply it to the associated
+    FancyAnchors via attribute selectors.
+
+    @example
+    & FancyAnchor[href="https://playwright.dev/docs/test-fixtures"]::before,
+    & FancyAnchor[href="https://playwright.dev/docs/test-advanced#projects"]::before,
+    & FancyAnchor[href="https://playwright.dev/docs/test-components#planned-work"]::before {
+      display: inline-block;
+      background-image: url(DATA_URL_OF_PLAYWRIGHT_FAVICON);
+    }
+   */
+  & ${StyledAnchor}::before {
+    display: none;
+  }
+
+  ${({ styleProps }) => {
+    const lightIconsCss = Object.values(styleProps.faviconDataURLsForWebsiteURLs.lightIcons).map(
+      (icon) => {
+        invariant(icon);
+        return css`
+          ${icon.associatedWebsites
+            .map((url) => `& ${StyledAnchor}[href="${url}"]::before`)
+            .join(', ')} {
+            display: inline-block;
+            background-image: url(${icon.iconDataURL});
+          }
+        `;
+      },
+    );
+
+    const darkIconsCss = Object.values(styleProps.faviconDataURLsForWebsiteURLs.darkIcons).map(
+      (icon) => {
+        invariant(icon);
+        return css`
+          ${icon.associatedWebsites
+            .map(
+              (url) =>
+                `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] & ${StyledAnchor}[href="${url}"]::before`,
+            )
+            .join(', ')} {
+            display: inline-block;
+            background-image: url(${icon.iconDataURL});
+          }
+        `;
+      },
+    );
+
+    return [...lightIconsCss, ...darkIconsCss];
+  }}
 
   /* 
     Code blocks should span entire width.
@@ -260,7 +274,7 @@ const ContactTeaserHeadline = styled.h2`
 
 const schema_staticProps = z.object({ segment: z.string().min(1) });
 type StaticProps = z.infer<typeof schema_staticProps>;
-const hrefsToFaviconsReadPromise = fs.promises.readFile(HREFS_TO_FAVICONS_PATH, {
+const faviconsForWebsitesReadPromise = fs.promises.readFile(PATHS.FAVICONS_FOR_WEBSITES, {
   encoding: 'utf-8',
 });
 export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
@@ -268,43 +282,45 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
 }) => {
   const parsedParams = schema_staticProps.parse(params);
 
-  const [mdxParseResult, hrefToFaviconsMapString] = await Promise.all([
+  const [mdxParseResult, faviconsForWebsitesString] = await Promise.all([
     parseMDXFileAndCollectHrefs(POSTS_PATH, `${parsedParams.segment}.mdx`),
-    hrefsToFaviconsReadPromise,
+    faviconsForWebsitesReadPromise,
   ]);
 
-  const hrefToFaviconsMap = schema_hrefToFaviconsMap.parse(JSON.parse(hrefToFaviconsMapString));
-  const pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap = {
+  const faviconsForWebsites = schema_faviconsForWebsites.parse(
+    JSON.parse(faviconsForWebsitesString),
+  );
+  const faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs = {
     lightIcons: {},
     darkIcons: {},
   };
   for (const collectedHref of mdxParseResult.collectedHrefs) {
-    const faviconHrefs = hrefToFaviconsMap.hrefToFaviconHrefsMap[collectedHref];
+    const iconURLs = faviconsForWebsites.websites[collectedHref]?.iconURLs;
 
     let lightIconDataURL;
-    if (faviconHrefs?.lightIconHref) {
-      lightIconDataURL = hrefToFaviconsMap.iconHrefToDataURLsMap[faviconHrefs.lightIconHref];
+    if (iconURLs?.light) {
+      lightIconDataURL = faviconsForWebsites.icons[iconURLs.light]?.dataURL;
 
       if (lightIconDataURL) {
-        let matching = pureHrefToFaviconDataURLsMap.lightIcons[faviconHrefs.lightIconHref];
+        let matching = faviconDataURLsForWebsiteURLs.lightIcons[iconURLs.light];
         if (!matching) {
-          matching = { iconDataURL: lightIconDataURL, associatedAnchors: [] };
-          pureHrefToFaviconDataURLsMap.lightIcons[faviconHrefs.lightIconHref] = matching;
+          matching = { iconDataURL: lightIconDataURL, associatedWebsites: [] };
+          faviconDataURLsForWebsiteURLs.lightIcons[iconURLs.light] = matching;
         }
-        matching.associatedAnchors.push(collectedHref);
+        matching.associatedWebsites.push(collectedHref);
       }
     }
 
-    if (faviconHrefs?.darkIconHref) {
-      const darkIconDataURL = hrefToFaviconsMap.iconHrefToDataURLsMap[faviconHrefs.darkIconHref];
+    if (iconURLs?.dark) {
+      const darkIconDataURL = faviconsForWebsites.icons[iconURLs.dark]?.dataURL;
 
       if (darkIconDataURL && darkIconDataURL !== lightIconDataURL) {
-        let matching = pureHrefToFaviconDataURLsMap.darkIcons[faviconHrefs.darkIconHref];
+        let matching = faviconDataURLsForWebsiteURLs.darkIcons[iconURLs.dark];
         if (!matching) {
-          matching = { iconDataURL: darkIconDataURL, associatedAnchors: [] };
-          pureHrefToFaviconDataURLsMap.darkIcons[faviconHrefs.darkIconHref] = matching;
+          matching = { iconDataURL: darkIconDataURL, associatedWebsites: [] };
+          faviconDataURLsForWebsiteURLs.darkIcons[iconURLs.dark] = matching;
         }
-        matching.associatedAnchors.push(collectedHref);
+        matching.associatedWebsites.push(collectedHref);
       }
     }
   }
@@ -312,7 +328,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
   return {
     props: {
       mdxParseResult,
-      pureHrefToFaviconDataURLsMap,
+      faviconDataURLsForWebsiteURLs,
     },
   };
 };

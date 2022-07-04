@@ -1,10 +1,16 @@
-const path = require('path');
+import path from 'path';
+import url from 'url';
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import bundleAnalyzer from '@next/bundle-analyzer';
+import remoteRefresh from 'next-remote-refresh';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const withRemoteRefresh = require('next-remote-refresh')({
+const withRemoteRefresh = remoteRefresh({
   paths: [path.resolve(__dirname, 'src', 'posts')],
 });
 
@@ -53,4 +59,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withRemoteRefresh(nextConfig);
+export default withRemoteRefresh(nextConfig);

@@ -1,72 +1,75 @@
 import fs from 'fs';
-import path from 'path';
-import url from 'url';
 import puppeteer from 'puppeteer';
 // @ts-expect-error -- safe-stable-stringify does not provide typings for its esm wrapper...
 import safeStringify from 'safe-stable-stringify';
 
-import { fetchFaviconHrefs, FetchFaviconHrefsResult } from '~/favicon.js';
+import { fetchFaviconURLs } from '~/favicon.js';
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 import { arrays, check } from '@pkerschbaum/ts-utils';
 import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const WEB_SRC_PATH = path.join(__dirname, '..', '..', '..', 'apps', 'web', 'src');
-const POSTS_PATH = path.join(WEB_SRC_PATH, 'posts');
-const JSON_OUTPUT_PATH = path.join(WEB_SRC_PATH, 'static', 'href-to-favicons.json');
+import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
+import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
+import { default as invariant } from 'tiny-invariant';
 
 async function fetchFaviconsForAllHrefsAndWriteToFile() {
   // Preparation: fetch list of posts and start browser
-  let fileNamesOfPosts = await fs.promises.readdir(POSTS_PATH);
+  let fileNamesOfPosts = await fs.promises.readdir(PATHS.POSTS);
   fileNamesOfPosts = fileNamesOfPosts.filter((path) => path.endsWith('.mdx'));
 
   const browser = await initializeBrowserInstance();
 
-  // Step #1: Collect all hrefs of all posts
-  const hrefsOfAllPosts: string[] = [];
+  // Step #1: Collect all hrefs of all posts (with duplicates removed)
+  let hrefsOfAllPosts: string[] = [];
   await Promise.all(
     fileNamesOfPosts.map(async (fileNameOfPost) => {
-      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(POSTS_PATH, fileNameOfPost);
+      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(PATHS.POSTS, fileNameOfPost);
       hrefsOfAllPosts.push(...collectedHrefs);
     }),
   );
+  hrefsOfAllPosts = arrays.uniqueValues(hrefsOfAllPosts);
 
   // Step #2: Use puppeteer to go to every href and fetch the URLs for both its light favicon and dark favicon
-  const hrefToFaviconHrefsMap: { [href: string]: FetchFaviconHrefsResult } = {};
+  const websites: FaviconsForWebsites['websites'] = {};
   await Promise.all(
     hrefsOfAllPosts.map(async (href) => {
-      const faviconHrefs = await fetchFaviconHrefs(href, { browser });
-      hrefToFaviconHrefsMap[href] = faviconHrefs;
+      const faviconURLs = await fetchFaviconURLs(new URL(href), { browser });
+      websites[href] = {
+        iconURLs: {
+          light: faviconURLs.icons.light?.href,
+          dark: faviconURLs.icons.dark?.href,
+        },
+      };
     }),
   );
 
-  // Step #3: Gather a list of unique favicon hrefs we need to fetch then
-  let allIconHrefs: string[] = [];
-  for (const entry of Object.values(hrefToFaviconHrefsMap)) {
-    if (check.isNonEmptyString(entry.lightIconHref)) {
-      allIconHrefs.push(entry.lightIconHref);
+  // Step #3: Gather a list of favicon URLs we need to fetch (with duplicates removed)
+  let allIconURLs: URL[] = [];
+  for (const entry of Object.values(websites)) {
+    invariant(entry);
+    if (check.isNonEmptyString(entry.iconURLs.light)) {
+      allIconURLs.push(new URL(entry.iconURLs.light));
     }
-    if (check.isNonEmptyString(entry.darkIconHref)) {
-      allIconHrefs.push(entry.darkIconHref);
+    if (check.isNonEmptyString(entry.iconURLs.dark)) {
+      allIconURLs.push(new URL(entry.iconURLs.dark));
     }
   }
-  const uniqueIconHrefs = arrays.uniqueValues(allIconHrefs);
+  allIconURLs = arrays.uniqueValues(allIconURLs);
 
-  // Step #4: Go to every favicon href and store the favicon as a data URL
-  const iconHrefToDataURLsMap: { [iconHref: string]: string } = {};
+  // Step #4: Go to every favicon URL and store the favicon as a data URL
+  const icons: FaviconsForWebsites['icons'] = {};
   await Promise.all(
-    uniqueIconHrefs.map(async (href) => {
-      iconHrefToDataURLsMap[href] = await binaryUtils.fetchUrlAndConvertToDataURL(new URL(href));
+    allIconURLs.map(async (url) => {
+      icons[url.href] = { dataURL: await binaryUtils.fetchUrlAndConvertToDataURL(url) };
     }),
   );
 
   // Step #5: Close the puppeteer browser and store the favicons as JSON
   await browser.close();
-  const finalResult = {
-    hrefToFaviconHrefsMap,
-    iconHrefToDataURLsMap,
+  const finalResult: FaviconsForWebsites = {
+    websites,
+    icons,
   };
-  await fs.promises.writeFile(JSON_OUTPUT_PATH, safeStringify(finalResult, null, 2), {
+  await fs.promises.writeFile(PATHS.FAVICONS_FOR_WEBSITES, safeStringify(finalResult, null, 2), {
     encoding: 'utf-8',
   });
 }

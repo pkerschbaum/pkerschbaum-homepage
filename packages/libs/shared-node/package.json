@@ -1,5 +1,5 @@
 {
-  "name": "@pkerschbaum-homepage/fetch-favicon",
+  "name": "@pkerschbaum-homepage/shared-node",
   "private": true,
   "type": "module",
   "version": "1.0.0",
@@ -20,25 +20,14 @@
     "nuke": "pnpm run nuke:build && pnpm run nuke:node-modules",
     "nuke:build": "rimraf dist tsconfig.tsbuildinfo",
     "nuke:node-modules": "rimraf node_modules",
-    "build": "tsc && node ./dist/index.js",
+    "build": "tsc",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "pnpm run lint --fix",
     "compile": "tsc --noEmit",
     "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
-    "@pkerschbaum-homepage/commons": "workspace:1.0.0",
-    "@pkerschbaum-homepage/commons-node": "workspace:1.0.0",
-    "@pkerschbaum-homepage/mdx": "workspace:1.0.0",
-    "@pkerschbaum-homepage/shared-node": "workspace:1.0.0",
-    "@pkerschbaum/ts-utils": "^0.0.1",
-    "@types/mdast": "^3.0.10",
-    "esbuild": "^0.14.48",
-    "mdx-bundler": "^9.0.1",
-    "puppeteer": "^14.1.2",
-    "safe-stable-stringify": "^2.3.1",
     "tiny-invariant": "^1.2.0",
-    "unist-util-visit": "^4.1.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {

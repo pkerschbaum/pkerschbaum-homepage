@@ -40,14 +40,14 @@ module.exports = {
   },
   extends: [
     ...(baseEslintConfig.extends ?? []),
-    './eslint-config-next-core-web-vitals-fixed.js',
+    './eslint-config-next-core-web-vitals-fixed.cjs',
     'plugin:@next/next/core-web-vitals',
   ],
   ignorePatterns: [
     ...(baseEslintConfig.ignorePatterns ?? []),
-    'eslint-config-next-core-web-vitals-fixed.js',
+    'eslint-config-next-core-web-vitals-fixed.cjs',
     'next.config.js',
-    'next-sitemap.js',
+    'next-sitemap.cjs',
   ],
   rules: {
     ...baseEslintConfig.rules,
