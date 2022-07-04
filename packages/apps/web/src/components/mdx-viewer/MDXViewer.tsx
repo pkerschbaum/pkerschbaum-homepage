@@ -5,17 +5,12 @@ import * as React from 'react';
 import { CodeBlock } from '~/components/code-block';
 import { FancyAnchor, FancyAnchorProps } from '~/components/fancy-anchor';
 import { Anchor } from '~/elements';
-import type { HrefToFaviconsMap } from '~/schema';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;
-  hrefToFaviconsMap: HrefToFaviconsMap;
 };
 
-export const MDXViewer: React.FC<MDXViewerProps> = ({
-  codeOfMdxParseResult,
-  hrefToFaviconsMap,
-}) => {
+export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) => {
   const Component = React.useMemo(
     () => getMDXComponent(codeOfMdxParseResult),
     [codeOfMdxParseResult],
@@ -33,7 +28,7 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({
         },
         code: CodeBlock,
         FancyAnchor: (props: FancyAnchorProps) => {
-          return <FancyAnchor target="_blank" {...props} hrefToFaviconsMap={hrefToFaviconsMap} />;
+          return <FancyAnchor target="_blank" {...props} />;
         },
       }}
     />

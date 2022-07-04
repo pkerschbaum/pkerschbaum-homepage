@@ -6,24 +6,40 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import invariant from 'tiny-invariant';
 import { z } from 'zod';
 
+import { StyledAnchor } from '~/components/fancy-anchor';
 import { Main } from '~/components/main';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { config } from '~/config';
-import { HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
+import { ColorTheme, DataAttribute, HREFS_TO_FAVICONS_PATH, POSTS_PATH } from '~/constants';
 import { Anchor } from '~/elements';
 import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
-import { HrefToFaviconsMap, schema_hrefToFaviconsMap } from '~/schema';
+import { schema_hrefToFaviconsMap } from '~/schema';
+
+type IconHrefToAssociatedAnchorsMap = {
+  [iconHref in string]?: {
+    iconDataURL: string;
+    associatedAnchors: string[];
+  };
+};
+type PureHrefToFaviconDataURLsMap = {
+  lightIcons: IconHrefToAssociatedAnchorsMap;
+  darkIcons: IconHrefToAssociatedAnchorsMap;
+};
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
-  hrefToFaviconsMap: HrefToFaviconsMap;
+  pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap;
 };
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFaviconsMap }) => {
+const BlogPostPage: React.FC<BlogPostPageProps> = ({
+  mdxParseResult,
+  pureHrefToFaviconDataURLsMap,
+}) => {
   useRemoteRefresh();
 
   const router = useRouter();
@@ -65,11 +81,8 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ mdxParseResult, hrefToFavic
             </Time>
           </FrontMatter>
 
-          <BlogPostContent>
-            <MDXViewer
-              codeOfMdxParseResult={mdxParseResult.code}
-              hrefToFaviconsMap={hrefToFaviconsMap}
-            />
+          <BlogPostContent styleProps={{ pureHrefToFaviconDataURLsMap }}>
+            <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
           </BlogPostContent>
 
           <InteractionSection>
@@ -119,7 +132,50 @@ const BlogPostContainer = styled.article`
   gap: calc(4 * var(--spacing-base));
 `;
 
-const BlogPostContent = styled.div`
+type StyleProps = {
+  pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap;
+};
+
+const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
+  & ${StyledAnchor}::before {
+    display: none;
+  }
+
+  ${({ styleProps }) => {
+    const lightIconsCss = Object.values(styleProps.pureHrefToFaviconDataURLsMap.lightIcons).map(
+      (blah) => {
+        invariant(blah);
+        return css`
+          ${blah.associatedAnchors
+            .map((anchorHref) => `& ${StyledAnchor}[href="${anchorHref}"]::before`)
+            .join(', ')} {
+            display: inline-block;
+            background-image: url(${blah.iconDataURL});
+          }
+        `;
+      },
+    );
+
+    const darkIconsCss = Object.values(styleProps.pureHrefToFaviconDataURLsMap.darkIcons).map(
+      (blah) => {
+        invariant(blah);
+        return css`
+          ${blah.associatedAnchors
+            .map(
+              (anchorHref) =>
+                `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] & ${StyledAnchor}[href="${anchorHref}"]::before`,
+            )
+            .join(', ')} {
+            display: inline-block;
+            background-image: url(${blah.iconDataURL});
+          }
+        `;
+      },
+    );
+
+    return [...lightIconsCss, ...darkIconsCss];
+  }}
+
   & p {
     margin-block: 1em;
   }
@@ -217,10 +273,46 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
     hrefsToFaviconsReadPromise,
   ]);
 
+  const hrefToFaviconsMap = schema_hrefToFaviconsMap.parse(JSON.parse(hrefToFaviconsMapString));
+  const pureHrefToFaviconDataURLsMap: PureHrefToFaviconDataURLsMap = {
+    lightIcons: {},
+    darkIcons: {},
+  };
+  for (const collectedHref of mdxParseResult.collectedHrefs) {
+    const faviconHrefs = hrefToFaviconsMap.hrefToFaviconHrefsMap[collectedHref];
+
+    let lightIconDataURL;
+    if (faviconHrefs?.lightIconHref) {
+      lightIconDataURL = hrefToFaviconsMap.iconHrefToDataURLsMap[faviconHrefs.lightIconHref];
+
+      if (lightIconDataURL) {
+        let matching = pureHrefToFaviconDataURLsMap.lightIcons[faviconHrefs.lightIconHref];
+        if (!matching) {
+          matching = { iconDataURL: lightIconDataURL, associatedAnchors: [] };
+          pureHrefToFaviconDataURLsMap.lightIcons[faviconHrefs.lightIconHref] = matching;
+        }
+        matching.associatedAnchors.push(collectedHref);
+      }
+    }
+
+    if (faviconHrefs?.darkIconHref) {
+      const darkIconDataURL = hrefToFaviconsMap.iconHrefToDataURLsMap[faviconHrefs.darkIconHref];
+
+      if (darkIconDataURL && darkIconDataURL !== lightIconDataURL) {
+        let matching = pureHrefToFaviconDataURLsMap.darkIcons[faviconHrefs.darkIconHref];
+        if (!matching) {
+          matching = { iconDataURL: darkIconDataURL, associatedAnchors: [] };
+          pureHrefToFaviconDataURLsMap.darkIcons[faviconHrefs.darkIconHref] = matching;
+        }
+        matching.associatedAnchors.push(collectedHref);
+      }
+    }
+  }
+
   return {
     props: {
       mdxParseResult,
-      hrefToFaviconsMap: schema_hrefToFaviconsMap.parse(JSON.parse(hrefToFaviconsMapString)),
+      pureHrefToFaviconDataURLsMap,
     },
   };
 };
