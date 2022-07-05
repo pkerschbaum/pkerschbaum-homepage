@@ -1,9 +1,9 @@
 import * as React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { Favicon } from '~/components/favicon';
 import { config } from '~/config';
-import { DataAttribute, IsScrolled } from '~/constants';
+import { Animations, DataAttribute, IsScrolled } from '~/constants';
 import { Anchor } from '~/elements';
 
 export const Nav: React.FC = () => {
@@ -50,37 +50,6 @@ const NavAnchor = styled(Anchor)`
   }
 `;
 
-const slideLeft = keyframes`
-  0% {
-    transform: translateX(0%);
-  }
-  50% {
-    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-  }
-  50.1% {
-    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-    display: none;
-  }
-  100% {
-    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-    display: none;
-  }
-`;
-const slideRight = keyframes`
-  0% {
-    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-    display: none;
-  }
-  0.1% {
-    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-  }
-  50% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-`;
 const NavHomeAnchor = styled(NavAnchor)`
   display: grid;
   grid-template: 'container';
@@ -100,7 +69,7 @@ const NavHomeAnchor = styled(NavAnchor)`
   & > * {
     grid-area: container;
 
-    animation-name: ${slideRight};
+    animation-name: ${Animations.SLIDE_RIGHT};
     animation-duration: var(--animation-duration);
     animation-fill-mode: both;
   }
@@ -108,7 +77,7 @@ const NavHomeAnchor = styled(NavAnchor)`
 
 const NavHomeAnchorText = styled.div`
   *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
-    animation-name: ${slideLeft};
+    animation-name: ${Animations.SLIDE_LEFT};
   }
 `;
 
@@ -118,6 +87,6 @@ const NavHomeAnchorLogo = styled.div`
   align-items: center;
 
   *:root:not([${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}']) & {
-    animation-name: ${slideLeft};
+    animation-name: ${Animations.SLIDE_LEFT};
   }
 `;

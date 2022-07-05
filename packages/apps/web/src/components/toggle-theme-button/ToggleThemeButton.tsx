@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-import { Classes, ColorTheme, DataAttribute } from '~/constants';
+import { Animations, Classes, ColorTheme, DataAttribute } from '~/constants';
 import { useColorTheme } from '~/context/color-theme';
 import { IconButton } from '~/elements/IconButton';
 
@@ -33,12 +33,6 @@ const ToggleThemeIconButton = styled(IconButton)`
   }
 `;
 
-const hideAnimation = keyframes`
-  to {
-    display: none;
-  }
-`;
-
 const AnimatedMoon = styled(Moon)`
   transition: transform var(--transition-duration);
 
@@ -46,7 +40,7 @@ const AnimatedMoon = styled(Moon)`
     /* hide */
     transform: translateY(var(--transition-translatey-distance));
 
-    animation-name: ${hideAnimation};
+    animation-name: ${Animations.HIDE};
     animation-duration: 0ms;
     animation-delay: var(--transition-duration);
     animation-fill-mode: forwards;
@@ -60,7 +54,7 @@ const AnimatedSun = styled(Sun)`
     /* hide */
     transform: translateY(calc(-1 * var(--transition-translatey-distance)));
 
-    animation-name: ${hideAnimation};
+    animation-name: ${Animations.HIDE};
     animation-duration: 0ms;
     animation-delay: var(--transition-duration);
     animation-fill-mode: forwards;

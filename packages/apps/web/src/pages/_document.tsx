@@ -2,7 +2,15 @@ import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'ne
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
-import { Classes, ColorTheme, DataAttribute, IsScrolled, LocalStorageKey } from '~/constants';
+import {
+  Animations,
+  Classes,
+  ColorTheme,
+  DataAttribute,
+  IsAnimationEnabled,
+  IsScrolled,
+  LocalStorageKey,
+} from '~/constants';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: Parameters<typeof Document.getInitialProps>[0]) {
@@ -38,6 +46,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <style
+            type="text/css"
             dangerouslySetInnerHTML={{
               __html: `
                 @font-face {
@@ -79,10 +88,68 @@ export default class MyDocument extends Document {
 
           {/* Plausible analytics */}
           <script defer data-domain="pkerschbaum.com" src="https://plausible.io/js/plausible.js" />
+
+          <style
+            type="text/css"
+            dangerouslySetInnerHTML={{
+              __html: `
+              *:root:not([${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}']) * {
+                /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+              }
+            
+              *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] a,
+              *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] svg * {
+                transition: color 150ms, fill 150ms;
+              }
+
+              @keyframes ${Animations.HIDE} {
+                to {
+                  display: none;
+                }
+              }
+
+              @keyframes ${Animations.SLIDE_LEFT} {
+                0% {
+                  transform: translateX(0%);
+                }
+                50% {
+                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                }
+                50.1% {
+                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                  display: none;
+                }
+                100% {
+                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                  display: none;
+                }
+              }
+              
+              @keyframes ${Animations.SLIDE_RIGHT} {
+                0% {
+                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                  display: none;
+                }
+                0.1% {
+                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                }
+                50% {
+                  transform: translateX(0%);
+                }
+                100% {
+                  transform: translateX(0%);
+                }
+              }
+              `,
+            }}
+          />
         </Head>
         <body>
-          <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme.toString() }} />
-          <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled.toString() }} />
+          <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme }} />
+          <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled }} />
           <Main />
           <NextScript />
         </body>

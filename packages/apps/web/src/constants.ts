@@ -20,6 +20,7 @@ export const QUERIES = {
 export enum DataAttribute {
   THEME = 'data-theme',
   IS_SCROLLED = 'data-is-scrolled',
+  IS_ANIMATION_ENABLED = 'data-is-animation-enabled',
 }
 
 export enum LocalStorageKey {
@@ -36,6 +37,17 @@ export enum IsScrolled {
   NO = 'no',
 }
 
+export enum IsAnimationEnabled {
+  YES = 'yes',
+  NO = 'no',
+}
+
 export enum Classes {
   JS_REQUIRED = 'js-required',
+}
+
+export enum Animations {
+  HIDE = 'hide',
+  SLIDE_LEFT = 'slide-left',
+  SLIDE_RIGHT = 'slide-right',
 }
