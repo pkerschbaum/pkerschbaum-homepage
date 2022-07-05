@@ -287,6 +287,7 @@ importers:
       eslint-plugin-regexp: ^1.7.0
       mdx-bundler: ^9.0.1
       prettier: ^2.7.1
+      refractor: ^4.7.0
       rehype-prism-plus: ^1.4.1
       rimraf: ^3.0.2
       tiny-invariant: ^1.2.0
@@ -300,6 +301,7 @@ importers:
       '@types/mdast': 3.0.10
       esbuild: 0.14.48
       mdx-bundler: 9.0.1_esbuild@0.14.48
+      refractor: 4.7.0
       rehype-prism-plus: 1.4.1
       tiny-invariant: 1.2.0
       unist-util-visit: 4.1.0

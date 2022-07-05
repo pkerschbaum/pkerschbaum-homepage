@@ -77,6 +77,7 @@ export const PrismStyles = styled.createGlobalStyle`
       color: #d73a49;
     }
     .token.class-name,
+    .token.type-class-name,
     .token.namespace {
       color: #6f42c1;
     }
@@ -163,9 +164,13 @@ export const PrismStyles = styled.createGlobalStyle`
 
     .token.atrule,
     .token.attr-value,
-    .token.function,
-    .token.class-name {
+    .token.function {
       color: #88c0d0;
+    }
+
+    .token.class-name,
+    .token.type-class-name {
+      color: #8fbcbb;
     }
 
     .token.keyword {

@@ -1,10 +1,9 @@
 import fs from 'fs';
 import { bundleMDX } from 'mdx-bundler';
 import path from 'path';
-// @ts-expect-error
-import rehypePrism from 'rehype-prism-plus';
 
 import { createCollectHrefsFromJsxElementsPlugin } from '~/plugins.js';
+import { myPrismPlugin } from '~/prism/lang-prisma.js';
 import { MDXParseResult, schema_frontmatterData } from '~/schema.js';
 
 export async function parseMDXFileAndCollectHrefs(
@@ -22,7 +21,7 @@ export async function parseMDXFileAndCollectHrefs(
         ...(options.remarkPlugins ?? []),
         createCollectHrefsFromJsxElementsPlugin({ hrefs: collectedHrefs }),
       ];
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism];
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), myPrismPlugin];
 
       return options;
     },
