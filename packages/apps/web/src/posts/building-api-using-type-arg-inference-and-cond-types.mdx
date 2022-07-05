@@ -359,4 +359,4 @@ export type UserGetPayload<
 
 Turns out that these type definitions do all sorts of analysis and type mapping.
 Still, you can see some similarities to our solution. It also inspects `include` and, if it is present and contains `orgUnit`, goes on with `OrgUnitGetPayload` (which contains, amongst other things, the properties for the `OrgUnit` model).  
-If you are curious, you can clone <FancyAnchor href="https://github.com/pkerschbaum/blog-building-a-prisma-like-api_example/tree/main/prisma/lib/prisma-client">this repository I made</FancyAnchor> and dig through `index.d.ts`, the type definitions of Prisma Client (generated based on the schema we worked on in this blog post).
+If you are curious, you can clone <FancyAnchor href="https://github.com/pkerschbaum/building-api-using-type-arg-inference-and-cond-types_example/tree/main/prisma/lib/prisma-client">this repository I made</FancyAnchor> and dig through `index.d.ts`, the type definitions of Prisma Client (generated based on the schema we worked on in this blog post).
