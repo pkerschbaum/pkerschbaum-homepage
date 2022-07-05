@@ -117,7 +117,7 @@ export const PrismStyles = styled.createGlobalStyle`
     .token.prolog,
     .token.doctype,
     .token.cdata {
-      color: #636f88;
+      color: #8d97ab; /* <-- using something between "nord3" and "nord4" for comments (nord3 is roughly readable, and nord4 is already in use for plain text) */
     }
 
     .token.punctuation {

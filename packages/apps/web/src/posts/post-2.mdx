@@ -1,10 +1,306 @@
 ---
-title: Building a Prisma-like API using Generics and Type Argument Inference
+title: Building a Prisma-like API using Type Argument Inference and Conditional Types
 published: false
-publishedAtISO: '2022-07-01T18:00:00.000Z'
+publishedAtISO: '2022-07-05T18:00:00.000Z'
 description: A lesson on how to adapt the result type of a function call based on the actual arguments given.
 shortenedURL: TODO
 tags: ['TODO']
 ---
 
-- Attempt #1: "lowest common denominator" ("orgUnit" optional typed)
+You might know <FancyAnchor href="https://prisma.io">Prisma</FancyAnchor>, a collection of products which help to work with databases.  
+In a nutshell, you give Prisma a database schema and what you get is a bunch of tools to work with your database.
+
+One of these tools is <FancyAnchor href="https://www.prisma.io/client">Prisma Client</FancyAnchor>, an "intuitive database client for TypeScript and Node.js", as they state it.  
+The first time I used Prisma Client, there was something that immediately caught my attention: the way the result type of some APIs react to the input you feed them in.
+
+## A short example using Prisma Client
+
+Imagine we have this simple schema consisting of two models, `User` and `OrgUnit`.  
+Those entities have a 1:n relationship, so a `User` is assigned to one `OrgUnit`:
+
+```prisma
+model User {
+  id    Int
+  email String
+
+  orgUnit OrgUnit
+}
+
+model OrgUnit {
+  id   Int
+  name String
+}
+```
+
+The Prisma Client generated from that schema will allow you to query a `User` by ID.  
+The interesting thing is that when doing so, you can include its `OrgUnit`, and **that will change the return type of the function call**:
+
+```typescript
+const user = await prisma.user.findUniqueOrThrow({
+  where: { id: 1 },
+});
+
+/*
+  Type of the returned `user` contains the fields of the schema model `User` - not more:
+    {
+      id: number;
+      email: string;
+    }
+ */
+
+const user = await prisma.user.findUniqueOrThrow({
+  where: { id: 1 },
+  include: { orgUnit: true }, // <-- including the `orgUnit` here
+});
+
+/*
+  Type of the returned `user` now includes the `orgUnit` with its properties!
+    {
+      id: number;
+      email: string;
+    } & {
+      orgUnit: {
+        id: number;
+        name: string;
+      };
+    }
+ */
+```
+
+The main thing to note here is that
+
+- only when `include: { orgUnit: true }` is added to the **function argument**
+- `orgUnit` with all of its properties will be present in the **return type**.
+
+This can get pretty wild; Prisma allows you to nest such `include`'s, so you can perform "deep" reads from your database, with multiple layers of joins.  
+Also, you can use `select` to get only a subset of the properties of the `OrgUnit`.  
+And all the time the result type will reflect _exactly_ what you will get from the database!
+
+```typescript
+const user = await prisma.user.findUniqueOrThrow({
+  where: { id: 1 },
+  include: {
+    orgUnit: {
+      // still including `orgUnit`...
+      select: { name: true }, // ...but only select `name` here
+    },
+  },
+});
+
+/*
+  Type of the returned `user` is:
+    {
+      id: number;
+      email: string;
+    } & {
+      orgUnit: {
+        name: string; // <-- no `id` here anymore!
+      };
+    }
+ */
+```
+
+To be clear, this is not simple generics going on here; Prisma is actively analyzing the function argument and adapting the shape of the return type based on that.
+
+**The goal of this blog post is to understand the main idea about how that works.**  
+As you will see, it boils down to
+
+1. Capturing the type of the actual argument with a generic variable.
+1. Passing that generic variable to the result type.
+1. Introspecting the generic variable to adapt the result type accordingly.
+
+We will now build our own version of `findUniqueOrThrow` demonstrating this concept!  
+We will only focus on changing the return type depending on whether `include` is given or not.
+
+## Our first draft: the "least common denominator" approach
+
+Imagine we have to build the type definition for `findUniqueOrThrow` from scratch.  
+A good start is to type it such that `orgUnit` is optional in the return type:
+
+{/* prettier-ignore */}
+```typescript
+function findUniqueOrThrow(args: FindArgs): Promise<FindResult>;
+
+type FindArgs = {
+  where: { id: number };
+  include?: { orgUnit?: boolean };
+};
+
+type FindResult = {
+  id: number;
+  email: string;
+  orgUnit?: { // <-- typed as optional
+    id: number;
+    name: string;
+  };
+};
+```
+
+This is what I would call the "least common denominator" approach: The property `orgUnit` _can_, but _might not_ be returned, and to represent both these scenarios, this property is optional in `FindResult`.
+
+The downside of this approach is that whenever we use that function, we have to check for `orgUnit` to be present:
+
+```typescript
+const userWithOrgUnit = findUniqueOrThrow({
+  where: { id: 1 },
+  include: { orgUnit: true },
+});
+
+/*
+ * We know that `orgUnit` is present here because we included it.
+ * But the type does not reflect that - the type of `orgUnit` has `undefined` included.
+ * That's why TypeScript will throw an error if we try to access properties of `orgUnit` here.
+ * Very annoying...
+ *
+ * To avoid type errors, we must handle `orgUnit` being `undefined` in some way.
+ */
+if (!userWithOrgUnit.orgUnit) {
+  throw new Error('should not happen');
+}
+// From here on TypeScript will know that accessing properties of `orgUnit` is safe
+```
+
+We will now incrementally improve on that draft.
+
+## Using Type Argument Inference and Conditional Types to improve the typing
+
+The first step is easy: change the function signature from this...
+
+```typescript
+function findUniqueOrThrow(args: FindArgs): Promise<FindResult>;
+```
+
+...to this:
+
+```typescript
+function findUniqueOrThrow<T extends FindArgs>(args: T): Promise<FindResult>;
+```
+
+At this point, the new generic variable `T` does not really change much.  
+Still, there is one important consequence: When calling `findUniqueOrThrow` without specifying `T` explicitly, TypeScript will apply something called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/generics.html#hello-world-of-generics">type argument inference</FancyAnchor>_.
+It will infer `T` from the function parameter `args`.  
+And that inference will **capture the concrete shape of the actual argument** given! That means whether `include` is present in the function argument will be reflected in the type `T`.
+
+The second step is to pass `T` to the result type. Change this...
+
+{/* prettier-ignore */}
+```typescript
+function findUniqueOrThrow<T extends FindArgs>(
+  args: T
+): Promise<FindResult>;
+
+type FindResult = {
+  id: number;
+  email: string;
+  orgUnit?: {
+    id: number;
+    name: string;
+  };
+};
+```
+
+...to this:
+
+{/* prettier-ignore */}
+```typescript
+function findUniqueOrThrow<T extends FindArgs>(
+  args: T
+): Promise<FindResult<T>>; // <-- we pass `T` to `FindResult` here
+
+type FindResult<T extends FindArgs> = { // <-- `FindResult` now also takes `T` as does `findUniqueOrThrow`
+  id: number;
+  email: string;
+  orgUnit?: {
+    id: number;
+    name: string;
+  };
+};
+```
+
+At this point, `T` is available in the result type `FindResult` but not used yet.
+
+As a final step, we have to introspect `T` and check whether it contains `include: { orgUnit: true }`.
+
+- If it does, we add the property `orgUnit` to the result type.
+- If not, we do not add anything.
+
+We can achieve this goal with a typescript feature called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">Conditional Types</FancyAnchor>_.
+Conditional types allow us to ask the question "is type `A` assignable to type `B`?" and then continue with one of two branches, whether the answer is "yes" or "no", respectively.
+
+Let's change `FindResult` to this:
+
+```typescript
+type FindResult<T extends UserFindUniqueArgs> = {
+  id: number;
+  email: string;
+} & (T extends { include: { orgUnit: true } }
+  ? {
+      orgUnit: {
+        id: number;
+        name: string;
+      };
+    }
+  : {});
+```
+
+What does this type do?
+We start with including `{ id: number; email: string }` in the result type, because these are the properties of the `User` model, and those properties will be returned for sure.  
+It is followed by an ampersand `&` which, in TypeScript, constructs a so-called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types">Intersection Type</FancyAnchor>_.  
+An intersection type just allows you to add something to an existing type.
+
+But what do we add?
+Well, we want to add the property `orgUnit` (with its fields) but _only if the org unit was included in the original function call_.  
+The conditional type `T extends { include: { orgUnit: true } }` does exactly that. Remember, `T` captures _the actual type_ of the function call, and the conditional type checks if `T` is assignable to `{ include: { orgUnit: true } }`.  
+Essentially, we are asking "was the function invoked with an argument containing `{ include: { orgUnit: true } }`?" If the answer is "yes", we add the property `orgUnit` to the result type.  
+Otherwise, we add an empty object - which does not change anything of the result type.
+
+...and that's it! `findUniqueOrThrow` will now react to the actual argument given, just like Prisma Client does!
+
+## One last thing: a glance at the types of Prisma Client
+
+Now that we have learned how all of this works, we can for sure understand the actual types Prisma Client uses!  
+It cannot be that complicated, right?
+
+Well...😅
+
+```typescript
+function findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
+  args?: SelectSubset<T, UserFindUniqueOrThrowArgs>,
+): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>;
+```
+
+That's a whole bunch of types!
+
+Turns out that `UserGetPayload` - the equivalent of our `FindResult` type - is also far more complicated than our type...
+
+```typescript
+export type UserGetPayload<
+  S extends boolean | null | undefined | UserArgs,
+  U = keyof S,
+> = S extends true
+  ? User
+  : S extends undefined
+  ? never
+  : S extends UserArgs | UserFindManyArgs
+  ? 'include' extends U
+    ? User & {
+        [P in TrueKeys<S['include']>]: P extends 'orgUnit'
+          ? OrgUnitGetPayload<S['include'][P]>
+          : never;
+      }
+    : 'select' extends U
+    ? {
+        [P in TrueKeys<S['select']>]: P extends 'orgUnit'
+          ? OrgUnitGetPayload<S['select'][P]>
+          : P extends keyof User
+          ? User[P]
+          : never;
+      }
+    : User
+  : User;
+```
+
+Turns out that these type definitions do all sorts of analysis and type mapping.
+Still, you can see some similarities to our solution. It also inspects `include` and, if it is present and contains `orgUnit`, goes on with `OrgUnitGetPayload`, which has the fields for the `OrgUnit` model.
+
+The main concept remains: capture the actual argument in a generic variable, and use conditional types to adapt based on that variable!

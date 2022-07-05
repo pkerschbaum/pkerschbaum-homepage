@@ -192,6 +192,7 @@ export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps
   }
 
   *:not(pre) > code {
+    font-size: 0.9em;
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
     border-radius: 4px;
     background-color: var(--color-bg-emphasized);
