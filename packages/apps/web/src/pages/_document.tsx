@@ -41,18 +41,18 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
                 @font-face {
-                  font-family: 'CascadiaCodeVariable';
+                  font-family: 'CascadiaMonoVariable';
                   font-style: normal;
                   font-display: swap;
                   font-weight: 200 700;
-                  src: url(/fonts/CascadiaCode.woff2) format('woff2');
+                  src: url(/fonts/CascadiaMono.woff2) format('woff2');
                 }
                 @font-face {
-                  font-family: 'CascadiaCodeVariable';
+                  font-family: 'CascadiaMonoVariable';
                   font-style: italic;
                   font-display: swap;
                   font-weight: 200 700;
-                  src: url(/fonts/CascadiaCodeItalic.woff2) format('woff2');
+                  src: url(/fonts/CascadiaMonoItalic.woff2) format('woff2');
                 }
               `,
             }}
