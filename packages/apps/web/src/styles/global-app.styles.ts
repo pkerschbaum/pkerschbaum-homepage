@@ -1,30 +1,8 @@
 import * as styled from 'styled-components';
-import { css } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '~/constants';
 
-type StyleProps = {
-  disableAnimations: boolean;
-};
-
-export const GlobalAppStyles = styled.createGlobalStyle<{ styleProps: StyleProps }>`
-  ${(props) =>
-    props.styleProps.disableAnimations
-      ? css`
-          /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
-          * {
-            animation-duration: 0ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0ms !important;
-          }
-        `
-      : css`
-          a,
-          svg * {
-            transition: color 150ms, fill 150ms;
-          }
-        `}
-
+export const GlobalAppStyles = styled.createGlobalStyle`
   /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */
   *:root {
     --color-thumb: var(--color-fg-less-emphasized);

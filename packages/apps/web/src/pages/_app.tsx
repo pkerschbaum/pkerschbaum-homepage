@@ -18,11 +18,9 @@ import { ColorThemeProvider } from '~/context/color-theme';
 import { CSSReset } from '~/styles/css-reset.styles';
 import { GlobalAppStyles } from '~/styles/global-app.styles';
 import { PrismStyles } from '~/styles/prism.styles';
-import { useIsMounted } from '~/utils/react.utils';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
-  const isMounted = useIsMounted();
 
   let pageUrl = config.deploymentOrigin;
   pageUrl = new URL(router.basePath, pageUrl);
@@ -48,7 +46,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <ColorThemeProvider>
         <CSSReset />
         <PrismStyles />
-        <GlobalAppStyles styleProps={{ disableAnimations: !isMounted }} />
+        <GlobalAppStyles />
 
         <RootContainer>
           <Header>

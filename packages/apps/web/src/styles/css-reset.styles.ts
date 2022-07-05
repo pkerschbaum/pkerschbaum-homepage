@@ -1,6 +1,6 @@
-import { createGlobalStyle, css } from 'styled-components';
+import * as styled from 'styled-components';
 
-const cssReset = css`
+export const CSSReset = styled.createGlobalStyle`
   /* based on https://www.joshwcomeau.com/css/custom-css-reset/ */
 
   /*
@@ -81,8 +81,4 @@ const cssReset = css`
   #__next {
     isolation: isolate;
   }
-`;
-
-export const CSSReset = createGlobalStyle`
-  ${cssReset}
 `;
