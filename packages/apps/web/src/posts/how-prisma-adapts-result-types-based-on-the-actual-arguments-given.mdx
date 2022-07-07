@@ -1,10 +1,10 @@
 ---
-title: Building a Prisma-like API using Type Argument Inference and Conditional Types
+title: How Prisma adapts Result Types based on the Actual Arguments given
 published: true
-publishedAtISO: '2022-07-05T21:00:00.000Z'
-description: A lesson on how to adapt the result type of a function call based on the actual arguments given.
-shortenedURL: building-api-using-type-arg-inference-and-cond-types
-tags: ['typescript', 'generics', 'conditionaltypes', 'webdev']
+publishedAtISO: '2022-07-07T16:00:00.000Z'
+description: A lesson on how to achieve fine-grained TypeScript results by combining generics with conditional types.
+shortenedURL: how-prisma-adapts-result-types-based-on-the-actual-arguments-given
+tags: ['typescript', 'prisma', 'generics', 'conditionaltypes', 'webdev']
 ---
 
 You might know <FancyAnchor href="https://prisma.io">Prisma</FancyAnchor>, a collection of products which help to work with databases.  
@@ -100,9 +100,9 @@ const user = await prisma.user.findUniqueOrThrow({
  */
 ```
 
-To be clear, this is not simple generics going on here; Prisma is actively analyzing the function argument and adapting the shape of the return type based on that.
+Prisma is actively analyzing the function argument and adapting the shape of the return type based on that.
 
-**The goal of this blog post is to understand the main idea about how that works.**  
+**The goal of this blog post is to understand the main concept of how to achieve such behavior.**  
 As you will see, it boils down to
 
 1. Capturing the type of the actual argument with a generic variable.
@@ -110,7 +110,7 @@ As you will see, it boils down to
 1. Introspecting the generic variable to adapt the result type accordingly.
 
 We will now build our own version of `findUniqueOrThrow` demonstrating this concept!
-We will only focus on changing the return type depending on whether `include` is given or not.
+For the sake of simplicity, we will only focus on changing the return type depending on whether `include` is given or not.
 
 ## Our first draft: the "least common denominator" approach
 
@@ -160,9 +160,10 @@ if (!userWithOrgUnit.orgUnit) {
 // From here on TypeScript will know that accessing properties of `orgUnit` is safe
 ```
 
-We will now incrementally improve that draft.
+Let's now improve that draft step by step.  
+I will use inline comments to highlight what we change.
 
-## Using Type Argument Inference and Conditional Types to improve the typing
+## Adding generics and conditional types
 
 The first step is easy: change the function signature from this...
 
@@ -227,10 +228,10 @@ As a final step, we have to introspect `T` and check whether it contains `includ
 - If it does, we add the property `orgUnit` to the result type.
 - If not, we do not add anything.
 
-We can achieve this goal with a typescript feature called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">Conditional Types</FancyAnchor>_.
+We can achieve this with a typescript feature called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">Conditional Types</FancyAnchor>_.
 Conditional types allow us to ask the question "is type `A` assignable to type `B`?" and then continue with one of two branches, whether the answer is "yes" or "no", respectively.
 
-Let's change `FindResult` to this:
+Let's apply conditional types. Change `FindResult` to this:
 
 ```typescript
 type FindResult<T extends UserFindUniqueArgs> = {
@@ -248,12 +249,12 @@ type FindResult<T extends UserFindUniqueArgs> = {
 
 We start with including `{ id: number; email: string }` in the result type, because these are the properties of the `User` model, and those properties will be returned for sure.  
 It is followed by an ampersand `&` which, in TypeScript, constructs a so-called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types">Intersection Type</FancyAnchor>_.  
-An intersection type just allows you to add something to an existing type.
+Intersection types all to add some stuff to existing types.
 
 But what do we add?
 Well, we want to add the property `orgUnit` (with its fields) but _only if the org unit was included in the original function call_.  
-The conditional type `T extends { include: { orgUnit: true } }` does exactly that. Remember, `T` captures _the actual type_ of the function call, and the conditional type checks if `T` is assignable to `{ include: { orgUnit: true } }`.  
-Essentially, we are asking "was the function invoked with an argument containing `{ include: { orgUnit: true } }`?" If the answer is "yes", we add the property `orgUnit` to the result type.  
+The conditional type in the code block above does exactly that. Remember, `T` captures _the actual type_ of the function call, and the conditional type checks if `T` is assignable to `{ include: { orgUnit: true } }`.  
+Essentially, what we are asking is: "Was the function invoked with an argument containing `{ include: { orgUnit: true } }`?" If the answer is "yes", we add the property `orgUnit` to the result type.  
 Otherwise, we add an empty object - which does not change anything of the result type.
 
 ...and that's it! We built our own version of `findUniqueOrThrow` which will react to the actual argument given, just like Prisma Client does!
@@ -313,6 +314,12 @@ findUniqueOrThrow({
 
 The error message is not the same, but at least we have an error again.
 
+## But...what should I do with all of that?
+
+I remember situations in which the type of something was `undefined` or `null` and I thought: I _know for sure_ that this thing is defined here, why does TypeScript not know that?  
+There is always the "solution" to just throw a non-null assertion (the exclamation mark `!`) at it, but as a good citizen I try to fix the root cause first.  
+And the concept we learned in this blog post - the combination of generics and conditional types - can be one tool in our toolbelt to improve the typing of APIs, such that we do not have to resort to some of those nasty quick-fixes!
+
 ## Bonus: a glance at the types of Prisma Client
 
 Now that we have learned how all of this works, we can for sure understand the actual types Prisma Client uses!  
@@ -357,6 +364,14 @@ export type UserGetPayload<
   : User;
 ```
 
-Turns out that these type definitions do all sorts of analysis and type mapping.
-Still, you can see some similarities to our solution. It also inspects `include` and, if it is present and contains `orgUnit`, goes on with `OrgUnitGetPayload` (which contains, amongst other things, the properties for the `OrgUnit` model).  
+Turns out that these type definitions do all sorts of analysis and type mapping.  
+Still, you can see some similarities to our solution.
+The biggest difference is that they do everything step by step:
+
+1. Extract the keys of `S` in `U`.
+1. Check if `include` is in `U`.
+1. If so, extract all keys having type `true` of that `include`.
+1. Check if one of those keys is `orgUnit`.
+1. If so, include `OrgUnitGetPayload` in the result type (which contains, amongst other things, the properties for the `OrgUnit` model).
+
 If you are curious, you can clone <FancyAnchor href="https://github.com/pkerschbaum/building-api-using-type-arg-inference-and-cond-types_example/tree/main/prisma/lib/prisma-client">this repository I made</FancyAnchor> and dig through `index.d.ts`, the type definitions of Prisma Client (generated based on the schema we worked on in this blog post).
