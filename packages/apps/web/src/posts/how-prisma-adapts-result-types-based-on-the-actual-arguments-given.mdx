@@ -234,7 +234,7 @@ Conditional types allow us to ask the question "is type `A` assignable to type `
 Let's apply conditional types. Change `FindResult` to this:
 
 ```typescript
-type FindResult<T extends UserFindUniqueArgs> = {
+type FindResult<T extends FindArgs> = {
   id: number;
   email: string;
 } & (T extends { include: { orgUnit: true } }
@@ -249,7 +249,7 @@ type FindResult<T extends UserFindUniqueArgs> = {
 
 We start with including `{ id: number; email: string }` in the result type, because these are the properties of the `User` model, and those properties will be returned for sure.  
 It is followed by an ampersand `&` which, in TypeScript, constructs a so-called _<FancyAnchor href="https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types">Intersection Type</FancyAnchor>_.  
-Intersection types all to add some stuff to existing types.
+Intersection types allow to add some stuff to existing types.
 
 But what do we add?
 Well, we want to add the property `orgUnit` (with its fields) but _only if the org unit was included in the original function call_.  
@@ -316,9 +316,9 @@ The error message is not the same, but at least we have an error again.
 
 ## But...what should I do with all of that?
 
-I remember situations in which the type of something was `undefined` or `null` and I thought: I _know for sure_ that this thing is defined here, why does TypeScript not know that?  
+I remember situations in which the type of something was `undefined` or `null` and I thought: I know _for sure_ that this thing is defined here, why does TypeScript not know that?  
 There is always the "solution" to just throw a non-null assertion (the exclamation mark `!`) at it, but as a good citizen I try to fix the root cause first.  
-And the concept we learned in this blog post - the combination of generics and conditional types - can be one tool in our toolbelt to improve the typing of APIs, such that we do not have to resort to some of those nasty quick-fixes!
+And the concept we learned in this blog post - the combination of generics and conditional types - can be one tool in our toolbelt to improve the typing of APIs, such that we do not have to resort to any of those nasty quick-fixes!
 
 ## Bonus: a glance at the types of Prisma Client
 
@@ -366,7 +366,7 @@ export type UserGetPayload<
 
 Turns out that these type definitions do all sorts of analysis and type mapping.  
 Still, you can see some similarities to our solution.
-The biggest difference is that they do everything step by step:
+The biggest difference is that Prisma Client does everything step by step:
 
 1. Extract the keys of `S` in `U`.
 1. Check if `include` is in `U`.
