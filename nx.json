@@ -1,0 +1,40 @@
+{
+  "affected": {
+    "defaultBase": "master"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "compile", "lint", "lint:fix"]
+      }
+    }
+  },
+  "namedInputs": {
+    "sources": ["{projectRoot}/src/**/*"],
+    "tsbuildinfo": ["{projectRoot}/tsconfig.tsbuildinfo"],
+    "outputs": ["{projectRoot}/dist/**/*"]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "outputs": ["{projectRoot}/dist/**/*"],
+      "dependsOn": ["^build"]
+    },
+    "compile": {
+      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "outputs": [],
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "outputs": [],
+      "dependsOn": ["^build"]
+    },
+    "lint:fix": {
+      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "outputs": ["{projectRoot}/src/**/*"],
+      "dependsOn": ["^build"]
+    }
+  }
+}

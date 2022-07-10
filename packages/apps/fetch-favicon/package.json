@@ -26,6 +26,14 @@
     "compile": "tsc --noEmit",
     "compile:watch": "pnpm run compile --watch"
   },
+  "nx": {
+    "namedInputs": {
+      "sources": [
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/../../apps/web/src/posts/**/*"
+      ]
+    }
+  },
   "dependencies": {
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
     "@pkerschbaum-homepage/commons-node": "workspace:1.0.0",

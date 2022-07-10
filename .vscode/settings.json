@@ -4,6 +4,5 @@
   "search.exclude": {
     "**/dist": true,
     "**/build": true,
-    "**/.next": true
   }
 }
