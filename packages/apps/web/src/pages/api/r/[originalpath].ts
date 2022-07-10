@@ -1,14 +1,15 @@
-import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { POSTS_PATH } from '~/constants';
+import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
+import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
+
 import { getAllMarkdownFiles } from '~/mdx';
 
 async function loadURLsOfBlogPosts() {
   const redirectMap: { [shortenedPath: string]: string } = {
     'playwright-api-test-coverage': '/blog/playwright-api-test-coverage-redirected',
   };
-  const posts = await getAllMarkdownFiles(POSTS_PATH);
+  const posts = await getAllMarkdownFiles(PATHS.POSTS);
 
   for (const post of posts) {
     redirectMap[post.frontmatter.shortenedURL] = `/blog/${post.segment}`;

@@ -1,11 +1,12 @@
-import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 import type { GetStaticProps } from 'next';
 import type React from 'react';
+
+import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
+import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
 
 import { BlogOverview } from '~/components/blog-overview';
 import { Main } from '~/components/main';
 import { MetadataTags } from '~/components/metadata-tags';
-import { POSTS_PATH } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
 type BlogOverviewPageProps = {
@@ -27,7 +28,7 @@ const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps<BlogOverviewPageProps> = async () => {
-  const posts = await getAllMarkdownFiles(POSTS_PATH);
+  const posts = await getAllMarkdownFiles(PATHS.POSTS);
 
   return {
     props: { posts },

@@ -1,6 +1,5 @@
 import path from 'path';
 
-export const POSTS_PATH = path.join(process.cwd(), 'src', 'posts');
 const PUBLIC_DIR_PATH = path.join(process.cwd(), 'public');
 export const RSS_FEED_XML_SLUG = 'rss.xml';
 export const RSS_FEED_JSON_SLUG = 'rss.json';

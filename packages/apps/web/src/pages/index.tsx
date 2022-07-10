@@ -1,9 +1,11 @@
-import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 import { Feed } from 'feed';
 import fs from 'fs';
 import type { GetStaticProps } from 'next';
 import * as React from 'react';
 import styled from 'styled-components';
+
+import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
+import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
 
 import { BlogOverview } from '~/components/blog-overview';
 import { Introduction } from '~/components/introduction';
@@ -12,7 +14,6 @@ import { MetadataTags } from '~/components/metadata-tags';
 import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
 import { config } from '~/config';
 import {
-  POSTS_PATH,
   RSS_FEED_JSON_PATH,
   RSS_FEED_JSON_SLUG,
   RSS_FEED_XML_PATH,
@@ -68,7 +69,7 @@ const SectionHeading = styled.h2`
 `;
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const posts = await getAllMarkdownFiles(POSTS_PATH);
+  const posts = await getAllMarkdownFiles(PATHS.POSTS);
 
   await generateAndStoreRssFeed(posts);
 

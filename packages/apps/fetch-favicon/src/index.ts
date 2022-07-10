@@ -1,19 +1,20 @@
+import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
+import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
+import { PATHS as PROJECT_PATHS } from '@pkerschbaum-homepage/shared-node/constants';
+import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
+import { arrays, check } from '@pkerschbaum/ts-utils';
 import fs from 'fs';
 import puppeteer from 'puppeteer';
 // @ts-expect-error -- safe-stable-stringify does not provide typings for its esm wrapper...
 import safeStringify from 'safe-stable-stringify';
-
-import { fetchFaviconURLs } from '~/favicon.js';
-import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
-import { arrays, check } from '@pkerschbaum/ts-utils';
-import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
-import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
-import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 import { default as invariant } from 'tiny-invariant';
+
+import { PATHS } from '~/constants.js';
+import { fetchFaviconURLs } from '~/favicon.js';
 
 async function fetchFaviconsForAllHrefsAndWriteToFile() {
   // Preparation: fetch list of posts and start browser
-  let fileNamesOfPosts = await fs.promises.readdir(PATHS.POSTS);
+  let fileNamesOfPosts = await fs.promises.readdir(PROJECT_PATHS.POSTS);
   fileNamesOfPosts = fileNamesOfPosts.filter((path) => path.endsWith('.mdx'));
 
   const browser = await initializeBrowserInstance();
@@ -22,7 +23,10 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
   let hrefsOfAllPosts: string[] = [];
   await Promise.all(
     fileNamesOfPosts.map(async (fileNameOfPost) => {
-      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(PATHS.POSTS, fileNameOfPost);
+      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(
+        PROJECT_PATHS.POSTS,
+        fileNameOfPost,
+      );
       hrefsOfAllPosts.push(...collectedHrefs);
     }),
   );
@@ -69,9 +73,12 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
     websites,
     icons,
   };
-  await fs.promises.writeFile(PATHS.FAVICONS_FOR_WEBSITES, safeStringify(finalResult, null, 2), {
-    encoding: 'utf-8',
-  });
+  await fs.promises.writeFile(
+    PATHS.FAVICONS_FOR_WEBSITES,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
+    safeStringify(finalResult, null, 2),
+    { encoding: 'utf-8' },
+  );
 }
 
 async function initializeBrowserInstance() {

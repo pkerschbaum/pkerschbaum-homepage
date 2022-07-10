@@ -1,7 +1,8 @@
-import { MDXFile, schema_frontmatterData } from '@pkerschbaum-homepage/mdx/schema';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+
+import { MDXFile, schema_frontmatterData } from '@pkerschbaum-homepage/mdx/schema';
 
 export { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 export type { MDXParseResult } from '@pkerschbaum-homepage/mdx/schema';

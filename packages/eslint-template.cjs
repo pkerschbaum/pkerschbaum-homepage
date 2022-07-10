@@ -80,6 +80,11 @@ module.exports = {
         groups: [['builtin', 'external'], ['parent', 'sibling'], 'index'],
         pathGroups: [
           {
+            pattern: '@pkerschbaum-homepage/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
             pattern: '~/**',
             group: 'parent',
           },
