@@ -35,17 +35,16 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
 
   // Step #2: Use puppeteer to go to every href and fetch the URLs for both its light favicon and dark favicon
   const websites: FaviconsForWebsites['websites'] = {};
-  await Promise.all(
-    hrefsOfAllPosts.map(async (href) => {
-      const faviconURLs = await fetchFaviconURLs(new URL(href), { browser });
-      websites[href] = {
-        iconURLs: {
-          light: faviconURLs.icons.light?.href,
-          dark: faviconURLs.icons.dark?.href,
-        },
-      };
-    }),
-  );
+  for (const href of hrefsOfAllPosts) {
+    // we fetch favicon URLs one after another so that we do not overwhelm the pptr browser instance
+    const faviconURLs = await fetchFaviconURLs(new URL(href), { browser });
+    websites[href] = {
+      iconURLs: {
+        light: faviconURLs.icons.light?.href,
+        dark: faviconURLs.icons.dark?.href,
+      },
+    };
+  }
 
   // Step #3: Gather a list of favicon URLs we need to fetch (with duplicates removed)
   let allIconURLs: URL[] = [];
