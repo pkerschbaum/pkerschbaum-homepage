@@ -1,13 +1,14 @@
+import { arrays, check } from '@pkerschbaum/ts-utils';
+import fs from 'fs';
+import pptr from 'puppeteer';
+// @ts-expect-error -- safe-stable-stringify does not provide typings for its esm wrapper...
+import safeStringify from 'safe-stable-stringify';
+import { default as invariant } from 'tiny-invariant';
+
 import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 import { PATHS as PROJECT_PATHS } from '@pkerschbaum-homepage/shared-node/constants';
 import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
-import { arrays, check } from '@pkerschbaum/ts-utils';
-import fs from 'fs';
-import puppeteer from 'puppeteer';
-// @ts-expect-error -- safe-stable-stringify does not provide typings for its esm wrapper...
-import safeStringify from 'safe-stable-stringify';
-import { default as invariant } from 'tiny-invariant';
 
 import { PATHS } from '~/constants.js';
 import { fetchFaviconURLs } from '~/favicon.js';
@@ -82,12 +83,12 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
 }
 
 async function initializeBrowserInstance() {
-  const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
+  const launchOptions: Parameters<typeof pptr.launch>[0] = {
     headless: true,
     ignoreHTTPSErrors: true,
     args: ['--no-sandbox'],
   };
-  return await puppeteer.launch(launchOptions);
+  return await pptr.launch(launchOptions);
 }
 
 void fetchFaviconsForAllHrefsAndWriteToFile();

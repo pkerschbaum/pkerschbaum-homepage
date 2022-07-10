@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.0",
+    "@next/env": "^12.2.2",
     "@next/eslint-plugin-next": "^12.2.0",
     "@types/node": "^16.11.25",
     "@types/react": "^17.0.39",

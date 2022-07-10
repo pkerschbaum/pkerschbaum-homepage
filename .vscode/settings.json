@@ -3,6 +3,6 @@
   "typescript.tsdk": "./packages/apps/web/node_modules/typescript/lib",
   "search.exclude": {
     "**/dist": true,
-    "**/build": true,
+    "**/build": true
   }
 }

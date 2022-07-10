@@ -1,8 +1,10 @@
+import type * as pptr from 'puppeteer';
+
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 
 const PUPPETEER_NAVIGATION_TIMEOUT = 2 * 60 * 1000; // 2 minutes
 
-type FetchFaviconURLsOptions = { browser: any };
+type FetchFaviconURLsOptions = { browser: pptr.Browser };
 export type FetchFaviconURLsResult = {
   icons: {
     light: undefined | URL;
@@ -29,15 +31,18 @@ export async function fetchFaviconURLs(
   return { icons: { light, dark } };
 }
 
-async function gotoPageAndExtractFaviconURLFromPage(page: any, website: URL) {
+async function gotoPageAndExtractFaviconURLFromPage(page: pptr.Page, website: URL) {
   // Goto given url
-  await page.goto(website, { waitUntil: 'networkidle0', timeout: PUPPETEER_NAVIGATION_TIMEOUT });
+  await page.goto(website.href, {
+    waitUntil: 'networkidle0',
+    timeout: PUPPETEER_NAVIGATION_TIMEOUT,
+  });
 
   // Extract href of icon from html
   const maybeRelativeIconURL = await page
     .$("link[rel='icon']")
-    .then((handle: any) => handle?.getProperty('href'))
-    .then((jsHandle: any) => jsHandle?.jsonValue());
+    .then((handle) => handle?.getProperty('href'))
+    .then((jsHandle) => jsHandle?.jsonValue());
   if (typeof maybeRelativeIconURL !== 'string') {
     logger.warn(`could not fetch icon from website! website.href=${website.href}`);
     return;
