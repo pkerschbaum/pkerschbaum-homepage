@@ -12,27 +12,48 @@
   },
   "namedInputs": {
     "sources": ["{projectRoot}/src/**/*"],
-    "tsbuildinfo": ["{projectRoot}/tsconfig.tsbuildinfo"],
+    "package-files": ["{projectRoot}/package.json"],
+    "tsc-files": ["{projectRoot}/tsconfig.project.json", "{projectRoot}/*.tsbuildinfo"],
     "outputs": ["{projectRoot}/dist/**/*"]
   },
   "targetDefaults": {
     "build": {
-      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "inputs": [
+        "sources",
+        "package-files",
+        "tsc-files",
+        { "input": "outputs", "projects": "dependencies" }
+      ],
       "outputs": ["{projectRoot}/dist/**/*"],
       "dependsOn": ["^build"]
     },
     "compile": {
-      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "inputs": [
+        "sources",
+        "package-files",
+        "tsc-files",
+        { "input": "outputs", "projects": "dependencies" }
+      ],
       "outputs": [],
       "dependsOn": ["^build"]
     },
     "lint": {
-      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "inputs": [
+        "sources",
+        "package-files",
+        "tsc-files",
+        { "input": "outputs", "projects": "dependencies" }
+      ],
       "outputs": [],
       "dependsOn": ["^build"]
     },
     "lint:fix": {
-      "inputs": ["sources", "tsbuildinfo", { "input": "outputs", "projects": "dependencies" }],
+      "inputs": [
+        "sources",
+        "package-files",
+        "tsc-files",
+        { "input": "outputs", "projects": "dependencies" }
+      ],
       "outputs": ["{projectRoot}/src/**/*"],
       "dependsOn": ["^build"]
     }

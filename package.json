@@ -5,7 +5,7 @@
     "prepare": "husky install",
     "mr:nuke": "pnpm run mr:nuke:build && pnpm run mr:nuke:node-modules",
     "mr:nuke:build": "nx run-many --target=nuke:build --all --parallel",
-    "mr:nuke:node-modules": "nx run-many --target=nuke:node-modules --all --parallel && rimraf node_modules",
+    "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
     "mr:lint": "nx run-many --target=lint --all --parallel",
     "mr:lint:fix": "nx run-many --target=lint:fix --all --parallel",
     "mr:format": "prettier --write --ignore-unknown .",

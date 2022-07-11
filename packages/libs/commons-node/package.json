@@ -18,12 +18,11 @@
   "scripts": {
     "postinstall": "ts-patch install -s",
     "nuke": "pnpm run nuke:build && pnpm run nuke:node-modules",
-    "nuke:build": "rimraf dist tsconfig.tsbuildinfo",
-    "nuke:node-modules": "rimraf node_modules",
-    "build": "tsc",
+    "nuke:build": "rimraf dist *.tsbuildinfo",
+    "build": "tsc -p ./tsconfig.project.json",
     "lint": "eslint --max-warnings 0 .",
     "lint:fix": "pnpm run lint --fix",
-    "compile": "tsc --noEmit",
+    "compile": "tsc -p ./tsconfig.project.json --noEmit",
     "compile:watch": "pnpm run compile --watch"
   },
   "dependencies": {
