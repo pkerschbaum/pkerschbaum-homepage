@@ -14,71 +14,6 @@ importers:
       prettier: 2.7.1
       rimraf: 3.0.2
 
-  packages/apps/fetch-favicon:
-    specifiers:
-      '@pkerschbaum-homepage/commons': workspace:1.0.0
-      '@pkerschbaum-homepage/commons-node': workspace:1.0.0
-      '@pkerschbaum-homepage/mdx': workspace:1.0.0
-      '@pkerschbaum-homepage/shared-node': workspace:1.0.0
-      '@pkerschbaum/ts-utils': ^0.0.1
-      '@types/mdast': ^3.0.10
-      '@types/node': ^16.11.25
-      '@typescript-eslint/eslint-plugin': ^5.30.0
-      '@typescript-eslint/parser': ^5.30.0
-      esbuild: ^0.14.48
-      eslint: ^8.16.0
-      eslint-config-prettier: ^8.5.0
-      eslint-plugin-code-import-patterns: ^3.0.0
-      eslint-plugin-eslint-comments: ^3.2.0
-      eslint-plugin-import: ^2.26.0
-      eslint-plugin-node: ^11.1.0
-      eslint-plugin-only-warn: ^1.0.3
-      eslint-plugin-prettier: ^4.2.1
-      eslint-plugin-regexp: ^1.7.0
-      mdx-bundler: ^9.0.1
-      prettier: ^2.7.1
-      puppeteer: ^15.3.2
-      rimraf: ^3.0.2
-      safe-stable-stringify: ^2.3.1
-      tiny-invariant: ^1.2.0
-      ts-patch: ^2.0.1
-      typescript: ^4.7.4
-      typescript-transform-paths: ^3.3.1
-      unist-util-visit: ^4.1.0
-      zod: ^3.17.3
-    dependencies:
-      '@pkerschbaum-homepage/commons': link:../../libs/commons
-      '@pkerschbaum-homepage/commons-node': link:../../libs/commons-node
-      '@pkerschbaum-homepage/mdx': link:../../libs/mdx
-      '@pkerschbaum-homepage/shared-node': link:../../libs/shared-node
-      '@pkerschbaum/ts-utils': 0.0.1
-      '@types/mdast': 3.0.10
-      esbuild: 0.14.48
-      mdx-bundler: 9.0.1_esbuild@0.14.48
-      puppeteer: 15.3.2
-      safe-stable-stringify: 2.3.1
-      tiny-invariant: 1.2.0
-      unist-util-visit: 4.1.0
-      zod: 3.17.3
-    devDependencies:
-      '@types/node': 16.11.42
-      '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
-      '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
-      eslint: 8.18.0
-      eslint-config-prettier: 8.5.0_eslint@8.18.0
-      eslint-plugin-code-import-patterns: 3.0.0
-      eslint-plugin-eslint-comments: 3.2.0_eslint@8.18.0
-      eslint-plugin-import: 2.26.0_wno36sjfnklvt2ocf7qbhb2izy
-      eslint-plugin-node: 11.1.0_eslint@8.18.0
-      eslint-plugin-only-warn: 1.0.3
-      eslint-plugin-prettier: 4.2.1_xu6ewijrtliw5q5lksq5uixwby
-      eslint-plugin-regexp: 1.7.0_eslint@8.18.0
-      prettier: 2.7.1
-      rimraf: 3.0.2
-      ts-patch: 2.0.1_typescript@4.7.4
-      typescript: 4.7.4
-      typescript-transform-paths: 3.3.1_typescript@4.7.4
-
   packages/apps/web:
     specifiers:
       '@fontsource/rubik': ^4.5.10
@@ -123,16 +58,19 @@ importers:
       react-feather: ^2.0.9
       react-is: ^18.2.0
       rimraf: ^3.0.2
+      safe-stable-stringify: ^2.3.1
       sharp: ^0.30.7
       styled-components: ^5.3.5
       tiny-invariant: ^1.2.0
+      ts-node: ^10.8.2
+      tsconfig-paths: ^4.0.0
       typescript: ^4.7.4
       unist-util-visit: ^4.1.0
       zod: ^3.17.3
     dependencies:
       '@fontsource/rubik': 4.5.10
       '@pkerschbaum-homepage/commons': link:../../libs/commons
-      '@pkerschbaum-homepage/fetch-favicon': link:../fetch-favicon
+      '@pkerschbaum-homepage/fetch-favicon': link:../../libs/fetch-favicon
       '@pkerschbaum-homepage/mdx': link:../../libs/mdx
       '@pkerschbaum-homepage/shared-node': link:../../libs/shared-node
       '@pkerschbaum/ts-utils': 0.0.1
@@ -147,6 +85,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-feather: 2.0.10_react@18.2.0
       react-is: 18.2.0
+      safe-stable-stringify: 2.3.1
       sharp: 0.30.7
       styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
       tiny-invariant: 1.2.0
@@ -178,6 +117,8 @@ importers:
       next-sitemap: 3.1.10_5crenonpc5mzdu2runrquyablm
       prettier: 2.7.1
       rimraf: 3.0.2
+      ts-node: 10.8.2_szebecl2kwa7lf7lxbfrilvjfq
+      tsconfig-paths: 4.0.0
       typescript: 4.7.4
 
   packages/libs/commons:
@@ -255,6 +196,69 @@ importers:
     devDependencies:
       '@types/node': 16.11.42
       '@types/node-fetch': 2.6.2
+      '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
+      '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
+      eslint: 8.18.0
+      eslint-config-prettier: 8.5.0_eslint@8.18.0
+      eslint-plugin-code-import-patterns: 3.0.0
+      eslint-plugin-eslint-comments: 3.2.0_eslint@8.18.0
+      eslint-plugin-import: 2.26.0_wno36sjfnklvt2ocf7qbhb2izy
+      eslint-plugin-node: 11.1.0_eslint@8.18.0
+      eslint-plugin-only-warn: 1.0.3
+      eslint-plugin-prettier: 4.2.1_xu6ewijrtliw5q5lksq5uixwby
+      eslint-plugin-regexp: 1.7.0_eslint@8.18.0
+      prettier: 2.7.1
+      rimraf: 3.0.2
+      ts-patch: 2.0.1_typescript@4.7.4
+      typescript: 4.7.4
+      typescript-transform-paths: 3.3.1_typescript@4.7.4
+
+  packages/libs/fetch-favicon:
+    specifiers:
+      '@pkerschbaum-homepage/commons': workspace:1.0.0
+      '@pkerschbaum-homepage/commons-node': workspace:1.0.0
+      '@pkerschbaum-homepage/mdx': workspace:1.0.0
+      '@pkerschbaum-homepage/shared-node': workspace:1.0.0
+      '@pkerschbaum/ts-utils': ^0.0.1
+      '@types/mdast': ^3.0.10
+      '@types/node': ^16.11.25
+      '@typescript-eslint/eslint-plugin': ^5.30.0
+      '@typescript-eslint/parser': ^5.30.0
+      esbuild: ^0.14.48
+      eslint: ^8.16.0
+      eslint-config-prettier: ^8.5.0
+      eslint-plugin-code-import-patterns: ^3.0.0
+      eslint-plugin-eslint-comments: ^3.2.0
+      eslint-plugin-import: ^2.26.0
+      eslint-plugin-node: ^11.1.0
+      eslint-plugin-only-warn: ^1.0.3
+      eslint-plugin-prettier: ^4.2.1
+      eslint-plugin-regexp: ^1.7.0
+      mdx-bundler: ^9.0.1
+      prettier: ^2.7.1
+      puppeteer: ^15.3.2
+      rimraf: ^3.0.2
+      tiny-invariant: ^1.2.0
+      ts-patch: ^2.0.1
+      typescript: ^4.7.4
+      typescript-transform-paths: ^3.3.1
+      unist-util-visit: ^4.1.0
+      zod: ^3.17.3
+    dependencies:
+      '@pkerschbaum-homepage/commons': link:../commons
+      '@pkerschbaum-homepage/commons-node': link:../commons-node
+      '@pkerschbaum-homepage/mdx': link:../mdx
+      '@pkerschbaum-homepage/shared-node': link:../shared-node
+      '@pkerschbaum/ts-utils': 0.0.1
+      '@types/mdast': 3.0.10
+      esbuild: 0.14.48
+      mdx-bundler: 9.0.1_esbuild@0.14.48
+      puppeteer: 15.3.2
+      tiny-invariant: 1.2.0
+      unist-util-visit: 4.1.0
+      zod: 3.17.3
+    devDependencies:
+      '@types/node': 16.11.42
       '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
       '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
       eslint: 8.18.0
@@ -506,6 +510,13 @@ packages:
     resolution: {integrity: sha512-q/yVUnqckA8Do+EvAfpy7RLdumnBy9ZsducMUtZTvpdbJC7azEf1hGtnYYxm0QfphYxjwggv6XtH64prvS1W+A==}
     dev: true
 
+  /@cspotcode/source-map-support/0.8.1:
+    resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.9
+    dev: true
+
   /@emotion/is-prop-valid/1.1.3:
     resolution: {integrity: sha512-RFg04p6C+1uO19uG8N+vqanzKqiM9eeV1LDOG3bmkYmuOj7NbKNlFC/4EZq5gnwAIlcC/jOT24f8Td0iax2SXA==}
     dependencies:
@@ -590,7 +601,6 @@ packages:
   /@jridgewell/resolve-uri/3.0.7:
     resolution: {integrity: sha512-8cXDaBBHOr2pQ7j77Y6Vp5VDT2sIqWyWQ56TjEq4ih/a4iST3dItRe8Q9fp0rrIl9DoKhWQtUQz/YpOxLkXbNA==}
     engines: {node: '>=6.0.0'}
-    dev: false
 
   /@jridgewell/set-array/1.1.1:
     resolution: {integrity: sha512-Ct5MqZkLGEXTVmQYbGtx9SVqD2fqwvdubdps5D3djjAkgkKwT918VNOz65pEHFaYTeWcukmJmH5SwsA9Tn2ObQ==}
@@ -599,7 +609,6 @@ packages:
 
   /@jridgewell/sourcemap-codec/1.4.13:
     resolution: {integrity: sha512-GryiOJmNcWbovBxTfZSF71V/mXbgcV3MewDe3kIMCLyIh5e7SKAeUZs+rMnJ8jkMolZ/4/VsdBmMrw3l+VdZ3w==}
-    dev: false
 
   /@jridgewell/trace-mapping/0.3.13:
     resolution: {integrity: sha512-o1xbKhp9qnIAoHJSWd6KlCZfqslL4valSF81H8ImioOAxluWYWOpWkpyktY2vnt4tbrX9XYaxovq6cgowaJp2w==}
@@ -607,6 +616,13 @@ packages:
       '@jridgewell/resolve-uri': 3.0.7
       '@jridgewell/sourcemap-codec': 1.4.13
     dev: false
+
+  /@jridgewell/trace-mapping/0.3.9:
+    resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+    dependencies:
+      '@jridgewell/resolve-uri': 3.0.7
+      '@jridgewell/sourcemap-codec': 1.4.13
+    dev: true
 
   /@mdx-js/esbuild/2.1.1_esbuild@0.14.48:
     resolution: {integrity: sha512-iwcbh7eZZh55r1/lqyrPpkIsuczmlUclulfrtc983mJncdhhhqv0g01loK2r3L0LeIzORhb8h1xUsAWneG0c6w==}
@@ -834,6 +850,22 @@ packages:
     resolution: {integrity: sha512-556Az0VX7WR6UdoTn4htt/l3zPQ7bsQWK+HqdG4swV7beUCxo/BqmvbOpUkTIm/9ih86LIf1qsUnywNL3obGHw==}
     dependencies:
       tslib: 2.4.0
+
+  /@tsconfig/node10/1.0.9:
+    resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
+    dev: true
+
+  /@tsconfig/node12/1.0.11:
+    resolution: {integrity: sha512-cqefuRsh12pWyGsIoBKJA9luFu3mRxCA+ORZvA4ktLSzIuCUtWVxGIuXigEwO5/ywWFMZ2QEGKWvkZG1zDMTag==}
+    dev: true
+
+  /@tsconfig/node14/1.0.3:
+    resolution: {integrity: sha512-ysT8mhdixWK6Hw3i1V2AeRqZ5WfXg1G43mqoYlM2nc6388Fq5jcXyr5mRsqViLx/GJYdoL0bfXD8nmF+Zn/Iow==}
+    dev: true
+
+  /@tsconfig/node16/1.0.3:
+    resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
+    dev: true
 
   /@types/acorn/4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -1157,6 +1189,10 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /arg/4.1.3:
+    resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
+    dev: true
+
   /argparse/1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
     dependencies:
@@ -1461,6 +1497,10 @@ packages:
     requiresBuild: true
     dev: true
 
+  /create-require/1.1.1:
+    resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
+    dev: true
+
   /cross-fetch/3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
     dependencies:
@@ -1607,6 +1647,11 @@ packages:
   /devtools-protocol/0.0.1011705:
     resolution: {integrity: sha512-OKvTvu9n3swmgYshvsyVHYX0+aPzCoYUnyXUacfQMmFtBtBKewV/gT4I9jkAbpTqtTi2E4S9MXLlvzBDUlqg0Q==}
     dev: false
+
+  /diff/4.0.2:
+    resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
+    engines: {node: '>=0.3.1'}
+    dev: true
 
   /diff/5.1.0:
     resolution: {integrity: sha512-D+mk+qE8VC/PAUrlAU34N+VfXev0ghe5ywmpqrawphmVZc1bEfn56uo9qpyGp1p4xpzOHkSW4ztBd6L7Xx4ACw==}
@@ -3155,6 +3200,12 @@ packages:
       minimist: 1.2.6
     dev: true
 
+  /json5/2.2.1:
+    resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dev: true
+
   /jsonc-parser/3.0.0:
     resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
     dev: true
@@ -3239,6 +3290,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /make-error/1.3.6:
+    resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
+    dev: true
 
   /markdown-extensions/1.1.1:
     resolution: {integrity: sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==}
@@ -4833,6 +4888,37 @@ packages:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: false
 
+  /ts-node/10.8.2_szebecl2kwa7lf7lxbfrilvjfq:
+    resolution: {integrity: sha512-LYdGnoGddf1D6v8REPtIH+5iq/gTDuZqv2/UJUU7tKjuEU8xVZorBM+buCGNjj+pGEud+sOoM4CX3/YzINpENA==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 16.11.39
+      acorn: 8.7.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.7.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
   /ts-patch/2.0.1_typescript@4.7.4:
     resolution: {integrity: sha512-mP7beU1QkmyDs1+SzXYVaSTD6Xo7ZCibOJ3sZkb/xsQjoAQXvn4oPjk0keC2LfCNAgilqtqgjiWp3pQri1uz4w==}
     hasBin: true
@@ -4854,6 +4940,14 @@ packages:
     dependencies:
       '@types/json5': 0.0.29
       json5: 1.0.1
+      minimist: 1.2.6
+      strip-bom: 3.0.0
+    dev: true
+
+  /tsconfig-paths/4.0.0:
+    resolution: {integrity: sha512-SLBg2GBKlR6bVtMgJJlud/o3waplKtL7skmLkExomIiaAtLGtVsoXIqP3SYdjbcH9lq/KVv7pMZeCBpLYOit6Q==}
+    dependencies:
+      json5: 2.2.1
       minimist: 1.2.6
       strip-bom: 3.0.0
     dev: true
@@ -5050,6 +5144,10 @@ packages:
       sade: 1.8.1
     dev: false
 
+  /v8-compile-cache-lib/3.0.1:
+    resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
+    dev: true
+
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
@@ -5236,6 +5334,11 @@ packages:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
     dev: false
+
+  /yn/3.1.1:
+    resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
+    engines: {node: '>=6'}
+    dev: true
 
   /zod/3.17.3:
     resolution: {integrity: sha512-4oKP5zvG6GGbMlqBkI5FESOAweldEhSOZ6LI6cG+JzUT7ofj1ZOC0PJudpQOpT1iqOFpYYtX5Pw0+o403y4bcg==}

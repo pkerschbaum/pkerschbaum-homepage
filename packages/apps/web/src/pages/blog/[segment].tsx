@@ -9,8 +9,6 @@ import styled, { css } from 'styled-components';
 import invariant from 'tiny-invariant';
 import { z } from 'zod';
 
-import { PATHS as FETCH_FAVICONS_PATHS } from '@pkerschbaum-homepage/fetch-favicon/constants';
-import { PATHS as PROJECT_PATHS } from '@pkerschbaum-homepage/shared-node/constants';
 import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 
 import { StyledAnchor } from '~/components/fancy-anchor';
@@ -18,7 +16,7 @@ import { Main } from '~/components/main';
 import { MDXViewer } from '~/components/mdx-viewer';
 import { MetadataTags } from '~/components/metadata-tags';
 import { config } from '~/config';
-import { ColorTheme, DataAttribute } from '~/constants';
+import { ColorTheme, DataAttribute, PATHS } from '~/constants';
 import { Anchor } from '~/elements';
 import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
@@ -271,17 +269,16 @@ const ContactTeaserHeadline = styled.h2`
 
 const schema_staticProps = z.object({ segment: z.string().min(1) });
 type StaticProps = z.infer<typeof schema_staticProps>;
-const faviconsForWebsitesReadPromise = fs.promises.readFile(
-  FETCH_FAVICONS_PATHS.FAVICONS_FOR_WEBSITES,
-  { encoding: 'utf-8' },
-);
+const faviconsForWebsitesReadPromise = fs.promises.readFile(PATHS.FAVICONS_FOR_WEBSITES, {
+  encoding: 'utf-8',
+});
 export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
   params,
 }) => {
   const parsedParams = schema_staticProps.parse(params);
 
   const [mdxParseResult, faviconsForWebsitesString] = await Promise.all([
-    parseMDXFileAndCollectHrefs(PROJECT_PATHS.POSTS, `${parsedParams.segment}.mdx`),
+    parseMDXFileAndCollectHrefs(PATHS.POSTS, `${parsedParams.segment}.mdx`),
     faviconsForWebsitesReadPromise,
   ]);
 
@@ -332,7 +329,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
 };
 
 export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const posts = await getAllMarkdownFiles(PROJECT_PATHS.POSTS);
+  const posts = await getAllMarkdownFiles(PATHS.POSTS);
   const paths = posts.map((post) => ({ params: { segment: post.segment } }));
   return {
     paths,

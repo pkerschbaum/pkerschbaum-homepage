@@ -18,19 +18,11 @@
     "postinstall": "ts-patch install -s",
     "nuke": "pnpm run nuke:build && pnpm run nuke:node-modules",
     "nuke:build": "rimraf dist *.tsbuildinfo",
-    "build": "tsc -p ./tsconfig.project.json && node ./dist/index.js",
+    "build": "tsc -p ./tsconfig.project.json",
     "lint": "eslint --max-warnings 0 .",
     "lint:fix": "pnpm run lint --fix",
     "compile": "tsc -p ./tsconfig.project.json --noEmit",
     "compile:watch": "pnpm run compile --watch"
-  },
-  "nx": {
-    "namedInputs": {
-      "sources": [
-        "{projectRoot}/src/**/*",
-        "{projectRoot}/../../apps/web/src/posts/**/*"
-      ]
-    }
   },
   "dependencies": {
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
@@ -42,7 +34,6 @@
     "esbuild": "^0.14.48",
     "mdx-bundler": "^9.0.1",
     "puppeteer": "^15.3.2",
-    "safe-stable-stringify": "^2.3.1",
     "tiny-invariant": "^1.2.0",
     "unist-util-visit": "^4.1.0",
     "zod": "^3.17.3"

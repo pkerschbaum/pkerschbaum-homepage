@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
-import { PATHS } from '@pkerschbaum-homepage/shared-node/constants';
 
+import { PATHS } from '~/constants';
 import { getAllMarkdownFiles } from '~/mdx';
 
 async function loadURLsOfBlogPosts() {

@@ -9,4 +9,4 @@ pnpm-lock.yaml
 **/coverage/**
 
 # generated file
-packages/apps/web/src/static/favicons-for-websites.json
+packages/apps/web/generated/favicons-for-websites.json
