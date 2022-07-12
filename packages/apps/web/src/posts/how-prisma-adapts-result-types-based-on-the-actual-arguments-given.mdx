@@ -366,7 +366,7 @@ export type UserGetPayload<
 
 Turns out that these type definitions do all sorts of analysis and type mapping.  
 Still, you can see some similarities to our solution.
-The biggest difference is that Prisma Client does everything step by step:
+The biggest difference is that `UserGetPayload` does everything step by step:
 
 1. Extract the keys of `S` in `U`.
 1. Check if `include` is in `U`.
