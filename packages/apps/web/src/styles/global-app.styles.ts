@@ -28,6 +28,10 @@ export const GlobalAppStyles = styled.createGlobalStyle`
     background-color: var(--color-track);
   }
 
+  * {
+    scroll-behavior: smooth;
+  }
+
   *:root {
     font-size: ${17 / 16}rem;
     color: var(--color-fg);
