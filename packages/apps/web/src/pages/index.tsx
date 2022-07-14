@@ -28,7 +28,10 @@ type HomePageProps = {
 const HomePage: React.FC<HomePageProps> = ({ posts }) => {
   return (
     <>
-      <MetadataTags title="Patrick Kerschbaum" description="Homepage of Patrick Kerschbaum" />
+      <MetadataTags
+        title="Homepage of Patrick Kerschbaum"
+        description="Homepage of Patrick Kerschbaum"
+      />
 
       <HomepageContainer>
         <Introduction />
