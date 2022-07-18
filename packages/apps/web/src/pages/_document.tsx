@@ -87,7 +87,12 @@ export default class MyDocument extends Document {
           </noscript>
 
           {/* Plausible analytics */}
-          <script defer data-domain="pkerschbaum.com" src="https://plausible.io/js/plausible.js" />
+          <script
+            defer
+            data-domain="pkerschbaum.com"
+            data-api="/p.io/api/event"
+            src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
+          />
 
           <style
             type="text/css"

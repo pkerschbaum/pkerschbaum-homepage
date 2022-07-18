@@ -59,6 +59,24 @@ const nextConfig = {
 
     return config;
   },
+
+  async rewrites() {
+    /*
+     * https://plausible.io/docs/proxy/guides/nextjs#step-1-add-url-rewrite-rules
+     * avoid using "plausible" in the source path (use "p.io" instead) because otherwise it could get blocked by adblockers
+     */
+    return [
+      {
+        source: '/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js',
+        destination:
+          'https://plausible.io/js/script.hash.outbound-links.file-downloads.exclusions.js',
+      },
+      {
+        source: '/p.io/api/event',
+        destination: 'https://plausible.io/api/event',
+      },
+    ];
+  },
 };
 
 export default withRemoteRefresh(nextConfig);
