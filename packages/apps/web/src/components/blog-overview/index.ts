@@ -1,1 +1,1 @@
-export * from '~/components/blog-overview/BlogOverview';
+export * from '#/components/blog-overview/BlogOverview';

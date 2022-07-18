@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Classes } from '~/constants';
+import { Classes } from '#/constants';
 
 export type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
 

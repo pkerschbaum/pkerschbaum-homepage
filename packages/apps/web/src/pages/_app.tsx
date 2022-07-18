@@ -8,18 +8,18 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Header } from '~/components/header';
-import { Nav } from '~/components/nav';
-import { RssFeedAnchor } from '~/components/rss-feed-anchor';
-import { SocialMediaLinks } from '~/components/social-media-links';
-import { ToggleThemeButton } from '~/components/toggle-theme-button';
-import { config } from '~/config';
-import { DataAttribute, IsAnimationEnabled } from '~/constants';
-import { ColorThemeProvider } from '~/context/color-theme';
-import { CSSReset } from '~/styles/css-reset.styles';
-import { GlobalAppStyles } from '~/styles/global-app.styles';
-import { PrismStyles } from '~/styles/prism.styles';
-import { useIsMounted } from '~/utils/react.utils';
+import { Header } from '#/components/header';
+import { Nav } from '#/components/nav';
+import { RssFeedAnchor } from '#/components/rss-feed-anchor';
+import { SocialMediaLinks } from '#/components/social-media-links';
+import { ToggleThemeButton } from '#/components/toggle-theme-button';
+import { config } from '#/config';
+import { DataAttribute, IsAnimationEnabled } from '#/constants';
+import { ColorThemeProvider } from '#/context/color-theme';
+import { CSSReset } from '#/styles/css-reset.styles';
+import { GlobalAppStyles } from '#/styles/global-app.styles';
+import { PrismStyles } from '#/styles/prism.styles';
+import { useIsMounted } from '#/utils/react.utils';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

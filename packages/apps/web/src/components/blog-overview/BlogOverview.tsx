@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogPostTile } from '~/components/blog-post-tile';
-import { QUERIES } from '~/constants';
+import { BlogPostTile } from '#/components/blog-post-tile';
+import { QUERIES } from '#/constants';
 
 type BlogOverviewProps = {
   posts: MDXFile[];

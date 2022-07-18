@@ -1,1 +1,1 @@
-export * from '~/components/project-tile/ProjectTile';
+export * from '#/components/project-tile/ProjectTile';

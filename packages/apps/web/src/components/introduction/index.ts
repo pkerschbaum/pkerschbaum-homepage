@@ -1,1 +1,1 @@
-export * from '~/components/introduction/Introduction';
+export * from '#/components/introduction/Introduction';

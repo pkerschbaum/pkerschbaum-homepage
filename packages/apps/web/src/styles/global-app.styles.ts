@@ -1,6 +1,6 @@
 import * as styled from 'styled-components';
 
-import { ColorTheme, DataAttribute } from '~/constants';
+import { ColorTheme, DataAttribute } from '#/constants';
 
 export const GlobalAppStyles = styled.createGlobalStyle`
   /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */

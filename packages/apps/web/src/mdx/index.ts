@@ -1,1 +1,1 @@
-export * from '~/mdx/mdx';
+export * from '#/mdx/mdx';

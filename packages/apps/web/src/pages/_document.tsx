@@ -10,7 +10,7 @@ import {
   IsAnimationEnabled,
   IsScrolled,
   LocalStorageKey,
-} from '~/constants';
+} from '#/constants';
 
 export default class MyDocument extends Document {
   public static async getInitialProps(ctx: Parameters<typeof Document.getInitialProps>[0]) {

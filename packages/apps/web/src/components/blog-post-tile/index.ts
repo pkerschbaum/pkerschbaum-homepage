@@ -1,1 +1,1 @@
-export * from '~/components/blog-post-tile/BlogPostTile';
+export * from '#/components/blog-post-tile/BlogPostTile';

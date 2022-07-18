@@ -7,7 +7,7 @@ import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.uti
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 
-import { fetchFaviconURLs } from '~/favicon.js';
+import { fetchFaviconURLs } from '#/favicon.js';
 
 export async function fetchFaviconsForAllHrefs(
   absolutePathToPosts: string,

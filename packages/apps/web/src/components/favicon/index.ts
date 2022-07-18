@@ -1,1 +1,1 @@
-export * from '~/components/favicon/Favicon';
+export * from '#/components/favicon/Favicon';

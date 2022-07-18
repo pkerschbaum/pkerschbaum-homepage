@@ -1,1 +1,1 @@
-export * from '~/components/mdx-viewer/MDXViewer';
+export * from '#/components/mdx-viewer/MDXViewer';

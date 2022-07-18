@@ -2,8 +2,8 @@ import type React from 'react';
 import { GitHub, Linkedin, Twitter } from 'react-feather';
 import styled from 'styled-components';
 
-import { config } from '~/config';
-import { Anchor } from '~/elements';
+import { config } from '#/config';
+import { Anchor } from '#/elements';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>

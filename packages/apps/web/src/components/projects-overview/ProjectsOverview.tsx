@@ -1,8 +1,8 @@
 import type React from 'react';
 import styled from 'styled-components';
 
-import { ProjectTile } from '~/components/project-tile';
-import { QUERIES } from '~/constants';
+import { ProjectTile } from '#/components/project-tile';
+import { QUERIES } from '#/constants';
 
 type ProjectsOverviewProps = {};
 

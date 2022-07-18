@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Favicon } from '~/components/favicon';
-import { config } from '~/config';
-import { Animations, DataAttribute, IsScrolled } from '~/constants';
-import { Anchor } from '~/elements';
+import { Favicon } from '#/components/favicon';
+import { config } from '#/config';
+import { Animations, DataAttribute, IsScrolled } from '#/constants';
+import { Anchor } from '#/elements';
 
 export const Nav: React.FC = () => {
   return (

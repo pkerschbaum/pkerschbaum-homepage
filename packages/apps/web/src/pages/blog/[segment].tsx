@@ -11,15 +11,15 @@ import { z } from 'zod';
 
 import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 
-import { StyledAnchor } from '~/components/fancy-anchor';
-import { Main } from '~/components/main';
-import { MDXViewer } from '~/components/mdx-viewer';
-import { MetadataTags } from '~/components/metadata-tags';
-import { config } from '~/config';
-import { ColorTheme, DataAttribute, PATHS } from '~/constants';
-import { Anchor } from '~/elements';
-import { FullBleedWrapper } from '~/elements/FullBleedWrapper';
-import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '~/mdx';
+import { StyledAnchor } from '#/components/fancy-anchor';
+import { Main } from '#/components/main';
+import { MDXViewer } from '#/components/mdx-viewer';
+import { MetadataTags } from '#/components/metadata-tags';
+import { config } from '#/config';
+import { ColorTheme, DataAttribute, PATHS } from '#/constants';
+import { Anchor } from '#/elements';
+import { FullBleedWrapper } from '#/elements/FullBleedWrapper';
+import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
 
 type IconURLToAssociatedWebsitesMap = {
   [iconURL in string]?: {

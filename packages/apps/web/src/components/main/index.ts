@@ -1,1 +1,1 @@
-export * from '~/components/main/Main';
+export * from '#/components/main/Main';

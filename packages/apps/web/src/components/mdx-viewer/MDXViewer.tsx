@@ -3,8 +3,8 @@ import { getMDXComponent } from 'mdx-bundler/client';
 import * as React from 'react';
 import styled, { StyledComponentProps } from 'styled-components';
 
-import { FancyAnchor, FancyAnchorProps } from '~/components/fancy-anchor';
-import { Anchor } from '~/elements';
+import { FancyAnchor, FancyAnchorProps } from '#/components/fancy-anchor';
+import { Anchor } from '#/elements';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;

@@ -6,7 +6,7 @@
     /* Modules */
     "module": "node16",
     "paths": {
-      "~/*": ["./src/*"]
+      "#/*": ["./src/*"]
     },
     "rootDir": "./src",
     "types": ["node"],

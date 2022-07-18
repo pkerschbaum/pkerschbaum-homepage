@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { logger } from '@pkerschbaum-homepage/commons/observability/logger';
 
-import { PATHS } from '~/constants';
-import { getAllMarkdownFiles } from '~/mdx';
+import { PATHS } from '#/constants';
+import { getAllMarkdownFiles } from '#/mdx';
 
 async function loadURLsOfBlogPosts() {
   const redirectMap: { [shortenedPath: string]: string } = {

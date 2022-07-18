@@ -6,20 +6,20 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogOverview } from '~/components/blog-overview';
-import { Introduction } from '~/components/introduction';
-import { Main } from '~/components/main';
-import { MetadataTags } from '~/components/metadata-tags';
-import { ProjectsOverview } from '~/components/projects-overview/ProjectsOverview';
-import { config } from '~/config';
+import { BlogOverview } from '#/components/blog-overview';
+import { Introduction } from '#/components/introduction';
+import { Main } from '#/components/main';
+import { MetadataTags } from '#/components/metadata-tags';
+import { ProjectsOverview } from '#/components/projects-overview/ProjectsOverview';
+import { config } from '#/config';
 import {
   PATHS,
   RSS_FEED_JSON_PATH,
   RSS_FEED_JSON_SLUG,
   RSS_FEED_XML_PATH,
   RSS_FEED_XML_SLUG,
-} from '~/constants';
-import { getAllMarkdownFiles } from '~/mdx';
+} from '#/constants';
+import { getAllMarkdownFiles } from '#/mdx';
 
 type HomePageProps = {
   posts: MDXFile[];
