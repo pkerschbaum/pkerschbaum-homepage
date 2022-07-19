@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@pkerschbaum/ts-utils": "^0.0.1",
+    "safe-stable-stringify": "^2.3.1",
     "tiny-invariant": "^1.2.0",
     "zod": "^3.17.3"
   },

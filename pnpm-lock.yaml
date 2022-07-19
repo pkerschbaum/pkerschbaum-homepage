@@ -31,6 +31,7 @@ importers:
       '@types/node': ^16.11.25
       '@types/react': ^18.0.15
       '@types/react-dom': ^18.0.6
+      '@types/react-is': ^17.0.3
       '@types/styled-components': ^5.1.25
       '@typescript-eslint/eslint-plugin': ^5.30.0
       '@typescript-eslint/parser': ^5.30.0
@@ -60,7 +61,6 @@ importers:
       react-feather: ^2.0.9
       react-is: ^18.2.0
       rimraf: ^3.0.2
-      safe-stable-stringify: ^2.3.1
       sharp: ^0.30.7
       styled-components: ^5.3.5
       tiny-invariant: ^1.2.0
@@ -87,7 +87,6 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-feather: 2.0.10_react@18.2.0
       react-is: 18.2.0
-      safe-stable-stringify: 2.3.1
       sharp: 0.30.7
       styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
       tiny-invariant: 1.2.0
@@ -100,6 +99,7 @@ importers:
       '@types/node': 16.11.39
       '@types/react': 18.0.15
       '@types/react-dom': 18.0.6
+      '@types/react-is': 17.0.3
       '@types/styled-components': 5.1.25
       '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
       '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
@@ -139,6 +139,7 @@ importers:
       eslint-plugin-regexp: ^1.7.0
       prettier: ^2.7.1
       rimraf: ^3.0.2
+      safe-stable-stringify: ^2.3.1
       tiny-invariant: ^1.2.0
       ts-patch: ^2.0.1
       typescript: ^4.7.4
@@ -146,6 +147,7 @@ importers:
       zod: ^3.17.3
     dependencies:
       '@pkerschbaum/ts-utils': 0.0.1
+      safe-stable-stringify: 2.3.1
       tiny-invariant: 1.2.0
       zod: 3.17.3
     devDependencies:
@@ -958,6 +960,12 @@ packages:
 
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
+    dependencies:
+      '@types/react': 18.0.15
+    dev: true
+
+  /@types/react-is/17.0.3:
+    resolution: {integrity: sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==}
     dependencies:
       '@types/react': 18.0.15
     dev: true
