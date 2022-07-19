@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import type React from 'react';
 import styled from 'styled-components';
 
@@ -13,9 +14,11 @@ type BlogOverviewProps = {
 export const BlogOverview: React.FC<BlogOverviewProps> = ({ posts }) => {
   return (
     <BlogOverviewContainer>
-      {posts.map((post) => (
-        <BlogPostTile key={post.segment} post={post} />
-      ))}
+      {posts
+        .sort((a, b) => dayjs(b.frontmatter.publishedAtISO).diff(a.frontmatter.publishedAtISO))
+        .map((post) => (
+          <BlogPostTile key={post.segment} post={post} />
+        ))}
     </BlogOverviewContainer>
   );
 };
