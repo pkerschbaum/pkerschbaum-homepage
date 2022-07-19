@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm run mr:compile
-pnpm run mr:lint
+pnpm lint-staged

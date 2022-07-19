@@ -6,15 +6,16 @@
     "mr:nuke": "pnpm run mr:nuke:build && pnpm run mr:nuke:node-modules",
     "mr:nuke:build": "nx run-many --target=nuke:build --all --parallel",
     "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
-    "mr:lint": "nx run-many --target=lint --all --parallel",
-    "mr:lint:fix": "nx run-many --target=lint:fix --all --parallel",
+    "mr:lint": "nx run-many --target=lint:package --all --parallel",
+    "mr:lint:fix": "nx run-many --target=lint:package:fix --all --parallel",
     "mr:format": "prettier --write --ignore-unknown .",
     "mr:build": "nx run-many --target=build --all",
     "mr:compile": "nx run-many --target=compile --all"
   },
   "devDependencies": {
     "husky": "^8.0.1",
-    "nx": "^14.4.2",
+    "lint-staged": "^13.0.3",
+    "nx": "^14.4.3",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2"
   },

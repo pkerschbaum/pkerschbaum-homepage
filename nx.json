@@ -6,7 +6,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "compile", "lint", "lint:fix"]
+        "cacheableOperations": ["build", "compile", "lint:package", "lint:package:fix"]
       }
     }
   },
@@ -37,7 +37,7 @@
       "outputs": [],
       "dependsOn": ["^build"]
     },
-    "lint": {
+    "lint:package": {
       "inputs": [
         "sources",
         "package-files",
@@ -47,7 +47,7 @@
       "outputs": [],
       "dependsOn": ["^build"]
     },
-    "lint:fix": {
+    "lint:package:fix": {
       "inputs": [
         "sources",
         "package-files",

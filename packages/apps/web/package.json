@@ -14,7 +14,8 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "lint:fix": "pnpm run lint --fix",
+    "lint:package": "pnpm run lint .",
+    "lint:package:fix": "pnpm run lint:package --fix",
     "compile": "tsc -p ./tsconfig.project.json --noEmit",
     "compile:watch": "pnpm run compile --watch"
   },
