@@ -19,11 +19,11 @@
     "nuke": "pnpm run nuke:build",
     "nuke:build": "rimraf dist *.tsbuildinfo",
     "build": "tsc -p ./tsconfig.project.json",
+    "lib:watch": "pnpm run build --watch --preserveWatchOutput",
     "lint": "eslint --max-warnings 0",
     "lint:package": "pnpm run lint .",
     "lint:package:fix": "pnpm run lint:package --fix",
-    "compile": "tsc -p ./tsconfig.project.json --noEmit",
-    "compile:watch": "pnpm run compile --watch"
+    "compile": "tsc -p ./tsconfig.project.json --noEmit"
   },
   "dependencies": {
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",

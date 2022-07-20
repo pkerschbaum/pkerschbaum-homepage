@@ -10,7 +10,8 @@
     "mr:lint:fix": "nx run-many --target=lint:package:fix --all --parallel",
     "mr:format": "prettier --write --ignore-unknown .",
     "mr:build": "nx run-many --target=build --all",
-    "mr:compile": "nx run-many --target=compile --all"
+    "mr:compile": "nx run-many --target=compile --all",
+    "mr:libs:watch": "pnpm --parallel run lib:watch"
   },
   "devDependencies": {
     "husky": "^8.0.1",

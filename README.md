@@ -40,6 +40,12 @@
    > `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt install ./google-chrome-stable_current_amd64.deb`  
    > See also this link for more information: <https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md>.
 
+1. **Run watcher for the libraries:**
+
+   ```sh
+   pnpm mr:libs:watch
+   ```
+
 1. **Start a local instance of `@pkerschbaum-homepage/web`:**
 
    ```sh

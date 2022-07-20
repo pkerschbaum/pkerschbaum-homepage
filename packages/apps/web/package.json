@@ -17,7 +17,7 @@
     "lint:package": "pnpm run lint .",
     "lint:package:fix": "pnpm run lint:package --fix",
     "compile": "tsc -p ./tsconfig.project.json --noEmit",
-    "compile:watch": "pnpm run compile --watch"
+    "lib:watch": "pnpm run compile --watch --preserveWatchOutput"
   },
   "nx": {
     "targets": {
