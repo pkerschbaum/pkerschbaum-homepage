@@ -12,8 +12,6 @@ const workspacePackages = workspacePackagesInclRoot.slice(1);
  * @param {string[]} files
  */
 function computeEslintShellCommandsPerPackage(files) {
-  /** @type {string[]} */
-  const sourceFilesOutsidePackages = [];
   /** @type {{ [nameOfPackage: string]: string[] }} */
   const sourceFilesPartitionedByPackage = {};
 
@@ -30,20 +28,10 @@ function computeEslintShellCommandsPerPackage(files) {
         break;
       }
     }
-    if (!foundPackage) {
-      sourceFilesOutsidePackages.push(file);
-    }
   }
 
   /** @type {string[]} */
   const eslintCommandsToExecute = [];
-  if (sourceFilesOutsidePackages.length > 0) {
-    eslintCommandsToExecute.push(
-      `pnpm exec eslint --max-warnings 0 ${sourceFilesOutsidePackages
-        .map((file) => `"${file}"`)
-        .join(' ')}`,
-    );
-  }
   for (const partition of Object.entries(sourceFilesPartitionedByPackage)) {
     const [nameOfPackage, filesList] = partition;
     if (filesList.length < 1) {
@@ -61,21 +49,12 @@ module.exports = {
   /**
    * @param {string[]} files
    */
-  '**/*.{js,jsx}': (files) => {
-    return [
-      ...computeEslintShellCommandsPerPackage(files),
-      `prettier --write --ignore-unknown ${files.map((file) => `"${file}"`).join(' ')}`,
-    ];
-  },
-  /**
-   * @param {string[]} files
-   */
-  '**/*.{ts,tsx}': (files) => {
+  '**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}': (files) => {
     return [
       `pnpm run mr:compile`,
       ...computeEslintShellCommandsPerPackage(files),
       `prettier --write --ignore-unknown ${files.map((file) => `"${file}"`).join(' ')}`,
     ];
   },
-  '**/*.!({js,jsx,ts,tsx})': ['prettier --write --ignore-unknown'],
+  '**/*.!({js,jsx,mjs,cjs,ts,tsx,mts,cts})': ['prettier --write --ignore-unknown'],
 };
