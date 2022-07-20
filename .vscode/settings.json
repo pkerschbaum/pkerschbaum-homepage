@@ -2,7 +2,6 @@
   "editor.rulers": [100],
   "typescript.tsdk": "./packages/apps/web/node_modules/typescript/lib",
   "search.exclude": {
-    "**/dist": true,
-    "**/build": true
+    "**/dist": true
   }
 }

@@ -23,12 +23,12 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier',
     'plugin:regexp/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:node/recommended',
     'plugin:eslint-comments/recommended',
+    'prettier',
   ],
   ignorePatterns: ['.eslintrc.cjs', 'dist/**/*'],
   rules: {
