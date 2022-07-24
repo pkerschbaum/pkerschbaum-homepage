@@ -1,29 +1,74 @@
 ---
-title: Some Tips for JS/TS Monorepos
+title: TODO
 published: true
-publishedAtISO: '2022-01-01T00:00:00.000Z'
+publishedAtISO: '2023-01-01T00:00:00.000Z'
 description: TODO
 shortenedURL: TODO
 tags: ['TODO']
 ---
 
-Terminology:
+I have been using monorepos for my TypeScript projects for about 2 years now.  
+During this time I have stumbled upon many problems and challenges.  
+If you have worked in monorepos already, this (incomplete) list of issues might sound familiar:
 
-- "workspace" = monorepo
-- "package" = "project" = the JS/TS packages
-- "application" = "runnable" = web app, node js http server, CLI, ...
-- "library" = not runnable
-- "library monorepo" vs "organization monorepo"
+- Some compilation/build error goes away if I delete all `node_modules` and install them again.
+- Adding a dependency in package A breaks the build of package B.
+- Jump-to-declaration does not work across packages in the monorepo.
+- Some package can be consumed by a package A, but a TypeScript error occurs when consuming the same package from another package B.
+- Using path aliases in a package screws up all packages which depend on it.
 
-## Guiding Principles
+I worked through many of such issues and landed on a monorepo setup which works really well for me.
+
+The goal of this blog post series is to **present the concerns you have/might have to deal with when setting up a monorepo for TypeScript packages, and solutions for them**.  
+This first blog post you are reading right now is called **Essentials 🏠**.
+You can use it to set up a TS monorepo from scratch and you will have a working monorepo.  
+The second one is called **Improvements 🚀** and will show how to improve the developer experience, how to get down build times, how to set up pre-commit hooks, ...
+
+## Goal
+
+The monorepo structure we aim for looks like this:
+
+```txt
+packages/
+  apps/
+    app-a/
+    app-b/
+    ...
+  libs/
+    lib-a/
+    lib-b/
+    ...
+package.json
+```
+
+The monorepo consists of _apps_ and _libs_:
+
+- An _application_ is something that is runnable.
+  Be it a web frontend, Node.js HTTP server, or some CLI.  
+  Apps may not depend on each other. They may depend on _libs_.
+- A _library_ is non-runnable.
+  It can be consumed by apps, other libs, or both.  
+  There can be many reasons to create a library. One reason is to share code between multiple apps and libs.
+  Another reason is to enforce modularization in an application, since a package is the hardest boundary you can create in a JS/TS project (a package has its own dependencies, and circular dependencies are not possible).
+
+A note on the term _workspace_. Unfortunately, this term is kind of ambiguous in the JS ecosystem.  
+Different tools of the monorepo tooling problem space will refer to different things when using this term.  
+What I know is that <FancyAnchor href="https://pnpm.io/workspaces">`pnpm`</FancyAnchor> uses the term to refer _to the monorepo itself_ as one "workspace", and uses the term "packages" or "projects" to refer to the packages inside the monorepo.  
+This seems to be the same definition <FancyAnchor href="https://nx.dev/getting-started/nx-setup">`nx`</FancyAnchor> is using.
+
+That's why in this blog post series, I will use _workspace_ to refer to the monorepo, and _package_ to refer to the TypeScript packages inside of that monorepo (apps and libs).
+
+## Some Guiding Principles
 
 - **Autonomy of packages:**
   TSC/eslint/prettier can be configured per package;
   a package might not even use TypeScript;
-  build/test/etc. can be configured by each package
+  build/test/etc. can be configured by each package.
+  ESM or CJS is decided by each package.
 - **No surprises:**
   No phantom dependencies;
   deterministic behavior during builds
+- **Scalability in number of packages:** Imagine you have an _app_ and it depends on a couple of _libs_. TODO build time lets say 30sec. one year later 100 packages more, but that app and libs untouched. how long should be build time? still 30sec.
 
 ## Package Management
 
@@ -120,3 +165,5 @@ Terminology:
 ## Further Reading
 
 - [https://monorepo.tools](https://monorepo.tools)
+
+TODO maybe mention that there can be dirs other than "apps" and "libs"?
