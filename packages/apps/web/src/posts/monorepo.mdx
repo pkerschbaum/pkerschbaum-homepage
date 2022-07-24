@@ -1,5 +1,5 @@
 ---
-title: JS/TS monorepo setup
+title: Some Tips for JS/TS Monorepos
 published: true
 publishedAtISO: '2022-01-01T00:00:00.000Z'
 description: TODO
@@ -9,13 +9,15 @@ tags: ['TODO']
 
 Terminology:
 
-- "monorepo" = "workspace"
+- "workspace" = monorepo
 - "package" = "project" = the JS/TS packages
+- "application" = "runnable" = web app, node js http server, CLI, ...
+- "library" = not runnable
 - "library monorepo" vs "organization monorepo"
 
-## Principles
+## Guiding Principles
 
-- **Autonomy of packages:** TSC/eslint/prettier can be configured per package; a package might not even use TypeScript
+- **Autonomy of packages:** TSC/eslint/prettier can be configured per package; a package might not even use TypeScript; build/test/etc. can be configured by each package
 - **No surprises:** No phantom dependencies; deterministic behavior during builds
 
 ## Package Management
@@ -63,10 +65,17 @@ Terminology:
 - all `eslint`-related deps are put in every `package.json`. Kind of noisy, but benefit is that problems with `eslint` execution are avoided, no surprises. Packages can also update their `eslint` deps independently.
 - `typescript` also per package
 
+## Development Process
+
+- let packages implement `compile:watch` such that
+  -- libraries run **type checking** and **emit output**
+  -- runnables only run **type checking**
+- `tsc --watch --preserveWatchOutput`
+- then, run a development script for the runnable in question separately
+
 ## Task Orchestration and Build Process
 
 - `pnpm --recursive run`; runs in parallel as much as possible while respecting dependency DAG. Supports to filter (e.g. `--filter @repo/web...` will run the command on `@repo/web` and its dependencies, in inverse order etc.)
-- let packages implement `dev` script which should start a watcher, e.g. `tsc --watch --preserveWatchOutput`
 
 ## Appendix: How-To Path Aliases
 
@@ -92,3 +101,7 @@ Terminology:
 - create one `tsconfig.json` using project references to reference all of these projects. VS Code will pick up that tsconfig.
 
 ## Appendix: Add Build Caching via `nx`
+
+## Further Reading
+
+- <https://monorepo.tools/>
