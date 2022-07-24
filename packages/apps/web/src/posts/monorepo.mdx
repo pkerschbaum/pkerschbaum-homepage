@@ -21,8 +21,10 @@ I worked through many of such issues and landed on a monorepo setup which works 
 
 The goal of this blog post series is to **present the concerns you have/might have to deal with when setting up a monorepo for TypeScript packages, and solutions for them**.  
 This first blog post you are reading right now is called **Essentials 🏠**.
-You can use it to set up a TS monorepo from scratch and you will have a working monorepo.  
-The second one is called **Improvements 🚀** and will show how to improve the developer experience, how to get down build times, how to set up pre-commit hooks, ...
+You can use it to set up a TS monorepo from scratch that has all the main concerns covered.  
+The second one is called **Improvements 🚀** and will show how to improve the developer experience, how to get build times down, how to set up pre-commit hooks, ...
+
+TODO TOC here
 
 ## Goal
 
@@ -31,12 +33,12 @@ The monorepo structure we aim for looks like this:
 ```txt
 packages/
   apps/
-    app-a/
-    app-b/
+    app-1/
+    app-2/
     ...
   libs/
-    lib-a/
-    lib-b/
+    lib-1/
+    lib-2/
     ...
 package.json
 ```
@@ -49,42 +51,87 @@ The monorepo consists of _apps_ and _libs_:
 - A _library_ is non-runnable.
   It can be consumed by apps, other libs, or both.  
   There can be many reasons to create a library. One reason is to share code between multiple apps and libs.
-  Another reason is to enforce modularization in an application, since a package is the hardest boundary you can create in a JS/TS project (a package has its own dependencies, and circular dependencies are not possible).
+  Another reason is to enforce modularization in an application, since a package is the hardest boundary one can create in JavaScript or TypeScript in general (a package has its own dependencies, its own NPM scripts, ...).
 
-A note on the term _workspace_. Unfortunately, this term is kind of ambiguous in the JS ecosystem.  
-Different tools of the monorepo tooling problem space will refer to different things when using this term.  
-What I know is that <FancyAnchor href="https://pnpm.io/workspaces">`pnpm`</FancyAnchor> uses the term to refer _to the monorepo itself_ as one "workspace", and uses the term "packages" or "projects" to refer to the packages inside the monorepo.  
+A note on the terms used in the monorepo problem space.  
+The term _workspace_ is kind of ambiguous, unfortunately.
+Different tools of the monorepo tooling domain will refer to different things when using this term.  
+What I know is that <FancyAnchor href="https://pnpm.io/workspaces">`pnpm`</FancyAnchor> refers _to the monorepo itself_ as one "workspace", and uses the term "packages" or "projects" to refer to the JS/TS packages inside of the monorepo.  
 This seems to be the same definition <FancyAnchor href="https://nx.dev/getting-started/nx-setup">`nx`</FancyAnchor> is using.
 
-That's why in this blog post series, I will use _workspace_ to refer to the monorepo, and _package_ to refer to the TypeScript packages inside of that monorepo (apps and libs).
+Following their terminology, from here on I will use _workspace_ to refer to the monorepo, and _project_ to refer to the JS/TS packages inside of that monorepo (apps and libs).
 
 ## Some Guiding Principles
 
-- **Autonomy of packages:**
-  TSC/eslint/prettier can be configured per package;
-  a package might not even use TypeScript;
-  build/test/etc. can be configured by each package.
-  ESM or CJS is decided by each package.
+- **Autonomy of projects:**
+  TSC/eslint/prettier can be configured per project;
+  a project might not even use TypeScript;
+  build/test/etc. can be configured by each project.
+  ESM or CJS is decided by each project.
 - **No surprises:**
   No phantom dependencies;
   deterministic behavior during builds
-- **Scalability in number of packages:** Imagine you have an _app_ and it depends on a couple of _libs_. TODO build time lets say 30sec. one year later 100 packages more, but that app and libs untouched. how long should be build time? still 30sec.
+- **Scalability in number of projects:** Imagine we have an _app_ and it depends on a couple of _libs_. TODO build time lets say 30sec. one year later 100 projects more, but that app and libs untouched. how long should be build time? still 30sec.
 
-## Package Management
+## Concern #1: Package Management
+
+Imagine we want the package `react` as a dependency for a project `app-1` in our monorepo.  
+There are two valid choices for `node_modules` folders we could `react` put into: that of the monorepo itself (A) or that of the project (B).
+
+```txt
+node_modules/
+  react <-- (A)
+packages/
+  apps/
+    app-1/
+      node_modules/
+        react <-- (B)
+    ...
+  libs/
+    ...
+```
+
+Where should `react` be put?
+My opinion: **Almost nothing** should be put into the root `node_modules`.  
+`react` should be put in (B).
+
+If we follow approach (A) - putting dependencies into the root `node_modules` - we can (and eventually will) run into a couple of problems:
+
+- **Phantom dependencies:**
+  Since `react` is in the root `node_modules` of the monorepo, **every project** can import `react` and use it.
+  Do we really want to have `react` available in, let's say, a utility library?  
+  It is clear that over the lifetime of the monorepo, dependencies keep getting added to the projects.  
+  This will lead to more and more phantom dependencies in the entire monorepo.
+- **TypeScript compilation issues:**
+  Did you know that TypeScript includes all packages of the `@types` NPM scope sitting in `node_modules` when compiling?  
+  This behavior can be disabled (see <FancyAnchor href="https://twitter.com/pkerschbaum/status/1549867867679690752">this tweet from me</FancyAnchor> for some details), but it is enabled by default.
+
+  This means whenever a package of the `@types` NPM scope is added as a dependency to **any** project of the monorepo, this will alter **all TS projects** which have the default behavior enabled.  
+  This can easily lead to compilation errors, for example if both `@types/mocha` and `@types/jest` are added (they have typings incompatible to each other).  
+  Breaking some projects of the monorepo just because some dependency was added to some specific project should never happen.
+
+- **Issues with some tools because of fragmentation of dependencies:**
+  Imagine two projects of your monorepo need **different versions** of `react`.  
+  There can only be one `react` in the root `node_modules`, therefore only one version can be put there; the other version must be put into the `node_modules` of the project needing this particular version.
+
+  Eventually, projects will have their dependencies fragmented between the root `node_modules` and its own `node_modules`.  
+  Some tools cannot handle that, for example `eslint`.
+  If `eslint` is put into the root `node_modules`, but a project uses a plugin or config (let's say, `eslint-plugin-next`) which gets put in the `node_modules` of that project, ESLint **will not be able to find it**.
+
+You might have seen that some package managers, like `npm`, put many packages in in the root `node_modules`.
+This is also called "hoisting" the package.  
+They do this for deduplication: if multiple projects in the workspace need the **same dependency** in the **same version**, it must only put **once** in the monorepo.  
+This saves dependency installation time and disk space.
 
 > TL;DR use `pnpm` as package manager; avoid putting dependencies into root `node_modules` as much as possible.
 
-- hoisting of `node_modules` introduces many problems:
-  - phantom dependencies
-  - `@types/*` packages alter compilation process of TS projects in the monorepo.
-  - `eslint` might not find configs and plugins.
-  - violates "package autonomy"
 - npm workspaces and yarn classic workspaces are unusable because of their hoisting behavior of `node_modules`.
   Creates all the problems listed above.
   yarn classic allows to disable hoisting for specific packages or even altogether, but that has a huge impact on dependency installation duration and disk space.
 - pnpm has worked out the deduplication of `node_modules`.
   Uses symlinks instead of hoisting to deduplicate dependencies.
   Does not suffer from the problems listed above.
+  npm is implementing this so-called "isolated" mode too: [https://github.com/npm/rfcs/blob/main/accepted/0042-isolated-mode.md](https://github.com/npm/rfcs/blob/main/accepted/0042-isolated-mode.md)
 - where to put dependencies? root `package.json` or in the package's `package.json`?
   - guiding principle: be very restrictive of what you put into the root `package.json`. Eligible deps are
     - deps related to Git Workflows (`husky`, `lint-staged`)
