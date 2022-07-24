@@ -30,7 +30,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*'],
+  ignorePatterns: ['.eslintrc.cjs', 'eslint-template.cjs', 'dist/**/*'],
   rules: {
     curly: 'error',
     'no-console': 'error',
@@ -42,7 +42,6 @@ module.exports = {
     'prefer-promise-reject-errors': 'error',
     'prefer-template': 'error',
     'require-atomic-updates': 'error',
-    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
     'code-import-patterns/patterns': [
       'error',
       {
