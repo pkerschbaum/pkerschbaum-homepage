@@ -1,0 +1,94 @@
+---
+title: JS/TS monorepo setup
+published: true
+publishedAtISO: '2022-01-01T00:00:00.000Z'
+description: TODO
+shortenedURL: TODO
+tags: ['TODO']
+---
+
+Terminology:
+
+- "monorepo" = "workspace"
+- "package" = "project" = the JS/TS packages
+- "library monorepo" vs "organization monorepo"
+
+## Principles
+
+- **Autonomy of packages:** TSC/eslint/prettier can be configured per package; a package might not even use TypeScript
+- **No surprises:** No phantom dependencies; deterministic behavior during builds
+
+## Package Management
+
+> TL;DR use `pnpm` as package manager; avoid putting dependencies into root `node_modules` as much as possible.
+
+- hoisting of `node_modules` introduces many problems:
+  - phantom dependencies
+  - `@types/*` packages alter compilation process of TS projects in the monorepo.
+  - `eslint` might not find configs and plugins.
+  - violates "package autonomy"
+- npm workspaces and yarn classic workspaces are unusable because of their hoisting behavior of `node_modules`. Creates all the problems listed above. yarn classic allows to disable hoisting for specific packages or even altogether, but that has a huge impact on dependency installation duration and disk space.
+- pnpm has worked out the deduplication of `node_modules`. Uses symlinks instead of hoisting to deduplicate dependencies. Does not suffer from the problems listed above.
+- where to put dependencies? root `package.json` or in the package's `package.json`?
+  - guiding principle: be very restrictive of what you put into the root `package.json`. Eligible deps are
+    - deps related to Git Workflows (`husky`, `lint-staged`)
+    - deps related to Monorepo tooling (`nx`, `turborepo`)
+    - deps polyfilling binaries for platforms not supporting them (e.g. `rimraf`, `mkdirp`)
+    - and maybe prettier (to enforce exactly the same code formatting in the entire monorepo)
+  - `pnpm up` can be used to update dependencies across the monorepo, easens the drawback that many different versions of packages (say, `typescript`) are present in the monorepo in multiple places.
+- `.npmrc`:
+  - `strict-peer-dependencies=true` (peer dependencies must be present and have the correct version)
+  - `public-hoist-pattern[]=` (disable public-hoist-pattern entirely to avoid phantom dependencies)
+  - `save-workspace-protocol=true` (use the `workspace:` prefix in `package.json` files to make it explicit that the dependency is a workspace dependency)
+
+## Package Configuration
+
+- use a separate `tsconfig.json` for every package.
+
+  ```jsonc
+  {
+    "compilerOptions": {
+      /* ... */
+      "declaration": true,
+      "declarationMap": true,
+      "outDir": "./dist",
+      "sourceMap": true
+    }
+  }
+  ```
+
+- create a `eslint-template.cjs` containing a standard configuration for the entire monorepo, and let `.eslintrc.cjs` of every package inherit from that
+- make use of `exports` and `typesVersions` to define what is exported from the package
+- each package can/should implement some NPM scripts: `nuke`, `build`, `lint`, `compile`, ... can do whatever it wants in each script
+- all `eslint`-related deps are put in every `package.json`. Kind of noisy, but benefit is that problems with `eslint` execution are avoided, no surprises. Packages can also update their `eslint` deps independently.
+- `typescript` also per package
+
+## Task Orchestration and Build Process
+
+- `pnpm --recursive run`; runs in parallel as much as possible while respecting dependency DAG. Supports to filter (e.g. `--filter @repo/web...` will run the command on `@repo/web` and its dependencies, in inverse order etc.)
+- let packages implement `dev` script which should start a watcher, e.g. `tsc --watch --preserveWatchOutput`
+
+## Appendix: How-To Path Aliases
+
+- unfortunately, `tsc` does not support to replace path aliases in the emitted output
+- install `ts-patch` and `typescript-transform-paths`. Add `"postinstall": "ts-patch install -s"`.  
+  Add to `tsconfig.json`:
+
+  ```json
+  "plugins": [
+    {
+      "transform": "typescript-transform-paths"
+    },
+    {
+      "transform": "typescript-transform-paths",
+      "afterDeclarations": true
+    }
+  ]
+  ```
+
+## Appendix: Improve Cross-Package TS Intellisense using TS Project References
+
+- rename all `tsconfig.json`'s to `tsconfig.project.json`
+- create one `tsconfig.json` using project references to reference all of these projects. VS Code will pick up that tsconfig.
+
+## Appendix: Add Build Caching via `nx`
