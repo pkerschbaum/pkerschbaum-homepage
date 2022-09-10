@@ -4,7 +4,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "nuke": "pnpm run nuke:build",
+    "nuke": "pnpm run nuke:build && rimraf node_modules",
     "nuke:build": "rimraf dist generated/favicons-for-websites.json *.tsbuildinfo",
     "dev": "next dev",
     "build": "pnpm run nuke:build && pnpm run build:fetch-favicons-for-posts && pnpm run build:next && pnpm run build:sitemap",

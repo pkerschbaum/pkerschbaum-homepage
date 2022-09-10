@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "mr:nuke": "pnpm run mr:nuke:build && pnpm run mr:nuke:node-modules",
+    "mr:nuke": "nx run-many --target=nuke --all --parallel && pnpm run mr:nuke:node-modules",
     "mr:nuke:build": "nx run-many --target=nuke:build --all --parallel",
     "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
     "mr:lint": "nx run-many --target=lint:package --all --parallel",
@@ -21,6 +21,6 @@
     "rimraf": "^3.0.2"
   },
   "engines": {
-    "pnpm": "^7.1.2"
+    "pnpm": "^7.11.0"
   }
 }

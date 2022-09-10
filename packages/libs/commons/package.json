@@ -16,7 +16,7 @@
   },
   "scripts": {
     "postinstall": "ts-patch install -s",
-    "nuke": "pnpm run nuke:build",
+    "nuke": "pnpm run nuke:build && rimraf node_modules",
     "nuke:build": "rimraf dist *.tsbuildinfo",
     "build": "tsc -p ./tsconfig.project.json",
     "lib:watch": "pnpm run build --watch --preserveWatchOutput",

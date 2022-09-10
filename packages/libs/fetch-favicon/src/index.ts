@@ -12,7 +12,7 @@ import { fetchFaviconURLs } from '#/favicon.js';
 export async function fetchFaviconsForAllHrefs(
   absolutePathToPosts: string,
 ): Promise<FaviconsForWebsites> {
-  // Preparation: fetch list of posts and start browser
+  // Preparation: fetch list of posts from disk and start browser
   let fileNamesOfPosts = await fs.promises.readdir(absolutePathToPosts);
   fileNamesOfPosts = fileNamesOfPosts.filter((path) => path.endsWith('.mdx'));
 
