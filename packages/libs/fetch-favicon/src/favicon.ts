@@ -28,6 +28,9 @@ export async function fetchFaviconURLs(
     gotoPageAndExtractFaviconURLFromPage(pageDark, website),
   ]);
 
+  // Close the pages
+  await Promise.all([pageLight.close(), pageDark.close()]);
+
   return { icons: { light, dark } };
 }
 
