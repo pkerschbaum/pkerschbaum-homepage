@@ -15,15 +15,16 @@
     }
   },
   "scripts": {
-    "postinstall": "ts-patch install -s",
-    "nuke": "pnpm run nuke:build && rimraf node_modules",
-    "nuke:build": "rimraf dist *.tsbuildinfo",
-    "build": "tsc -p ./tsconfig.project.json",
-    "lib:watch": "pnpm run build --watch --preserveWatchOutput",
+    "prepare": "ts-patch install -s",
+    "pkg:nuke": "pnpm run pkg:nuke:artifacts && rimraf node_modules",
+    "pkg:nuke:artifacts": "rimraf dist *.tsbuildinfo",
+    "compile": "tsc -p ./tsconfig.project.json",
+    "pkg:build": "pnpm run compile",
+    "pkg:lib:watch": "pnpm run pkg:build --watch --preserveWatchOutput",
     "lint": "eslint --max-warnings 0",
-    "lint:package": "pnpm run lint .",
-    "lint:package:fix": "pnpm run lint:package --fix",
-    "compile": "tsc -p ./tsconfig.project.json --noEmit"
+    "pkg:lint": "pnpm run lint .",
+    "pkg:lint:fix": "pnpm run pkg:lint --fix",
+    "pkg:compile:dry-run": "pnpm run compile --noEmit"
   },
   "dependencies": {
     "@pkerschbaum/ts-utils": "^0.0.1",

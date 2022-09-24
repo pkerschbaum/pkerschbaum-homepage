@@ -4,20 +4,20 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "nuke": "pnpm run nuke:build && rimraf node_modules",
-    "nuke:build": "rimraf dist generated/favicons-for-websites.json *.tsbuildinfo",
+    "pkg:nuke": "pnpm run pkg:nuke:artifacts && rimraf node_modules",
+    "pkg:nuke:artifacts": "rimraf dist generated/favicons-for-websites.json *.tsbuildinfo",
     "dev": "next dev",
-    "build": "pnpm run nuke:build && pnpm run build:fetch-favicons-for-posts && pnpm run build:next && pnpm run build:sitemap",
+    "pkg:build": "pnpm run pkg:nuke:artifacts && pnpm run build:fetch-favicons-for-posts && pnpm run build:next && pnpm run build:sitemap",
     "build:fetch-favicons-for-posts": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-posts.ts",
     "build:next": "next build",
     "build:sitemap": "next-sitemap --config next-sitemap.cjs",
     "export": "next export",
     "start": "next start",
     "lint": "eslint --max-warnings 0",
-    "lint:package": "pnpm run lint .",
-    "lint:package:fix": "pnpm run lint:package --fix",
-    "compile": "tsc -p ./tsconfig.project.json --noEmit",
-    "lib:watch": "pnpm run compile --watch --preserveWatchOutput"
+    "pkg:lint": "pnpm run lint .",
+    "pkg:lint:fix": "pnpm run pkg:lint --fix",
+    "pkg:compile:dry-run": "tsc -p ./tsconfig.project.json --noEmit",
+    "pkg:lib:watch": "pnpm run pkg:compile:dry-run --watch --preserveWatchOutput"
   },
   "nx": {
     "targets": {

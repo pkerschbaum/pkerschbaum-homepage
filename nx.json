@@ -6,7 +6,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "compile", "lint:package", "lint:package:fix"]
+        "cacheableOperations": ["pkg:build", "pkg:compile:dry-run", "pkg:lint", "pkg:lint:fix"]
       }
     }
   },
@@ -18,7 +18,7 @@
     "outputs": ["{projectRoot}/dist/**/*"]
   },
   "targetDefaults": {
-    "build": {
+    "pkg:build": {
       "inputs": [
         "sources",
         "package-files",
@@ -26,9 +26,9 @@
         { "input": "outputs", "projects": "dependencies" }
       ],
       "outputs": ["{projectRoot}/dist/**/*"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^pkg:build"]
     },
-    "compile": {
+    "pkg:compile:dry-run": {
       "inputs": [
         "sources",
         "package-files",
@@ -36,9 +36,9 @@
         { "input": "outputs", "projects": "dependencies" }
       ],
       "outputs": [],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^pkg:build"]
     },
-    "lint:package": {
+    "pkg:lint": {
       "inputs": [
         "sources",
         "package-files",
@@ -47,9 +47,9 @@
         { "input": "outputs", "projects": "dependencies" }
       ],
       "outputs": [],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^pkg:build"]
     },
-    "lint:package:fix": {
+    "pkg:lint:fix": {
       "inputs": [
         "sources",
         "package-files",
@@ -58,7 +58,7 @@
         { "input": "outputs", "projects": "dependencies" }
       ],
       "outputs": ["{projectRoot}/src/**/*"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^pkg:build"]
     }
   }
 }

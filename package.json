@@ -3,15 +3,15 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "mr:nuke": "nx run-many --target=nuke --all --parallel && pnpm run mr:nuke:node-modules",
-    "mr:nuke:build": "nx run-many --target=nuke:build --all --parallel",
+    "mr:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run mr:nuke:node-modules",
+    "mr:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
     "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
-    "mr:lint": "nx run-many --target=lint:package --all --parallel",
-    "mr:lint:fix": "nx run-many --target=lint:package:fix --all --parallel",
+    "mr:lint": "nx run-many --target=pkg:lint --all --parallel",
+    "mr:lint:fix": "nx run-many --target=pkg:lint:fix --all --parallel",
     "mr:format": "prettier --write --ignore-unknown .",
-    "mr:build": "nx run-many --target=build --all",
-    "mr:compile": "nx run-many --target=compile --all",
-    "mr:libs:watch": "pnpm --parallel run lib:watch"
+    "mr:build": "nx run-many --target=pkg:build --all",
+    "mr:compile:dry-run": "nx run-many --target=pkg:compile:dry-run --all",
+    "mr:libs:watch": "pnpm --parallel run pkg:lib:watch"
   },
   "devDependencies": {
     "husky": "^8.0.1",
