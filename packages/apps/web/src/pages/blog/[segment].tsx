@@ -12,6 +12,7 @@ import {
   ArticleViewerContent,
   FaviconDataURLsForWebsiteURLs,
   FrontMatter,
+  Time,
 } from '#/components/article-viewer';
 import { Main } from '#/components/main';
 import { MDXViewer } from '#/components/mdx-viewer';
@@ -113,11 +114,6 @@ const InteractionSection = styled.div`
   gap: calc(4 * var(--spacing-base));
 `;
 
-const Time = styled.time`
-  color: var(--color-fg-less-emphasized);
-  text-transform: uppercase;
-`;
-
 const InteractionAnchor = styled(Anchor)`
   display: inline-flex;
   gap: calc(1 * var(--spacing-base));
@@ -164,8 +160,8 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
 };
 
 export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const posts = await getAllMarkdownFiles(PATHS.POSTS);
-  const paths = posts.map((post) => ({ params: { segment: post.segment } }));
+  const articles = await getAllMarkdownFiles(PATHS.POSTS);
+  const paths = articles.map((article) => ({ params: { segment: article.segment } }));
   return {
     paths,
     fallback: false,

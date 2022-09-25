@@ -36,6 +36,11 @@ export const FrontMatter = styled.div`
   text-align: center;
 `;
 
+export const Time = styled.time`
+  color: var(--color-fg-less-emphasized);
+  text-transform: uppercase;
+`;
+
 type StyleProps = {
   faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
 };
