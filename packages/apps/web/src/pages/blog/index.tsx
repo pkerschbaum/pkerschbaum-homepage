@@ -3,7 +3,7 @@ import type React from 'react';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogOverview } from '#/components/blog-overview';
+import { ArticlesList } from '#/components/articles-list';
 import { Main } from '#/components/main';
 import { MetadataTags } from '#/components/metadata-tags';
 import { PATHS } from '#/constants';
@@ -21,7 +21,7 @@ const BlogOverviewPage: React.FC<BlogOverviewPageProps> = ({ posts }) => {
       <Main>
         <h1>All Posts</h1>
 
-        <BlogOverview posts={posts} />
+        <ArticlesList pathPrefix="/blog" articles={posts} />
       </Main>
     </>
   );

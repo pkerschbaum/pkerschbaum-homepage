@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogOverview } from '#/components/blog-overview';
+import { ArticlesList } from '#/components/articles-list';
 import { Introduction } from '#/components/introduction';
 import { Main } from '#/components/main';
 import { MetadataTags } from '#/components/metadata-tags';
@@ -38,7 +38,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
 
         <HomepageSection>
           <SectionHeading>Blog Posts</SectionHeading>
-          <BlogOverview posts={posts} />
+          <ArticlesList pathPrefix="/blog" articles={posts} />
         </HomepageSection>
 
         {config.featureFlags.projects && (

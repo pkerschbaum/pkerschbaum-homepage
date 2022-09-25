@@ -4,26 +4,31 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogPostTile } from '#/components/blog-post-tile';
+import { ArticleTile } from '#/components/article-tile';
 import { QUERIES } from '#/constants';
 
-type BlogOverviewProps = {
-  posts: MDXFile[];
+type ArticlesListProps = {
+  pathPrefix: string;
+  articles: MDXFile[];
 };
 
-export const BlogOverview: React.FC<BlogOverviewProps> = ({ posts }) => {
+export const ArticlesList: React.FC<ArticlesListProps> = ({ pathPrefix, articles }) => {
   return (
-    <BlogOverviewContainer>
-      {posts
+    <ArticlesListContainer>
+      {articles
         .sort((a, b) => dayjs(b.frontmatter.publishedAtISO).diff(a.frontmatter.publishedAtISO))
-        .map((post) => (
-          <BlogPostTile key={post.segment} post={post} />
+        .map((article) => (
+          <ArticleTile
+            key={article.segment}
+            article={article}
+            href={`${pathPrefix}/${encodeURIComponent(article.segment)}`}
+          />
         ))}
-    </BlogOverviewContainer>
+    </ArticlesListContainer>
   );
 };
 
-const BlogOverviewContainer = styled.div`
+const ArticlesListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: calc(2 * var(--spacing-base));
