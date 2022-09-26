@@ -9,31 +9,31 @@ import { MetadataTags } from '#/components/metadata-tags';
 import { PATHS } from '#/constants';
 import { getAllMarkdownFiles } from '#/mdx';
 
-type NotesOverviewPageProps = {
-  notes: MDXFile[];
+type TidbitsOverviewPageProps = {
+  tidbits: MDXFile[];
 };
 
-const NotesOverviewPage: React.FC<NotesOverviewPageProps> = ({ notes }) => {
+const TidbitsOverviewPage: React.FC<TidbitsOverviewPageProps> = ({ tidbits }) => {
   return (
     <>
       {/* TODO description? */}
-      <MetadataTags title="Notes" description="" />
+      <MetadataTags title="Tidbits" description="" />
 
       <Main>
-        <h1>Notes</h1>
+        <h1>Tidbits</h1>
 
-        <ArticlesList pathPrefix="/notes" articles={notes} />
+        <ArticlesList pathPrefix="/tidbits" articles={tidbits} />
       </Main>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<NotesOverviewPageProps> = async () => {
-  const notes = await getAllMarkdownFiles(PATHS.NOTES);
+export const getStaticProps: GetStaticProps<TidbitsOverviewPageProps> = async () => {
+  const tidbits = await getAllMarkdownFiles(PATHS.TIDBITS);
 
   return {
-    props: { notes },
+    props: { tidbits },
   };
 };
 
-export default NotesOverviewPage;
+export default TidbitsOverviewPage;

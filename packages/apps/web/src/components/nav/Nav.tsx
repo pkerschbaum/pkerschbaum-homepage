@@ -18,7 +18,7 @@ export const Nav: React.FC = () => {
 
       <SubNavContainer>
         <NavAnchor href="/blog">Blog</NavAnchor>
-        <NavAnchor href="/notes">Notes</NavAnchor>
+        <NavAnchor href="/tidbits">Tidbits</NavAnchor>
         {config.featureFlags.projects && <NavAnchor href="/projects">Projects</NavAnchor>}
       </SubNavContainer>
     </NavContainer>

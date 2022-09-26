@@ -2,8 +2,8 @@ import path from 'path';
 
 export const PATHS = {
   FAVICONS_FOR_WEBSITES: path.join(process.cwd(), 'generated', 'favicons-for-websites.json'),
-  POSTS: path.join(process.cwd(), 'src', 'posts'),
-  NOTES: path.join(process.cwd(), 'src', 'notes'),
+  POSTS: path.join(process.cwd(), 'src', 'writing', 'posts'),
+  TIDBITS: path.join(process.cwd(), 'src', 'writing', 'tidbits'),
   PUBLIC_DIR: path.join(process.cwd(), 'public'),
 };
 export const RSS_FEED_XML_SLUG = 'rss.xml';

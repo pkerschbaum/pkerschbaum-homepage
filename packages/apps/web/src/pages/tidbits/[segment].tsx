@@ -18,12 +18,15 @@ import { PATHS } from '#/constants';
 import { createFaviconsMapping } from '#/favicons/favicons';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
 
-type NotesPageProps = {
+type TidbitPageProps = {
   mdxParseResult: MDXParseResult;
   faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
 };
 
-const NotesPage: React.FC<NotesPageProps> = ({ mdxParseResult, faviconDataURLsForWebsiteURLs }) => {
+const TidbitPage: React.FC<TidbitPageProps> = ({
+  mdxParseResult,
+  faviconDataURLsForWebsiteURLs,
+}) => {
   useRemoteRefresh();
 
   return (
@@ -54,11 +57,11 @@ const NotesPage: React.FC<NotesPageProps> = ({ mdxParseResult, faviconDataURLsFo
 
 const schema_staticProps = z.object({ segment: z.string().min(1) });
 type StaticProps = z.infer<typeof schema_staticProps>;
-export const getStaticProps: GetStaticProps<NotesPageProps, StaticProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<TidbitPageProps, StaticProps> = async ({ params }) => {
   const parsedParams = schema_staticProps.parse(params);
 
   const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    PATHS.NOTES,
+    PATHS.TIDBITS,
     `${parsedParams.segment}.mdx`,
   );
 
@@ -73,7 +76,7 @@ export const getStaticProps: GetStaticProps<NotesPageProps, StaticProps> = async
 };
 
 export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const articles = await getAllMarkdownFiles(PATHS.NOTES);
+  const articles = await getAllMarkdownFiles(PATHS.TIDBITS);
   const paths = articles.map((article) => ({ params: { segment: article.segment } }));
   return {
     paths,
@@ -81,4 +84,4 @@ export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
   };
 };
 
-export default NotesPage;
+export default TidbitPage;
