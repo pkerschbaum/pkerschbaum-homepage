@@ -3,6 +3,52 @@ title: Sensible tsconfig.json Defaults
 published: true
 publishedAtISO: '2022-09-26T20:00:00.000Z'
 lastUpdatedAtISO: '2022-09-26T20:00:00.000Z'
-description: TODO
+description: The default tsconfig.json configuration I use in projects.
 tags: ['typescript']
 ---
+
+This is the `tsconfig.json` base configuration I start from when I set up a Node.js TypeScript ESM package.  
+It can also be used as a basis for web apps.
+
+Here it is:
+
+```jsonc
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2017",
+
+    /* Modules */
+    "module": "node16",
+    "paths": {
+      "#pkg/*": ["./src/*"]
+    },
+    "types": [],
+
+    /* Emit */
+    "declaration": true,
+    "declarationMap": true,
+    "klj": "error",
+    "outDir": "./dist",
+    "sourceMap": true,
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    /* Type Checking */
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    "strict": true,
+
+    /* Projects */
+    "incremental": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/node_modules"]
+}
+```
