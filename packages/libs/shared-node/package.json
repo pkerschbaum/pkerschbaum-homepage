@@ -27,7 +27,7 @@
     "pkg:compile:dry-run": "pnpm run compile --noEmit"
   },
   "dependencies": {
-    "tiny-invariant": "^1.2.0",
+    "tiny-invariant": "^1.3.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "eslint-plugin-regexp": "^1.7.0",
     "prettier": "^2.7.1",
     "ts-patch": "^2.0.1",
-    "typescript": "^4.7.4",
+    "typescript": "^4.8.4",
     "typescript-transform-paths": "^3.3.1"
   }
 }

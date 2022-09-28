@@ -1,7 +1,7 @@
 import { arrays, check } from '@pkerschbaum/ts-utils';
 import fs from 'fs';
 import pptr from 'puppeteer';
-import { default as invariant } from 'tiny-invariant';
+import invariant from 'tiny-invariant';
 
 import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
