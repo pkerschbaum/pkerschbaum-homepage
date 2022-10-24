@@ -1,43 +1,26 @@
 {
+  "extends": "../../../tsconfig.workspace.json",
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es5",
 
     /* Modules */
+    "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "baseUrl": ".",
     "paths": {
       "#/*": ["./src/*"]
     },
+    "resolveJsonModule": true,
+    "types": ["node"],
 
     /* JavaScript Support */
     "allowJs": true,
 
     /* Emit */
-    "noEmit": true,
-    "importsNotUsedAsValues": "error",
-
-    /* Interop Constraints */
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-
-    /* Type Checking */
-    "strict": true,
-    "allowUnreachableCode": false,
-    "noFallthroughCasesInSwitch": true,
-
-    /* Projects */
-    "composite": true,
-    "incremental": true,
-
-    /* Completeness */
-    "skipLibCheck": true
+    "noEmit": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

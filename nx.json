@@ -13,7 +13,11 @@
   "namedInputs": {
     "sources": ["{projectRoot}/src/**/*"],
     "package-files": ["{projectRoot}/package.json"],
-    "tsc-files": ["{projectRoot}/tsconfig.project.json", "{projectRoot}/*.tsbuildinfo"],
+    "tsc-files": [
+      "{workspaceRoot}/tsconfig.workspace.json",
+      "{projectRoot}/tsconfig.project.json",
+      "{projectRoot}/*.tsbuildinfo"
+    ],
     "eslint-files": ["{workspaceRoot}/packages/eslint-template.cjs", "{projectRoot}/.eslintrc.cjs"],
     "outputs": ["{projectRoot}/dist/**/*"]
   },
