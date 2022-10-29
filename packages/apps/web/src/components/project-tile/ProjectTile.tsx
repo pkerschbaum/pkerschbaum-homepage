@@ -14,13 +14,7 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({ project }) => {
     <TileAnchor key={project.segment} href={`/projects/${encodeURIComponent(project.segment)}`}>
       <StyledTile>
         <ThumbnailWrapper>
-          <Thumbnail
-            src={project.thumbnailUrl}
-            alt=""
-            layout="fill"
-            objectFit="cover"
-            objectPosition="top center"
-          />
+          <Thumbnail src={project.thumbnailUrl} alt="" fill sizes="100vw" />
         </ThumbnailWrapper>
         <StyledTileContent>
           <Title>{project.title}</Title>
@@ -48,7 +42,10 @@ const ThumbnailWrapper = styled.span`
   position: relative;
 `;
 
-const Thumbnail = styled(Image)``;
+const Thumbnail = styled(Image)`
+  object-fit: cover;
+  object-position: top center;
+`;
 
 const StyledTileContent = styled(TileContent)`
   display: flex;

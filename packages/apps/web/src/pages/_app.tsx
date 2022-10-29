@@ -100,9 +100,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             <YearAndContact>
               <span>{dayjs().year()}</span>
               <span>-</span>
-              <Link href="/">
-                <a>pkerschbaum</a>
-              </Link>
+              <Link href="/">pkerschbaum</Link>
             </YearAndContact>
           </Footer>
         </RootContainer>

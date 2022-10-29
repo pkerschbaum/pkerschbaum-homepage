@@ -25,7 +25,6 @@ export const Introduction: React.FC = () => {
           alt="Picture of Patrick Kerschbaum"
           width={120}
           height={120}
-          objectFit="cover"
         />
       </ProfilePictureWrapper>
     </IntroductionContainer>
@@ -81,4 +80,5 @@ const ProfilePictureWrapper = styled.span`
 
 const ProfilePicture = styled(Image)`
   border-radius: 50%;
+  object-fit: cover;
 `;

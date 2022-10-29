@@ -1,14 +1,9 @@
 import path from 'path';
 import url from 'url';
 
-import bundleAnalyzer from '@next/bundle-analyzer';
 import remoteRefresh from 'next-remote-refresh';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
 
 const withRemoteRefresh = remoteRefresh({
   paths: [path.resolve(__dirname, 'src', 'posts')],

@@ -6,12 +6,6 @@ export type AnchorProps = React.ComponentPropsWithoutRef<'a'> & {
   href: string;
 };
 
-export const Anchor = styled(
-  ({ href, children, ...delegated }: React.PropsWithChildren<AnchorProps>) => (
-    <Link href={href} passHref>
-      <StyledAnchor {...delegated}>{children}</StyledAnchor>
-    </Link>
-  ),
-)``;
-
-const StyledAnchor = styled.a``;
+export const Anchor = styled(({ children, ...delegated }: React.PropsWithChildren<AnchorProps>) => (
+  <Link {...delegated}>{children}</Link>
+))``;
