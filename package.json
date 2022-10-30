@@ -6,6 +6,7 @@
     "mr:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run mr:nuke:node-modules",
     "mr:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
     "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
+    "mr:nuke:compute-cache": "rimraf node_modules/.cache/nx",
     "mr:lint": "nx run-many --target=pkg:lint --all --parallel",
     "mr:lint:fix": "nx run-many --target=pkg:lint:fix --all --parallel",
     "mr:format": "prettier --write --ignore-unknown .",
@@ -16,7 +17,7 @@
   "devDependencies": {
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "nx": "^14.4.3",
+    "nx": "^15.0.4",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2"
   },
