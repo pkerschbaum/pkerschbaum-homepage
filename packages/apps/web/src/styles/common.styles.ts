@@ -5,14 +5,14 @@ export const commonStyles = {
    * based on https://www.joshwcomeau.com/snippets/react-components/visually-hidden/
    */
   visuallyHidden: css`
-    display: inline-block;
     position: absolute;
+    display: inline-block;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
     overflow: hidden;
     clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
     border: 0;
   `,
 };

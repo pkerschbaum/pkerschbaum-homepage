@@ -10,26 +10,28 @@ export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 };
 
 export const FullBleedHeader = styled.header`
-  flex-shrink: 0;
-  align-self: stretch;
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   z-index: 1;
+
+  flex-shrink: 0;
+  align-self: stretch;
 
   background-color: var(--color-bg);
 `;
 
 export const HeaderContent = styled.div`
-  max-width: var(--app-max-width);
-  margin: 0 auto;
-  padding-block-start: var(--spacing-base);
-  padding-inline: var(--app-padding-inline);
   display: flex;
+  gap: calc(4 * var(--spacing-base));
   align-items: center;
   justify-content: space-between;
-  gap: calc(4 * var(--spacing-base));
+
+  max-width: var(--app-max-width);
+  padding-block-start: var(--spacing-base);
+  padding-inline: var(--app-padding-inline);
+  margin: 0 auto;
 
   overflow: hidden;
 

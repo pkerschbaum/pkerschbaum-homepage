@@ -38,7 +38,9 @@ function computeEslintShellCommandsPerPackage(files) {
       continue;
     }
     eslintCommandsToExecute.push(
-      `pnpm --filter "${nameOfPackage}" run lint ${filesList.map((file) => `"${file}"`).join(' ')}`,
+      `pnpm --filter "${nameOfPackage}" run pkg:lint:file ${filesList
+        .map((file) => `"${file}"`)
+        .join(' ')}`,
     );
   }
 

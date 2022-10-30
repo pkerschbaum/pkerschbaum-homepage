@@ -55,15 +55,15 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
 const HomepageContainer = styled(Main)`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: calc(8 * var(--spacing-base));
+  align-items: stretch;
 `;
 
 const HomepageSection = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: calc(1.5 * var(--spacing-base));
+  align-items: center;
 `;
 
 const SectionHeading = styled.h2`

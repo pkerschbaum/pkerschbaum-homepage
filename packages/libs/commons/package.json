@@ -24,6 +24,7 @@
     "lint": "eslint --max-warnings 0",
     "pkg:lint": "pnpm run lint .",
     "pkg:lint:fix": "pnpm run pkg:lint --fix",
+    "pkg:lint:file": "pnpm run lint",
     "pkg:compile:dry-run": "pnpm run compile --noEmit"
   },
   "dependencies": {

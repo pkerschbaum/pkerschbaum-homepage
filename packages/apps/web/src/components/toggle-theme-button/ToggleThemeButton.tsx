@@ -18,18 +18,18 @@ export const ToggleThemeButton: React.FC = () => {
 };
 
 const ToggleThemeIconButton = styled(IconButton)`
-  flex-shrink: 0;
-
-  display: grid;
-  place-items: center;
-
   --transition-duration: 500ms;
   --transition-translatey-distance: 250%;
+
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+
   overflow: hidden;
 
   & > * {
-    grid-column: 1 / -1;
     grid-row: 1 / -1;
+    grid-column: 1 / -1;
   }
 `;
 

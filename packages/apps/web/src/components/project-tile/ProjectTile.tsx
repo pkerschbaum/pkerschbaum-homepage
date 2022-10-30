@@ -27,19 +27,19 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({ project }) => {
 
 const StyledTile = styled(Tile)`
   display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 1fr;
   grid-template-areas: 'thumbnail description';
+  grid-template-rows: 1fr;
+  grid-template-columns: 200px 1fr;
   align-items: stretch;
 `;
 
 const ThumbnailWrapper = styled.span`
+  position: relative;
   grid-area: thumbnail;
-  height: 100%;
-  max-height: 100%;
   width: 100%;
   max-width: 100%;
-  position: relative;
+  height: 100%;
+  max-height: 100%;
 `;
 
 const Thumbnail = styled(Image)`

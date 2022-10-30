@@ -28,11 +28,10 @@ export const SocialMediaLinks: React.FC = () => (
 );
 
 const LinksList = styled.ul`
-  flex-shrink: 0;
-
   display: flex;
-  align-items: baseline;
+  flex-shrink: 0;
   gap: calc(3 * var(--spacing-base));
+  align-items: baseline;
 `;
 
 const LinkElement = styled.li``;

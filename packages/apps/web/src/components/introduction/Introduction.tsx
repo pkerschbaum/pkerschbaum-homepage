@@ -32,30 +32,31 @@ export const Introduction: React.FC = () => {
 };
 
 const VisuallyHiddenHeadline = styled.h1`
-  ${commonStyles.visuallyHidden}
+  /* stylelint-disable */
+  ${commonStyles.visuallyHidden}/* stylelint-enable */
 `;
 
 const IntroductionContainer = styled.section`
-  max-width: var(--box-width-sm);
-  margin-block-start: calc(8 * var(--spacing-base));
-  margin-block-end: calc(4 * var(--spacing-base));
-  align-self: center;
-
   display: grid;
-  grid-template-columns: max-content 1fr;
   grid-template-areas:
     'profile-picture greeting'
     'profile-picture message'
     'profile-picture message-details';
-  grid-column-gap: calc(3 * var(--spacing-base));
+  grid-template-columns: max-content 1fr;
   grid-row-gap: calc(0.5 * var(--spacing-base));
+  grid-column-gap: calc(3 * var(--spacing-base));
   align-items: center;
+
+  align-self: center;
+  max-width: var(--box-width-sm);
+  margin-block-start: calc(8 * var(--spacing-base));
+  margin-block-end: calc(4 * var(--spacing-base));
 `;
 
 const Greeting = styled.h2`
-  margin-block: 0;
   grid-area: greeting;
   align-self: end;
+  margin-block: 0;
 `;
 
 const Message = styled.p`
@@ -65,12 +66,11 @@ const Message = styled.p`
 `;
 
 const Location = styled.p`
-  grid-area: message-details;
-  align-self: start;
-
   display: flex;
-  align-items: center;
+  grid-area: message-details;
   gap: calc(0.75 * var(--spacing-base));
+  align-items: center;
+  align-self: start;
 `;
 
 const ProfilePictureWrapper = styled.span`

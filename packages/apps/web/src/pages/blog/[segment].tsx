@@ -118,14 +118,15 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
 };
 
 const BlogPostContainer = styled.article`
-  width: 100%;
   --max-width: var(--box-width-md);
-  max-width: var(--max-width);
-  align-self: center;
 
   display: flex;
   flex-direction: column;
   gap: calc(4 * var(--spacing-base));
+  align-self: center;
+
+  width: 100%;
+  max-width: var(--max-width);
 `;
 
 type StyleProps = {
@@ -137,15 +138,16 @@ const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
     margin-block: 1em;
   }
   & ul {
-    margin-block: 0.75em;
     --ul-padding-inline-start: 20px;
+
     padding-inline-start: var(--ul-padding-inline-start);
-  }
-  & ul li {
-    list-style-type: initial;
+    margin-block: 0.75em;
   }
   & li {
     margin-block: 0.5em;
+  }
+  & ul li {
+    list-style-type: initial;
   }
   & li:first-of-type {
     margin-block-start: 0;
@@ -164,10 +166,11 @@ const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
       background-image: url(DATA_URL_OF_PLAYWRIGHT_FAVICON);
     }
    */
-  & ${StyledAnchor}::before {
+  & ${/* sc-selector */ StyledAnchor}::before {
     display: none;
   }
 
+  /* stylelint-disable */
   ${({ styleProps }) => {
     const lightIconsCss = Object.values(styleProps.faviconDataURLsForWebsiteURLs.lightIcons).map(
       (icon) => {
@@ -202,6 +205,7 @@ const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
 
     return [...lightIconsCss, ...darkIconsCss];
   }}
+  /* stylelint-enable */
 
   /* 
     Code blocks should span entire width.
@@ -233,8 +237,8 @@ const InteractionSection = styled.div`
 const FrontMatter = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--spacing-base);
+  align-items: center;
 
   text-align: center;
 `;
@@ -246,8 +250,8 @@ const Time = styled.time`
 
 const InteractionAnchor = styled(Anchor)`
   display: inline-flex;
-  align-items: center;
   gap: calc(1 * var(--spacing-base));
+  align-items: center;
 
   font-size: var(--font-size-sm);
 `;
@@ -259,8 +263,8 @@ const ContactTeaserWrapper = styled(FullBleedWrapper)`
 `;
 
 const ContactTeaser = styled.div`
-  margin-inline: auto;
   max-width: var(--max-width);
+  margin-inline: auto;
 `;
 
 const ContactTeaserHeadline = styled.h2`

@@ -28,14 +28,14 @@ export const StyledAnchor = styled(Anchor)`
   word-break: break-all;
 
   &&::before {
-    content: '';
-    vertical-align: sub;
-    margin-inline-end: calc(0.5 * var(--spacing-base));
-    height: calc(1.2 * 1em);
     width: 1em;
+    height: calc(1.2 * 1em);
+    margin-inline-end: calc(0.5 * var(--spacing-base));
+    vertical-align: sub;
+    content: '';
 
-    background-position: center;
     background-repeat: no-repeat;
+    background-position: center;
     background-size: 1em 1em;
   }
 `;

@@ -3,5 +3,9 @@
   "typescript.tsdk": "./packages/apps/web/node_modules/typescript/lib",
   "search.exclude": {
     "**/dist": true
-  }
+  },
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss", "typescript", "typescriptreact"]
 }

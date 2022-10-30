@@ -25,23 +25,24 @@ export const Nav: React.FC = () => {
 };
 
 const NavContainer = styled.nav`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
   --nav-column-gap: calc(3 * var(--spacing-base));
-  column-gap: var(--nav-column-gap);
+
+  display: flex;
+  flex-wrap: wrap;
   row-gap: calc(1 * var(--spacing-base));
+  column-gap: var(--nav-column-gap);
+  align-items: center;
 `;
 
 const SubNavContainer = styled.div`
   display: flex;
-  align-items: center;
   gap: var(--nav-column-gap);
+  align-items: center;
 `;
 
 const NavAnchor = styled(Anchor)`
-  color: inherit;
   font-size: var(--font-size-xl);
+  color: inherit;
   text-decoration: none;
 
   &:hover {
@@ -51,17 +52,19 @@ const NavAnchor = styled(Anchor)`
 `;
 
 const NavHomeAnchor = styled(NavAnchor)`
-  display: grid;
-  grid-template: 'container';
+  --animation-duration: 400ms;
 
-  line-height: 1;
+  display: grid;
+  grid-template-areas: 'container';
+
+  width: 180px;
+
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-bold);
+  line-height: 1;
   text-transform: uppercase;
 
-  --animation-duration: 400ms;
   transition: width var(--animation-duration);
-  width: 180px;
   *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
     width: 40px;
   }
@@ -82,9 +85,10 @@ const NavHomeAnchorText = styled.div`
 `;
 
 const NavHomeAnchorLogo = styled.div`
-  width: fit-content;
   display: flex;
   align-items: center;
+
+  width: fit-content;
 
   *:root:not([${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}']) & {
     animation-name: ${Animations.SLIDE_LEFT};

@@ -48,6 +48,7 @@ module.exports = {
     'eslint-config-next-core-web-vitals-fixed.cjs',
     'next.config.js',
     'next-sitemap.cjs',
+    'stylelint.config.cjs',
   ],
   rules: {
     ...baseEslintConfig.rules,

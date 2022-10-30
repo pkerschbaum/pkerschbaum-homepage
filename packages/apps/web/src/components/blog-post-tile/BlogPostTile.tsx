@@ -26,28 +26,28 @@ export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => (
 );
 
 const PostTileContent = styled(TileContent)`
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  height: 100%;
 `;
 
 const TagsArea = styled.ul`
-  /* some margin-block-start for optical alignment */
-  margin-block-start: 4px;
-
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: calc(1 * var(--spacing-base));
+  align-items: center;
+
+  /* some margin-block-start for optical alignment */
+  margin-block-start: 4px;
 `;
 
 const Tag = styled.li`
   padding: calc(0.5 * var(--spacing-base)) calc(1 * var(--spacing-base));
 
-  white-space: pre;
   font-size: var(--font-size-sm);
-  border-radius: 4px;
+  white-space: pre;
   background-color: var(--color-bg-emphasized);
+  border-radius: 4px;
 `;

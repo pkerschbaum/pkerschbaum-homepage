@@ -110,43 +110,43 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 };
 
 const RootContainer = styled.div`
-  min-height: 100%;
   --app-padding-inline: calc(1.5 * var(--spacing-base));
   --app-max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
-  max-width: var(--app-max-width);
-  margin: 0 auto;
 
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-base));
+  align-items: stretch;
+
+  max-width: var(--app-max-width);
+  min-height: 100%;
   padding-block-start: calc(2 * var(--spacing-base));
   padding-block-end: calc(3 * var(--spacing-base));
   padding-inline: var(--app-padding-inline);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: calc(2 * var(--spacing-base));
+  margin: 0 auto;
 `;
 
 const AnchorAndButtonsArea = styled.div`
-  flex-shrink: 0;
-
   display: flex;
+  flex-shrink: 0;
   gap: calc(3 * var(--spacing-base));
 `;
 
 const Footer = styled.footer`
-  padding-block-start: calc(4 * var(--spacing-base));
-  flex-shrink: 0;
-
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex-shrink: 0;
   gap: calc(2 * var(--spacing-base));
+  align-items: center;
+
+  padding-block-start: calc(4 * var(--spacing-base));
 `;
 
 const YearAndContact = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: calc(1 * var(--spacing-base));
+  align-items: center;
+  justify-content: center;
 `;
 
 export default MyApp;
