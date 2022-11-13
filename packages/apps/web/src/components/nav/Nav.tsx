@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { PenTool } from 'react-feather';
 import styled from 'styled-components';
 
 import { Favicon } from '#/components/favicon';
+import { Cookie, Topic } from '#/components/icon-library';
 import { config } from '#/config';
 import { Animations, DataAttribute, IsScrolled } from '#/constants';
 import { Anchor } from '#/elements';
@@ -17,9 +19,20 @@ export const Nav: React.FC = () => {
       </NavHomeAnchor>
 
       <SubNavContainer>
-        <NavAnchor href="/blog">Blog</NavAnchor>
-        <NavAnchor href="/tidbits">Tidbits</NavAnchor>
-        {config.featureFlags.projects && <NavAnchor href="/projects">Projects</NavAnchor>}
+        <NavAnchor href="/blog">
+          <PenTool size="1em" />
+          Blog
+        </NavAnchor>
+        <NavAnchor href="/tidbits">
+          <Cookie size="1em" />
+          Tidbits
+        </NavAnchor>
+        {config.featureFlags.projects && (
+          <NavAnchor href="/projects">
+            <Topic size="1em" />
+            Projects
+          </NavAnchor>
+        )}
       </SubNavContainer>
     </NavContainer>
   );
@@ -42,6 +55,11 @@ const SubNavContainer = styled.div`
 `;
 
 const NavAnchor = styled(Anchor)`
+  display: flex;
+  flex-shrink: 0;
+  gap: calc(1 * var(--spacing-base));
+  align-items: center;
+
   font-size: var(--font-size-xl);
   color: inherit;
   text-decoration: none;
@@ -49,6 +67,10 @@ const NavAnchor = styled(Anchor)`
   &:hover {
     color: inherit;
     text-decoration: revert;
+  }
+
+  & > *:nth-child(1) {
+    flex-shrink: 0;
   }
 `;
 

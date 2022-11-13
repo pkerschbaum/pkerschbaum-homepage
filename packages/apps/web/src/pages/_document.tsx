@@ -45,8 +45,8 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Cascadia Mono Font Faces */}
           <style
-            type="text/css"
             dangerouslySetInnerHTML={{
               __html: `
                 @font-face {
@@ -66,6 +66,7 @@ export default class MyDocument extends Document {
               `,
             }}
           />
+
           {/* favicons block generated with https://realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
@@ -75,15 +76,19 @@ export default class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff" />
-
           <meta property="og:image" content="/favicons/favicon-32x32.png" />
+
+          {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
           <noscript>
-            <style type="text/css">
-              {`
-              .${Classes.JS_REQUIRED} {
-                display:none !important;
-              }`}
-            </style>
+            <style
+              dangerouslySetInnerHTML={{
+                __html: `
+                  .${Classes.JS_REQUIRED} {
+                    display: none !important;
+                  }
+                `,
+              }}
+            />
           </noscript>
 
           {/* Plausible analytics */}
@@ -94,60 +99,70 @@ export default class MyDocument extends Document {
             src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
           />
 
+          {/* 
+              Some critical CSS which will disable animations until some data attribute is set on the 
+              root element. This will avoid running animations on mount of components.
+          */}
           <style
-            type="text/css"
             dangerouslySetInnerHTML={{
               __html: `
-              *:root:not([${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}']) * {
-                /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-              }
-            
-              *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] a,
-              *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] svg * {
-                transition: color 150ms, fill 150ms;
-              }
-
-              @keyframes ${Animations.HIDE} {
-                to {
-                  display: none;
+                *:root:not([${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}']) * {
+                  /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
+                  animation-duration: 0.001ms !important;
+                  animation-iteration-count: 1 !important;
+                  transition-duration: 0.001ms !important;
                 }
-              }
-
-              @keyframes ${Animations.SLIDE_LEFT} {
-                0% {
-                  transform: translateX(0%);
-                }
-                50% {
-                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-                }
-                50.1% {
-                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-                  display: none;
-                }
-                100% {
-                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-                  display: none;
-                }
-              }
               
-              @keyframes ${Animations.SLIDE_RIGHT} {
-                0% {
-                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
-                  display: none;
+                *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] a,
+                *:root[${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}'] svg * {
+                  transition: color 150ms, fill 150ms;
                 }
-                0.1% {
-                  transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+              `,
+            }}
+          />
+
+          {/* Some critical CSS defining keyframes animations */}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                @keyframes ${Animations.HIDE} {
+                  to {
+                    display: none;
+                  }
                 }
-                50% {
-                  transform: translateX(0%);
+
+                @keyframes ${Animations.SLIDE_LEFT} {
+                  0% {
+                    transform: translateX(0%);
+                  }
+                  50% {
+                    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                  }
+                  50.1% {
+                    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                    display: none;
+                  }
+                  100% {
+                    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                    display: none;
+                  }
                 }
-                100% {
-                  transform: translateX(0%);
+                
+                @keyframes ${Animations.SLIDE_RIGHT} {
+                  0% {
+                    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                    display: none;
+                  }
+                  0.1% {
+                    transform: translateX(calc(-100% + -1 * var(--app-padding-inline)));
+                  }
+                  50% {
+                    transform: translateX(0%);
+                  }
+                  100% {
+                    transform: translateX(0%);
+                  }
                 }
-              }
               `,
             }}
           />
