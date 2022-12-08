@@ -53,10 +53,10 @@ export const ArticleViewerContent = styled.div<{ styleProps: StyleProps }>`
     --ul-padding-inline-start: 20px;
 
     padding-inline-start: var(--ul-padding-inline-start);
-    margin-block: 0.75em;
+    margin-block: 0.5em;
   }
   & li {
-    margin-block: 0.5em;
+    margin-block: 0.25em;
   }
   & ul li {
     list-style-type: initial;

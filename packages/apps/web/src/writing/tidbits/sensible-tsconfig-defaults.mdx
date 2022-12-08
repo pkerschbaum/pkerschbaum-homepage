@@ -7,10 +7,7 @@ description: The default tsconfig.json configuration I use in projects.
 tags: ['typescript']
 ---
 
-This is the `tsconfig.json` base configuration I start from when I set up a Node.js TypeScript ESM package.  
-It can also be used as a basis for web apps.
-
-Here it is:
+This is the `tsconfig.json` base configuration I start from when I set up a TypeScript package:
 
 ```jsonc
 {
@@ -19,7 +16,6 @@ Here it is:
     "target": "ES2017",
 
     /* Modules */
-    "module": "node16",
     "paths": {
       "#pkg/*": ["./src/*"]
     },
@@ -28,7 +24,7 @@ Here it is:
     /* Emit */
     "declaration": true,
     "declarationMap": true,
-    "klj": "error",
+    "importsNotUsedAsValues": "error",
     "outDir": "./dist",
     "sourceMap": true,
 
@@ -52,3 +48,105 @@ Here it is:
   "exclude": ["**/node_modules"]
 }
 ```
+
+I use it for new packages and adjust it for the specific needs.
+
+See below the reasons for each compiler option:
+
+## `"target": "ES2017"`
+
+A lower target means the emitted JavaScript is supported by more browsers; a higher target will lead to smaller and more performant output (because e.g. `async/await` does not need to get transpiled to much more verbose promise chains).  
+So what target is the best tradeoff here? According to an article from <FancyAnchor href="https://web.dev/publish-modern-javascript/">web.dev from late 2020</FancyAnchor>, `ES2017` is a good tradeoff.
+It's supported by >95% of the browser market; has significant savings compared to `ES2016` or lower; and higher targets do not change that much anymore.
+
+## Path mapping `"#pkg/*"` pointing to the source
+
+Path aliases make imports cleaner, so it's a good idea to use them.
+
+But why do I use `#pkg/*` as an alias for the source folder?  
+Node.js has a feature called <FancyAnchor href="https://nodejs.org/api/packages.html#subpath-imports">Subpath imports</FancyAnchor> which allows to "create private mappings that only apply to import specifiers from within the package itself".
+With them, Node.js supports path aliases **natively**.  
+No need to configure the runtime or the build system anymore (using things like <FancyAnchor href="https://www.npmjs.com/package/tsconfig-paths">`tsconfig-paths`</FancyAnchor>) or <FancyAnchor href="https://www.npmjs.com/package/typescript-transform-paths">`typescript-transform-paths`</FancyAnchor>).
+
+Thing is: a Node.js private mapping must start with a `#` and at least one letter must follow, so `#/*` would not work.  
+I decided to go for `#pkg/*` because it emphasizes that import statements using this subpath import target sources inside our package.
+
+## `"types": []`
+
+I always explicitly set `"types"`, by default to `[]`.
+
+Why?
+The option `"types"` influences what types are included _implicitly_ in the compilation process.
+By default, if the option is not set, TS will include _all_ types located in the `@types` folder of any `node_modules` directory in the file system hierarchy.
+
+This behavior can introduce issues in monorepo setups where dependencies are hoisted to the root of the monorepo.
+For example, if `@types/node` is installed in any TS package in the monorepo (and dependencies are hoisted), _all_ TS packages in the monorepo will include those types in their compilation process!
+
+This can lead to problems like:
+
+- compilation errors
+- globals (e.g. `process`) being available in packages not related to Node.js
+- reduced compilation performance
+- etc.
+
+And here's an important detail: Types of dependencies explicitly referenced by `import` statements will always get included, so those are not affected by compiler option `"types"`.  
+Since many dependencies nowadays must be imported with `import` statements anyways, the default behavior does not provide benefits anymore.
+
+Therefore set
+
+- `"types": []` if no types must be added implicitly
+- `"types": ["node"]` in a Node.js package
+- `"types": ["node", "jest"]` if Jest globals are also needed
+
+etc.
+
+## Enabling `"sourceMap"`, `"declaration"` and `"declarationMap"`
+
+Given a source file `src/main.ts`, this configuration will emit the following files:
+
+- `dist/main.js`: the JavaScript code
+- `dist/main.js.map`: Emitted because of `sourceMap`.
+  Allows to debug `main.js` using the source file `main.ts`.
+  Also, if the runtime gets configured properly, stack traces will point to the `.ts` locations instead of `.js`.
+- `dist/main.d.ts`: Emitted because of `declaration`.
+  Type definitions for things exported by `main.js`.
+- `dist/main.d.ts.map`: Emitted because of `declarationMap`.
+  This is a source map for the type definitions `main.d.ts`.
+  One might wonders why we need a source map for type definitions, since they are never executed (and thus, things like debugging and stack traces play no role)?
+
+  Turns out that IDEs like VS Code can use that information for code navigation, things like "Go to Definition".
+  This is very useful for monorepos because it improves the cross-package editing experience.
+
+Important notes here:
+
+- For web projects we often don't want that TypeScript emits anything, since bundlers (like webpack) operate on the TypeScript sources directly.  
+  In such cases, I don't enable any of these three options and instead enable `noEmit`.
+- For libraries published to `npm`, it might be a good idea to not enable `declarationMap` because we might want package consumers to jump to the types (and not sources) if actions like "Go to Definition" are performed.
+
+## `"importsNotUsedAsValues": "error"`
+
+This forces you to use `import type` for import statements if the imported thing is used as a type only (and not used as a value).  
+Such imports will get fully erased when TypeScript compiles the sources to JavaScript.
+Also it can help tools like bundlers to determine better wether an import is needed at runtime or not.  
+The auto-import feature of VS Code will automatically use `import type` statements when this compiler option is set, so there are no downsides of setting this compiler option IMO.
+
+## Enabling `"isolatedModules"`
+
+TODO
+
+## `"allowUnreachableCode"` and `"noFallthroughCasesInSwitch"`
+
+TODO
+
+## Enabling `"incremental"`
+
+TODO
+
+## Other options
+
+All other compiler options are recommended by the <FancyAnchor href="https://www.typescriptlang.org/tsconfig">TSConfig Reference</FancyAnchor>, though not enabled by default.  
+These are:
+
+- {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#esModuleInterop">`esModuleInterop`</FancyAnchor>
+- {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames">`forceConsistentCasingInFileNames`</FancyAnchor>
+- {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#skipLibCheck">`skipLibCheck`</FancyAnchor>
