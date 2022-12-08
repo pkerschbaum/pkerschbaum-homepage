@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook';
+import path from 'path';
 import * as React from 'react';
 import { z } from 'zod';
 
@@ -61,8 +62,7 @@ export const getStaticProps: GetStaticProps<TidbitPageProps, StaticProps> = asyn
   const parsedParams = schema_staticProps.parse(params);
 
   const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    PATHS.TIDBITS,
-    `${parsedParams.segment}.mdx`,
+    path.join(PATHS.TIDBITS, `${parsedParams.segment}.mdx`),
   );
 
   const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);

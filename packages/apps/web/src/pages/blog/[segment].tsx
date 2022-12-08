@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import { useRouter } from 'next/router';
+import path from 'path';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
 import styled from 'styled-components';
@@ -145,8 +146,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
   const parsedParams = schema_staticProps.parse(params);
 
   const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    PATHS.POSTS,
-    `${parsedParams.segment}.mdx`,
+    path.join(PATHS.POSTS, `${parsedParams.segment}.mdx`),
   );
 
   const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);

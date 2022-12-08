@@ -16,15 +16,14 @@ type BundlerRehypePlugin = ArrayElement<
 const rehypePrismPlugin = rehypePrismGenerator(refractor) as BundlerRehypePlugin;
 
 export async function parseMDXFileAndCollectHrefs(
-  absolutePathToDirectory: string,
-  fileName: string,
+  fileAbsolutePath: string,
 ): Promise<MDXParseResult> {
-  const source = await fs.promises.readFile(path.join(absolutePathToDirectory, fileName), 'utf8');
+  const source = await fs.promises.readFile(fileAbsolutePath, 'utf8');
 
   const collectedHrefs: string[] = [];
   const bundleMDXResult = await bundleMDX({
     source,
-    cwd: absolutePathToDirectory,
+    cwd: path.parse(fileAbsolutePath).dir,
     mdxOptions: (options) => {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
