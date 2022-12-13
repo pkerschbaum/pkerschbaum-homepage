@@ -1,14 +1,27 @@
-import { default as fetch } from 'node-fetch';
+import { default as fetch, type Response } from 'node-fetch';
 
-export const binaryUtils = { fetchUrlAndConvertToDataURL };
+export const binaryUtils = {
+  fetchUrl,
+  convertBlobToDataURL,
+};
 
-async function fetchUrlAndConvertToDataURL(url: URL): Promise<string> {
-  const response = await fetch(url.href);
-  if (!response.ok || !`${response.status}`.startsWith('2')) {
+async function fetchUrl(url: URL): Promise<Response> {
+  let attempts = 1;
+  let response;
+  while (attempts <= 3 && !response) {
+    try {
+      response = await fetch(url.href);
+    } catch {
+      // ignore
+    }
+    attempts++;
+  }
+
+  if (!response || !response.ok || !`${response.status}`.startsWith('2')) {
     throw new Error(`could not fetch`);
   }
-  const blob = await response.blob();
-  return await convertBlobToDataURL(blob);
+
+  return response;
 }
 
 async function convertBlobToDataURL(blob: Blob): Promise<string> {

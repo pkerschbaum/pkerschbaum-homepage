@@ -54,7 +54,10 @@ export async function fetchFaviconsForAllHrefs(
   const icons: FaviconsForWebsites['icons'] = {};
   await Promise.all(
     allIconURLs.map(async (url) => {
-      icons[url.href] = { dataURL: await binaryUtils.fetchUrlAndConvertToDataURL(url) };
+      const response = await binaryUtils.fetchUrl(url);
+      const blob = await response.blob();
+      const dataURL = await binaryUtils.convertBlobToDataURL(blob);
+      icons[url.href] = { dataURL };
     }),
   );
 
