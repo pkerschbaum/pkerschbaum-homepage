@@ -16,8 +16,10 @@ type TidbitsOverviewPageProps = {
 const TidbitsOverviewPage: React.FC<TidbitsOverviewPageProps> = ({ tidbits }) => {
   return (
     <>
-      {/* TODO description? */}
-      <MetadataTags title="Tidbits" description="" />
+      <MetadataTags
+        title="Tidbits"
+        description="Short always-up-to-date articles written by Patrick Kerschbaum"
+      />
 
       <Main>
         <h1>Tidbits</h1>
