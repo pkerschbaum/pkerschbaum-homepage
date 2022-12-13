@@ -7,5 +7,5 @@ export type AnchorProps = React.ComponentPropsWithoutRef<'a'> & {
 };
 
 export const Anchor = styled(({ children, ...delegated }: React.PropsWithChildren<AnchorProps>) => (
-  <Link {...delegated}>{children}</Link>
+  <Link {...(delegated as React.ComponentPropsWithoutRef<typeof Link>)}>{children}</Link>
 ))``;

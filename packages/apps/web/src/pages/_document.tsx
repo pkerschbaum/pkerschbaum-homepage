@@ -13,7 +13,9 @@ import {
 } from '#/constants';
 
 export default class MyDocument extends Document {
-  public static async getInitialProps(ctx: Parameters<typeof Document.getInitialProps>[0]) {
+  public static override async getInitialProps(
+    ctx: Parameters<typeof Document.getInitialProps>[0],
+  ) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -41,7 +43,7 @@ export default class MyDocument extends Document {
     }
   }
 
-  public render() {
+  public override render() {
     return (
       <Html lang="en">
         <Head>

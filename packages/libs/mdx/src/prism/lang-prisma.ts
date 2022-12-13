@@ -4,7 +4,7 @@ import type { refractor } from 'refractor/lib/all.js';
 /* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group */
 export const prisma = (arg: unknown) => {
   const Prism = arg as typeof refractor;
-  Prism.languages.prisma = Prism.languages.extend('clike', {
+  Prism.languages['prisma'] = Prism.languages.extend('clike', {
     keyword: /\b(?:datasource|enum|generator|model|type)\b/,
     'type-class-name': /(\b()\s+)[\w.\\]+/,
   });
