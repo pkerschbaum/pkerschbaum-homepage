@@ -17,7 +17,7 @@ export function createCollectHrefsFromJsxElementsPlugin({
 }: CreateCollectHrefsFromJsxElementsPluginArgs) {
   return function collectHrefsFromJsxElementsPlugin() {
     return (tree: Root) => {
-      visit(tree, 'mdxJsxTextElement', (node: any) => {
+      visit(tree, ['mdxJsxFlowElement', 'mdxJsxTextElement'], (node: any) => {
         let hrefAttribute;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         for (const attribute of node.attributes) {
