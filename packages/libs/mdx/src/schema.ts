@@ -15,8 +15,8 @@ export const schema_frontmatterData = z.object({
   title: z.string(),
   published: z.boolean(),
   publishedAtISO: z.string(),
+  lastUpdatedAtISO: z.string().optional(),
   description: z.string(),
-  shortenedURL: z.string(),
   tags: z.array(z.string()),
 });
 export type FrontmatterData = z.infer<typeof schema_frontmatterData>;

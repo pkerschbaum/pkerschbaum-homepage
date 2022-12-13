@@ -5,27 +5,30 @@ import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
 import { Description, Tile, TileAnchor, TileContent, Title } from '#/elements';
 
-type BlogPostTileProps = {
-  post: MDXFile;
+type ArticleTileProps = {
+  article: MDXFile;
+  href: string;
 };
 
-export const BlogPostTile: React.FC<BlogPostTileProps> = ({ post }) => (
-  <TileAnchor key={post.segment} href={`/blog/${encodeURIComponent(post.segment)}`}>
+export const ArticleTile: React.FC<ArticleTileProps> = ({ article, href }) => (
+  <TileAnchor key={article.segment} href={href}>
     <Tile>
-      <PostTileContent>
-        <Title>{post.frontmatter.title}</Title>
-        <Description>{post.frontmatter.description}</Description>
+      <ArticleTileContent>
+        <Title>{article.frontmatter.title}</Title>
+        <Description>{article.frontmatter.description}</Description>
         <TagsArea>
-          {post.frontmatter.tags.map((tag) => (
+          {article.frontmatter.tags.map((tag) => (
             <Tag key={tag}>#{tag}</Tag>
           ))}
         </TagsArea>
-      </PostTileContent>
+      </ArticleTileContent>
     </Tile>
   </TileAnchor>
 );
 
-const PostTileContent = styled(TileContent)`
+const ArticleTileContent = styled(TileContent)`
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;

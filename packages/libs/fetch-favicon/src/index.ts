@@ -1,5 +1,4 @@
 import { arrays, check } from '@pkerschbaum/ts-utils';
-import fs from 'fs';
 import pptr from 'puppeteer';
 import invariant from 'tiny-invariant';
 
@@ -10,22 +9,16 @@ import type { FaviconsForWebsites } from '@pkerschbaum-homepage/shared-node/sche
 import { fetchFaviconURLs } from '#/favicon.js';
 
 export async function fetchFaviconsForAllHrefs(
-  absolutePathToPosts: string,
+  filesAbsolutePaths: string[],
 ): Promise<FaviconsForWebsites> {
-  // Preparation: fetch list of posts from disk and start browser
-  let fileNamesOfPosts = await fs.promises.readdir(absolutePathToPosts);
-  fileNamesOfPosts = fileNamesOfPosts.filter((path) => path.endsWith('.mdx'));
-
+  // Preparation: start browser
   const browser = await initializeBrowserInstance();
 
   // Step #1: Collect all hrefs of all posts (with duplicates removed)
   let hrefsOfAllPosts: string[] = [];
   await Promise.all(
-    fileNamesOfPosts.map(async (fileNameOfPost) => {
-      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(
-        absolutePathToPosts,
-        fileNameOfPost,
-      );
+    filesAbsolutePaths.map(async (fileAbsolutePath) => {
+      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(fileAbsolutePath);
       hrefsOfAllPosts.push(...collectedHrefs);
     }),
   );

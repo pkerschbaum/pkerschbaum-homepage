@@ -2,11 +2,13 @@ import { Feed } from 'feed';
 import fs from 'fs';
 import type { GetStaticProps } from 'next';
 import * as React from 'react';
+import { PenTool } from 'react-feather';
 import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { BlogOverview } from '#/components/blog-overview';
+import { ArticlesList } from '#/components/articles-list';
+import { Cookie, Topic } from '#/components/icon-library';
 import { Introduction } from '#/components/introduction';
 import { Main } from '#/components/main';
 import { MetadataTags } from '#/components/metadata-tags';
@@ -23,9 +25,10 @@ import { getAllMarkdownFiles } from '#/mdx';
 
 type HomePageProps = {
   posts: MDXFile[];
+  tidbits: MDXFile[];
 };
 
-const HomePage: React.FC<HomePageProps> = ({ posts }) => {
+const HomePage: React.FC<HomePageProps> = ({ posts, tidbits }) => {
   return (
     <>
       <MetadataTags
@@ -37,13 +40,27 @@ const HomePage: React.FC<HomePageProps> = ({ posts }) => {
         <Introduction />
 
         <HomepageSection>
-          <SectionHeading>Blog Posts</SectionHeading>
-          <BlogOverview posts={posts} />
+          <SectionHeading>
+            <PenTool size="1em" />
+            Blog Posts
+          </SectionHeading>
+          <ArticlesList pathPrefix="/blog" articles={posts} />
+        </HomepageSection>
+
+        <HomepageSection>
+          <SectionHeading>
+            <Cookie size="1em" />
+            Tidbits
+          </SectionHeading>
+          <ArticlesList pathPrefix="/tidbits" articles={tidbits} />
         </HomepageSection>
 
         {config.featureFlags.projects && (
           <HomepageSection>
-            <SectionHeading>Projects</SectionHeading>
+            <SectionHeading>
+              <Topic size="1em" />
+              Projects
+            </SectionHeading>
             <ProjectsOverview />
           </HomepageSection>
         )}
@@ -67,17 +84,24 @@ const HomepageSection = styled.section`
 `;
 
 const SectionHeading = styled.h2`
+  display: flex;
+  gap: calc(1 * var(--spacing-base));
+  align-items: center;
+
   margin-block: 0;
   font-size: var(--font-size-xxl);
 `;
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const posts = await getAllMarkdownFiles(PATHS.POSTS);
+  const [posts, tidbits] = await Promise.all([
+    getAllMarkdownFiles(PATHS.POSTS),
+    getAllMarkdownFiles(PATHS.TIDBITS),
+  ]);
 
   await generateAndStoreRssFeed(posts);
 
   return {
-    props: { posts },
+    props: { posts, tidbits },
   };
 };
 

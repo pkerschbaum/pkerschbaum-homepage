@@ -1,36 +1,29 @@
 import dayjs from 'dayjs';
-import fs from 'fs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import { useRouter } from 'next/router';
+import path from 'path';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
-import styled, { css } from 'styled-components';
-import invariant from 'tiny-invariant';
+import styled from 'styled-components';
 import { z } from 'zod';
 
-import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
-
-import { StyledAnchor } from '#/components/fancy-anchor';
+import {
+  ArticleViewerContainer,
+  ArticleViewerContent,
+  FaviconDataURLsForWebsiteURLs,
+  FrontMatter,
+  Time,
+} from '#/components/article-viewer';
 import { Main } from '#/components/main';
 import { MDXViewer } from '#/components/mdx-viewer';
 import { MetadataTags } from '#/components/metadata-tags';
 import { config } from '#/config';
-import { ColorTheme, DataAttribute, PATHS } from '#/constants';
+import { PATHS } from '#/constants';
 import { Anchor } from '#/elements';
 import { FullBleedWrapper } from '#/elements/FullBleedWrapper';
+import { createFaviconsMapping } from '#/favicons/favicons';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
-
-type IconURLToAssociatedWebsitesMap = {
-  [iconURL in string]?: {
-    iconDataURL: string;
-    associatedWebsites: string[];
-  };
-};
-type FaviconDataURLsForWebsiteURLs = {
-  lightIcons: IconURLToAssociatedWebsitesMap;
-  darkIcons: IconURLToAssociatedWebsitesMap;
-};
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
@@ -68,7 +61,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
       />
 
       <Main>
-        <BlogPostContainer>
+        <ArticleViewerContainer>
           <FrontMatter>
             <h1>{mdxParseResult.frontmatter.title}</h1>
             <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
@@ -77,9 +70,9 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
             </Time>
           </FrontMatter>
 
-          <BlogPostContent styleProps={{ faviconDataURLsForWebsiteURLs }}>
+          <ArticleViewerContent styleProps={{ faviconDataURLsForWebsiteURLs }}>
             <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-          </BlogPostContent>
+          </ArticleViewerContent>
 
           <InteractionSection>
             <InteractionAnchor href={twitterShareHref} target="_blank">
@@ -111,141 +104,15 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
               </p>
             </ContactTeaser>
           </ContactTeaserWrapper>
-        </BlogPostContainer>
+        </ArticleViewerContainer>
       </Main>
     </>
   );
 };
 
-const BlogPostContainer = styled.article`
-  --max-width: var(--box-width-md);
-
-  display: flex;
-  flex-direction: column;
-  gap: calc(4 * var(--spacing-base));
-  align-self: center;
-
-  width: 100%;
-  max-width: var(--max-width);
-`;
-
-type StyleProps = {
-  faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
-};
-
-const BlogPostContent = styled.div<{ styleProps: StyleProps }>`
-  & p {
-    margin-block: 1em;
-  }
-  & ul {
-    --ul-padding-inline-start: 20px;
-
-    padding-inline-start: var(--ul-padding-inline-start);
-    margin-block: 0.75em;
-  }
-  & li {
-    margin-block: 0.5em;
-  }
-  & ul li {
-    list-style-type: initial;
-  }
-  & li:first-of-type {
-    margin-block-start: 0;
-  }
-
-  /* 
-    Add icons to FancyAnchors.
-    We construct CSS such that we transmit every data URL only once and apply it to the associated
-    FancyAnchors via attribute selectors.
-
-    @example
-    & FancyAnchor[href="https://playwright.dev/docs/test-fixtures"]::before,
-    & FancyAnchor[href="https://playwright.dev/docs/test-advanced#projects"]::before,
-    & FancyAnchor[href="https://playwright.dev/docs/test-components#planned-work"]::before {
-      display: inline-block;
-      background-image: url(DATA_URL_OF_PLAYWRIGHT_FAVICON);
-    }
-   */
-  & ${/* sc-selector */ StyledAnchor}::before {
-    display: none;
-  }
-
-  /* stylelint-disable */
-  ${({ styleProps }) => {
-    const lightIconsCss = Object.values(styleProps.faviconDataURLsForWebsiteURLs.lightIcons).map(
-      (icon) => {
-        invariant(icon);
-        return css`
-          ${icon.associatedWebsites
-            .map((url) => `& ${StyledAnchor}[href="${url}"]::before`)
-            .join(', ')} {
-            display: inline-block;
-            background-image: url(${icon.iconDataURL});
-          }
-        `;
-      },
-    );
-
-    const darkIconsCss = Object.values(styleProps.faviconDataURLsForWebsiteURLs.darkIcons).map(
-      (icon) => {
-        invariant(icon);
-        return css`
-          ${icon.associatedWebsites
-            .map(
-              (url) =>
-                `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] & ${StyledAnchor}[href="${url}"]::before`,
-            )
-            .join(', ')} {
-            display: inline-block;
-            background-image: url(${icon.iconDataURL});
-          }
-        `;
-      },
-    );
-
-    return [...lightIconsCss, ...darkIconsCss];
-  }}
-  /* stylelint-enable */
-
-  /* 
-    Code blocks should span entire width.
-    We have to undo the app padding and margin-inline-start of ul/ol list elements (if a code block is inside such an element).
-   */
-  & > pre {
-    margin-inline-start: calc(-1 * var(--app-padding-inline));
-    margin-inline-end: calc(-1 * var(--app-padding-inline));
-  }
-  & ul > li > pre,
-  & ol > li > pre {
-    width: calc(100% + 2 * var(--app-padding-inline) + var(--ul-padding-inline-start));
-    margin-inline-start: calc(-1 * (var(--app-padding-inline) + var(--ul-padding-inline-start)));
-  }
-  & ul ul > li > pre,
-  & ol ol > li > pre {
-    width: calc(100% + 2 * var(--app-padding-inline) + 2 * var(--ul-padding-inline-start));
-    margin-inline-start: calc(
-      -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
-    );
-  }
-`;
-
 const InteractionSection = styled.div`
   display: flex;
   gap: calc(4 * var(--spacing-base));
-`;
-
-const FrontMatter = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-base);
-  align-items: center;
-
-  text-align: center;
-`;
-
-const Time = styled.time`
-  color: var(--color-fg-less-emphasized);
-  text-transform: uppercase;
 `;
 
 const InteractionAnchor = styled(Anchor)`
@@ -273,56 +140,16 @@ const ContactTeaserHeadline = styled.h2`
 
 const schema_staticProps = z.object({ segment: z.string().min(1) });
 type StaticProps = z.infer<typeof schema_staticProps>;
-const faviconsForWebsitesReadPromise = fs.promises.readFile(PATHS.FAVICONS_FOR_WEBSITES, {
-  encoding: 'utf-8',
-});
 export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
   params,
 }) => {
   const parsedParams = schema_staticProps.parse(params);
 
-  const [mdxParseResult, faviconsForWebsitesString] = await Promise.all([
-    parseMDXFileAndCollectHrefs(PATHS.POSTS, `${parsedParams.segment}.mdx`),
-    faviconsForWebsitesReadPromise,
-  ]);
-
-  const faviconsForWebsites = schema_faviconsForWebsites.parse(
-    JSON.parse(faviconsForWebsitesString),
+  const mdxParseResult = await parseMDXFileAndCollectHrefs(
+    path.join(PATHS.POSTS, `${parsedParams.segment}.mdx`),
   );
-  const faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs = {
-    lightIcons: {},
-    darkIcons: {},
-  };
-  for (const collectedHref of mdxParseResult.collectedHrefs) {
-    const iconURLs = faviconsForWebsites.websites[collectedHref]?.iconURLs;
 
-    let lightIconDataURL;
-    if (iconURLs?.light) {
-      lightIconDataURL = faviconsForWebsites.icons[iconURLs.light]?.dataURL;
-
-      if (lightIconDataURL) {
-        let matching = faviconDataURLsForWebsiteURLs.lightIcons[iconURLs.light];
-        if (!matching) {
-          matching = { iconDataURL: lightIconDataURL, associatedWebsites: [] };
-          faviconDataURLsForWebsiteURLs.lightIcons[iconURLs.light] = matching;
-        }
-        matching.associatedWebsites.push(collectedHref);
-      }
-    }
-
-    if (iconURLs?.dark) {
-      const darkIconDataURL = faviconsForWebsites.icons[iconURLs.dark]?.dataURL;
-
-      if (darkIconDataURL && darkIconDataURL !== lightIconDataURL) {
-        let matching = faviconDataURLsForWebsiteURLs.darkIcons[iconURLs.dark];
-        if (!matching) {
-          matching = { iconDataURL: darkIconDataURL, associatedWebsites: [] };
-          faviconDataURLsForWebsiteURLs.darkIcons[iconURLs.dark] = matching;
-        }
-        matching.associatedWebsites.push(collectedHref);
-      }
-    }
-  }
+  const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
 
   return {
     props: {
@@ -333,8 +160,8 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
 };
 
 export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const posts = await getAllMarkdownFiles(PATHS.POSTS);
-  const paths = posts.map((post) => ({ params: { segment: post.segment } }));
+  const articles = await getAllMarkdownFiles(PATHS.POSTS);
+  const paths = articles.map((article) => ({ params: { segment: article.segment } }));
   return {
     paths,
     fallback: false,

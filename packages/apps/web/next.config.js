@@ -6,7 +6,7 @@ import remoteRefresh from 'next-remote-refresh';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const withRemoteRefresh = remoteRefresh({
-  paths: [path.resolve(__dirname, 'src', 'posts')],
+  paths: [path.resolve(__dirname, 'src', 'writing')],
 });
 
 /** @type {import('next').NextConfig} */
