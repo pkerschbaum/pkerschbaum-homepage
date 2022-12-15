@@ -2,8 +2,8 @@
 title: Sensible tsconfig.json Defaults
 published: true
 publishedAtISO: '2022-12-13T22:17:00.000Z'
-lastUpdatedAtISO: '2022-12-13T22:17:00.000Z'
-description: The tsconfig.json configuration I start from for new TypeScript projects.
+lastUpdatedAtISO: '2022-12-16T22:20:00.000Z'
+description: The TypeScript configuration I use as a basis for new projects.
 tags: ['typescript']
 ---
 
@@ -79,9 +79,9 @@ Path aliases make imports cleaner, so it's a good idea to use them.
 But why do I use `#pkg/*` as an alias for the source folder?  
 Node.js has a feature called <FancyAnchor href="https://nodejs.org/api/packages.html#subpath-imports">Subpath imports</FancyAnchor> which allows to "create private mappings that only apply to import specifiers from within the package itself".
 With them, Node.js supports path aliases **natively**.  
-No need to configure the runtime or the build system - using things like <FancyAnchor href="https://www.npmjs.com/package/tsconfig-paths">`tsconfig-paths`</FancyAnchor> or <FancyAnchor href="https://www.npmjs.com/package/typescript-transform-paths">`typescript-transform-paths`</FancyAnchor> - anymore!.
+No need to configure the runtime or the build system - using things like <FancyAnchor href="https://www.npmjs.com/package/tsconfig-paths">`tsconfig-paths`</FancyAnchor> or <FancyAnchor href="https://www.npmjs.com/package/typescript-transform-paths">`typescript-transform-paths`</FancyAnchor> - anymore!
 
-But there is one important requirement: a Node.js private mapping **must start with a** `#` and **at least one letter must follow before the slash**.  
+But there is one important requirement for Node.js private mappings: they **must start with a** `#` and **at least one letter must follow before the slash**.  
 I decided to go for `#pkg/*` because it emphasizes that an import statement using this subpath refers to a source file inside our package.
 
 ## `"types": []`
@@ -147,7 +147,7 @@ Important notes here:
 
 {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues">#importsNotUsedAsValues docs</FancyAnchor>
 
-This forces you to use `import type` for import statements if the imported thing is used as a _type_ only (and not used as a _value_).
+This enables the restriction for import statements that `import type` must be used if the imported thing is used as a _type_ only (and not used as a _value_).
 
 Such imports will get fully erased when TypeScript compiles the sources to JavaScript.
 Also it can help tools like bundlers to determine whether an import is needed at runtime or not.  
@@ -176,7 +176,7 @@ These options are recommended by the <FancyAnchor href="https://www.typescriptla
 - {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames">`forceConsistentCasingInFileNames`</FancyAnchor>
 - {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#skipLibCheck">`skipLibCheck`</FancyAnchor>
 
-And the following are just my personal preference:
+And the "Type Checking" rules are just my personal preference:
 
 - {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#allowUnreachableCode">`allowUnreachableCode`</FancyAnchor>
 - {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes">`exactOptionalPropertyTypes`</FancyAnchor>
