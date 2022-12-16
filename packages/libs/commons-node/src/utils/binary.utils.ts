@@ -17,7 +17,7 @@ async function fetchUrl(url: URL): Promise<Response> {
     attempts++;
   }
 
-  if (!response || !response.ok || !`${response.status}`.startsWith('2')) {
+  if (!response?.ok || !`${response.status}`.startsWith('2')) {
     throw new Error(`could not fetch`);
   }
 
