@@ -1,6 +1,6 @@
 import type * as pptr from 'puppeteer';
 
-const PUPPETEER_NAVIGATION_TIMEOUT = 2 * 60 * 1000; // 2 minutes
+const PUPPETEER_NAVIGATION_TIMEOUT = 30 * 1000; // 30 seconds
 
 type FetchFaviconURLsOptions = { browser: pptr.Browser };
 export type FetchFaviconURLsResult = {

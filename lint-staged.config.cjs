@@ -59,4 +59,6 @@ module.exports = {
     ];
   },
   '**/*.!({js,jsx,mjs,cjs,ts,tsx,mts,cts})': ['prettier --write --ignore-unknown'],
+  'packages/apps/web/src/writing/**':
+    'pnpm --dir ./packages/apps/web run fetch-favicons-for-articles && git add ./packages/apps/web/generated/favicons-for-websites.json',
 };

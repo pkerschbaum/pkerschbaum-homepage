@@ -6,6 +6,3 @@ pnpm-lock.yaml
 # coverage
 **/.nyc_output/**
 **/coverage/**
-
-# generated file
-packages/apps/web/generated/favicons-for-websites.json
