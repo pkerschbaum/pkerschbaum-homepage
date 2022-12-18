@@ -1,8 +1,8 @@
-import type * as pptr from 'puppeteer';
+import type playwright from 'playwright';
 
 const PUPPETEER_NAVIGATION_TIMEOUT = 30 * 1000; // 30 seconds
 
-type FetchFaviconURLsOptions = { browser: pptr.Browser };
+type FetchFaviconURLsOptions = { browser: playwright.Browser };
 export type FetchFaviconURLsResult = {
   icons: {
     light: undefined | URL;
@@ -14,11 +14,13 @@ export async function fetchFaviconURLs(
   options: FetchFaviconURLsOptions,
 ): Promise<FetchFaviconURLsResult> {
   // Open two pages, one for light/dark color scheme each
-  const [pageLight, pageDark] = await Promise.all([
-    options.browser.newPage(),
-    options.browser.newPage(),
-  ]);
-  await pageDark.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
+  async function createPage(colorScheme: 'light' | 'dark') {
+    const context = await options.browser.newContext({ colorScheme, ignoreHTTPSErrors: true });
+    const page = await context.newPage();
+    return page;
+  }
+
+  const [pageLight, pageDark] = await Promise.all([createPage('light'), createPage('dark')]);
 
   // Fetch URLs of Favicons in parallel
   const [light, dark] = await Promise.all([
@@ -32,14 +34,14 @@ export async function fetchFaviconURLs(
   return { icons: { light, dark } };
 }
 
-async function gotoPageAndExtractFaviconURLFromPage(page: pptr.Page, website: URL) {
+async function gotoPageAndExtractFaviconURLFromPage(page: playwright.Page, website: URL) {
   // Goto given url
   await page.goto(website.href, {
-    waitUntil: 'networkidle0',
+    waitUntil: 'load',
     timeout: PUPPETEER_NAVIGATION_TIMEOUT,
   });
 
-  const relativeIconURL = await page
+  const relativeIconURL: unknown = await page
     .$("link[rel='icon']")
     .then((handle) => handle?.getProperty('href'))
     .then((jsHandle) => jsHandle?.jsonValue());

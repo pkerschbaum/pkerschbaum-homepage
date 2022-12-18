@@ -1,5 +1,5 @@
 import { arrays, check } from '@pkerschbaum/ts-utils';
-import pptr from 'puppeteer';
+import playwright from 'playwright';
 import invariant from 'tiny-invariant';
 
 import { binaryUtils } from '@pkerschbaum-homepage/commons-node/utils/binary.utils';
@@ -70,10 +70,9 @@ export async function fetchFaviconsForAllHrefs(
 }
 
 async function initializeBrowserInstance() {
-  const launchOptions: Parameters<typeof pptr.launch>[0] = {
+  const launchOptions: playwright.LaunchOptions = {
     headless: true,
-    ignoreHTTPSErrors: true,
     args: ['--no-sandbox'],
   };
-  return await pptr.launch(launchOptions);
+  return await playwright.chromium.launch(launchOptions);
 }
