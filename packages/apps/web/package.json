@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@fontsource/rubik": "^4.5.13",
+    "@next/font": "^13.0.7",
     "@pkerschbaum-homepage/commons": "workspace:1.0.0",
     "@pkerschbaum-homepage/fetch-favicon": "workspace:1.0.0",
     "@pkerschbaum-homepage/mdx": "workspace:1.0.0",

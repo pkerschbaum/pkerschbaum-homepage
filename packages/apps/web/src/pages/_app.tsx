@@ -1,5 +1,6 @@
 import '@fontsource/rubik/variable.css';
 
+import localFont from '@next/font/local';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -20,6 +21,21 @@ import { CSSReset } from '#/styles/css-reset.styles';
 import { GlobalAppStyles } from '#/styles/global-app.styles';
 import { PrismStyles } from '#/styles/prism.styles';
 import { useIsMounted } from '#/utils/react.utils';
+
+const cascadiaMono = localFont({
+  src: [
+    {
+      path: '../static/fonts/CascadiaMono.woff2',
+      style: 'normal',
+      weight: '200 700',
+    },
+    {
+      path: '../static/fonts/CascadiaMonoItalic.woff2',
+      style: 'italic',
+      weight: '200 700',
+    },
+  ],
+});
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -79,7 +95,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <ColorThemeProvider>
         <CSSReset />
         <PrismStyles />
-        <GlobalAppStyles />
+        <GlobalAppStyles cascadiaMonoFontFamily={cascadiaMono.style.fontFamily} />
 
         <RootContainer>
           <Header>

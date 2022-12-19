@@ -47,28 +47,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/* Cascadia Mono Font Faces */}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-                @font-face {
-                  font-family: 'CascadiaMonoVariable';
-                  font-style: normal;
-                  font-display: swap;
-                  font-weight: 200 700;
-                  src: url(/fonts/CascadiaMono.woff2) format('woff2');
-                }
-                @font-face {
-                  font-family: 'CascadiaMonoVariable';
-                  font-style: italic;
-                  font-display: swap;
-                  font-weight: 200 700;
-                  src: url(/fonts/CascadiaMonoItalic.woff2) format('woff2');
-                }
-              `,
-            }}
-          />
-
           {/* favicons block generated with https://realfavicongenerator.net */}
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
