@@ -126,7 +126,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 };
 
 const RootContainer = styled.div`
-  --app-padding-inline: calc(1.5 * var(--spacing-base));
+  --app-padding-inline: calc(2 * var(--spacing-base));
   --app-max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
 
   display: flex;
