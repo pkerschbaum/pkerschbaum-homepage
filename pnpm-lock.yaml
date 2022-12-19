@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  next-remote-refresh@0.9.2:
+    hash: g66kxjeftiq6kaza7rtvxvrurm
+    path: patches/next-remote-refresh@0.9.2.patch
+
 importers:
 
   .:
@@ -118,7 +123,7 @@ importers:
       eslint-plugin-only-warn: 1.1.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.29.0
       eslint-plugin-regexp: 1.11.0_eslint@8.29.0
-      next-remote-refresh: 0.9.2_next@13.0.7+react@18.2.0
+      next-remote-refresh: 0.9.2_g66kxjeftiq6kaza7rtvxvrurm_next@13.0.7+react@18.2.0
       next-sitemap: 3.1.42_yctveb4xazgnpnecintgjwhjki
       postcss: 8.4.20
       postcss-scss: 4.0.6_postcss@8.4.20
@@ -4226,7 +4231,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-remote-refresh/0.9.2_next@13.0.7+react@18.2.0:
+  /next-remote-refresh/0.9.2_g66kxjeftiq6kaza7rtvxvrurm_next@13.0.7+react@18.2.0:
     resolution: {integrity: sha512-yoYI7pa5Dbtt3n5xcu2nIX0Jma+fMM+GR9Qj3+IhXSILb9NgOB+7jy86jFx8QXukcDmehJi/bepaen7UfwQKuw==}
     peerDependencies:
       next: '>9.0.0'
@@ -4240,6 +4245,7 @@ packages:
       - bufferutil
       - utf-8-validate
     dev: true
+    patched: true
 
   /next-sitemap/3.1.42_yctveb4xazgnpnecintgjwhjki:
     resolution: {integrity: sha512-z/m440ZDCTxoE3FWbBWZLK66ZEh9e2R+j/Bm0d1Vo4PFkMi4yhWdIjWqhj//kyFyBvMYk3YWs8QQqVCCe15E6g==}

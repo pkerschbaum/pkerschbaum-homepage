@@ -10,7 +10,7 @@ const withRemoteRefresh = remoteRefresh({
 });
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+let nextConfig = {
   distDir: 'dist',
   reactStrictMode: true,
 
@@ -47,4 +47,6 @@ const nextConfig = {
   },
 };
 
-export default withRemoteRefresh(nextConfig);
+nextConfig = await withRemoteRefresh(nextConfig);
+
+export default nextConfig;

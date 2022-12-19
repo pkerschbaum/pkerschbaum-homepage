@@ -1,0 +1,32 @@
+diff --git a/index.d.ts b/index.d.ts
+index 292d05f918836563e1e5d671ae3046a0b257a1a0..943d1eaca68dcb4e9471e8d2e35aeaef2afa1374 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -6,4 +6,4 @@ interface PluginOptions {
+   signal?: AbortSignal
+ }
+ 
+-export default function plugin (options: PluginOptions): (nextConfig: NextConfig) => NextConfig
++export default function plugin (options: PluginOptions): (nextConfig: NextConfig) => Promise<NextConfig>
+diff --git a/index.js b/index.js
+index 811c02988758a45975eec5352689b8496974368a..ca557ed5a15eef0e6c1d91ef6651300bd20499ae 100644
+--- a/index.js
++++ b/index.js
+@@ -3,10 +3,15 @@ const createServer = require('./server')
+ module.exports = function plugin(options) {
+   let port
+ 
+-  return function withConfig(nextConfig = {}) {
++  return async function withConfig(nextConfig = {}) {
+     if (process.env.NODE_ENV !== 'production') {
++      const server = createServer(options)
++      await new Promise((resolve, reject) => {
++        server.on('listening', resolve)
++        server.on('error', reject)
++      })
+       if (port === undefined) {
+-        ({ port } = createServer(options).address())
++        ({ port } = server.address())
+       }
+ 
+       if (nextConfig.env === undefined) {
