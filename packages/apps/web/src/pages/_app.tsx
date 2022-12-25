@@ -90,7 +90,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pkerschbaum" />
         <meta name="twitter:creator" content="@pkerschbaum" />
+
+        {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://twitter.com/pkerschbaum" rel="me" />
+        <link rel="webmention" href="https://webmention.io/pkerschbaum.com/webmention" />
+        <link rel="pingback" href="https://webmention.io/pkerschbaum.com/xmlrpc" />
       </Head>
 
       <ColorThemeProvider>
