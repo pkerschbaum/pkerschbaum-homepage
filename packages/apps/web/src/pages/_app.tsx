@@ -90,6 +90,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pkerschbaum" />
         <meta name="twitter:creator" content="@pkerschbaum" />
+        <link href="https://twitter.com/pkerschbaum" rel="me" />
       </Head>
 
       <ColorThemeProvider>
