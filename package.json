@@ -3,16 +3,16 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "mr:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run mr:nuke:node-modules",
-    "mr:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
-    "mr:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
-    "mr:nuke:compute-cache": "rimraf node_modules/.cache/nx",
-    "mr:lint": "nx run-many --target=pkg:lint --all --parallel",
-    "mr:lint:fix": "nx run-many --target=pkg:lint:fix --all --parallel",
-    "mr:format": "prettier --write --ignore-unknown .",
-    "mr:build": "nx run-many --target=pkg:build --all",
-    "mr:compile:dry-run": "nx run-many --target=pkg:compile:dry-run --all",
-    "mr:libs:watch": "pnpm --parallel run pkg:lib:watch"
+    "w:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run w:nuke:node-modules",
+    "w:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
+    "w:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
+    "w:nuke:compute-cache": "rimraf node_modules/.cache/nx",
+    "w:lint": "nx run-many --target=pkg:lint --all --parallel",
+    "w:lint:fix": "nx run-many --target=pkg:lint:fix --all --parallel",
+    "w:format": "prettier --write --ignore-unknown .",
+    "w:build": "nx run-many --target=pkg:build --all",
+    "w:compile:dry-run": "nx run-many --target=pkg:compile:dry-run --all",
+    "w:libs:watch": "pnpm --parallel run pkg:lib:watch"
   },
   "devDependencies": {
     "husky": "^8.0.2",
