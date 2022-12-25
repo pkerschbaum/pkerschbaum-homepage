@@ -2,6 +2,7 @@
   "name": "pkerschbaum-homepage",
   "private": true,
   "scripts": {
+    "preinstall": "npx -y --prefer-online only-allow pnpm",
     "prepare": "husky install",
     "w:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run w:nuke:node-modules",
     "w:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
