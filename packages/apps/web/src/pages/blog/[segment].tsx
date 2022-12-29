@@ -110,17 +110,19 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
             </ContactTeaser>
           </ContactTeaserWrapper>
 
-          <WebmentionsWrapper>
-            <WebmentionsHeadline>Webmentions</WebmentionsHeadline>
-            <WebmentionsList>
-              {arrays
-                .shallowCopy(webmentions)
-                .sort((a, b) => b.data.published_ts - a.data.published_ts)
-                .map((webmention) => (
-                  <WebmentionTile key={webmention.id} webmention={webmention} />
-                ))}
-            </WebmentionsList>
-          </WebmentionsWrapper>
+          {webmentions.length > 0 && (
+            <WebmentionsWrapper>
+              <WebmentionsHeadline>Webmentions</WebmentionsHeadline>
+              <WebmentionsList>
+                {arrays
+                  .shallowCopy(webmentions)
+                  .sort((a, b) => b.data.published_ts - a.data.published_ts)
+                  .map((webmention) => (
+                    <WebmentionTile key={webmention.id} webmention={webmention} />
+                  ))}
+              </WebmentionsList>
+            </WebmentionsWrapper>
+          )}
         </ArticleViewerContainer>
       </Main>
     </>
