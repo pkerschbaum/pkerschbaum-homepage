@@ -2,6 +2,7 @@ import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'ne
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
+import { config } from '#/config';
 import {
   Animations,
   Classes,
@@ -74,7 +75,7 @@ export default class MyDocument extends Document {
           {/* Plausible analytics */}
           <script
             defer
-            data-domain="pkerschbaum.com"
+            data-domain={config.canonicalTLDPlus1}
             data-api="/p.io/api/event"
             src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
           />

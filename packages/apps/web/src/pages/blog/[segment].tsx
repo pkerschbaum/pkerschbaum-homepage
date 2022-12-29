@@ -1,3 +1,4 @@
+import { arrays } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook';
@@ -18,21 +19,25 @@ import {
 import { Main } from '#/components/main';
 import { MDXViewer } from '#/components/mdx-viewer';
 import { MetadataTags } from '#/components/metadata-tags';
+import { WebmentionTile } from '#/components/webmention-tile';
 import { config } from '#/config';
 import { PATHS } from '#/constants';
 import { Anchor } from '#/elements';
 import { FullBleedWrapper } from '#/elements/FullBleedWrapper';
 import { createFaviconsMapping } from '#/favicons/favicons';
 import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
+import { fetchWebmentions, Webmention } from '#/webmentions/webmentions';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
   faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
+  webmentions: Webmention[];
 };
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({
   mdxParseResult,
   faviconDataURLsForWebsiteURLs,
+  webmentions,
 }) => {
   useRemoteRefresh();
 
@@ -104,6 +109,18 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({
               </p>
             </ContactTeaser>
           </ContactTeaserWrapper>
+
+          <WebmentionsWrapper>
+            <WebmentionsHeadline>Webmentions</WebmentionsHeadline>
+            <WebmentionsList>
+              {arrays
+                .shallowCopy(webmentions)
+                .sort((a, b) => b.data.published_ts - a.data.published_ts)
+                .map((webmention) => (
+                  <WebmentionTile key={webmention.id} webmention={webmention} />
+                ))}
+            </WebmentionsList>
+          </WebmentionsWrapper>
         </ArticleViewerContainer>
       </Main>
     </>
@@ -138,6 +155,22 @@ const ContactTeaserHeadline = styled.h2`
   margin-block-start: 0;
 `;
 
+const WebmentionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+const WebmentionsHeadline = styled.h2`
+  margin-block-start: 0;
+`;
+
+const WebmentionsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--spacing-base));
+`;
+
 const schema_staticProps = z.object({ segment: z.string().min(1) });
 type StaticProps = z.infer<typeof schema_staticProps>;
 export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
@@ -145,16 +178,18 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
 }) => {
   const parsedParams = schema_staticProps.parse(params);
 
-  const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    path.join(PATHS.POSTS, `${parsedParams.segment}.mdx`),
-  );
-
-  const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
+  const [{ mdxParseResult, faviconDataURLsForWebsiteURLs }, { webmentions }] = await Promise.all([
+    fetchMDXFileAndFavicons(parsedParams.segment),
+    fetchWebmentions(
+      new URL(`/blog/${parsedParams.segment}`, `https://${config.canonicalTLDPlus1}`).href,
+    ),
+  ]);
 
   return {
     props: {
       mdxParseResult,
       faviconDataURLsForWebsiteURLs,
+      webmentions,
     },
   };
 };
@@ -169,3 +204,16 @@ export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
 };
 
 export default BlogPostPage;
+
+async function fetchMDXFileAndFavicons(segment: string) {
+  const mdxParseResult = await parseMDXFileAndCollectHrefs(
+    path.join(PATHS.POSTS, `${segment}.mdx`),
+  );
+
+  const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
+
+  return {
+    mdxParseResult,
+    faviconDataURLsForWebsiteURLs,
+  };
+}
