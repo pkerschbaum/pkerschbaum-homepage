@@ -22,12 +22,10 @@ export const WebmentionTile: React.FC<WebmentionTileProps> = ({ webmention }) =>
           {webmentionToActionVerb(webmention)}
         </ActivityType>
         {webmention.data.published_ts && (
-          <>
+          <Timestamp>
             <TimestampSpacer>⋅</TimestampSpacer>
-            <Timestamp>
-              {dayjs.unix(webmention.data.published_ts).format('DD MMMM, YYYY')}
-            </Timestamp>
-          </>
+            <span>{dayjs.unix(webmention.data.published_ts).format('DD MMMM, YYYY')}</span>
+          </Timestamp>
         )}
       </Headline>
       {webmention.data.content && webmention.activity.type === 'reply' && (
@@ -59,10 +57,10 @@ function webmentionToActionVerb(webmention: Webmention): string {
 const WebmentionContainer = styled.div`
   display: grid;
   grid-template-areas:
-    'avatar headline .'
-    'avatar content  content';
+    'avatar headline'
+    'avatar content';
   grid-template-rows: max-content max-content;
-  grid-template-columns: max-content max-content 1fr;
+  grid-template-columns: max-content 1fr;
   grid-row-gap: calc(1 * var(--spacing-base));
   grid-column-gap: calc(2 * var(--spacing-base));
 `;
@@ -75,6 +73,7 @@ const AuthorAvatar = styled(Image)`
 
 const Headline = styled.div`
   display: flex;
+  flex-wrap: wrap;
   grid-area: headline;
   gap: calc(0.5 * var(--spacing-base));
   align-items: baseline;
@@ -86,13 +85,13 @@ const ActivityType = styled(Anchor)`
   font-style: italic;
 `;
 
-const TimestampSpacer = styled.div`
-  padding-left: 4px;
-`;
-
 const Timestamp = styled.div`
   font-size: var(--font-size-sm);
   color: var(--color-fg-less-emphasized);
+`;
+
+const TimestampSpacer = styled.span`
+  padding-inline: 4px;
 `;
 
 const Content = styled.div`
