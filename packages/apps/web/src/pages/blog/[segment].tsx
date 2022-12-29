@@ -191,6 +191,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = as
       faviconDataURLsForWebsiteURLs,
       webmentions,
     },
+    revalidate: 60, // seconds
   };
 };
 
