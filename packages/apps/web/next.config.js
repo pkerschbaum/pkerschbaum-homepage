@@ -45,6 +45,17 @@ let nextConfig = {
       },
     ];
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'webmention.io',
+        port: '',
+        pathname: '/avatar/**',
+      },
+    ],
+  },
 };
 
 nextConfig = await withRemoteRefresh(nextConfig);

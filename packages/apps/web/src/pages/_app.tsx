@@ -85,7 +85,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="canonical" href={pageHref} key="canonical" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={imageUrl.href} />
-        <meta property="og:site_name" content="pkerschbaum.com" />
+        <meta property="og:site_name" content={config.canonicalTLDPlus1} />
         <meta property="og:url" content={pageHref} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@pkerschbaum" />
@@ -93,8 +93,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://twitter.com/pkerschbaum" rel="me" />
-        <link rel="webmention" href="https://webmention.io/pkerschbaum.com/webmention" />
-        <link rel="pingback" href="https://webmention.io/pkerschbaum.com/xmlrpc" />
+        <link
+          rel="webmention"
+          href={`https://webmention.io/${config.canonicalTLDPlus1}/webmention`}
+        />
+        <link rel="pingback" href={`https://webmention.io/${config.canonicalTLDPlus1}/xmlrpc`} />
       </Head>
 
       <ColorThemeProvider>

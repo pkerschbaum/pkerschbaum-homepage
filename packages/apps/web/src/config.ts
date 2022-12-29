@@ -22,4 +22,5 @@ export const config = {
   socialMediaLinks: {
     linkedIn: 'https://www.linkedin.com/in/pkerschbaum',
   },
+  canonicalTLDPlus1: 'pkerschbaum.com',
 };

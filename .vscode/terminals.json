@@ -10,7 +10,6 @@
     {
       "name": "@pkerschbaum-homepage/web: pnpm run dev",
       "cwd": "[cwd]/packages/apps/web",
-      "focus": true,
       "execute": false,
       "command": "pnpm run dev"
     }
