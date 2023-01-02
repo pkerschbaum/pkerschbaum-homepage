@@ -1,11 +1,14 @@
 import { check, numbers } from '@pkerschbaum/ts-utils';
 import { getMDXComponent } from 'mdx-bundler/client';
 import * as React from 'react';
+import { CheckCircle, Clipboard } from 'react-feather';
 import * as ReactIs from 'react-is';
 import styled, { StyledComponentProps } from 'styled-components';
+import invariant from 'tiny-invariant';
 
 import { FancyAnchor, FancyAnchorProps } from '#/components/fancy-anchor';
-import { Anchor } from '#/elements';
+import { Classes } from '#/constants';
+import { Anchor, Button } from '#/elements';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;
@@ -45,6 +48,7 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
         FancyAnchor: (props: FancyAnchorProps) => {
           return <FancyAnchor target="_blank" {...props} />;
         },
+        pre: PreComponent,
       }}
     />
   );
@@ -100,6 +104,64 @@ const HeadingAnchor = styled(Anchor)`
   &:hover ${HeadingAnchorIcon} {
     opacity: initial;
   }
+`;
+
+const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({
+  children,
+  ref: _ignored,
+  ...delegated
+}) => {
+  const codePreRef = React.useRef<HTMLPreElement>(null);
+  const [codeWasCopied, setCodeWasCopied] = React.useState(false);
+
+  async function copyCode() {
+    invariant(codePreRef.current);
+    invariant(codePreRef.current.textContent);
+    await navigator.clipboard.writeText(codePreRef.current.textContent);
+    setCodeWasCopied(true);
+  }
+
+  return (
+    <CodeBlockContainer>
+      <CopyCodeButton onClick={copyCode} className={Classes.JS_REQUIRED}>
+        {!codeWasCopied ? (
+          <>
+            <Clipboard size="1em" />
+            Copy
+          </>
+        ) : (
+          <>
+            <CheckCircle size="1em" />
+            Copied!
+          </>
+        )}
+      </CopyCodeButton>
+      <pre {...delegated} ref={codePreRef}>
+        {children}
+      </pre>
+    </CodeBlockContainer>
+  );
+};
+
+export const CodeBlockContainer = styled.div`
+  position: relative;
+  overflow: visible;
+`;
+
+const CopyCodeButton = styled(Button)`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  gap: calc(1 * var(--spacing-base));
+  align-items: center;
+  padding-inline: calc(1.5 * var(--spacing-base));
+
+  font-size: var(--font-size-sm);
+  background: var(--prism-theme-nord-bg);
+  border-radius: var(--prism-border-radius);
+  transform: translateY(-60%);
 `;
 
 function getIdForHeading(text: string): string {

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { StyledAnchor } from '#/components/fancy-anchor';
+import { CodeBlockContainer } from '#/components/mdx-viewer';
 import { ColorTheme, DataAttribute } from '#/constants';
 
 type IconURLToAssociatedWebsitesMap = {
@@ -123,17 +124,33 @@ export const ArticleViewerContent = styled.div<{ styleProps: StyleProps }>`
     Code blocks should span entire width.
     We have to undo the app padding and margin-inline-start of ul/ol list elements (if a code block is inside such an element).
    */
-  & > pre {
+  & > ${CodeBlockContainer} {
+    /* add some margin-block-start so that there is some space between the copy button and any text before the code block. */
+    margin-block-start: calc(3 * var(--spacing-base));
     margin-inline-start: calc(-1 * var(--app-padding-inline));
     margin-inline-end: calc(-1 * var(--app-padding-inline));
   }
-  & ul > li > pre,
-  & ol > li > pre {
+  &
+    ul
+    > li
+    > ${/* sc-selector */ CodeBlockContainer},
+    &
+    ol
+    > li
+    > ${/* sc-selector */ CodeBlockContainer} {
     width: calc(100% + 2 * var(--app-padding-inline) + var(--ul-padding-inline-start));
     margin-inline-start: calc(-1 * (var(--app-padding-inline) + var(--ul-padding-inline-start)));
   }
-  & ul ul > li > pre,
-  & ol ol > li > pre {
+  &
+    ul
+    ul
+    > li
+    > ${/* sc-selector */ CodeBlockContainer},
+    &
+    ol
+    ol
+    > li
+    > ${/* sc-selector */ CodeBlockContainer} {
     width: calc(100% + 2 * var(--app-padding-inline) + 2 * var(--ul-padding-inline-start));
     margin-inline-start: calc(
       -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
