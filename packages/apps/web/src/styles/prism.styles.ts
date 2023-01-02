@@ -9,6 +9,12 @@ export const PrismStyles = styled.createGlobalStyle`
    * - https://github.com/PrismJS/prism-themes/blob/447479fc7b2be2051fe27e561aceed7cc87a589f/themes/prism-nord.css
    */
 
+  *:root {
+    --prism-theme-github-bg: white;
+    --prism-theme-nord-bg: #2e3440;
+    --prism-border-radius: 8px;
+  }
+
   code[class*='language-'],
   pre[class*='language-'] {
     background: none;
@@ -30,7 +36,7 @@ export const PrismStyles = styled.createGlobalStyle`
   /* Code blocks */
   pre[class*='language-'] {
     box-shadow: var(--shadow-elevation-low);
-    border-radius: 8px;
+    border-radius: var(--prism-border-radius);
     overflow: auto;
     padding-block: var(--app-padding-inline);
     padding-inline: var(--app-padding-inline);
@@ -64,7 +70,7 @@ export const PrismStyles = styled.createGlobalStyle`
 
     pre[class*='language-'] {
       border-color: #dddddd;
-      background-color: white;
+      background-color: var(--prism-theme-github-bg);
     }
 
     .token.selector,
@@ -110,7 +116,7 @@ export const PrismStyles = styled.createGlobalStyle`
 
     :not(pre) > code[class*='language-'],
     pre[class*='language-'] {
-      background: #2e3440;
+      background: var(--prism-theme-nord-bg);
     }
 
     .token.comment,
