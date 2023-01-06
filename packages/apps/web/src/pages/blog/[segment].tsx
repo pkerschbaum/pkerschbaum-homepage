@@ -15,18 +15,18 @@ import {
   FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
-} from '#/components/article-viewer';
-import { Main } from '#/components/main';
-import { MDXViewer } from '#/components/mdx-viewer';
-import { MetadataTags } from '#/components/metadata-tags';
-import { WebmentionTile } from '#/components/webmention-tile';
-import { config } from '#/config';
-import { PATHS } from '#/constants';
-import { Anchor } from '#/elements';
-import { FullBleedWrapper } from '#/elements/FullBleedWrapper';
-import { createFaviconsMapping } from '#/favicons/favicons';
-import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
-import { fetchWebmentions, Webmention } from '#/webmentions/webmentions';
+} from '#pkg/components/article-viewer';
+import { Main } from '#pkg/components/main';
+import { MDXViewer } from '#pkg/components/mdx-viewer';
+import { MetadataTags } from '#pkg/components/metadata-tags';
+import { WebmentionTile } from '#pkg/components/webmention-tile';
+import { config } from '#pkg/config';
+import { PATHS } from '#pkg/constants';
+import { Anchor } from '#pkg/elements';
+import { FullBleedWrapper } from '#pkg/elements/FullBleedWrapper';
+import { createFaviconsMapping } from '#pkg/favicons/favicons';
+import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#pkg/mdx';
+import { fetchWebmentions, Webmention } from '#pkg/webmentions/webmentions';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;

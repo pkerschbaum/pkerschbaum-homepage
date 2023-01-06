@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { Description, Tile, TileAnchor, TileContent, Title } from '#/elements';
+import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements';
 
 type ArticleTileProps = {
   article: MDXFile;

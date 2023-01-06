@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticleTile } from '#/components/article-tile';
-import { QUERIES } from '#/constants';
+import { ArticleTile } from '#pkg/components/article-tile';
+import { QUERIES } from '#pkg/constants';
 
 type ArticlesListProps = {
   pathPrefix: string;

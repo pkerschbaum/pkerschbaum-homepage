@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Anchor } from '#/elements/Anchor';
+import { Anchor } from '#pkg/elements/Anchor';
 
 export const TileAnchor = styled(Anchor)`
   text-decoration: none;

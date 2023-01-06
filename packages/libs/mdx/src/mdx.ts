@@ -5,9 +5,9 @@ import path from 'path';
 // @ts-expect-error -- it seems like typings of "rehype-prism-plus" are broken if TS is configured with "module": "node16" (ESM modules)
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
 
-import { createCollectHrefsFromJsxElementsPlugin } from '#/plugins.js';
-import { refractor } from '#/prism/refractor.js';
-import { MDXParseResult, schema_frontmatterData } from '#/schema.js';
+import { createCollectHrefsFromJsxElementsPlugin } from '#pkg/plugins.js';
+import { refractor } from '#pkg/prism/refractor.js';
+import { MDXParseResult, schema_frontmatterData } from '#pkg/schema.js';
 
 type BundlerRehypePlugin = ArrayElement<
   Parameters<Exclude<Parameters<typeof bundleMDX>[0]['mdxOptions'], undefined>>[0]['rehypePlugins']

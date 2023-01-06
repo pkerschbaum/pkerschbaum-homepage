@@ -1,1 +1,1 @@
-export * from '#/mdx/mdx';
+export * from '#pkg/mdx/mdx';

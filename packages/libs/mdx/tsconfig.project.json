@@ -3,7 +3,7 @@
   "compilerOptions": {
     /* Modules */
     "paths": {
-      "#/*": ["./src/*"]
+      "#pkg/*": ["./src/*"]
     },
     "rootDir": "./src",
     "types": ["node"],

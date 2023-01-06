@@ -1,10 +1,10 @@
 import type { GetStaticProps } from 'next';
 import type React from 'react';
 
-import { Main } from '#/components/main';
-import { MetadataTags } from '#/components/metadata-tags';
-import { ProjectsOverview } from '#/components/projects-overview/ProjectsOverview';
-import { config } from '#/config';
+import { Main } from '#pkg/components/main';
+import { MetadataTags } from '#pkg/components/metadata-tags';
+import { ProjectsOverview } from '#pkg/components/projects-overview/ProjectsOverview';
+import { config } from '#pkg/config';
 
 const ProjectsPage: React.FC = () => {
   return (

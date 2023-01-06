@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import invariant from 'tiny-invariant';
 
-import { StyledAnchor } from '#/components/fancy-anchor';
-import { CodeBlockContainer } from '#/components/mdx-viewer';
-import { ColorTheme, DataAttribute } from '#/constants';
+import { StyledAnchor } from '#pkg/components/fancy-anchor';
+import { CodeBlockContainer } from '#pkg/components/mdx-viewer';
+import { ColorTheme, DataAttribute } from '#pkg/constants';
 
 type IconURLToAssociatedWebsitesMap = {
   [iconURL in string]?: {

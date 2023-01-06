@@ -52,7 +52,8 @@ module.exports = {
               {
                 // forbid relative imports except for .png, .jpg, .svg, .css
                 pattern: /^\.(?!.+png$|.+jpg$|.+svg$|.+css$)/,
-                errorMessage: 'Use absolute paths (beginning with "#/") instead of relative paths.',
+                errorMessage:
+                  'Use absolute paths (beginning with "#pkg/") instead of relative paths.',
               },
             ],
           },
@@ -84,7 +85,7 @@ module.exports = {
             position: 'after',
           },
           {
-            pattern: '#/**',
+            pattern: '#pkg/**',
             group: 'parent',
           },
         ],

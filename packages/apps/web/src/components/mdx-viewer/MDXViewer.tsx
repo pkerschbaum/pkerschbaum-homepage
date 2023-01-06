@@ -6,9 +6,9 @@ import * as ReactIs from 'react-is';
 import styled, { StyledComponentProps } from 'styled-components';
 import invariant from 'tiny-invariant';
 
-import { FancyAnchor, FancyAnchorProps } from '#/components/fancy-anchor';
-import { Classes, ColorTheme, DataAttribute } from '#/constants';
-import { Anchor, Button } from '#/elements';
+import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor';
+import { Classes, ColorTheme, DataAttribute } from '#pkg/constants';
+import { Anchor, Button } from '#pkg/elements';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;

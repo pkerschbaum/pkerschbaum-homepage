@@ -2,8 +2,8 @@ import Image from 'next/image';
 import type React from 'react';
 import styled from 'styled-components';
 
-import { Description, Tile, TileAnchor, TileContent, Title } from '#/elements';
-import type { Project } from '#/schema';
+import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements';
+import type { Project } from '#pkg/schema';
 
 type ProjectTileProps = {
   project: Project;

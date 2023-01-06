@@ -1,1 +1,1 @@
-export * from '#/components/rss-feed-anchor/RssFeedAnchor';
+export * from '#pkg/components/rss-feed-anchor/RssFeedAnchor';

@@ -1,1 +1,1 @@
-export * from '#/components/toggle-theme-button/ToggleThemeButton';
+export * from '#pkg/components/toggle-theme-button/ToggleThemeButton';

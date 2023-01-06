@@ -1,3 +1,3 @@
-export * from '#/elements/Anchor';
-export * from '#/elements/Button';
-export * from '#/elements/Tile';
+export * from '#pkg/elements/Anchor';
+export * from '#pkg/elements/Button';
+export * from '#pkg/elements/Tile';

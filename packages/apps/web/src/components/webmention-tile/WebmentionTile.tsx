@@ -5,8 +5,8 @@ import type React from 'react';
 import sanitizeHTML from 'sanitize-html';
 import styled from 'styled-components';
 
-import { Anchor } from '#/elements';
-import type { Webmention } from '#/webmentions';
+import { Anchor } from '#pkg/elements';
+import type { Webmention } from '#pkg/webmentions';
 
 type WebmentionTileProps = {
   webmention: Webmention;

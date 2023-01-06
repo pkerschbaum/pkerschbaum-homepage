@@ -1,1 +1,1 @@
-export * from '#/components/social-media-links/SocialMediaLinks';
+export * from '#pkg/components/social-media-links/SocialMediaLinks';

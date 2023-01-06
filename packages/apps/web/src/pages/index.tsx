@@ -7,21 +7,21 @@ import styled from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticlesList } from '#/components/articles-list';
-import { Cookie, Topic } from '#/components/icon-library';
-import { Introduction } from '#/components/introduction';
-import { Main } from '#/components/main';
-import { MetadataTags } from '#/components/metadata-tags';
-import { ProjectsOverview } from '#/components/projects-overview/ProjectsOverview';
-import { config } from '#/config';
+import { ArticlesList } from '#pkg/components/articles-list';
+import { Cookie, Topic } from '#pkg/components/icon-library';
+import { Introduction } from '#pkg/components/introduction';
+import { Main } from '#pkg/components/main';
+import { MetadataTags } from '#pkg/components/metadata-tags';
+import { ProjectsOverview } from '#pkg/components/projects-overview/ProjectsOverview';
+import { config } from '#pkg/config';
 import {
   PATHS,
   RSS_FEED_JSON_PATH,
   RSS_FEED_JSON_SLUG,
   RSS_FEED_XML_PATH,
   RSS_FEED_XML_SLUG,
-} from '#/constants';
-import { getAllMarkdownFiles } from '#/mdx';
+} from '#pkg/constants';
+import { getAllMarkdownFiles } from '#pkg/mdx';
 
 type HomePageProps = {
   posts: MDXFile[];

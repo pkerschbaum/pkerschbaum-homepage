@@ -11,13 +11,13 @@ import {
   FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
-} from '#/components/article-viewer';
-import { Main } from '#/components/main';
-import { MDXViewer } from '#/components/mdx-viewer';
-import { MetadataTags } from '#/components/metadata-tags';
-import { PATHS } from '#/constants';
-import { createFaviconsMapping } from '#/favicons/favicons';
-import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#/mdx';
+} from '#pkg/components/article-viewer';
+import { Main } from '#pkg/components/main';
+import { MDXViewer } from '#pkg/components/mdx-viewer';
+import { MetadataTags } from '#pkg/components/metadata-tags';
+import { PATHS } from '#pkg/constants';
+import { createFaviconsMapping } from '#pkg/favicons/favicons';
+import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#pkg/mdx';
 
 type TidbitPageProps = {
   mdxParseResult: MDXParseResult;

@@ -3,7 +3,7 @@ import type React from 'react';
 import { MapPin } from 'react-feather';
 import styled from 'styled-components';
 
-import { commonStyles } from '#/styles/common.styles';
+import { commonStyles } from '#pkg/styles/common.styles';
 import profilePic from '../../../public/profile-picture.jpg';
 
 export const Introduction: React.FC = () => {

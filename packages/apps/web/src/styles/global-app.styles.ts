@@ -1,6 +1,6 @@
 import * as styled from 'styled-components';
 
-import { ColorTheme, DataAttribute } from '#/constants';
+import { ColorTheme, DataAttribute } from '#pkg/constants';
 
 type GlobalAppStylesProps = {
   cascadiaMonoFontFamily: string;

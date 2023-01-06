@@ -1,1 +1,1 @@
-export * from '#/components/header/Header';
+export * from '#pkg/components/header/Header';

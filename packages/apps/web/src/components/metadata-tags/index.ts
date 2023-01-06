@@ -1,1 +1,1 @@
-export * from '#/components/metadata-tags/MetadataTags';
+export * from '#pkg/components/metadata-tags/MetadataTags';

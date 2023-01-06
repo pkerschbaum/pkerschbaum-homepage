@@ -1,1 +1,1 @@
-export * from '#/components/main/Main';
+export * from '#pkg/components/main/Main';

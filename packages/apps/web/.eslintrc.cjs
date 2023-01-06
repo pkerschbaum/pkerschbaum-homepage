@@ -22,11 +22,12 @@ const noRestrictedSyntax_preferNextJsImage = [
 const noRestrictedSyntax_preferElements = [
   {
     selector: "MemberExpression[object.name='styled'][property.name='a']",
-    message: 'Do not use the native <a> HTML element; use <Anchor> from "#/elements" instead.',
+    message: 'Do not use the native <a> HTML element; use <Anchor> from "#pkg/elements" instead.',
   },
   {
     selector: "MemberExpression[object.name='styled'][property.name='button']",
-    message: 'Do not use the native <button> HTML element; use <Button> from "#/elements" instead.',
+    message:
+      'Do not use the native <button> HTML element; use <Button> from "#pkg/elements" instead.',
   },
 ];
 

@@ -3,11 +3,11 @@ import type React from 'react';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticlesList } from '#/components/articles-list';
-import { Main } from '#/components/main';
-import { MetadataTags } from '#/components/metadata-tags';
-import { PATHS } from '#/constants';
-import { getAllMarkdownFiles } from '#/mdx';
+import { ArticlesList } from '#pkg/components/articles-list';
+import { Main } from '#pkg/components/main';
+import { MetadataTags } from '#pkg/components/metadata-tags';
+import { PATHS } from '#pkg/constants';
+import { getAllMarkdownFiles } from '#pkg/mdx';
 
 type TidbitsOverviewPageProps = {
   tidbits: MDXFile[];

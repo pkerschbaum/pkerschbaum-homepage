@@ -1,1 +1,1 @@
-export * from '#/webmentions/webmentions';
+export * from '#pkg/webmentions/webmentions';

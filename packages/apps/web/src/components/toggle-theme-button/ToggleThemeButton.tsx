@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Moon, Sun } from 'react-feather';
 import styled from 'styled-components';
 
-import { Animations, Classes, ColorTheme, DataAttribute } from '#/constants';
-import { useColorTheme } from '#/context/color-theme';
-import { IconButton } from '#/elements/IconButton';
+import { Animations, Classes, ColorTheme, DataAttribute } from '#pkg/constants';
+import { useColorTheme } from '#pkg/context/color-theme';
+import { IconButton } from '#pkg/elements/IconButton';
 
 export const ToggleThemeButton: React.FC = () => {
   const { toggleColorTheme } = useColorTheme();

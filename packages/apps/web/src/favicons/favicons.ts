@@ -2,9 +2,9 @@ import fs from 'fs';
 
 import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 
-import type { FaviconDataURLsForWebsiteURLs } from '#/components/article-viewer';
-import { PATHS } from '#/constants';
-import type { MDXParseResult } from '#/mdx';
+import type { FaviconDataURLsForWebsiteURLs } from '#pkg/components/article-viewer';
+import { PATHS } from '#pkg/constants';
+import type { MDXParseResult } from '#pkg/mdx';
 
 const faviconsForWebsitesReadPromise = fs.promises.readFile(PATHS.FAVICONS_FOR_WEBSITES, {
   encoding: 'utf-8',

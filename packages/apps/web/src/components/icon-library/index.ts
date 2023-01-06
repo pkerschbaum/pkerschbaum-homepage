@@ -1,1 +1,1 @@
-export * from '#/components/icon-library/IconLibrary';
+export * from '#pkg/components/icon-library/IconLibrary';

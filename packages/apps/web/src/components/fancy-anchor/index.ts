@@ -1,1 +1,1 @@
-export * from '#/components/fancy-anchor/FancyAnchor';
+export * from '#pkg/components/fancy-anchor/FancyAnchor';

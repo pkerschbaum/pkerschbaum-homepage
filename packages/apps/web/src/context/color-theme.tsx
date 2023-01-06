@@ -1,8 +1,8 @@
 // based on https://sreetamdas.com/blog/the-perfect-dark-mode, https://www.joshwcomeau.com/react/dark-mode
 import * as React from 'react';
 
-import { ColorTheme, DataAttribute, LocalStorageKey } from '#/constants';
-import { reactUtils } from '#/utils/react.utils';
+import { ColorTheme, DataAttribute, LocalStorageKey } from '#pkg/constants';
+import { reactUtils } from '#pkg/utils/react.utils';
 
 type ColorThemeContextValue = {
   activeColorTheme: ColorTheme;
