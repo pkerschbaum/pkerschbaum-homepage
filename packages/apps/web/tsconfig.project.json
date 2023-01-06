@@ -10,6 +10,7 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
+    // as of next@13.1.1, "paths" is still needed for package-internal imports even though package.json#imports is set
     "paths": {
       "#pkg/*": ["./src/*"]
     },

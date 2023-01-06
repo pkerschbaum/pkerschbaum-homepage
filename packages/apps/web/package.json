@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "version": "1.0.0",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
   "scripts": {
     "dev": "next dev",
     "fetch-favicons-for-articles": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write ./generated/favicons-for-websites.json",
