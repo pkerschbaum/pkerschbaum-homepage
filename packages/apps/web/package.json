@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "fetch-favicons-for-articles": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write ./generated/favicons-for-websites.json",
+    "fetch-favicons-for-articles": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write ./generated/favicons-for-websites.json && git add ./generated/favicons-for-websites.json",
     "build:next": "next build",
     "build:sitemap": "next-sitemap --config next-sitemap.cjs",
     "export": "next export",
