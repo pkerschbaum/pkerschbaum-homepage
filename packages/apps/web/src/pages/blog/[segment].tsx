@@ -1,8 +1,8 @@
 import { arrays } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import { useRouter } from 'next/router';
+import { useRemoteRefresh } from 'next-remote-refresh/hook';
 import path from 'path';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
@@ -209,9 +209,9 @@ export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
 export default BlogPostPage;
 
 async function fetchMDXFileAndFavicons(segment: string) {
-  const mdxParseResult = await parseMDXFileAndCollectHrefs(
+  const mdxParseResult = (await parseMDXFileAndCollectHrefs(
     path.join(PATHS.POSTS, `${segment}.mdx`),
-  );
+  )) as MDXParseResult;
 
   const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
 
