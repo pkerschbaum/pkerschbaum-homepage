@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { Anchor, AnchorProps } from '#pkg/elements';
-import { urlUtils } from '#pkg/utils/url.utils';
+import { Anchor, AnchorProps } from '#pkg/elements/index.js';
+import { urlUtils } from '#pkg/utils/url.utils.js';
 
 export type FancyAnchorProps = AnchorProps & {};
 

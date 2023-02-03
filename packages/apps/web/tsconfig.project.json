@@ -4,13 +4,11 @@
     /* Language and Environment */
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es5",
 
     /* Modules */
     "baseUrl": ".",
     "module": "esnext",
-    "moduleResolution": "node",
-    // as of next@13.1.1, "paths" is still needed for package-internal imports even though package.json#imports is set
+    "moduleResolution": "node16",
     "paths": {
       "#pkg/*": ["./src/*"]
     },

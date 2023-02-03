@@ -1,1 +1,1 @@
-export * from '#pkg/components/article-viewer/ArticleViewer';
+export * from '#pkg/components/article-viewer/ArticleViewer.jsx';

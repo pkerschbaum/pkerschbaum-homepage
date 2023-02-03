@@ -2,6 +2,9 @@
   "extends": "../../../tsconfig.workspace.json",
   "compilerOptions": {
     /* Modules */
+    "paths": {
+      "#pkg/*": ["./src/*"]
+    },
     "rootDir": "./src",
 
     /* Emit */

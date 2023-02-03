@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 import invariant from 'tiny-invariant';
 
-import { StyledAnchor } from '#pkg/components/fancy-anchor';
-import { CodeBlockContainer } from '#pkg/components/mdx-viewer';
-import { ColorTheme, DataAttribute } from '#pkg/constants';
+import { StyledAnchor } from '#pkg/components/fancy-anchor/index.js';
+import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
+import { ColorTheme, DataAttribute } from '#pkg/constants.js';
 
 type IconURLToAssociatedWebsitesMap = {
   [iconURL in string]?: {
@@ -90,6 +90,7 @@ export const ArticleViewerContent = styled.div<{ styleProps: StyleProps }>`
         invariant(icon);
         return css`
           ${icon.associatedWebsites
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             .map((url) => `& ${StyledAnchor}[href="${url}"]::before`)
             .join(', ')} {
             display: inline-block;
@@ -106,6 +107,7 @@ export const ArticleViewerContent = styled.div<{ styleProps: StyleProps }>`
           ${icon.associatedWebsites
             .map(
               (url) =>
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                 `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] & ${StyledAnchor}[href="${url}"]::before`,
             )
             .join(', ')} {

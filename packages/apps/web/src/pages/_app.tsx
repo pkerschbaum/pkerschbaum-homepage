@@ -2,26 +2,30 @@ import '@fontsource/rubik/variable.css';
 
 import localFont from '@next/font/local';
 import dayjs from 'dayjs';
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import type { AppProps } from 'next/app.js';
+import _Head from 'next/head.js';
+import _Link from 'next/link.js';
+import { useRouter } from 'next/router.js';
 import * as React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { Header } from '#pkg/components/header';
-import { Nav } from '#pkg/components/nav';
-import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor';
-import { SocialMediaLinks } from '#pkg/components/social-media-links';
-import { ToggleThemeButton } from '#pkg/components/toggle-theme-button';
-import { config } from '#pkg/config';
-import { DataAttribute, IsAnimationEnabled } from '#pkg/constants';
-import { ColorThemeProvider } from '#pkg/context/color-theme';
-import { CSSReset } from '#pkg/styles/css-reset.styles';
-import { GlobalAppStyles } from '#pkg/styles/global-app.styles';
-import { PrismStyles } from '#pkg/styles/prism.styles';
-import { useIsMounted } from '#pkg/utils/react.utils';
+import { Header } from '#pkg/components/header/index.js';
+import { Nav } from '#pkg/components/nav/index.js';
+import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor/index.js';
+import { SocialMediaLinks } from '#pkg/components/social-media-links/index.js';
+import { ToggleThemeButton } from '#pkg/components/toggle-theme-button/index.js';
+import { config } from '#pkg/config.js';
+import { DataAttribute, IsAnimationEnabled } from '#pkg/constants.js';
+import { ColorThemeProvider } from '#pkg/context/color-theme.jsx';
+import { CSSReset } from '#pkg/styles/css-reset.styles.js';
+import { GlobalAppStyles } from '#pkg/styles/global-app.styles.js';
+import { PrismStyles } from '#pkg/styles/prism.styles.js';
+import { useIsMounted } from '#pkg/utils/react.utils.jsx';
 
+const Head = _Head as unknown as typeof _Head.default;
+const Link = _Link as unknown as typeof _Link.default;
+
+// @ts-expect-error -- ESM typing error here, not important
 const cascadiaMono = localFont({
   src: [
     {
@@ -35,7 +39,7 @@ const cascadiaMono = localFont({
       weight: '200 700',
     },
   ],
-});
+}) as { style: { fontFamily: string } };
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

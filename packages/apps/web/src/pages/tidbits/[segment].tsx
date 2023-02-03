@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { useRemoteRefresh } from 'next-remote-refresh/hook';
+import { useRemoteRefresh } from 'next-remote-refresh/hook.js';
 import path from 'path';
 import * as React from 'react';
 import { z } from 'zod';
@@ -11,13 +11,17 @@ import {
   FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
-} from '#pkg/components/article-viewer';
-import { Main } from '#pkg/components/main';
-import { MDXViewer } from '#pkg/components/mdx-viewer';
-import { MetadataTags } from '#pkg/components/metadata-tags';
-import { PATHS } from '#pkg/constants';
-import { createFaviconsMapping } from '#pkg/favicons/favicons';
-import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#pkg/mdx';
+} from '#pkg/components/article-viewer/index.js';
+import { Main } from '#pkg/components/main/index.js';
+import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
+import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
+import { PATHS } from '#pkg/constants.js';
+import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
+import {
+  getAllMarkdownFiles,
+  MDXParseResult,
+  parseMDXFileAndCollectHrefs,
+} from '#pkg/mdx/index.js';
 
 type TidbitPageProps = {
   mdxParseResult: MDXParseResult;

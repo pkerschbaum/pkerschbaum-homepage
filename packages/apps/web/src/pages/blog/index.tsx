@@ -3,11 +3,11 @@ import type React from 'react';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticlesList } from '#pkg/components/articles-list';
-import { Main } from '#pkg/components/main';
-import { MetadataTags } from '#pkg/components/metadata-tags';
-import { PATHS } from '#pkg/constants';
-import { getAllMarkdownFiles } from '#pkg/mdx';
+import { ArticlesList } from '#pkg/components/articles-list/index.js';
+import { Main } from '#pkg/components/main/index.js';
+import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
+import { PATHS } from '#pkg/constants.js';
+import { getAllMarkdownFiles } from '#pkg/mdx/index.js';
 
 type BlogOverviewPageProps = {
   posts: MDXFile[];

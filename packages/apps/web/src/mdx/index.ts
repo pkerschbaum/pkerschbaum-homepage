@@ -1,1 +1,1 @@
-export * from '#pkg/mdx/mdx';
+export * from '#pkg/mdx/mdx.js';

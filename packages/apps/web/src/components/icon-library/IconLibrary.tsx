@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { IconProps as ReactFeatherIconProps } from 'react-feather';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 type IconProps = {
   /**

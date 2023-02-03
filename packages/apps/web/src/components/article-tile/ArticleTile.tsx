@@ -1,9 +1,9 @@
 import type React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements';
+import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements/index.js';
 
 type ArticleTileProps = {
   article: MDXFile;

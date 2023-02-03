@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 import type React from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticleTile } from '#pkg/components/article-tile';
-import { QUERIES } from '#pkg/constants';
+import { ArticleTile } from '#pkg/components/article-tile/index.js';
+import { QUERIES } from '#pkg/constants.js';
 
 type ArticlesListProps = {
   pathPrefix: string;

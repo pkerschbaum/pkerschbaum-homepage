@@ -60,6 +60,7 @@ module.exports = {
       ...noRestrictedSyntax_preferNextJsImage,
       ...noRestrictedSyntax_preferElements,
     ],
+    '@next/next/no-html-link-for-pages': ['error', 'src/pages/'],
   },
   overrides: [
     ...(baseEslintConfig.overrides ?? []),

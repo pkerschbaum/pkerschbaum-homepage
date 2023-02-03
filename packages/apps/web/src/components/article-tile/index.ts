@@ -1,1 +1,1 @@
-export * from '#pkg/components/article-tile/ArticleTile';
+export * from '#pkg/components/article-tile/ArticleTile.jsx';

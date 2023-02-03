@@ -3,12 +3,12 @@ import { getMDXComponent } from 'mdx-bundler/client';
 import * as React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import * as ReactIs from 'react-is';
-import styled, { StyledComponentProps } from 'styled-components';
+import { styled } from 'styled-components';
 import invariant from 'tiny-invariant';
 
-import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor';
-import { Classes, ColorTheme, DataAttribute } from '#pkg/constants';
-import { Anchor, Button } from '#pkg/elements';
+import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
+import { Classes, ColorTheme, DataAttribute } from '#pkg/constants.js';
+import { Anchor, Button } from '#pkg/elements/index.js';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;
@@ -57,7 +57,7 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
 // based on https://tomekdev.com/posts/anchors-for-headings-in-mdx
 type HeadingWithAnchorProps = {
   as: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  headingProps: StyledComponentProps<'h1', any, {}, never>;
+  headingProps: React.HTMLAttributes<HTMLHeadingElement>;
 };
 
 const HeadingWithAnchor: React.FC<HeadingWithAnchorProps> = ({ as, headingProps }) => {

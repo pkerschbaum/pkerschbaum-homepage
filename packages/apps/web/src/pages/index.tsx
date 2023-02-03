@@ -3,25 +3,25 @@ import fs from 'fs';
 import type { GetStaticProps } from 'next';
 import * as React from 'react';
 import { PenTool } from 'react-feather';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
-import { ArticlesList } from '#pkg/components/articles-list';
-import { Cookie, Topic } from '#pkg/components/icon-library';
-import { Introduction } from '#pkg/components/introduction';
-import { Main } from '#pkg/components/main';
-import { MetadataTags } from '#pkg/components/metadata-tags';
-import { ProjectsOverview } from '#pkg/components/projects-overview/ProjectsOverview';
-import { config } from '#pkg/config';
+import { ArticlesList } from '#pkg/components/articles-list/index.js';
+import { Cookie, Topic } from '#pkg/components/icon-library/index.js';
+import { Introduction } from '#pkg/components/introduction/index.js';
+import { Main } from '#pkg/components/main/index.js';
+import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
+import { ProjectsOverview } from '#pkg/components/projects-overview/ProjectsOverview.jsx';
+import { config } from '#pkg/config.js';
 import {
   PATHS,
   RSS_FEED_JSON_PATH,
   RSS_FEED_JSON_SLUG,
   RSS_FEED_XML_PATH,
   RSS_FEED_XML_SLUG,
-} from '#pkg/constants';
-import { getAllMarkdownFiles } from '#pkg/mdx';
+} from '#pkg/constants.js';
+import { getAllMarkdownFiles } from '#pkg/mdx/index.js';
 
 type HomePageProps = {
   posts: MDXFile[];

@@ -1,6 +1,6 @@
 import * as styled from 'styled-components';
 
-import { DataAttribute, ColorTheme } from '#pkg/constants';
+import { DataAttribute, ColorTheme } from '#pkg/constants.js';
 
 export const PrismStyles = styled.createGlobalStyle`
   /* 

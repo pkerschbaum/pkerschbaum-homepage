@@ -1,8 +1,8 @@
-import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
+import _Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document.js';
 import * as React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
-import { config } from '#pkg/config';
+import { config } from '#pkg/config.js';
 import {
   Animations,
   Classes,
@@ -11,7 +11,9 @@ import {
   IsAnimationEnabled,
   IsScrolled,
   LocalStorageKey,
-} from '#pkg/constants';
+} from '#pkg/constants.js';
+
+const Document = _Document as unknown as typeof _Document.default;
 
 export default class MyDocument extends Document {
   public static override async getInitialProps(
