@@ -39,5 +39,4 @@ const LinkElement = styled.li``;
 const SocialMediaAnchor = styled(Anchor).attrs({
   target: '_blank',
   rel: 'noopener noreferrer',
-  href: '',
-})``;
+} satisfies React.AnchorHTMLAttributes<HTMLAnchorElement> as any)``;
