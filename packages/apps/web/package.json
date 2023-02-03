@@ -3,9 +3,6 @@
   "private": true,
   "type": "module",
   "version": "1.0.0",
-  "imports": {
-    "#pkg/*": "./dist/*"
-  },
   "scripts": {
     "dev": "next dev",
     "fetch-favicons-for-articles": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write ./generated/favicons-for-websites.json && git add ./generated/favicons-for-websites.json",
@@ -53,9 +50,9 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-is": "^18.2.0",
-    "sanitize-html": "^2.8.1",
+    "sanitize-html": "^2.9.0",
     "sharp": "^0.31.3",
-    "styled-components": "^5.3.6",
+    "styled-components": "6.0.0-beta.9",
     "tiny-invariant": "^1.3.1",
     "unist-util-visit": "^4.1.2",
     "zod": "^3.20.2"
@@ -83,7 +80,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-regexp": "^1.12.0",
     "next-remote-refresh": "^0.10.0",
-    "next-sitemap": "^3.1.48",
+    "next-sitemap": "^3.1.49",
     "postcss": "^8.4.21",
     "postcss-scss": "^4.0.6",
     "prettier": "^2.8.3",

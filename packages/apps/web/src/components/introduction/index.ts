@@ -1,1 +1,1 @@
-export * from '#pkg/components/introduction/Introduction';
+export * from '#pkg/components/introduction/Introduction.jsx';

@@ -1,1 +1,1 @@
-export * from '#pkg/components/header/Header';
+export * from '#pkg/components/header/Header.jsx';

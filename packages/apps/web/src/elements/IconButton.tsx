@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { Button, ButtonProps } from '#pkg/elements/Button';
+import { Button, ButtonProps } from '#pkg/elements/Button.jsx';
 
 export type IconButtonProps = ButtonProps;
 

@@ -28,6 +28,16 @@ let nextConfig = {
     ignoreBuildErrors: true,
   },
 
+  webpack(config) {
+    // moduleResolution: node16 support for Next.js (https://github.com/vercel/next.js/discussions/41189#discussioncomment-4026895)
+    config.resolve.extensionAlias = {
+      ...config.resolve.extensionAlias,
+      '.js': ['.js', '.ts'],
+      '.jsx': ['.jsx', '.tsx'],
+    };
+    return config;
+  },
+
   async rewrites() {
     /*
      * https://plausible.io/docs/proxy/guides/nextjs#step-1-add-url-rewrite-rules

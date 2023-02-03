@@ -1,12 +1,14 @@
 import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
-import Image from 'next/image';
+import _Image from 'next/image.js';
 import type React from 'react';
 import sanitizeHTML from 'sanitize-html';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { Anchor } from '#pkg/elements';
-import type { Webmention } from '#pkg/webmentions';
+import { Anchor } from '#pkg/elements/index.js';
+import type { Webmention } from '#pkg/webmentions/index.js';
+
+const Image = _Image as unknown as typeof _Image.default;
 
 type WebmentionTileProps = {
   webmention: Webmention;

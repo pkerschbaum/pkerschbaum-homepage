@@ -1,9 +1,9 @@
 import type React from 'react';
 import { GitHub, Linkedin, Twitter } from 'react-feather';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { config } from '#pkg/config';
-import { Anchor } from '#pkg/elements';
+import { config } from '#pkg/config.js';
+import { Anchor } from '#pkg/elements/index.js';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>
@@ -39,4 +39,5 @@ const LinkElement = styled.li``;
 const SocialMediaAnchor = styled(Anchor).attrs({
   target: '_blank',
   rel: 'noopener noreferrer',
+  href: '',
 })``;

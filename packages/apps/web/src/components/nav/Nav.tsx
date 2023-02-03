@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { PenTool } from 'react-feather';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
-import { Favicon } from '#pkg/components/favicon';
-import { Cookie, Topic } from '#pkg/components/icon-library';
-import { config } from '#pkg/config';
-import { Animations, DataAttribute, IsScrolled } from '#pkg/constants';
-import { Anchor } from '#pkg/elements';
+import { Favicon } from '#pkg/components/favicon/index.js';
+import { Cookie, Topic } from '#pkg/components/icon-library/index.js';
+import { config } from '#pkg/config.js';
+import { Animations, DataAttribute, IsScrolled } from '#pkg/constants.js';
+import { Anchor } from '#pkg/elements/index.js';
 
 export const Nav: React.FC = () => {
   return (

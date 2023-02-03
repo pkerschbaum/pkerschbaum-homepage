@@ -1,1 +1,1 @@
-export * from '#pkg/components/project-tile/ProjectTile';
+export * from '#pkg/components/project-tile/ProjectTile.jsx';

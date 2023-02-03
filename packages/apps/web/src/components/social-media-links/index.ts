@@ -1,1 +1,1 @@
-export * from '#pkg/components/social-media-links/SocialMediaLinks';
+export * from '#pkg/components/social-media-links/SocialMediaLinks.jsx';

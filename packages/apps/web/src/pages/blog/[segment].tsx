@@ -1,12 +1,12 @@
 import { arrays } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import { useRemoteRefresh } from 'next-remote-refresh/hook';
+import { useRouter } from 'next/router.js';
+import { useRemoteRefresh } from 'next-remote-refresh/hook.js';
 import path from 'path';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { z } from 'zod';
 
 import {
@@ -15,18 +15,21 @@ import {
   FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
-} from '#pkg/components/article-viewer';
-import { Main } from '#pkg/components/main';
-import { MDXViewer } from '#pkg/components/mdx-viewer';
-import { MetadataTags } from '#pkg/components/metadata-tags';
-import { WebmentionTile } from '#pkg/components/webmention-tile';
-import { config } from '#pkg/config';
-import { PATHS } from '#pkg/constants';
-import { Anchor } from '#pkg/elements';
-import { FullBleedWrapper } from '#pkg/elements/FullBleedWrapper';
-import { createFaviconsMapping } from '#pkg/favicons/favicons';
-import { getAllMarkdownFiles, MDXParseResult, parseMDXFileAndCollectHrefs } from '#pkg/mdx';
-import { fetchWebmentions, Webmention } from '#pkg/webmentions/webmentions';
+} from '#pkg/components/article-viewer/index.js';
+import { Main } from '#pkg/components/main/index.js';
+import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
+import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
+import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
+import { config } from '#pkg/config.js';
+import { PATHS } from '#pkg/constants.js';
+import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
+import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
+import {
+  getAllMarkdownFiles,
+  MDXParseResult,
+  parseMDXFileAndCollectHrefs,
+} from '#pkg/mdx/index.js';
+import { fetchWebmentions, Webmention } from '#pkg/webmentions/index.js';
 
 type BlogPostPageProps = {
   mdxParseResult: MDXParseResult;
@@ -209,9 +212,9 @@ export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
 export default BlogPostPage;
 
 async function fetchMDXFileAndFavicons(segment: string) {
-  const mdxParseResult = (await parseMDXFileAndCollectHrefs(
+  const mdxParseResult = await parseMDXFileAndCollectHrefs(
     path.join(PATHS.POSTS, `${segment}.mdx`),
-  )) as MDXParseResult;
+  );
 
   const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
 

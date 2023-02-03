@@ -1,1 +1,1 @@
-export * from '#pkg/components/webmention-tile/WebmentionTile';
+export * from '#pkg/components/webmention-tile/WebmentionTile.jsx';

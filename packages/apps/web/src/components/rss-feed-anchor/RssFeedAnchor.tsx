@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Rss } from 'react-feather';
 
-import { Anchor } from '#pkg/elements';
+import { Anchor } from '#pkg/elements/index.js';
 
 export const RssFeedAnchor: React.FC = () => {
   return (
