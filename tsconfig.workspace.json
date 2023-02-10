@@ -1,4 +1,6 @@
 {
+  /* based on https://pkerschbaum.com/tidbits/sensible-tsconfig-defaults */
+
   "compilerOptions": {
     /* Language and Environment */
     "target": "ES2018",

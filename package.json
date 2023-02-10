@@ -27,10 +27,8 @@
     "pnpm": "^7.11.0"
   },
   "pnpm": {
-    "updateConfig": {
-      "ignoreDependencies": [
-        "esbuild"
-      ]
+    "patchedDependencies": {
+      "mdx-bundler@9.2.1": "patches/mdx-bundler@9.2.1.patch"
     }
   }
 }
