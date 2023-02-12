@@ -1,0 +1,63 @@
+---
+title: Starting multiple VS Code instances with separate Node.js versions
+published: true
+publishedAtISO: '2023-02-12T11:06:00.000Z'
+description: How to combine `nvm` and the `code` CLI to start multiple VS Code instances using separate versions of Node.js.
+tags: ['VSCode', 'nvm']
+---
+
+In our day-to-day work as web developers it is common to work on multiple web projects at the same time. I like to do that by starting multiple VS Code instances, one for each project I work on.
+
+This can present the challenge that each project needs a specific Node.js version.
+So what we want to have is for each project, start an instance of VS Code with the correct Node.js version in use.
+
+Think of two VS Code instances for working on two projects:
+
+- a frontend project which needs Node.js 18
+- and a backend project which needs Node.js 16
+
+I have been using a setup for Ubuntu (WSL2) for a few years which works very well accomplishing this.
+
+I define aliases like this:
+
+```sh
+alias dev_pkerschbaum_homepage='cd ~/workspace/pkerschbaum-homepage && nvm use && code .'
+alias dev_document_generator='cd ~/workspace/react-pdf-document-generator && nvm use && code .'
+```
+
+Then I can run `dev_pkerschbaum_homepage` and `dev_document_generator` to start two instances of VS Code each using the correct Node.js version!
+
+Here's how the setup works:
+
+## NVM: Node Version Manager
+
+The tool <FancyAnchor href="https://github.com/nvm-sh/nvm">nvm</FancyAnchor> let's you install multiple versions of Node.js and switch between them as you needed.  
+To switch versions, you use the `nvm use` command:
+
+```sh
+nvm use 16.19.0
+```
+
+But, you can also put the version number in a file `.nvmrc` in the root of your repository and just run `nvm use` without a version number; it will pick up the version defined in the file.  
+Great thing is that you can use this file also for other purposes (e.g. configure your CI/CD system to use that version).
+
+## VS Code CLI and Environment Variables
+
+In <FancyAnchor href="https://github.com/microsoft/vscode/issues/1895#issuecomment-290351238">a `microsoft/vscode` GitHub issue</FancyAnchor> I learned that when you start VS Code using the `code` CLI, it will **inherit the environment variables** of the terminal you run that command in. And even if the environment variables of that terminal change, those changes will not propagate to the VS Code instance which was started before.
+
+Since `nvm use` does it's magic of switching Node.js versions via environment variables, running `nvm use` first and then `code .` will start a VS Code instance using the correct Node.js version.
+
+To summarize, if I run the two aliases one after the other:
+
+```bash
+$ dev_pkerschbaum_homepage
+Found '/home/pkerschbaum/workspace/pkerschbaum-homepage/.nvmrc' with version <16.19.0>
+Now using node v16.19.0 (npm v8.19.3)
+$ dev_document_generator
+Found '/home/pkerschbaum/workspace/react-pdf-document-generator/.nvmrc' with version <18.12.1>
+Now using node v18.12.1 (npm v8.19.2)
+```
+
+...I have two VS Code instances started, each with the correct Node.js version!
+
+VS Code will use that Node.js version for new integrated terminals instances, pre-commit hooks; just 💫*everywhere*💫.
