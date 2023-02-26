@@ -1,9 +1,9 @@
 // @ts-check
-const { execSync } = require('child_process');
+import { $ } from 'zx';
 
 /** @type {Array<{ name: string; path: string }>} */
 const workspacePackagesInclRoot = JSON.parse(
-  execSync('pnpm --recursive list --json --depth -1').toString('utf-8'),
+  (await $`pnpm --recursive list --json --depth -1`).stdout,
 );
 const workspacePackages = workspacePackagesInclRoot.slice(1);
 
@@ -47,7 +47,7 @@ function computeEslintShellCommandsPerPackage(files) {
   return eslintCommandsToExecute;
 }
 
-module.exports = {
+export default {
   /**
    * @param {string[]} files
    */
