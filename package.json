@@ -29,7 +29,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "mdx-bundler@9.2.1": "patches/mdx-bundler@9.2.1.patch"
+      "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch"
     }
   }
 }

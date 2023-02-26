@@ -1,5 +1,5 @@
 import { check, numbers } from '@pkerschbaum/ts-utils';
-import { getMDXComponent } from 'mdx-bundler/client';
+import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import * as ReactIs from 'react-is';
@@ -15,13 +15,9 @@ export type MDXViewerProps = {
 };
 
 export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) => {
-  const Component = React.useMemo(
-    () => getMDXComponent(codeOfMdxParseResult),
-    [codeOfMdxParseResult],
-  );
-
   return (
-    <Component
+    <MDXRemote
+      compiledSource={codeOfMdxParseResult}
       components={{
         a: (props) => {
           if (check.isNullishOrEmptyString(props.href)) {

@@ -1,0 +1,58 @@
+# fix for https://github.com/hashicorp/next-mdx-remote/issues/329
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index ba25454bfcedd4738d49d1dae582ba7a4097a021..86796ec9db7e678729a16e84ba5813c052cede0c 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -1,7 +1,7 @@
+-import './idle-callback-polyfill';
++import './idle-callback-polyfill.js';
+ import React from 'react';
+ import * as mdx from '@mdx-js/react';
+-import { MDXRemoteSerializeResult } from './types';
++import { MDXRemoteSerializeResult } from './types.js';
+ declare type RequestIdleCallbackHandle = number;
+ declare type RequestIdleCallbackOptions = {
+     timeout?: number;
+diff --git a/dist/rsc.d.ts b/dist/rsc.d.ts
+index eb0ab8e63d143ee06dfec843fbd1b06f8c3c07ae..12e4820bb6d4b5c4c147aecb26230f44642de5e4 100644
+--- a/dist/rsc.d.ts
++++ b/dist/rsc.d.ts
+@@ -1,5 +1,5 @@
+ import React from 'react';
+-import { MDXRemoteSerializeResult, SerializeOptions } from './types';
++import { MDXRemoteSerializeResult, SerializeOptions } from './types.js';
+ import { VFileCompatible } from 'vfile';
+ import { MDXProvider } from '@mdx-js/react';
+ export declare type MDXRemoteProps = MDXRemoteSerializeResult & {
+diff --git a/dist/serialize.d.ts b/dist/serialize.d.ts
+index c914acaf000baadcd790776d1bc83b0c3f75fec5..bcd741b550417e101e0a968c3144ade99c1155c3 100644
+--- a/dist/serialize.d.ts
++++ b/dist/serialize.d.ts
+@@ -1,5 +1,5 @@
+ import { VFileCompatible } from 'vfile';
+-import { MDXRemoteSerializeResult, SerializeOptions } from './types';
++import { MDXRemoteSerializeResult, SerializeOptions } from './types.js';
+ /**
+  * Parses and compiles the provided MDX string. Returns a result which can be passed into <MDXRemote /> to be rendered.
+  */
+diff --git a/index.d.ts b/index.d.ts
+index 9247c2a8c747eb7dafd78d9d5a8cd404d48d4dca..09e9c9b2a265b231e5f195ca1cfddccebffbfa9f 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -1 +1 @@
+-export * from './dist/index'
++export * from './dist/index.js'
+diff --git a/rsc.d.ts b/rsc.d.ts
+index e21f418693d6a263c27d412e517e13b4e214e292..371ebfb4946b5886663cd14742dc97d3e20e3e4e 100644
+--- a/rsc.d.ts
++++ b/rsc.d.ts
+@@ -1 +1 @@
+-export * from './dist/rsc'
++export * from './dist/rsc.js'
+diff --git a/serialize.d.ts b/serialize.d.ts
+index d1c360d3ce3ea6641800f7f4c7f978310177dfe7..477f7499950717c8371c12e42b1b64dcd5718802 100644
+--- a/serialize.d.ts
++++ b/serialize.d.ts
+@@ -1 +1 @@
+-export * from './dist/serialize'
++export * from './dist/serialize.js'
