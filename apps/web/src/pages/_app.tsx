@@ -1,8 +1,8 @@
 import '@fontsource/rubik/variable.css';
 
-import localFont from '@next/font/local';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app.js';
+import localFont from 'next/font/local';
 import _Head from 'next/head.js';
 import _Link from 'next/link.js';
 import { useRouter } from 'next/router.js';
@@ -39,7 +39,11 @@ const cascadiaMono = localFont({
       weight: '200 700',
     },
   ],
-}) as { style: { fontFamily: string } };
+  variable: '--font-family-cascadia-mono',
+}) as {
+  style: { fontFamily: string };
+  variable: string;
+};
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -104,35 +108,37 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="pingback" href={`https://webmention.io/${config.canonicalTLDPlus1}/xmlrpc`} />
       </Head>
 
-      <ColorThemeProvider>
-        <CSSReset />
-        <PrismStyles />
-        <GlobalAppStyles cascadiaMonoFontFamily={cascadiaMono.style.fontFamily} />
+      <div className={cascadiaMono.variable} style={{ display: 'contents' }}>
+        <ColorThemeProvider>
+          <CSSReset />
+          <PrismStyles />
+          <GlobalAppStyles />
 
-        <RootContainer>
-          <Header>
-            <Nav />
+          <RootContainer>
+            <Header>
+              <Nav />
 
-            <AnchorAndButtonsArea>
-              <RssFeedAnchor />
+              <AnchorAndButtonsArea>
+                <RssFeedAnchor />
 
-              <ToggleThemeButton />
-            </AnchorAndButtonsArea>
-          </Header>
+                <ToggleThemeButton />
+              </AnchorAndButtonsArea>
+            </Header>
 
-          <Component {...pageProps} />
+            <Component {...pageProps} />
 
-          <Footer>
-            <SocialMediaLinks />
+            <Footer>
+              <SocialMediaLinks />
 
-            <YearAndContact>
-              <span>{dayjs().year()}</span>
-              <span>-</span>
-              <Link href="/">pkerschbaum</Link>
-            </YearAndContact>
-          </Footer>
-        </RootContainer>
-      </ColorThemeProvider>
+              <YearAndContact>
+                <span>{dayjs().year()}</span>
+                <span>-</span>
+                <Link href="/">pkerschbaum</Link>
+              </YearAndContact>
+            </Footer>
+          </RootContainer>
+        </ColorThemeProvider>
+      </div>
     </>
   );
 };

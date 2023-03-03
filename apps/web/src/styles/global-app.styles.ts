@@ -2,11 +2,7 @@ import * as styled from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '#pkg/constants.js';
 
-type GlobalAppStylesProps = {
-  cascadiaMonoFontFamily: string;
-};
-
-export const GlobalAppStyles = styled.createGlobalStyle<GlobalAppStylesProps>`
+export const GlobalAppStyles = styled.createGlobalStyle`
   /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */
   *:root {
     --color-thumb: var(--color-fg-less-emphasized);
@@ -168,8 +164,8 @@ export const GlobalAppStyles = styled.createGlobalStyle<GlobalAppStylesProps>`
 
   code {
     /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
-    font-family: ${({ cascadiaMonoFontFamily }) => cascadiaMonoFontFamily}, 'Fira Mono',
-      'DejaVu Sans Mono', Menlo, Consolas, 'Liberation Mono', Monaco, 'Lucida Console', monospace;
+    font-family: var(--font-family-cascadia-mono), 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
+      'Liberation Mono', Monaco, 'Lucida Console', monospace;
     font-size: var(--font-size-sm);
   }
 
