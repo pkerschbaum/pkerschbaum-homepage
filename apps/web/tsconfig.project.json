@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.workspace.json",
+  "extends": "../../tsconfig.workspace.json",
   "compilerOptions": {
     /* Language and Environment */
     "jsx": "preserve",

@@ -1,0 +1,22 @@
+{
+  "references": [
+    {
+      "path": "./apps/web/tsconfig.project.json"
+    },
+    {
+      "path": "./packages/commons/tsconfig.project.json"
+    },
+    {
+      "path": "./packages/commons-node/tsconfig.project.json"
+    },
+    {
+      "path": "./packages/fetch-favicon/tsconfig.project.json"
+    },
+    {
+      "path": "./packages/mdx/tsconfig.project.json"
+    },
+    {
+      "path": "./packages/shared-node/tsconfig.project.json"
+    }
+  ]
+}

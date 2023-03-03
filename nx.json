@@ -18,7 +18,7 @@
       "{projectRoot}/tsconfig.project.json",
       "{projectRoot}/*.tsbuildinfo"
     ],
-    "eslint-files": ["{workspaceRoot}/packages/eslint-template.cjs", "{projectRoot}/.eslintrc.cjs"],
+    "eslint-files": ["{workspaceRoot}/eslint-template.cjs", "{projectRoot}/.eslintrc.cjs"],
     "outputs": ["{projectRoot}/dist/**/*"]
   },
   "targetDefaults": {

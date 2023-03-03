@@ -9,7 +9,7 @@
     },
     {
       "name": "@pkerschbaum-homepage/web: pnpm run dev",
-      "cwd": "[cwd]/packages/apps/web",
+      "cwd": "[cwd]/apps/web",
       "execute": false,
       "command": "pnpm run dev"
     }

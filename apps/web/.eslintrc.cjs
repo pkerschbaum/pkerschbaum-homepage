@@ -85,7 +85,7 @@ module.exports = {
   settings: {
     ...baseEslintConfig.settings,
     next: {
-      rootDir: 'packages/apps/web/',
+      rootDir: 'apps/web/',
     },
   },
 };

@@ -23,7 +23,7 @@ importers:
       rimraf: 4.1.2
       zx: 7.1.1
 
-  packages/apps/web:
+  apps/web:
     specifiers:
       '@fontsource/rubik': ^4.5.14
       '@next/env': ^13.2.1
@@ -86,10 +86,10 @@ importers:
     dependencies:
       '@fontsource/rubik': 4.5.14
       '@next/font': 13.2.1
-      '@pkerschbaum-homepage/commons': link:../../libs/commons
-      '@pkerschbaum-homepage/fetch-favicon': link:../../libs/fetch-favicon
-      '@pkerschbaum-homepage/mdx': link:../../libs/mdx
-      '@pkerschbaum-homepage/shared-node': link:../../libs/shared-node
+      '@pkerschbaum-homepage/commons': link:../../packages/commons
+      '@pkerschbaum-homepage/fetch-favicon': link:../../packages/fetch-favicon
+      '@pkerschbaum-homepage/mdx': link:../../packages/mdx
+      '@pkerschbaum-homepage/shared-node': link:../../packages/shared-node
       '@pkerschbaum/ts-utils': 0.0.1
       '@types/mdast': 3.0.10
       dayjs: 1.11.7
@@ -144,7 +144,7 @@ importers:
       ts-node: 10.9.1_ellgaeuoqnti3hful2ny2iugba
       typescript: 4.9.5
 
-  packages/libs/commons:
+  packages/commons:
     specifiers:
       '@pkerschbaum/ts-utils': ^0.0.1
       '@typescript-eslint/eslint-plugin': ^5.53.0
@@ -185,7 +185,7 @@ importers:
       typescript: 4.9.5
       typescript-transform-paths: 3.4.6_typescript@4.9.5
 
-  packages/libs/commons-node:
+  packages/commons-node:
     specifiers:
       '@pkerschbaum/ts-utils': ^0.0.1
       '@types/node': ^18.14.2
@@ -228,7 +228,7 @@ importers:
       typescript: 4.9.5
       typescript-transform-paths: 3.4.6_typescript@4.9.5
 
-  packages/libs/fetch-favicon:
+  packages/fetch-favicon:
     specifiers:
       '@pkerschbaum-homepage/commons': workspace:1.0.0
       '@pkerschbaum-homepage/commons-node': workspace:1.0.0
@@ -283,7 +283,7 @@ importers:
       typescript: 4.9.5
       typescript-transform-paths: 3.4.6_typescript@4.9.5
 
-  packages/libs/mdx:
+  packages/mdx:
     specifiers:
       '@pkerschbaum/ts-utils': ^0.0.1
       '@types/mdast': ^3.0.10
@@ -338,7 +338,7 @@ importers:
       typescript: 4.9.5
       typescript-transform-paths: 3.4.6_typescript@4.9.5
 
-  packages/libs/shared-node:
+  packages/shared-node:
     specifiers:
       '@types/node': ^18.14.2
       '@typescript-eslint/eslint-plugin': ^5.53.0
@@ -4076,7 +4076,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -6357,7 +6357,7 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.1.4
+      glob: 7.2.3
     dev: true
 
   /rimraf/4.1.2:

@@ -2,7 +2,7 @@
 
 - [Development](#development)
   - [Prerequisites](#prerequisites)
-  - [Build & Run](#build--run)
+  - [Build \& Run](#build--run)
   - [Additional commands for development](#additional-commands-for-development)
 
 ## Development
@@ -49,7 +49,7 @@
 1. **Start a local instance of `@pkerschbaum-homepage/web`:**
 
    ```sh
-   cd ./packages/apps/web
+   cd ./apps/web
    pnpm run dev
    ```
 
