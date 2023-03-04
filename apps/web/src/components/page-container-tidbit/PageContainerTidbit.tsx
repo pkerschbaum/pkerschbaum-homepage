@@ -1,9 +1,6 @@
 import dayjs from 'dayjs';
-import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRemoteRefresh } from 'next-remote-refresh/hook.js';
-import path from 'path';
 import * as React from 'react';
-import { z } from 'zod';
 
 import {
   ArticleViewerContainer,
@@ -15,20 +12,14 @@ import {
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
-import { PATHS } from '#pkg/constants.js';
-import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
-import {
-  getAllMarkdownFiles,
-  MDXParseResult,
-  parseMDXFileAndCollectHrefs,
-} from '#pkg/mdx/index.js';
+import type { MDXParseResult } from '#pkg/mdx/index.js';
 
-type TidbitPageProps = {
+export type PageContainerTidbitProps = {
   mdxParseResult: MDXParseResult;
   faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
 };
 
-const TidbitPage: React.FC<TidbitPageProps> = ({
+export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
   mdxParseResult,
   faviconDataURLsForWebsiteURLs,
 }) => {
@@ -59,33 +50,3 @@ const TidbitPage: React.FC<TidbitPageProps> = ({
     </>
   );
 };
-
-const schema_staticProps = z.object({ segment: z.string().min(1) });
-type StaticProps = z.infer<typeof schema_staticProps>;
-export const getStaticProps: GetStaticProps<TidbitPageProps, StaticProps> = async ({ params }) => {
-  const parsedParams = schema_staticProps.parse(params);
-
-  const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    path.join(PATHS.TIDBITS, `${parsedParams.segment}.mdx`),
-  );
-
-  const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
-
-  return {
-    props: {
-      mdxParseResult,
-      faviconDataURLsForWebsiteURLs,
-    },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const articles = await getAllMarkdownFiles(PATHS.TIDBITS);
-  const paths = articles.map((article) => ({ params: { segment: article.segment } }));
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export default TidbitPage;

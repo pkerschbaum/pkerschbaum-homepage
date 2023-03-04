@@ -1,13 +1,10 @@
 import { arrays } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
-import type { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router.js';
 import { useRemoteRefresh } from 'next-remote-refresh/hook.js';
-import path from 'path';
 import * as React from 'react';
 import { Share2, Twitter } from 'react-feather';
 import { styled } from 'styled-components';
-import { z } from 'zod';
 
 import {
   ArticleViewerContainer,
@@ -21,23 +18,17 @@ import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { config } from '#pkg/config.js';
-import { PATHS } from '#pkg/constants.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
-import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
-import {
-  getAllMarkdownFiles,
-  MDXParseResult,
-  parseMDXFileAndCollectHrefs,
-} from '#pkg/mdx/index.js';
-import { fetchWebmentions, Webmention } from '#pkg/webmentions/index.js';
+import type { MDXParseResult } from '#pkg/mdx/index.js';
+import type { Webmention } from '#pkg/webmentions/index.js';
 
-type BlogPostPageProps = {
+export type PageContainerBlogPostProps = {
   mdxParseResult: MDXParseResult;
   faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
   webmentions: Webmention[];
 };
 
-const BlogPostPage: React.FC<BlogPostPageProps> = ({
+export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
   mdxParseResult,
   faviconDataURLsForWebsiteURLs,
   webmentions,
@@ -175,51 +166,3 @@ const WebmentionsList = styled.div`
   flex-direction: column;
   gap: calc(4 * var(--spacing-base));
 `;
-
-const schema_staticProps = z.object({ segment: z.string().min(1) });
-type StaticProps = z.infer<typeof schema_staticProps>;
-export const getStaticProps: GetStaticProps<BlogPostPageProps, StaticProps> = async ({
-  params,
-}) => {
-  const parsedParams = schema_staticProps.parse(params);
-
-  const [{ mdxParseResult, faviconDataURLsForWebsiteURLs }, { webmentions }] = await Promise.all([
-    fetchMDXFileAndFavicons(parsedParams.segment),
-    fetchWebmentions(
-      new URL(`/blog/${parsedParams.segment}`, `https://${config.canonicalTLDPlus1}`).href,
-    ),
-  ]);
-
-  return {
-    props: {
-      mdxParseResult,
-      faviconDataURLsForWebsiteURLs,
-      webmentions,
-    },
-    revalidate: 60, // seconds
-  };
-};
-
-export const getStaticPaths: GetStaticPaths<StaticProps> = async () => {
-  const articles = await getAllMarkdownFiles(PATHS.POSTS);
-  const paths = articles.map((article) => ({ params: { segment: article.segment } }));
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export default BlogPostPage;
-
-async function fetchMDXFileAndFavicons(segment: string) {
-  const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    path.join(PATHS.POSTS, `${segment}.mdx`),
-  );
-
-  const faviconDataURLsForWebsiteURLs = await createFaviconsMapping(mdxParseResult);
-
-  return {
-    mdxParseResult,
-    faviconDataURLsForWebsiteURLs,
-  };
-}
