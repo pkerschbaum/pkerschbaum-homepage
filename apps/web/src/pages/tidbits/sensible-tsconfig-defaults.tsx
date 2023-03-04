@@ -1,22 +1,27 @@
 import type { GetStaticProps } from 'next';
 import path from 'path';
 import * as React from 'react';
+import invariant from 'tiny-invariant';
 
 import {
   PageContainerTidbit,
-  PageContainerTidbitProps,
+  PageContainerTidbitPropsBase,
 } from '#pkg/components/page-container-tidbit/index.js';
-import { PATHS } from '#pkg/constants.js';
+import { ClassesAliases, PATHS } from '#pkg/constants.js';
 import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
 import { parseMDXFileAndCollectHrefs } from '#pkg/mdx/index.js';
+import styles from '#pkg/pages/tidbits/sensible-tsconfig-defaults.module.css';
 
-const TidbitPage: React.FC<PageContainerTidbitProps> = (props) => {
-  return <PageContainerTidbit {...props} />;
+const faviconsClassName = styles[ClassesAliases.FAVICONS];
+invariant(faviconsClassName);
+
+const TidbitPage: React.FC<PageContainerTidbitPropsBase> = (props) => {
+  return <PageContainerTidbit {...props} faviconsClassName={faviconsClassName} />;
 };
 
 const segment = 'sensible-tsconfig-defaults';
 
-export const getStaticProps: GetStaticProps<PageContainerTidbitProps> = async () => {
+export const getStaticProps: GetStaticProps<PageContainerTidbitPropsBase> = async () => {
   const mdxParseResult = await parseMDXFileAndCollectHrefs(
     path.join(PATHS.TIDBITS, `${segment}.mdx`),
   );

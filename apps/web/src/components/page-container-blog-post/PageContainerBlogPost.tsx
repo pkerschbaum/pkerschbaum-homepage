@@ -9,7 +9,6 @@ import { styled } from 'styled-components';
 import {
   ArticleViewerContainer,
   ArticleViewerContent,
-  FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
 } from '#pkg/components/article-viewer/index.js';
@@ -22,16 +21,18 @@ import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 import type { Webmention } from '#pkg/webmentions/index.js';
 
-export type PageContainerBlogPostProps = {
+export type PageContainerBlogPostPropsBase = {
   mdxParseResult: MDXParseResult;
-  faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
   webmentions: Webmention[];
+};
+export type PageContainerBlogPostProps = PageContainerBlogPostPropsBase & {
+  faviconsClassName: string;
 };
 
 export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
   mdxParseResult,
-  faviconDataURLsForWebsiteURLs,
   webmentions,
+  faviconsClassName,
 }) => {
   useRemoteRefresh();
 
@@ -59,7 +60,7 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
         description={mdxParseResult.frontmatter.description}
       />
 
-      <Main>
+      <Main className={faviconsClassName}>
         <ArticleViewerContainer>
           <FrontMatter>
             <h1>{mdxParseResult.frontmatter.title}</h1>
@@ -69,7 +70,7 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
             </Time>
           </FrontMatter>
 
-          <ArticleViewerContent styleProps={{ faviconDataURLsForWebsiteURLs }}>
+          <ArticleViewerContent>
             <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
           </ArticleViewerContent>
 

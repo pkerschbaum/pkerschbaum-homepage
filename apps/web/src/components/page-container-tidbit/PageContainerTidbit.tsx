@@ -5,7 +5,6 @@ import * as React from 'react';
 import {
   ArticleViewerContainer,
   ArticleViewerContent,
-  FaviconDataURLsForWebsiteURLs,
   FrontMatter,
   Time,
 } from '#pkg/components/article-viewer/index.js';
@@ -14,14 +13,16 @@ import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { MetadataTags } from '#pkg/components/metadata-tags/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 
-export type PageContainerTidbitProps = {
+export type PageContainerTidbitPropsBase = {
   mdxParseResult: MDXParseResult;
-  faviconDataURLsForWebsiteURLs: FaviconDataURLsForWebsiteURLs;
+};
+export type PageContainerTidbitProps = PageContainerTidbitPropsBase & {
+  faviconsClassName: string;
 };
 
 export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
   mdxParseResult,
-  faviconDataURLsForWebsiteURLs,
+  faviconsClassName,
 }) => {
   useRemoteRefresh();
 
@@ -32,7 +33,7 @@ export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
         description={mdxParseResult.frontmatter.description}
       />
 
-      <Main>
+      <Main className={faviconsClassName}>
         <ArticleViewerContainer>
           <FrontMatter>
             <h1>{mdxParseResult.frontmatter.title}</h1>
@@ -42,7 +43,7 @@ export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
             </Time>
           </FrontMatter>
 
-          <ArticleViewerContent styleProps={{ faviconDataURLsForWebsiteURLs }}>
+          <ArticleViewerContent>
             <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
           </ArticleViewerContent>
         </ArticleViewerContainer>
