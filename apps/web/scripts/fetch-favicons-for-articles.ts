@@ -8,14 +8,14 @@ import { fetchFaviconsForAllHrefs } from '@pkerschbaum-homepage/fetch-favicon';
 import { PATHS } from '../src/constants.js';
 
 async function fetchFaviconsForAllHrefsAndWriteToFile() {
-  const [postsFileBasenames, tidbitsFileBasenames] = await Promise.all([
+  const [postsBasenames, tidbitBasenames] = await Promise.all([
     fs.promises.readdir(PATHS.POSTS),
     fs.promises.readdir(PATHS.TIDBITS),
   ]);
-  const postsWithAbsolutePaths = postsFileBasenames
+  const postsWithAbsolutePaths = postsBasenames
     .filter((path) => path.endsWith('.mdx'))
     .map((basename) => path.join(PATHS.POSTS, basename));
-  const tidbitsWithAbsolutePaths = tidbitsFileBasenames
+  const tidbitsWithAbsolutePaths = tidbitBasenames
     .filter((path) => path.endsWith('.mdx'))
     .map((basename) => path.join(PATHS.TIDBITS, basename));
   const filesWithAbsolutePaths = [...postsWithAbsolutePaths, ...tidbitsWithAbsolutePaths];

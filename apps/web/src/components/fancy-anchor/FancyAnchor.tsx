@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled } from 'styled-components';
 
+import { Classes } from '#pkg/constants.js';
 import { Anchor, AnchorProps } from '#pkg/elements/index.js';
 import { urlUtils } from '#pkg/utils/url.utils.js';
 
@@ -9,6 +10,7 @@ export type FancyAnchorProps = AnchorProps & {};
 export function FancyAnchor({
   href,
   children,
+  className,
   ...delegated
 }: FancyAnchorProps): React.ReactElement {
   let textToDisplay = children;
@@ -18,7 +20,11 @@ export function FancyAnchor({
   }
 
   return (
-    <StyledAnchor href={href} {...delegated}>
+    <StyledAnchor
+      href={href}
+      className={`${className ?? ''} ${Classes.STYLED_ANCHOR}`}
+      {...delegated}
+    >
       {textToDisplay}
     </StyledAnchor>
   );

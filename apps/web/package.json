@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "fetch-favicons-for-articles": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write ./generated/favicons-for-websites.json && git add ./generated/favicons-for-websites.json",
+    "fetch-favicons": "ts-node --esm --project ./tsconfig.project.json ./scripts/fetch-favicons-for-articles.ts && prettier --write \"./generated/favicons-for-websites.json\" && git add \"./generated/favicons-for-websites.json\"",
+    "generate-css-modules": "ts-node --esm --project ./tsconfig.project.json ./scripts/generate-css-modules-for-articles.ts && prettier --write \"./src/pages/**/*.module.css\" && git add \"./src/pages/**/*.module.css\"",
     "build:next": "next build",
     "build:sitemap": "next-sitemap --config next-sitemap.cjs",
     "compile": "tsc -p ./tsconfig.project.json --noEmit",
