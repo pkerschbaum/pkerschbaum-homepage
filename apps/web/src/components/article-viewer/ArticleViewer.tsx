@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 
-import { StyledAnchor } from '#pkg/components/fancy-anchor/index.js';
 import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
 
 export const ArticleViewerContainer = styled.article`
@@ -47,10 +46,6 @@ export const ArticleViewerContent = styled.div`
   }
   & li:first-of-type {
     margin-block-start: 0;
-  }
-
-  & ${/* sc-selector */ StyledAnchor as any}::before {
-    display: none;
   }
 
   /* 

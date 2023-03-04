@@ -11,6 +11,8 @@ import { ClassesAliases, PATHS } from '#pkg/constants.js';
 import { parseMDXFileAndCollectHrefs } from '#pkg/mdx/index.js';
 import styles from '#pkg/pages/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions.module.css';
 
+const SEGMENT = path.parse(__filename).name;
+
 const faviconsClassName = styles[ClassesAliases.FAVICONS];
 invariant(faviconsClassName);
 
@@ -18,11 +20,9 @@ const TidbitPage: React.FC<PageContainerTidbitPropsBase> = (props) => {
   return <PageContainerTidbit {...props} faviconsClassName={faviconsClassName} />;
 };
 
-const segment = 'multiple-vs-code-instances-with-separate-nodejs-versions';
-
 export const getStaticProps: GetStaticProps<PageContainerTidbitPropsBase> = async () => {
   const mdxParseResult = await parseMDXFileAndCollectHrefs(
-    path.join(PATHS.TIDBITS, `${segment}.mdx`),
+    path.join(PATHS.TIDBITS, `${SEGMENT}.mdx`),
   );
 
   return {

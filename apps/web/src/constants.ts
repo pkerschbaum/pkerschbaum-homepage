@@ -23,6 +23,8 @@ export const QUERIES = {
   laptopAndUp: `(min-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
 };
 
+export const BLOG_REFETCH_INTERVAL_SECONDS = 60;
+
 export enum DataAttribute {
   THEME = 'data-theme',
   IS_SCROLLED = 'data-is-scrolled',
