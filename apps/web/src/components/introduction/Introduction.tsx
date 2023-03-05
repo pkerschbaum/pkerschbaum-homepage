@@ -1,12 +1,10 @@
-import _Image from 'next/image.js';
+import Image from 'next/image.js';
 import type React from 'react';
 import { MapPin } from 'react-feather';
 import { styled } from 'styled-components';
 
 import { commonStyles } from '#pkg/styles/common.styles.js';
 import profilePic from '../../../public/profile-picture.jpg';
-
-const Image = _Image as unknown as typeof _Image.default;
 
 export const Introduction: React.FC = () => {
   return (

@@ -8,7 +8,7 @@
     /* Modules */
     "baseUrl": ".",
     "module": "esnext",
-    "moduleResolution": "node16",
+    "moduleResolution": "node",
     "paths": {
       "#pkg/*": ["./src/*"]
     },

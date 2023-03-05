@@ -3,8 +3,8 @@ import '@fontsource/rubik/variable.css';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app.js';
 import localFont from 'next/font/local';
-import _Head from 'next/head.js';
-import _Link from 'next/link.js';
+import Head from 'next/head.js';
+import Link from 'next/link.js';
 import { useRouter } from 'next/router.js';
 import * as React from 'react';
 import { styled } from 'styled-components';
@@ -22,10 +22,6 @@ import { GlobalAppStyles } from '#pkg/styles/global-app.styles.js';
 import { PrismStyles } from '#pkg/styles/prism.styles.js';
 import { useIsMounted } from '#pkg/utils/react.utils.jsx';
 
-const Head = _Head as unknown as typeof _Head.default;
-const Link = _Link as unknown as typeof _Link.default;
-
-// @ts-expect-error -- ESM typing error here, not important
 const cascadiaMono = localFont({
   src: [
     {

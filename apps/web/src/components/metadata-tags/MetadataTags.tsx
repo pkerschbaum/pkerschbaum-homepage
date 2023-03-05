@@ -1,6 +1,4 @@
-import _Head from 'next/head.js';
-
-const Head = _Head as unknown as typeof _Head.default;
+import Head from 'next/head.js';
 
 type MetadataTagsProps = {
   title: string;

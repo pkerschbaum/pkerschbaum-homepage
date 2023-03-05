@@ -1,11 +1,9 @@
-import _Image from 'next/image.js';
+import Image from 'next/image.js';
 import type React from 'react';
 import { styled } from 'styled-components';
 
 import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements/index.js';
 import type { Project } from '#pkg/schema.js';
-
-const Image = _Image as unknown as typeof _Image.default;
 
 type ProjectTileProps = {
   project: Project;
