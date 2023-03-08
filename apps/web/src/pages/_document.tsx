@@ -59,6 +59,28 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <meta property="og:image" content="/favicons/favicon-32x32.png" />
 
+          {/* Cascadia Mono Font Faces */}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                @font-face {
+                  font-family: 'CascadiaMonoVariable';
+                  font-style: normal;
+                  font-display: swap;
+                  font-weight: 200 700;
+                  src: url(/fonts/CascadiaMono.woff2) format('woff2');
+                }
+                @font-face {
+                  font-family: 'CascadiaMonoVariable';
+                  font-style: italic;
+                  font-display: swap;
+                  font-weight: 200 700;
+                  src: url(/fonts/CascadiaMonoItalic.woff2) format('woff2');
+                }
+              `,
+            }}
+          />
+
           {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
           <noscript>
             <style

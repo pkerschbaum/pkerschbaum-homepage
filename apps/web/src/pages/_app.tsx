@@ -2,7 +2,6 @@ import '@fontsource/rubik/variable.css';
 
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app.js';
-import localFont from 'next/font/local';
 import Head from 'next/head.js';
 import Link from 'next/link.js';
 import { useRouter } from 'next/router.js';
@@ -21,25 +20,6 @@ import { CSSReset } from '#pkg/styles/css-reset.styles.js';
 import { GlobalAppStyles } from '#pkg/styles/global-app.styles.js';
 import { PrismStyles } from '#pkg/styles/prism.styles.js';
 import { useIsMounted } from '#pkg/utils/react.utils.jsx';
-
-const cascadiaMono = localFont({
-  src: [
-    {
-      path: '../static/fonts/CascadiaMono.woff2',
-      style: 'normal',
-      weight: '200 700',
-    },
-    {
-      path: '../static/fonts/CascadiaMonoItalic.woff2',
-      style: 'italic',
-      weight: '200 700',
-    },
-  ],
-  variable: '--font-family-cascadia-mono',
-}) as {
-  style: { fontFamily: string };
-  variable: string;
-};
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -104,37 +84,35 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="pingback" href={`https://webmention.io/${config.canonicalTLDPlus1}/xmlrpc`} />
       </Head>
 
-      <div className={cascadiaMono.variable} style={{ display: 'contents' }}>
-        <ColorThemeProvider>
-          <CSSReset />
-          <PrismStyles />
-          <GlobalAppStyles />
+      <ColorThemeProvider>
+        <CSSReset />
+        <PrismStyles />
+        <GlobalAppStyles />
 
-          <RootContainer>
-            <Header>
-              <Nav />
+        <RootContainer>
+          <Header>
+            <Nav />
 
-              <AnchorAndButtonsArea>
-                <RssFeedAnchor />
+            <AnchorAndButtonsArea>
+              <RssFeedAnchor />
 
-                <ToggleThemeButton />
-              </AnchorAndButtonsArea>
-            </Header>
+              <ToggleThemeButton />
+            </AnchorAndButtonsArea>
+          </Header>
 
-            <Component {...pageProps} />
+          <Component {...pageProps} />
 
-            <Footer>
-              <SocialMediaLinks />
+          <Footer>
+            <SocialMediaLinks />
 
-              <YearAndContact>
-                <span>{dayjs().year()}</span>
-                <span>-</span>
-                <Link href="/">pkerschbaum</Link>
-              </YearAndContact>
-            </Footer>
-          </RootContainer>
-        </ColorThemeProvider>
-      </div>
+            <YearAndContact>
+              <span>{dayjs().year()}</span>
+              <span>-</span>
+              <Link href="/">pkerschbaum</Link>
+            </YearAndContact>
+          </Footer>
+        </RootContainer>
+      </ColorThemeProvider>
     </>
   );
 };
