@@ -30,7 +30,12 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.cjs', 'eslint-template.cjs', 'dist/**/*'],
+  ignorePatterns: [
+    '.eslintrc.cjs',
+    'eslint-template.cjs',
+    '**/lint-staged.config.mjs',
+    'dist/**/*',
+  ],
   rules: {
     curly: 'error',
     'no-console': 'error',

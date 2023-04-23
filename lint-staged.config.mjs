@@ -59,6 +59,4 @@ export default {
     ];
   },
   '**/*.!({js,jsx,mjs,cjs,ts,tsx,mts,cts})': ['prettier --write --ignore-unknown'],
-  'apps/web/src/writing/**':
-    'pnpm --dir ./apps/web run fetch-favicons && pnpm --dir ./apps/web run generate-css-modules',
 };

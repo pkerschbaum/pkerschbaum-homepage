@@ -2,7 +2,7 @@
 title: Sensible tsconfig.json Defaults
 published: true
 publishedAtISO: '2022-12-13T22:17:00.000Z'
-lastUpdatedAtISO: '2022-12-16T22:20:00.000Z'
+lastUpdatedAtISO: '2023-04-23T18:19:00.000Z'
 description: The TypeScript configuration I use as a basis for new projects.
 tags: ['typescript']
 ---
@@ -12,8 +12,14 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
 ```jsonc
 {
   "compilerOptions": {
-    /* Language and Environment */
-    "target": "ES2017",
+    /* Type Checking */
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "strict": true,
 
     /* Modules */
     "paths": {
@@ -24,7 +30,6 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
     /* Emit */
     "declaration": true,
     "declarationMap": true,
-    "importsNotUsedAsValues": "error",
     "outDir": "./dist",
     "sourceMap": true,
 
@@ -32,15 +37,10 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
 
-    /* Type Checking */
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
+    /* Language and Environment */
+    "target": "ES2017",
 
     /* Projects */
     "incremental": true,
@@ -55,20 +55,6 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
 
 I use it for new packages and adjust it as needed.  
 Below you find an explanation why I think these compiler options represent good defaults.
-
-## `"target": "ES2017"`
-
-{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#target">#target docs</FancyAnchor>
-
-A lower target means the emitted JavaScript is supported by more browsers/runtimes;
-a higher target will lead to smaller and more performant output because modern ECMAScript features (like `async/await`) do not need to be downleveled to more verbose code.
-
-So what target is the best tradeoff here?  
-According to <FancyAnchor href="https://web.dev/publish-modern-javascript/">an article from web.dev</FancyAnchor> and its accompanying <FancyAnchor href="https://youtu.be/cLxNdLK--yI">Chrome Developers video</FancyAnchor> from late 2020, `ES2017` is a good choice:
-
-- It's supported by >95% of the browser market.
-- It includes most of the commonly used modern syntax features (e.g. `async/await`), resulting in significant smaller and more performant code compared to lower targets.
-- And higher targets don't change much in terms of size and performance.
 
 ## Path mapping `"#pkg/*"` pointing to the source
 
@@ -143,16 +129,6 @@ Important notes here:
 
   ...if actions like "Go to Definition" are performed.
 
-## `"importsNotUsedAsValues": "error"`
-
-{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues">#importsNotUsedAsValues docs</FancyAnchor>
-
-This enables the restriction for import statements that `import type` must be used if the imported thing is used as a _type_ only (and not used as a _value_).
-
-Such imports will get fully erased when TypeScript compiles the sources to JavaScript.
-Also it can help tools like bundlers to determine whether an import is needed at runtime or not.  
-The auto-import feature of VS Code will automatically use `import type` statements when this compiler option is set, making it less cumbersome to follow this import restriction.
-
 ## Enabling `"isolatedModules"`
 
 {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#isolatedModules">#isolatedModules docs</FancyAnchor>
@@ -161,6 +137,30 @@ This forbids the use of a few TypeScript features that are not supported by tool
 Affected are e.g. `namespace`'s and `const enum`'s.
 
 I think it is a good idea to start with this option enabled, as I feel we don't need the affected features often anyways; it can be disabled later in case one of those features is really needed.
+
+## Enabling `"verbatimModuleSyntax"`
+
+{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax">#verbatimModuleSyntax docs</FancyAnchor>
+
+This enables the restriction for import statements that `import type` must be used if the imported thing is used as a _type_ only (and not used as a _value_).
+
+Such imports will get fully erased when TypeScript compiles the sources to JavaScript.
+Also it can help tools like bundlers to determine whether an import is needed at runtime or not.  
+The auto-import feature of VS Code will automatically use `import type` statements when this compiler option is set, making it less cumbersome to follow this import restriction.
+
+## `"target": "ES2017"`
+
+{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#target">#target docs</FancyAnchor>
+
+A lower target means the emitted JavaScript is supported by more browsers/runtimes;
+a higher target will lead to smaller and more performant output because modern ECMAScript features (like `async/await`) do not need to be downleveled to more verbose code.
+
+So what target is the best tradeoff here?  
+According to <FancyAnchor href="https://web.dev/publish-modern-javascript/">an article from web.dev</FancyAnchor> and its accompanying <FancyAnchor href="https://youtu.be/cLxNdLK--yI">Chrome Developers video</FancyAnchor> from late 2020, `ES2017` is a good choice:
+
+- It's supported by >95% of the browser market.
+- It includes most of the commonly used modern syntax features (e.g. `async/await`), resulting in significant smaller and more performant code compared to lower targets.
+- And higher targets don't change much in terms of size and performance.
 
 ## Enabling `"incremental"`
 
