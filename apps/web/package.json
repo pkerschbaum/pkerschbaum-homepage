@@ -10,7 +10,6 @@
     "build:next": "next build",
     "build:sitemap": "next-sitemap --config next-sitemap.cjs",
     "compile": "tsc -p ./tsconfig.project.json --noEmit",
-    "export": "next export",
     "start": "next start",
     "lint:eslint": "eslint --max-warnings 0",
     "lint:css": "stylelint \"./src/**/*.(css|ts|tsx)\"",
