@@ -46,14 +46,12 @@ async function gotoPageAndExtractFaviconURLFromPage(page: playwright.Page, websi
     .then(async (handle) => handle?.getProperty('href'))
     .then(async (jsHandle) => jsHandle?.jsonValue());
 
-  let absoluteIconURL;
-  if (typeof relativeIconURL === 'string') {
-    // If we have an <link> element with rel='icon', return the URL for that
-    absoluteIconURL = new URL(relativeIconURL, website);
-  } else {
-    // As an alternative, return just /favicon.ico
-    absoluteIconURL = new URL('/favicon.ico', website);
-  }
+  const absoluteIconURL =
+    typeof relativeIconURL === 'string'
+      ? // If we have an <link> element with rel='icon', return the URL for that
+        new URL(relativeIconURL, website)
+      : // As an alternative, return just /favicon.ico
+        new URL('/favicon.ico', website);
 
   return absoluteIconURL;
 }

@@ -6,4 +6,4 @@ import { prisma } from '#pkg/prism/lang-prisma.js';
 refractor.register(jsonc);
 refractor.register(prisma);
 
-export { refractor };
+export { refractor } from 'refractor/lib/all.js';

@@ -15,7 +15,7 @@ type ColorThemeProviderProps = {
 };
 
 export const ColorThemeProvider: React.FC<ColorThemeProviderProps> = ({ children }) => {
-  const [activeColorTheme, setActiveColorTheme] = React.useState<ColorTheme | null>(null);
+  const [activeColorTheme, setActiveColorTheme] = React.useState<ColorTheme | undefined>();
 
   React.useEffect(function readAndSetInitialTheme() {
     const initialTheme =

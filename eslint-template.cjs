@@ -27,6 +27,7 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:node/recommended',
+    'plugin:unicorn/recommended',
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
@@ -106,6 +107,10 @@ module.exports = {
     'node/no-unpublished-require': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-unsupported-features/node-builtins': 'off',
+    'unicorn/filename-case': 'off',
+    'unicorn/prefer-module': 'off',
+    'unicorn/prefer-top-level-await': 'off',
+    'unicorn/prevent-abbreviations': 'off',
     '@typescript-eslint/ban-types': [
       'error',
       {

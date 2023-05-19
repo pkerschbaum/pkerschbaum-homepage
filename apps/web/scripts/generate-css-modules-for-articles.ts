@@ -32,7 +32,7 @@ async function generateCssModulesForArticles() {
       await fs.promises.writeFile(
         path.join(PATHS.POSTS_PAGES_DIR, `${nameWithoutExt}.module.css`),
         cssModule,
-        { encoding: 'utf-8' },
+        { encoding: 'utf8' },
       );
     }),
     ...tidbitsBasenames.map(async (tidbitBasename) => {
@@ -41,7 +41,7 @@ async function generateCssModulesForArticles() {
       await fs.promises.writeFile(
         path.join(PATHS.TIDBITS_PAGES_DIR, `${nameWithoutExt}.module.css`),
         cssModule,
-        { encoding: 'utf-8' },
+        { encoding: 'utf8' },
       );
     }),
   ]);

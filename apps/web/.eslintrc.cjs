@@ -60,6 +60,8 @@ module.exports = {
       ...noRestrictedSyntax_preferNextJsImage,
       ...noRestrictedSyntax_preferElements,
     ],
+    // "node:path" etc. is not supported in this Next.js project
+    'unicorn/prefer-node-protocol': 'off',
     '@next/next/no-html-link-for-pages': ['error', 'src/pages/'],
   },
   overrides: [

@@ -120,15 +120,15 @@ const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({
   return (
     <CodeBlockContainer>
       <CopyCodeButton onClick={copyCode} className={Classes.JS_REQUIRED}>
-        {!codeWasCopied ? (
-          <>
-            <Clipboard size="1em" />
-            Copy
-          </>
-        ) : (
+        {codeWasCopied ? (
           <>
             <CheckCircle size="1em" />
             Copied!
+          </>
+        ) : (
+          <>
+            <Clipboard size="1em" />
+            Copy
           </>
         )}
       </CopyCodeButton>
@@ -166,8 +166,8 @@ const CopyCodeButton = styled(Button)`
 function getIdForHeading(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^a-z\d ]/g, '')
-    .replace(/ /g, '-');
+    .replaceAll(/[^\d a-z]/g, '')
+    .replaceAll(' ', '-');
 }
 
 /**
@@ -181,7 +181,7 @@ function getNodeText(node: React.ReactNode): string {
     return numbers.toString(node);
   }
   if (Array.isArray(node)) {
-    return node.map(getNodeText).join('');
+    return node.map((node) => getNodeText(node as React.ReactNode)).join('');
   }
   if (ReactIs.isElement(node)) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access

@@ -17,7 +17,7 @@ export type FaviconDataURLsForWebsiteURLs = {
 };
 
 const faviconsForWebsitesReadPromise = fs.promises.readFile(PATHS.FAVICONS_FOR_WEBSITES, {
-  encoding: 'utf-8',
+  encoding: 'utf8',
 });
 
 export async function createFaviconsMapping(

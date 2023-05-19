@@ -23,8 +23,8 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
   const finalResult = await fetchFaviconsForAllHrefs(filesWithAbsolutePaths);
   await fs.promises.writeFile(
     PATHS.FAVICONS_FOR_WEBSITES,
-    jsonUtil.safeStringify(finalResult, null, 2),
-    { encoding: 'utf-8' },
+    jsonUtil.safeStringify(finalResult, undefined, 2),
+    { encoding: 'utf8' },
   );
 }
 

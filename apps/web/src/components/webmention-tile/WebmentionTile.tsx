@@ -49,8 +49,9 @@ function webmentionToActionVerb(webmention: Webmention): string {
       }
       return 'reposted';
     }
-    default:
+    default: {
       assertIsUnreachable(webmention.activity.type);
+    }
   }
 }
 
