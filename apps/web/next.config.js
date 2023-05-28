@@ -46,12 +46,11 @@ let nextConfig = {
     return [
       {
         source: '/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js',
-        destination:
-          'https://plausible.io/js/script.hash.outbound-links.file-downloads.exclusions.js',
+        destination: 'https://analytics.pkerschbaum.com/js/script.js',
       },
       {
         source: '/p.io/api/event',
-        destination: 'https://plausible.io/api/event',
+        destination: 'https://analytics.pkerschbaum.com/api/event',
       },
     ];
   },

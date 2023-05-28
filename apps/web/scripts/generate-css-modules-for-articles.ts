@@ -11,6 +11,8 @@ import { parseMDXFileAndCollectHrefs } from '#pkg/mdx/mdx.js';
   We construct CSS such that we transmit every data URL only once and apply it to the associated
   FancyAnchors via attribute selectors.
 
+  Idea of those FancyAnchor's is based on https://twitter.com/simevidas/status/1481753210578690064.
+
   @example
   .favicons .fancy-anchor[href="https://playwright.dev/docs/test-fixtures"]::before,
   .favicons .fancy-anchor[href="https://playwright.dev/docs/test-advanced#projects"]::before,
