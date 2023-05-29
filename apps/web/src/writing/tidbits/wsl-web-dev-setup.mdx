@@ -1,0 +1,169 @@
+---
+title: WSL Web Development Setup
+published: true
+publishedAtISO: '2023-05-29T11:24:00.000Z'
+lastUpdatedAtISO: '2023-05-29T11:24:00.000Z'
+description: A guide for how to set up a Windows+WSL2 development environment for the Node.js ecosystem.
+tags: ['WSL', 'git', 'Node.js', 'JavaScript', 'VSCode']
+---
+
+I have been using Windows + WSL2 for my web development environment for many years now.  
+Over time I gathered some helpful resources for setting up such development environment, so I decided
+to write this post to have a reference for myself and you, dear reader!
+
+It shows how to set up
+
+- WSL itself
+- git-related tooling
+- prerequisites to be able to install, build, etc. codebases using the Node.js ecosystem
+- and, optionally, additional things
+
+## Basic setup
+
+1. Open PowerShell as administrator and run:
+
+   ```powershell
+   wsl --install
+   ```
+
+1. Restart your machine.
+1. Run "Ubuntu" from the start menu to start an Ubuntu terminal.
+1. It will ask for a username and password - choose some.
+1. I like to not having to enter the password when running things in the WSL distribution, do the following to remove it:
+
+   1. Run:
+
+      ```sh
+      sudo visudo
+      ```
+
+   1. At the bottom of the file, add the following line (replace `<username>` with your chosen username):
+
+      ```txt
+      <username> ALL=(ALL) NOPASSWD: ALL
+      ```
+
+   1. Press `CTRL+X` to exit nano and it will prompt you to save.
+   1. Close the terminal and start a new one (by running "Ubuntu" from the start menu).
+
+1. Update and upgrade all packages:
+
+   ```sh
+   sudo apt update && sudo apt upgrade
+   ```
+
+## Git and GitHub SSH
+
+1. Update git to the latest version and add support for git LFS:
+
+   ```sh
+   sudo apt-get install git
+   sudo apt-get install git-lfs
+   git lfs install
+   ```
+
+1. Configure git:
+
+   ```sh
+   git config --global user.name "Your Name"
+   git config --global user.email "your_email@example.com"
+   ```
+
+1. Create a SSH keypair and add the private key to ssh-agent in Ubuntu (based on <FancyAnchor href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux">AUTOGENERATE</FancyAnchor>):
+
+   ```sh
+   # Generate a SSH keypair
+   # When asked to enter a file to save the key, I recommend to choose a different filename.
+   # For GitHub instead of "/home/pkerschbaum/.ssh/id_rsa" I would choose "/home/pkerschbaum/.ssh/id_rsa_github"
+   # When asked for a passphrase, I typically omit that.
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+
+   # Start the ssh-agent in the background
+   eval "$(ssh-agent -s)"
+
+   # Add your SSH private key to the ssh-agent
+   ssh-add "/home/pkerschbaum/.ssh/id_rsa_github"
+
+   # copy the public key in Windows clipboard
+   cat "/home/pkerschbaum/.ssh/id_rsa_github.pub" | clip.exe
+   ```
+
+1. Add the public key of your new SSH keypair to your GitHub account (note: you must check out the GitHub repositories via SSH then, not via HTTPS):
+
+   1. Open <FancyAnchor href="https://github.com/settings/ssh/new">Add new SSH key of your GitHub settings</FancyAnchor>
+   1. _Title:_ I recommend to combine the name of your PC with "WSL", like `ZEPHYRUS-M16 WSL`.
+   1. _Key type:_ Keep `Authentication Key`
+   1. _Key:_ Use the content of the clipboard (= the public key).
+
+1. Sometimes after I have set up WSL it had strange network issues for outbound connections.  
+   I found some GitHub issues regarding that and one of them mentioned a misconfigured network interface.  
+   That's why nowadays I always do the following one time after setting up WSL (based on <FancyAnchor href="https://github.com/microsoft/WSL/issues/7254#issuecomment-1202299443">AUTOGENERATE</FancyAnchor>):
+
+   1. Start PowerShell as administrator.
+   1. List the network interfaces of Windows:
+
+      ```powershell
+      netsh interface ipv4 show subinterfaces
+      ```
+
+   1. There should be an interface called `"vEthernet (WSL)"`. Also you must have some WiFi interface, in my case it is called `"WiFi"`. Both interfaces should have the same "MTU" value.  
+      If not, run this:
+
+      ```powershell
+      netsh interface ipv4 set subinterface "vEthernet (WSL)" mtu=<MTU-value-of-wifi-interface> store=persistent
+      wsl --shutdown
+      ```
+
+## Node.js (and related tools)
+
+1. Instead of installing Node.js directly I like to use `nvm` to be able to have multiple versions of Node.js installed at the same time (you can read more here: <FancyAnchor href="https://pkerschbaum.com/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions">AUTOGENERATE</FancyAnchor>).  
+   Run this to install `nvm`:
+
+   ```sh
+   # replace v0.39.3 by the newest version, you can look it up here: https://github.com/nvm-sh/nvm/releases
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+   ```
+
+1. To be able to compile npm packages which include native C++ addons, via `node-gyp`, we need to install a few things:
+
+   ```sh
+   sudo apt-get install build-essential g++ libx11-dev libxkbfile-dev libsecret-1-dev python-is-python3
+   ```
+
+1. npm has a feature to complete commands via the tab key, so let's enable that:
+
+   ```sh
+   npm completion >> ~/.bashrc
+   ```
+
+## Additional things
+
+- **pnpm:** To install pnpm, follow <FancyAnchor href="https://pnpm.io/installation">AUTOGENERATE</FancyAnchor> and <FancyAnchor href="https://pnpm.io/completion">AUTOGENERATE</FancyAnchor>.
+- **Docker:** Choose one of the following:
+
+  - _Docker Desktop:_ This is the recommended option because everything just works.
+    - <FancyAnchor href="https://www.docker.com/products/docker-desktop/">AUTOGENERATE</FancyAnchor>
+    - But be aware of the licensing terms, see "Who's required to pay for Docker Desktop?" in <FancyAnchor href="https://www.docker.com/pricing/faq/">AUTOGENERATE</FancyAnchor>.
+  - _Install Docker directly in WSL Ubuntu:_ Drawbacks are that there is no support for starting containers from Windows directly and multi-platform builds are not possible with this option.
+    - Docker Setup for Ubuntu: <FancyAnchor href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">AUTOGENERATE</FancyAnchor>
+    - In case there is some permission error `/var/run/docker.sock` see <FancyAnchor href="https://stackoverflow.com/a/52245490">AUTOGENERATE</FancyAnchor>.
+
+  Also recommended:
+
+  - Install hadolint:
+
+    ```sh
+    # replace v2.10.0 by the newest version, you can look it up here: https://github.com/hadolint/hadolint/releases
+    wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
+    ```
+
+- **VS Code:** Install the <FancyAnchor href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL extension</FancyAnchor>, then you can run in an Ubuntu terminal `code .` to start VS Code in that folder.
+- **Webstorm:** Follow <FancyAnchor href="https://www.jetbrains.com/help/webstorm/how-to-use-wsl-development-environment-in-product.html#ws_wsl_node_interpreter_configure">AUTOGENERATE</FancyAnchor>.
+
+- Certain Node.js and Ubuntu combinations can lead to errors when Node.js `crypto` APIs are used.
+  In case you get an error along the lines `error:25066067:DSO support routines:dlfcn_load:could not load the shared library` when running Node.js code you can do this: <FancyAnchor href="https://askubuntu.com/questions/1409458/openssl-config-cuases-error-in-node-js-crypto-how-should-the-config-be-updated/1410124#1410124">AUTOGENERATE</FancyAnchor>.
+- If there are connection issues (even after fixing the MTU value of the WSL network interface, what we did above) you might need to change the DNS server: <FancyAnchor href="https://github.com/microsoft/WSL/issues/7254#issuecomment-905767204">AUTOGENERATE</FancyAnchor>.
+- Some tips:
+
+  - Run `explorer.exe .` in an Ubuntu terminal to open the Windows Explorer at that directory path.
+  - Run `wsl --shutdown` in Windows CMD or PowerShell to shutdown the WSL instance.
