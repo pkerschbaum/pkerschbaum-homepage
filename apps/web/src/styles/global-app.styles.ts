@@ -110,13 +110,16 @@ export const GlobalAppStyles = styled.createGlobalStyle`
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
-  ul {
+  ul,
+  ol {
     padding: 0;
   }
-  ul li,
-  ul ul li {
+  ul > li {
     text-indent: 0;
     list-style-type: none;
+  }
+  ol > li {
+    text-indent: 0;
   }
 
   a {

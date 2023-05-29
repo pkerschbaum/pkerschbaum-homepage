@@ -32,7 +32,8 @@ export const ArticleViewerContent = styled.div`
   & p {
     margin-block: 1em;
   }
-  & ul {
+  & ul,
+  & ol {
     --ul-padding-inline-start: 20px;
 
     padding-inline-start: var(--ul-padding-inline-start);
@@ -41,7 +42,7 @@ export const ArticleViewerContent = styled.div`
   & li {
     margin-block: 0.25em;
   }
-  & ul li {
+  & ul > li {
     list-style-type: initial;
   }
   & li:first-of-type {
@@ -77,6 +78,16 @@ export const ArticleViewerContent = styled.div`
     &
     ol
     ol
+    > li
+    > ${/* sc-selector */ CodeBlockContainer},
+    &
+    ul
+    ol
+    > li
+    > ${/* sc-selector */ CodeBlockContainer},
+    &
+    ol
+    ul
     > li
     > ${/* sc-selector */ CodeBlockContainer} {
     width: calc(100% + 2 * var(--app-padding-inline) + 2 * var(--ul-padding-inline-start));
