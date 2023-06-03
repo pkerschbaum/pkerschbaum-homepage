@@ -17,15 +17,15 @@
   },
   "devDependencies": {
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.2",
-    "nx": "^16.1.4",
-    "prettier": "^2.8.4",
-    "rimraf": "^4.1.2",
-    "zx": "^7.1.1"
+    "lint-staged": "^13.2.2",
+    "nx": "^16.3.2",
+    "prettier": "2.8.4",
+    "rimraf": "^5.0.1",
+    "zx": "^7.2.2"
   },
-  "packageManager": "pnpm@8.3.1",
+  "packageManager": "pnpm@8.1.1",
   "engines": {
-    "pnpm": "8.3.1"
+    "pnpm": "8.1.1"
   },
   "pnpm": {
     "patchedDependencies": {
