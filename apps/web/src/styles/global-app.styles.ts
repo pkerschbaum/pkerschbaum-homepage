@@ -18,8 +18,8 @@ export const GlobalAppStyles = styled.createGlobalStyle`
     background-color: var(--color-track);
   }
   *::-webkit-scrollbar-thumb {
-    border-radius: 1000px;
     background-color: var(--color-thumb);
+    border-radius: 1000px;
   }
   *::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-thumb-hover);
@@ -29,26 +29,26 @@ export const GlobalAppStyles = styled.createGlobalStyle`
   }
 
   *:root {
+    overflow-x: hidden;
+    overflow-y: scroll;
     font-size: ${17 / 16}rem;
     color: var(--color-fg);
     background-color: var(--color-bg);
-    overflow-y: scroll;
-    overflow-x: hidden;
 
     /* design tokens */
-    --color-white: rgb(250, 250, 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
+    --color-white: rgb(250 250 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
     --color-black-hsl: 225, 6%, 13%;
     --color-black: hsl(var(--color-black-hsl));
     --color-bluegray-hsl: 230, 16%, 17%;
     --color-bluegray: hsl(var(--color-bluegray-hsl));
-    --color-darkgrey: hsl(0 0% 30%);
-    --color-grey: hsl(0 0% 65%);
-    --color-lightgrey: hsl(0 0% 85%);
-    --color-verylightgrey: hsl(0 0% 88%);
-    --color-darkteal: hsl(180 100% 25%);
-    --color-teal: hsl(180 100% 29%);
-    --color-lightteal: hsl(180 100% 45%);
-    --color-verylightteal: hsl(180 100% 75%);
+    --color-darkgrey: hsl(0deg 0% 30%);
+    --color-grey: hsl(0deg 0% 65%);
+    --color-lightgrey: hsl(0deg 0% 85%);
+    --color-verylightgrey: hsl(0deg 0% 88%);
+    --color-darkteal: hsl(180deg 100% 25%);
+    --color-teal: hsl(180deg 100% 29%);
+    --color-lightteal: hsl(180deg 100% 45%);
+    --color-verylightteal: hsl(180deg 100% 75%);
 
     --color-fg: var(--color-black);
     --color-fg-less-emphasized: var(--color-darkgrey);
@@ -72,21 +72,20 @@ export const GlobalAppStyles = styled.createGlobalStyle`
 
     /* https://www.joshwcomeau.com/shadow-palette/ */
     --shadow-color: 0deg 0% 63%;
-    --shadow-elevation-low: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0),
-      0.2px 0.4px 0.7px hsl(var(--shadow-color) / 0.23),
-      0.4px 0.8px 1.3px hsl(var(--shadow-color) / 0.46);
-    --shadow-elevation-medium: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0),
-      0.5px 1px 1.7px hsl(var(--shadow-color) / 0.18),
-      1.1px 2px 3.4px hsl(var(--shadow-color) / 0.36),
-      2.2px 4.1px 7px hsl(var(--shadow-color) / 0.54);
-    --shadow-elevation-high: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0),
-      1.1px 2.1px 3.6px hsl(var(--shadow-color) / 0.08),
-      2px 3.7px 6.3px hsl(var(--shadow-color) / 0.17),
-      2.9px 5.5px 9.3px hsl(var(--shadow-color) / 0.25),
-      4.1px 7.6px 13px hsl(var(--shadow-color) / 0.34),
-      5.7px 10.6px 18.1px hsl(var(--shadow-color) / 0.42),
-      7.8px 14.7px 25px hsl(var(--shadow-color) / 0.5),
-      10.8px 20.3px 34.5px hsl(var(--shadow-color) / 0.59);
+    --shadow-elevation-low: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      0.2px 0.4px 0.7px hsl(var(--shadow-color) / 23%),
+      0.4px 0.8px 1.3px hsl(var(--shadow-color) / 46%);
+    --shadow-elevation-medium: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      0.5px 1px 1.7px hsl(var(--shadow-color) / 18%), 1.1px 2px 3.4px hsl(var(--shadow-color) / 36%),
+      2.2px 4.1px 7px hsl(var(--shadow-color) / 54%);
+    --shadow-elevation-high: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      1.1px 2.1px 3.6px hsl(var(--shadow-color) / 8%),
+      2px 3.7px 6.3px hsl(var(--shadow-color) / 17%),
+      2.9px 5.5px 9.3px hsl(var(--shadow-color) / 25%),
+      4.1px 7.6px 13px hsl(var(--shadow-color) / 34%),
+      5.7px 10.6px 18.1px hsl(var(--shadow-color) / 42%),
+      7.8px 14.7px 25px hsl(var(--shadow-color) / 5%),
+      10.8px 20.3px 34.5px hsl(var(--shadow-color) / 59%);
   }
 
   *:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] {
@@ -106,8 +105,8 @@ export const GlobalAppStyles = styled.createGlobalStyle`
   }
 
   #__next {
-    font-family: 'RubikVariable', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: RubikVariable, 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
   ul,
@@ -134,13 +133,13 @@ export const GlobalAppStyles = styled.createGlobalStyle`
 
   /* style buttons */
   button {
-    border: none;
     color: inherit;
     background-color: inherit;
+    border: none;
   }
   button:hover {
-    cursor: pointer;
     color: var(--color-fg-interactive);
+    cursor: pointer;
   }
 
   p,
@@ -167,15 +166,15 @@ export const GlobalAppStyles = styled.createGlobalStyle`
 
   code {
     /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
-    font-family: 'CascadiaMonoVariable', 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
+    font-family: CascadiaMonoVariable, 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
       'Liberation Mono', Monaco, 'Lucida Console', monospace;
     font-size: var(--font-size-sm);
   }
 
   *:not(pre) > code {
-    font-size: 0.9em;
     padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
-    border-radius: 4px;
+    font-size: 0.9em;
     background-color: var(--color-bg-emphasized);
+    border-radius: 4px;
   }
 `;

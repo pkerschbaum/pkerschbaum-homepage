@@ -17,29 +17,24 @@ export const PrismStyles = styled.createGlobalStyle`
 
   code[class*='language-'],
   pre[class*='language-'] {
-    background: none;
+    hyphens: none;
+    line-height: 1.5;
     text-align: left;
-    white-space: pre;
-    word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
-    line-height: 1.5;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
+    white-space: pre;
+    background: none;
+    word-spacing: normal;
   }
 
   /* Code blocks */
   pre[class*='language-'] {
-    box-shadow: var(--shadow-elevation-low);
-    border-radius: var(--prism-border-radius);
-    overflow: auto;
     padding-block: var(--app-padding-inline);
     padding-inline: var(--app-padding-inline);
+    overflow: auto;
+    border-radius: var(--prism-border-radius);
+    box-shadow: var(--shadow-elevation-low);
   }
 
   /* Inline code */
@@ -69,8 +64,8 @@ export const PrismStyles = styled.createGlobalStyle`
     }
 
     pre[class*='language-'] {
-      border-color: #dddddd;
       background-color: var(--prism-theme-github-bg);
+      border-color: #ddd;
     }
 
     .token.selector,

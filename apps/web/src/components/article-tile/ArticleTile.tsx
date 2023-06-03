@@ -32,8 +32,6 @@ const ArticleTileContent = styled(TileContent)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  height: 100%;
 `;
 
 const TagsArea = styled.ul`
