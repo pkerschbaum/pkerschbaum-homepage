@@ -14,8 +14,8 @@
     "lint:eslint": "eslint --max-warnings 0",
     "lint:css": "stylelint \"./src/**/*.(css|ts|tsx)\"",
     "pkg:nuke": "pnpm run pkg:nuke:artifacts && rimraf node_modules",
-    "pkg:nuke:artifacts": "rimraf dist *.tsbuildinfo",
-    "pkg:build": "pnpm run pkg:nuke:artifacts && pnpm run compile && pnpm run build:next && pnpm run build:sitemap",
+    "pkg:nuke:artifacts": "rimraf dist dist-tsc *.tsbuildinfo",
+    "pkg:build": "pnpm run pkg:nuke:artifacts && pnpm run compile && node ./dist-tsc/scripts/generate-and-store-rss-feed.js && pnpm run build:next && pnpm run build:sitemap",
     "pkg:lint": "pnpm run lint:eslint . && pnpm run lint:css",
     "pkg:lint:fix": "pnpm run lint:eslint . --fix",
     "pkg:lint:file": "pnpm run lint:eslint",
@@ -35,6 +35,7 @@
       ],
       "pkg:build-outputs": [
         "{projectRoot}/dist/**/*",
+        "{projectRoot}/dist-tsc/**/*",
         "{projectRoot}/*.tsbuildinfo"
       ],
       "pkg:lint-inputs": [
@@ -46,6 +47,7 @@
       "pkg:build": {
         "outputs": [
           "{projectRoot}/dist/**/*",
+          "{projectRoot}/dist-tsc/**/*",
           "{projectRoot}/*.tsbuildinfo"
         ]
       }
