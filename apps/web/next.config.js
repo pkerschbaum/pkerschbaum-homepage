@@ -1,13 +1,8 @@
+// @ts-check
 import path from 'path';
 import url from 'url';
 
-import remoteRefresh from 'next-remote-refresh';
-
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const withRemoteRefresh = remoteRefresh({
-  paths: [path.resolve(__dirname, 'src', 'writing')],
-});
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
@@ -66,7 +61,5 @@ let nextConfig = {
     ],
   },
 };
-
-nextConfig = await withRemoteRefresh(nextConfig);
 
 export default nextConfig;
