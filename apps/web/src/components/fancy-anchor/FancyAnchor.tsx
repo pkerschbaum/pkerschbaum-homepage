@@ -13,10 +13,30 @@ export function FancyAnchor({
   className,
   ...delegated
 }: FancyAnchorProps): React.ReactElement {
-  let textToDisplay = children;
-  if (textToDisplay === 'AUTOGENERATE') {
-    const url = new URL(href);
-    textToDisplay = urlUtils.createReadableTextFromUrl(url);
+  let childrenToRender;
+
+  if (typeof children === 'string') {
+    let textToDisplay = children;
+    if (textToDisplay === 'AUTOGENERATE') {
+      const url = new URL(href);
+      textToDisplay = urlUtils.createReadableTextFromUrl(url);
+    }
+
+    const [firstTextPart, ...otherTextParts] = textToDisplay.split(' ');
+
+    childrenToRender = (
+      <>
+        <span>{firstTextPart}</span>
+        {otherTextParts.length > 0 && (
+          <>
+            {' '}
+            <span>{otherTextParts.join(' ')}</span>
+          </>
+        )}
+      </>
+    );
+  } else {
+    childrenToRender = <span>{children}</span>;
   }
 
   return (
@@ -25,15 +45,17 @@ export function FancyAnchor({
       className={`${className ?? ''} ${Classes.STYLED_ANCHOR}`}
       {...delegated}
     >
-      {textToDisplay}
+      {childrenToRender}
     </StyledAnchor>
   );
 }
 
 export const StyledAnchor = styled(Anchor)`
-  word-break: break-all;
-
-  &&::before {
+  && > span:first-of-type {
+    display: inline-block;
+    text-decoration: underline;
+  }
+  && > span:first-of-type::before {
     width: 1em;
     height: calc(1.2 * 1em);
     margin-inline-end: calc(0.5 * var(--spacing-base));

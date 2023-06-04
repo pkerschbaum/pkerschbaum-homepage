@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "fetch-favicons": "pnpm run compile && node ./dist-tsc/scripts/fetch-favicons-for-articles.js && prettier --write \"./generated/favicons-for-websites.json\" && git add \"./generated/favicons-for-websites.json\"",
-    "generate-css-modules": "pnpm run compile && node ./dist-tsc/scripts/generate-css-modules-for-articles.js && prettier --write \"./src/pages/**/*.module.css\" && git add \"./src/pages/**/*.module.css\"",
+    "generate-css-modules": "pnpm run compile && node ./dist-tsc/scripts/generate-css-modules-for-articles.js && prettier --write \"./src/app/**/*.module.css\" && git add \"./src/app/**/*.module.css\"",
     "build:next": "next build",
     "build:sitemap": "next-sitemap --config next-sitemap.cjs",
     "compile": "tsc -p ./tsconfig.project.json",
