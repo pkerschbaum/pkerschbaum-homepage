@@ -9,6 +9,7 @@
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
+    "outDir": "./dist-tsc",
     "paths": {
       "#pkg/*": ["./src/*"]
     },
@@ -18,8 +19,20 @@
     /* JavaScript Support */
     "allowJs": true,
 
-    /* Emit */
-    "noEmit": true
+    /* Editor Support */
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      },
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["**/node_modules", "dist-tsc"]
 }

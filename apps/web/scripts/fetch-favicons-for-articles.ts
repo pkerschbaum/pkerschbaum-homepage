@@ -4,8 +4,7 @@ import path from 'path';
 import { jsonUtil } from '@pkerschbaum-homepage/commons/util/json.util';
 import { fetchFaviconsForAllHrefs } from '@pkerschbaum-homepage/fetch-favicon';
 
-// eslint-disable-next-line code-import-patterns/patterns -- this file is executed with ts-node, but ts-node does not support path aliases OOTB
-import { PATHS } from '../src/constants.js';
+import { PATHS } from '#pkg/constants.js';
 
 async function fetchFaviconsForAllHrefsAndWriteToFile() {
   const [postsBasenames, tidbitBasenames] = await Promise.all([

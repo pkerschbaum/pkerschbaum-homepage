@@ -24,7 +24,7 @@ let nextConfig = {
   },
 
   typescript: {
-    tsconfigPath: './tsconfig.project.json',
+    tsconfigPath: './tsconfig.next.json',
     ignoreBuildErrors: true,
   },
 
