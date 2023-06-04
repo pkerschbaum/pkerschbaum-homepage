@@ -32,8 +32,6 @@ export default function RootLayout({ children }: LayoutProps) {
           rel="stylesheet"
         />
 
-        <link rel="canonical" href={config.deploymentOrigin.href} />
-
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://twitter.com/pkerschbaum" rel="me" />
         <link
@@ -194,6 +192,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@pkerschbaum',
     creator: '@pkerschbaum',
+  },
+  alternates: {
+    canonical: `https://${config.canonicalTLDPlus1}`,
   },
 };
 
