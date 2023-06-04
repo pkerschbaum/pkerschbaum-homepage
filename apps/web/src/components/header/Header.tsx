@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type React from 'react';
 import { styled } from 'styled-components';
 
 export const Header: React.FC<{ children: React.ReactNode }> = ({ children }) => {

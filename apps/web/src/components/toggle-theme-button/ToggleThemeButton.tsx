@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type React from 'react';
 import { Moon, Sun } from 'react-feather';
 import { styled } from 'styled-components';
 

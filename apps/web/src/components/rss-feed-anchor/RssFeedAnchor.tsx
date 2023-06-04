@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type React from 'react';
 import { Rss } from 'react-feather';
 
 import { Anchor } from '#pkg/elements/index.js';

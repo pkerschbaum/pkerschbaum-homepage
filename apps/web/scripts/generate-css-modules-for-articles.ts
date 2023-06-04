@@ -32,7 +32,7 @@ async function generateCssModulesForArticles() {
       const nameWithoutExt = path.parse(postBasename).name;
       const cssModule = await generateCssModuleForPage(PATHS.POSTS, nameWithoutExt);
       await fs.promises.writeFile(
-        path.join(PATHS.POSTS_PAGES_DIR, `${nameWithoutExt}.module.css`),
+        path.join(PATHS.POSTS_PAGES_DIR, nameWithoutExt, `styles.module.css`),
         cssModule,
         { encoding: 'utf8' },
       );
@@ -41,7 +41,7 @@ async function generateCssModulesForArticles() {
       const nameWithoutExt = path.parse(tidbitBasename).name;
       const cssModule = await generateCssModuleForPage(PATHS.TIDBITS, nameWithoutExt);
       await fs.promises.writeFile(
-        path.join(PATHS.TIDBITS_PAGES_DIR, `${nameWithoutExt}.module.css`),
+        path.join(PATHS.TIDBITS_PAGES_DIR, nameWithoutExt, `styles.module.css`),
         cssModule,
         { encoding: 'utf8' },
       );

@@ -1,6 +1,6 @@
 import { check, numbers } from '@pkerschbaum/ts-utils';
 import { MDXRemote } from 'next-mdx-remote';
-import * as React from 'react';
+import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import * as ReactIs from 'react-is';
 import { styled } from 'styled-components';

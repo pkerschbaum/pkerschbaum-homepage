@@ -1,8 +1,8 @@
-import * as styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import { DataAttribute, ColorTheme } from '#pkg/constants.js';
 
-export const PrismStyles = styled.createGlobalStyle`
+export const PrismStyles = createGlobalStyle`
   /* 
    * The Prismjs styles are based on these themes:
    * - https://gist.github.com/kyubuns/41ac79a4bfe6f258c5e3f5cf392f5191 from 20220704 

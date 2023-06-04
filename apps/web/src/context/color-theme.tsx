@@ -1,5 +1,5 @@
 // based on https://sreetamdas.com/blog/the-perfect-dark-mode, https://www.joshwcomeau.com/react/dark-mode
-import * as React from 'react';
+import React from 'react';
 
 import { ColorTheme, DataAttribute, LocalStorageKey } from '#pkg/constants.js';
 import { reactUtils } from '#pkg/utils/react.utils.jsx';
