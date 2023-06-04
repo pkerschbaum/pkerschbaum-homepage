@@ -1,8 +1,9 @@
 import fs from 'fs';
 import matter from 'gray-matter';
+import type { Metadata } from 'next';
 import path from 'path';
 
-import { MDXFile, schema_frontmatterData } from '@pkerschbaum-homepage/mdx/schema';
+import { MDXFile, MDXParseResult, schema_frontmatterData } from '@pkerschbaum-homepage/mdx/schema';
 
 export { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 export type { MDXParseResult } from '@pkerschbaum-homepage/mdx/schema';
@@ -32,4 +33,15 @@ export async function getAllMarkdownFiles(absolutePathToDirectory: string): Prom
   const publishedFiles = markdownFiles.filter((file) => file.frontmatter.published);
 
   return publishedFiles;
+}
+
+export function mapMDXParseResultToMetadata(mdxParseResult: MDXParseResult): Metadata {
+  return {
+    title: mdxParseResult.frontmatter.title,
+    description: mdxParseResult.frontmatter.description,
+    openGraph: {
+      title: mdxParseResult.frontmatter.title,
+      description: mdxParseResult.frontmatter.description,
+    },
+  };
 }

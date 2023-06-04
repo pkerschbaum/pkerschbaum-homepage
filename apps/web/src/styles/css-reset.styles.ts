@@ -1,6 +1,7 @@
-import * as styled from 'styled-components';
+'use client';
+import { createGlobalStyle } from 'styled-components';
 
-export const CSSReset = styled.createGlobalStyle`
+export const CSSReset = createGlobalStyle`
   /* based on https://www.joshwcomeau.com/css/custom-css-reset/ */
 
   /*

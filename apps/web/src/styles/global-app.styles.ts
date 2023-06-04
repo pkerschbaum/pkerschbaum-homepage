@@ -1,8 +1,10 @@
-import * as styled from 'styled-components';
+'use client';
+
+import { createGlobalStyle } from 'styled-components';
 
 import { ColorTheme, DataAttribute } from '#pkg/constants.js';
 
-export const GlobalAppStyles = styled.createGlobalStyle`
+export const GlobalAppStyles = createGlobalStyle`
   /* change scrollbar to a thin variant which lightens up on hover (on browsers supporting the webkit-pseudo-elements) */
   *:root {
     --color-thumb: var(--color-fg-less-emphasized);

@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.workspace.json",
   "compilerOptions": {
+    /* Type Checking*/
+    "strictNullChecks": true,
+
     /* Language and Environment */
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -33,6 +36,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "dist/types/**/*.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "dist-tsc"]
 }

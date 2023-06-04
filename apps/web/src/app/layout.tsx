@@ -1,8 +1,11 @@
-import Document, { DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document.js';
-import * as React from 'react';
-import { ServerStyleSheet } from 'styled-components';
+import '@fontsource/rubik/variable.css';
 
-import { config } from '#pkg/config.js';
+import type { Metadata } from 'next';
+import type React from 'react';
+
+import { StyledComponentsRegistry } from '#pkg/app/registry';
+import { RootLayoutContainer } from '#pkg/app/root-layout-container';
+import { config } from '#pkg/config';
 import {
   Animations,
   Classes,
@@ -11,58 +14,49 @@ import {
   IsAnimationEnabled,
   IsScrolled,
   LocalStorageKey,
-} from '#pkg/constants.js';
+} from '#pkg/constants';
+import { CSSReset } from '#pkg/styles/css-reset.styles';
+import { GlobalAppStyles } from '#pkg/styles/global-app.styles';
 
-export default class MyDocument extends Document {
-  public static override async getInitialProps(
-    ctx: Parameters<typeof Document.getInitialProps>[0],
-  ) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
+type LayoutProps = {
+  children: React.ReactNode;
+};
 
-    try {
-      ctx.renderPage = async () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-        });
+export default function RootLayout({ children }: LayoutProps) {
+  return (
+    <html lang="en">
+      <head>
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet"
+        />
 
-      const initialProps = await Document.getInitialProps(ctx);
+        <link rel="canonical" href={config.deploymentOrigin.href} />
 
-      const result: DocumentInitialProps = {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
+        {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
+        <link href="https://twitter.com/pkerschbaum" rel="me" />
+        <link
+          rel="webmention"
+          href={`https://webmention.io/${config.canonicalTLDPlus1}/webmention`}
+        />
+        <link rel="pingback" href={`https://webmention.io/${config.canonicalTLDPlus1}/xmlrpc`} />
 
-      return result;
-    } finally {
-      sheet.seal();
-    }
-  }
+        {/* favicons block generated with https://realfavicongenerator.net */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+        <link rel="shortcut icon" href="/favicons/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta property="og:image" content="/favicons/favicon-32x32.png" />
 
-  public override render() {
-    return (
-      <Html lang="en">
-        <Head>
-          {/* favicons block generated with https://realfavicongenerator.net */}
-          <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
-          <link rel="shortcut icon" href="/favicons/favicon.ico" sizes="any" />
-          <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-          <meta name="theme-color" content="#ffffff" />
-          <meta property="og:image" content="/favicons/favicon-32x32.png" />
-
-          {/* Cascadia Mono Font Faces */}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
+        {/* Cascadia Mono Font Faces */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
                 @font-face {
                   font-family: 'CascadiaMonoVariable';
                   font-style: normal;
@@ -78,37 +72,37 @@ export default class MyDocument extends Document {
                   src: url(/fonts/CascadiaMonoItalic.woff2) format('woff2');
                 }
               `,
-            }}
-          />
+          }}
+        />
 
-          {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
-          <noscript>
-            <style
-              dangerouslySetInnerHTML={{
-                __html: `
+        {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
+        <noscript>
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
                   .${Classes.JS_REQUIRED} {
                     display: none !important;
                   }
                 `,
-              }}
-            />
-          </noscript>
-
-          {/* Plausible analytics */}
-          <script
-            defer
-            data-domain={config.canonicalTLDPlus1}
-            data-api="/p.io/api/event"
-            src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
+            }}
           />
+        </noscript>
 
-          {/* 
+        {/* Plausible analytics */}
+        <script
+          defer
+          data-domain={config.canonicalTLDPlus1}
+          data-api="/p.io/api/event"
+          src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
+        />
+
+        {/* 
               Some critical CSS which will disable animations until some data attribute is set on the 
               root element. This will avoid running animations on mount of components.
           */}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
                 *:root:not([${DataAttribute.IS_ANIMATION_ENABLED}='${IsAnimationEnabled.YES}']) * {
                   /* https://css-tricks.com/revisiting-prefers-reduced-motion/ */
                   animation-duration: 0.001ms !important;
@@ -121,13 +115,13 @@ export default class MyDocument extends Document {
                   transition: color 150ms, fill 150ms;
                 }
               `,
-            }}
-          />
+          }}
+        />
 
-          {/* Some critical CSS defining keyframes animations */}
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
+        {/* Some critical CSS defining keyframes animations */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
                 @keyframes ${Animations.HIDE} {
                   to {
                     display: none;
@@ -167,19 +161,41 @@ export default class MyDocument extends Document {
                   }
                 }
               `,
-            }}
-          />
-        </Head>
-        <body>
-          <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme }} />
-          <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled }} />
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+          }}
+        />
+      </head>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: blockingSetInitialColorTheme }} />
+        <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled }} />
+
+        <div id="__next">
+          <StyledComponentsRegistry>
+            <CSSReset />
+            <GlobalAppStyles />
+
+            <RootLayoutContainer>{children}</RootLayoutContainer>
+          </StyledComponentsRegistry>
+        </div>
+      </body>
+    </html>
+  );
 }
+
+export const metadata: Metadata = {
+  metadataBase: config.deploymentOrigin,
+  viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+  openGraph: {
+    type: 'website',
+    images: '/favicons/android-chrome-512x512.png',
+    siteName: config.canonicalTLDPlus1,
+    url: '/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@pkerschbaum',
+    creator: '@pkerschbaum',
+  },
+};
 
 // see https://sreetamdas.com/blog/the-perfect-dark-mode#recap
 const blockingSetInitialColorTheme = `(function() {

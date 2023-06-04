@@ -68,7 +68,7 @@ module.exports = {
     ...(baseEslintConfig.overrides ?? []),
     {
       // allow default export for Next.js pages
-      files: ['src/pages/**/*'],
+      files: ['src/pages/**/*', 'src/app/**/{layout,page}.tsx'],
       rules: {
         'import/no-default-export': 'off',
       },
