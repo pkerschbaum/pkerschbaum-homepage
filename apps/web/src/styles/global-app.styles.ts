@@ -166,6 +166,10 @@ export const GlobalAppStyles = createGlobalStyle`
     font-size: var(--font-size-xl);
   }
 
+  h1 {
+    text-wrap: balance;
+  }
+
   code {
     /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
     font-family: CascadiaMonoVariable, 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
