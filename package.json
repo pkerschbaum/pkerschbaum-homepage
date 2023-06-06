@@ -6,8 +6,8 @@
     "prepare": "husky install",
     "w:nuke": "nx run-many --target=pkg:nuke --all --parallel && pnpm run w:nuke:node-modules",
     "w:nuke:artifacts": "nx run-many --target=pkg:nuke:artifacts --all --parallel",
-    "w:nuke:node-modules": "pnpm --parallel exec rimraf node_modules && rimraf node_modules",
-    "w:nuke:compute-cache": "rimraf node_modules/.cache/nx",
+    "w:nuke:node-modules": "del-cli \"**/node_modules\"",
+    "w:nuke:compute-cache": "del-cli node_modules/.cache/nx",
     "w:lint": "nx run-many --target=pkg:lint --all --parallel",
     "w:lint:fix": "nx run-many --target=pkg:lint:fix --all --parallel",
     "w:format": "prettier --write --ignore-unknown .",
@@ -16,11 +16,11 @@
     "w:libs:watch": "pnpm --parallel run pkg:lib:watch"
   },
   "devDependencies": {
+    "del-cli": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "nx": "^16.3.2",
     "prettier": "2.8.4",
-    "rimraf": "^5.0.1",
     "zx": "^7.2.2"
   },
   "packageManager": "pnpm@8.1.1",
