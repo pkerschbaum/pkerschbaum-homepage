@@ -53,6 +53,7 @@ export enum IsAnimationEnabled {
 export enum Classes {
   JS_REQUIRED = 'js-required',
   STYLED_ANCHOR = 'styled-anchor',
+  FANCY_ANCHOR_ICON = 'fancy-anchor-icon',
 }
 
 export enum ClassesAliases {

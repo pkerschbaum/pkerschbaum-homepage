@@ -108,6 +108,7 @@ module.exports = {
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-unsupported-features/node-builtins': 'off',
     'unicorn/filename-case': 'off',
+    'unicorn/no-negated-condition': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',

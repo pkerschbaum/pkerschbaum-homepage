@@ -63,7 +63,7 @@ async function generateCssModuleForPage(
     const selector = icon.associatedWebsites
       .map(
         (url) =>
-          `.${ClassesAliases.FAVICONS} :global(.${Classes.STYLED_ANCHOR})[href="${url}"] > span:first-of-type::before`,
+          `.${ClassesAliases.FAVICONS} :global(.${Classes.STYLED_ANCHOR})[href="${url}"] :global(.${Classes.FANCY_ANCHOR_ICON})::before`,
       )
       .join(', ');
     const rule = `{ display: inline-block; background-image: url(${icon.iconDataURL}); }`;
@@ -75,7 +75,7 @@ async function generateCssModuleForPage(
     const selector = icon.associatedWebsites
       .map(
         (url) =>
-          `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] .${ClassesAliases.FAVICONS} :global(.${Classes.STYLED_ANCHOR})[href="${url}"] > span:first-of-type::before`,
+          `*:root[${DataAttribute.THEME}='${ColorTheme.DARK}'] .${ClassesAliases.FAVICONS} :global(.${Classes.STYLED_ANCHOR})[href="${url}"] :global(.${Classes.FANCY_ANCHOR_ICON})::before`,
       )
       .join(', ');
     const rule = `{ display: inline-block; background-image: url(${icon.iconDataURL}); }`;
