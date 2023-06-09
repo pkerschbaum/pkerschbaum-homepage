@@ -1,5 +1,6 @@
 import '@fontsource/rubik/variable.css';
 
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import type React from 'react';
 
@@ -172,6 +173,8 @@ export default function RootLayout({ children }: LayoutProps) {
             <GlobalAppStyles />
 
             <RootLayoutContainer>{children}</RootLayoutContainer>
+
+            <Analytics />
           </StyledComponentsRegistry>
         </div>
       </body>
