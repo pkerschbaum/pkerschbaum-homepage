@@ -50,6 +50,7 @@ module.exports = {
     'next.config.js',
     'next-sitemap.cjs',
     'stylelint.config.cjs',
+    'dist-tsc/**',
   ],
   rules: {
     ...baseEslintConfig.rules,
