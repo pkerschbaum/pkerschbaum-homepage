@@ -57,14 +57,14 @@ type HeadingWithAnchorProps = {
 };
 
 const HeadingWithAnchor: React.FC<HeadingWithAnchorProps> = ({ as, headingProps }) => {
-  const { children, ...delegatedProps } = headingProps;
+  const { children, id, ...delegatedProps } = headingProps;
+  invariant(id, `should have got an "id" from parsing the MDX`);
 
   const headingText = getNodeText(children);
-  const idForHeading = getIdForHeading(headingText);
-  const hrefForHeading = `#${idForHeading}`;
+  const hrefForHeading = `#${id}`;
 
   return (
-    <Heading id={idForHeading} as={as} {...delegatedProps}>
+    <Heading id={id} as={as} {...delegatedProps}>
       <HeadingAnchor href={hrefForHeading}>
         {headingText} <HeadingAnchorIcon>#</HeadingAnchorIcon>
       </HeadingAnchor>
@@ -162,13 +162,6 @@ const CopyCodeButton = styled(Button)`
   border-radius: var(--prism-border-radius);
   transform: translateY(-60%);
 `;
-
-function getIdForHeading(text: string): string {
-  return text
-    .toLowerCase()
-    .replaceAll(/[^\d a-z]/g, '')
-    .replaceAll(' ', '-');
-}
 
 /**
  * based on https://stackoverflow.com/a/60564620/1700319

@@ -4,9 +4,10 @@ import fs from 'node:fs';
 // @ts-expect-error -- it seems like typings of "rehype-prism-plus" are broken if TS is configured with "module": "node16" (ESM modules)
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
 
-import { createCollectHrefsFromJsxElementsPlugin } from '#pkg/plugins.js';
 import { refractor } from '#pkg/prism/refractor.js';
-import { MDXParseResult, schema_frontmatterData } from '#pkg/schema.js';
+import { createCollectAndAugmentHeadingsPlugin } from '#pkg/rehype-plugins.js';
+import { createCollectHrefsFromJsxElementsPlugin } from '#pkg/remark-plugins.js';
+import { Heading, MDXParseResult, schema_frontmatterData } from '#pkg/schema.js';
 
 type BundlerRehypePlugin = ArrayElement<
   Exclude<
@@ -23,11 +24,15 @@ export async function parseMDXFileAndCollectHrefs(
   const source = await fs.promises.readFile(fileAbsolutePath, 'utf8');
 
   const collectedHrefs: string[] = [];
+  const collectedHeadings: Heading[] = [];
   const bundleMDXResult = await serialize(source, {
     parseFrontmatter: true,
     mdxOptions: {
       remarkPlugins: [createCollectHrefsFromJsxElementsPlugin({ hrefs: collectedHrefs })],
-      rehypePlugins: [rehypePrismPlugin],
+      rehypePlugins: [
+        rehypePrismPlugin,
+        createCollectAndAugmentHeadingsPlugin({ headings: collectedHeadings }),
+      ],
     },
   });
 
@@ -37,6 +42,7 @@ export async function parseMDXFileAndCollectHrefs(
     frontmatter,
     code,
     collectedHrefs,
+    collectedHeadings,
   };
 
   return mdxParseResult;

@@ -28,7 +28,9 @@
     "pkg:compile:dry-run": "pnpm run compile --noEmit"
   },
   "dependencies": {
+    "@pkerschbaum-homepage/commons": "workspace:*",
     "@pkerschbaum/ts-utils": "^0.0.1",
+    "@types/hast": "^2.3.4",
     "@types/mdast": "^3.0.11",
     "next-mdx-remote": "4.3.0",
     "react": "^18.2.0",

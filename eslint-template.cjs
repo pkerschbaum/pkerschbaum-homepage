@@ -112,6 +112,7 @@ module.exports = {
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-module': 'off',
+    'unicorn/prefer-string-replace-all': 'off',
     'unicorn/prefer-top-level-await': 'off',
     'unicorn/prevent-abbreviations': 'off',
     '@typescript-eslint/ban-types': [

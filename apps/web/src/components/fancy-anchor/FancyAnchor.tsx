@@ -1,9 +1,10 @@
 import type React from 'react';
 import { styled } from 'styled-components';
 
+import { urlUtils } from '@pkerschbaum-homepage/commons/util/url.util';
+
 import { Classes } from '#pkg/constants.js';
 import { Anchor, AnchorProps } from '#pkg/elements/index.js';
-import { urlUtils } from '#pkg/utils/url.utils.js';
 
 const MAX_TEXT_LENGTH_TO_BREAK_ICON_WITH_TEXT = 15;
 
