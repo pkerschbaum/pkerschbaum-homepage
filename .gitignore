@@ -36,4 +36,4 @@
 **/.env
 
 # turbo cache
-.turbo
+*/**/.turbo
