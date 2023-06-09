@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".npmrc", ".nvmrc", "package.json", "pnpm-lock.yaml"],
+  "pipeline": {
+    "pkg:build": {
+      "dependsOn": ["^pkg:build"],
+      "cache": false
+    },
+    "pkg:compile:dry-run": {
+      "dependsOn": ["^pkg:build"],
+      "cache": false
+    },
+    "pkg:lint": {
+      "dependsOn": ["^pkg:build"],
+      "cache": false
+    },
+    "pkg:lint:fix": {
+      "dependsOn": ["^pkg:build"],
+      "cache": false
+    }
+  }
+}

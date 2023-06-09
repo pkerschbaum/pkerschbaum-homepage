@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "pkg:lint": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "../../eslint-template.cjs",
+        "scripts/**",
+        "src/**",
+        "next-env-custom.d.ts",
+        "next-env.d.ts",
+        ".eslintrc.cjs",
+        "package.json",
+        "stylelint.config.cjs",
+        "tsconfig.project.json"
+      ],
+      "outputs": []
+    },
+    "pkg:lint:fix": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "../../eslint-template.cjs",
+        "scripts/**",
+        "src/**",
+        "next-env-custom.d.ts",
+        "next-env.d.ts",
+        ".eslintrc.cjs",
+        "package.json",
+        "stylelint.config.cjs",
+        "tsconfig.project.json"
+      ],
+      "outputs": ["scripts/**", "src/**"]
+    }
+  }
+}

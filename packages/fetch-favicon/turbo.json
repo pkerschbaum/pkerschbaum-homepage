@@ -1,0 +1,50 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "pkg:build": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "src/**",
+        "package.json",
+        "tsconfig.project.json"
+      ],
+      "outputs": ["dist/**", "*.tsbuildinfo"]
+    },
+    "pkg:compile:dry-run": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "src/**",
+        "package.json",
+        "tsconfig.project.json"
+      ],
+      "outputs": []
+    },
+    "pkg:lint": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "../../eslint-template.cjs",
+        "src/**",
+        ".eslintrc.cjs",
+        "package.json",
+        "tsconfig.project.json"
+      ],
+      "outputs": []
+    },
+    "pkg:lint:fix": {
+      "cache": true,
+      "inputs": [
+        "../../tsconfig.workspace.json",
+        "../../eslint-template.cjs",
+        "src/**",
+        ".eslintrc.cjs",
+        "package.json",
+        "tsconfig.project.json"
+      ],
+      "outputs": ["src/**"]
+    }
+  }
+}
