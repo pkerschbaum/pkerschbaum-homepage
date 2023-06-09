@@ -22,37 +22,6 @@
     "pkg:compile:dry-run": "pnpm run compile",
     "pkg:lib:watch": "pnpm run pkg:compile:dry-run --watch --preserveWatchOutput"
   },
-  "nx": {
-    "namedInputs": {
-      "pkg:build-inputs": [
-        "default-pkg:build-inputs",
-        "{projectRoot}/generated/**/*",
-        "{projectRoot}/public/**/*",
-        "{projectRoot}/next-env-custom.d.ts",
-        "{projectRoot}/next-env.d.ts",
-        "{projectRoot}/next-sitemap.cjs",
-        "{projectRoot}/next.config.js"
-      ],
-      "pkg:build-outputs": [
-        "{projectRoot}/dist/**/*",
-        "{projectRoot}/dist-tsc/**/*",
-        "{projectRoot}/*.tsbuildinfo"
-      ],
-      "pkg:lint-inputs": [
-        "default-pkg:lint-inputs",
-        "{projectRoot}/eslint-config-next-core-web-vitals-fixed.cjs"
-      ]
-    },
-    "targets": {
-      "pkg:build": {
-        "outputs": [
-          "{projectRoot}/dist/**/*",
-          "{projectRoot}/dist-tsc/**/*",
-          "{projectRoot}/*.tsbuildinfo"
-        ]
-      }
-    }
-  },
   "dependencies": {
     "@fontsource/rubik": "^4.5.14",
     "@pkerschbaum-homepage/commons": "workspace:*",

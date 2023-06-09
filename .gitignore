@@ -34,3 +34,6 @@
 
 # environment files
 **/.env
+
+# turbo cache
+.turbo
