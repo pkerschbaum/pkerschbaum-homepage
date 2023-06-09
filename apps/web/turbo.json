@@ -2,59 +2,6 @@
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
   "pipeline": {
-    "pkg:build": {
-      "cache": true,
-      "inputs": [
-        "generated/**",
-        "public/**",
-        "!public/robots.txt",
-        "!public/rss.json",
-        "!public/rss.xml",
-        "!public/sitemap-0.xml",
-        "!public/sitemap.xml",
-        "scripts/**",
-        "src/**",
-        "next-env-custom.d.ts",
-        "next-env.d.ts",
-        "next-sitemap.cjs",
-        "next.config.js",
-        "package.json",
-        "tsconfig.next.json",
-        "tsconfig.project.json"
-      ],
-      "outputs": [
-        "dist/**",
-        "dist-tsc/**",
-        "public/robots.txt",
-        "public/rss.json",
-        "public/rss.xml",
-        "public/sitemap-0.xml",
-        "public/sitemap.xml",
-        "*.tsbuildinfo"
-      ]
-    },
-    "pkg:compile:dry-run": {
-      "cache": true,
-      "inputs": [
-        "generated/**",
-        "public/**",
-        "!public/robots.txt",
-        "!public/rss.json",
-        "!public/rss.xml",
-        "!public/sitemap-0.xml",
-        "!public/sitemap.xml",
-        "scripts/**",
-        "src/**",
-        "next-env-custom.d.ts",
-        "next-env.d.ts",
-        "next-sitemap.cjs",
-        "next.config.js",
-        "package.json",
-        "tsconfig.next.json",
-        "tsconfig.project.json"
-      ],
-      "outputs": []
-    },
     "pkg:lint": {
       "cache": true,
       "inputs": [
