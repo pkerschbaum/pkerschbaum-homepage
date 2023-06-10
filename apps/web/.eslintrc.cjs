@@ -63,7 +63,7 @@ module.exports = {
     ],
     // "node:path" etc. is not supported in this Next.js project
     'unicorn/prefer-node-protocol': 'off',
-    '@next/next/no-html-link-for-pages': ['error', 'src/pages/'],
+    '@next/next/no-html-link-for-pages': ['error', 'src/app/'],
   },
   overrides: [
     ...(baseEslintConfig.overrides ?? []),

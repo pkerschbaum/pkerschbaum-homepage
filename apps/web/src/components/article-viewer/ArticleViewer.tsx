@@ -2,16 +2,17 @@ import { styled } from 'styled-components';
 
 import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
 
-export const ArticleViewerContainer = styled.article`
-  --max-width: var(--box-width-md);
-
+export const ArticleViewerContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: calc(4 * var(--spacing-base));
   align-self: center;
 
   width: 100%;
-  max-width: var(--max-width);
+`;
+
+export const ArticleViewer = styled.article`
+  min-width: 0;
 `;
 
 export const FrontMatter = styled.div`
@@ -21,6 +22,10 @@ export const FrontMatter = styled.div`
   align-items: center;
 
   text-align: center;
+`;
+
+export const ArticleHeading = styled.h1`
+  margin-block-start: 0;
 `;
 
 export const Time = styled.time`

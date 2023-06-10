@@ -11,6 +11,7 @@ import { Nav } from '#pkg/components/nav';
 import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor';
 import { SocialMediaLinks } from '#pkg/components/social-media-links';
 import { ToggleThemeButton } from '#pkg/components/toggle-theme-button';
+import { TOC_QUERY } from '#pkg/constants';
 import { ColorThemeProvider } from '#pkg/context/color-theme';
 import { CSSReset } from '#pkg/styles/css-reset.styles';
 import { GlobalAppStyles } from '#pkg/styles/global-app.styles';
@@ -57,7 +58,12 @@ export const RootLayoutContainer = ({ children }: RootLayoutContainerProps) => {
 
 const RootContainer = styled.div`
   --app-padding-inline: calc(2 * var(--spacing-base));
-  --app-max-width: calc(var(--box-width-md) + 2 * var(--app-padding-inline));
+  --app-box-width: var(--box-width-md);
+  --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
+
+  @media ${TOC_QUERY} {
+    --app-box-width: var(--box-width-lg);
+  }
 
   display: flex;
   flex-direction: column;

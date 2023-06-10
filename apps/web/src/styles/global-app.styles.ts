@@ -68,6 +68,7 @@ export const GlobalAppStyles = createGlobalStyle`
     --font-size-xxxxl: 2rem;
     --font-weight-bold: 700;
     --spacing-base: 8px;
+    --box-width-lg: 1050px;
     --box-width-md: 800px;
     --box-width-sm: 600px;
     --image-filter: grayscale(0%);

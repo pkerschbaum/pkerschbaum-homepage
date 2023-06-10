@@ -16,12 +16,16 @@ export const RSS_FEED_JSON_PATH = path.join(PATHS.PUBLIC_DIR, RSS_FEED_JSON_SLUG
 const BREAKPOINTS = {
   tabletMin: 600,
   laptopMin: 900,
+  desktopMin: 1100,
 };
 
 export const QUERIES = {
   tabletAndUp: `(min-width: ${BREAKPOINTS.tabletMin / 16}rem)`,
   laptopAndUp: `(min-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
+  desktopAndUp: `(min-width: ${BREAKPOINTS.desktopMin / 16}rem)`,
 };
+
+export const TOC_QUERY = QUERIES.desktopAndUp;
 
 export const BLOG_REFETCH_INTERVAL_SECONDS = 60;
 

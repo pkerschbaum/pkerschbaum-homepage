@@ -7,6 +7,8 @@ import { Share2, Twitter } from 'react-feather';
 import { styled } from 'styled-components';
 
 import {
+  ArticleHeading,
+  ArticleViewer,
   ArticleViewerContainer,
   ArticleViewerContent,
   FrontMatter,
@@ -15,6 +17,7 @@ import {
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
+import { TOC_QUERY } from '#pkg/constants';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 import { usePageUrl } from '#pkg/utils/next.utils';
@@ -48,17 +51,33 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
 
   return (
     <Main className={faviconsClassName}>
-      <ArticleViewerContainer>
-        <FrontMatter>
-          <h1>{mdxParseResult.frontmatter.title}</h1>
-          <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-            Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
-          </Time>
-        </FrontMatter>
+      <BlogPostArticleViewerContainer>
+        <TocAndArticle>
+          <Aside>
+            <TocNav>
+              <TocHeading>Table of Contents</TocHeading>
+              {mdxParseResult.collectedHeadings.map((heading) => (
+                <TocAnchor key={heading.id} href={`#${heading.id}`}>
+                  {heading.text}
+                </TocAnchor>
+              ))}
+            </TocNav>
+          </Aside>
 
-        <ArticleViewerContent>
-          <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-        </ArticleViewerContent>
+          <ArticleViewer>
+            <FrontMatter>
+              <ArticleHeading>{mdxParseResult.frontmatter.title}</ArticleHeading>
+              <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+                Published on{' '}
+                {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
+              </Time>
+            </FrontMatter>
+
+            <ArticleViewerContent>
+              <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+            </ArticleViewerContent>
+          </ArticleViewer>
+        </TocAndArticle>
 
         <InteractionSection>
           <InteractionAnchor href={twitterShareHref} target="_blank">
@@ -104,10 +123,58 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
             </WebmentionsList>
           </WebmentionsWrapper>
         )}
-      </ArticleViewerContainer>
+      </BlogPostArticleViewerContainer>
     </Main>
   );
 };
+
+const TocAndArticle = styled.div`
+  @media ${TOC_QUERY} {
+    grid-template-areas: 'article-viewer-container aside';
+    grid-template-columns: 1fr 250px;
+    column-gap: calc(6 * var(--spacing-base));
+  }
+  margin-block-start: 100px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'article-viewer-container';
+`;
+
+const Aside = styled.aside`
+  @media ${TOC_QUERY} {
+    display: block;
+  }
+
+  display: none;
+  position: sticky;
+  top: 85px;
+  grid-area: aside;
+  height: max-content;
+`;
+
+const TocNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+const TocHeading = styled.h2`
+  margin-block-start: 0;
+  font-size: var(--font-size-xl);
+  text-transform: uppercase;
+`;
+
+const TocAnchor = styled(Anchor)`
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+`;
+
+const BlogPostArticleViewerContainer = styled(ArticleViewerContainer)`
+  grid-area: article-viewer-container;
+`;
 
 const InteractionSection = styled.div`
   display: flex;
@@ -129,7 +196,7 @@ const ContactTeaserWrapper = styled(FullBleedWrapper)`
 `;
 
 const ContactTeaser = styled.div`
-  max-width: var(--max-width);
+  max-width: var(--app-box-width);
   margin-inline: auto;
 `;
 
