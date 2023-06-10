@@ -4,10 +4,17 @@ import dayjs from 'dayjs';
 import type React from 'react';
 
 import {
+  Article,
   ArticleContainer,
   ArticleContent,
+  ArticleHeading,
   FrontMatter,
   Time,
+  TocAnchor,
+  TocAndArticle,
+  TocAside,
+  TocHeading,
+  TocNav,
 } from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
@@ -27,17 +34,32 @@ export const ArticleContainerTidbit: React.FC<ArticleContainerTidbitProps> = ({
   return (
     <Main className={faviconsClassName}>
       <ArticleContainer>
-        <FrontMatter>
-          <h1>{mdxParseResult.frontmatter.title}</h1>
-          <Time dateTime={mdxParseResult.frontmatter.lastUpdatedAtISO}>
-            Last updated on{' '}
-            {dayjs(mdxParseResult.frontmatter.lastUpdatedAtISO).format('DD MMMM, YYYY')}
-          </Time>
-        </FrontMatter>
+        <TocAndArticle>
+          <TocAside>
+            <TocNav>
+              <TocHeading>Table of Contents</TocHeading>
+              {mdxParseResult.collectedHeadings.map((heading) => (
+                <TocAnchor key={heading.id} href={`#${heading.id}`}>
+                  {heading.text}
+                </TocAnchor>
+              ))}
+            </TocNav>
+          </TocAside>
 
-        <ArticleContent>
-          <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-        </ArticleContent>
+          <Article>
+            <FrontMatter>
+              <ArticleHeading>{mdxParseResult.frontmatter.title}</ArticleHeading>
+              <Time dateTime={mdxParseResult.frontmatter.lastUpdatedAtISO}>
+                Last updated on{' '}
+                {dayjs(mdxParseResult.frontmatter.lastUpdatedAtISO).format('DD MMMM, YYYY')}
+              </Time>
+            </FrontMatter>
+
+            <ArticleContent>
+              <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+            </ArticleContent>
+          </Article>
+        </TocAndArticle>
       </ArticleContainer>
     </Main>
   );

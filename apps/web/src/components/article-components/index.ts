@@ -1,6 +1,8 @@
 import { styled } from 'styled-components';
 
 import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
+import { TOC_QUERY } from '#pkg/constants';
+import { Anchor } from '#pkg/elements';
 
 export const ArticleContainer = styled.div`
   display: flex;
@@ -9,6 +11,50 @@ export const ArticleContainer = styled.div`
   align-self: center;
 
   width: 100%;
+`;
+
+export const TocAndArticle = styled.div`
+  @media ${TOC_QUERY} {
+    grid-template-areas: 'article-components-container aside';
+    grid-template-columns: 1fr 250px;
+    column-gap: calc(6 * var(--spacing-base));
+  }
+
+  margin-block-start: 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'article-components-container';
+`;
+
+export const TocAside = styled.aside`
+  @media ${TOC_QUERY} {
+    display: block;
+  }
+
+  display: none;
+  position: sticky;
+  top: 85px;
+  grid-area: aside;
+  height: max-content;
+`;
+
+export const TocNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: calc(2 * var(--spacing-base));
+`;
+
+export const TocHeading = styled.h2`
+  margin-block-start: 0;
+  font-size: var(--font-size-xl);
+  text-transform: uppercase;
+`;
+
+export const TocAnchor = styled(Anchor)`
+  text-decoration: none;
+  font-size: var(--font-size-sm);
 `;
 
 export const Article = styled.article`
