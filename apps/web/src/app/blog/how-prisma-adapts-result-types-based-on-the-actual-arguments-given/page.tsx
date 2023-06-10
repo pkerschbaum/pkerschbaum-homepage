@@ -4,7 +4,7 @@ import type React from 'react';
 import invariant from 'tiny-invariant';
 
 import styles from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/styles.module.css';
-import { PageContainerBlogPost } from '#pkg/components/page-container-blog-post';
+import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post';
 import { config } from '#pkg/config.js';
 import { PATHS, ClassesAliases } from '#pkg/constants.js';
 import { mapMDXParseResultToMetadata, parseMDXFileAndCollectHrefs } from '#pkg/mdx/index.js';
@@ -23,7 +23,7 @@ async function BlogPostPage() {
   ]);
 
   return (
-    <PageContainerBlogPost
+    <ArticleContainerBlogPost
       mdxParseResult={mdxParseResult}
       webmentions={webmentions}
       faviconsClassName={faviconsClassName}

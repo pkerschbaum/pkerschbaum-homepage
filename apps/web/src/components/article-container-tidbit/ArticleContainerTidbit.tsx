@@ -4,29 +4,29 @@ import dayjs from 'dayjs';
 import type React from 'react';
 
 import {
-  ArticleViewerContainer,
-  ArticleViewerContent,
+  ArticleContainer,
+  ArticleContent,
   FrontMatter,
   Time,
-} from '#pkg/components/article-viewer/index.js';
+} from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 
-export type PageContainerTidbitPropsBase = {
+export type ArticleContainerTidbitPropsBase = {
   mdxParseResult: MDXParseResult;
 };
-export type PageContainerTidbitProps = PageContainerTidbitPropsBase & {
+export type ArticleContainerTidbitProps = ArticleContainerTidbitPropsBase & {
   faviconsClassName: string;
 };
 
-export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
+export const ArticleContainerTidbit: React.FC<ArticleContainerTidbitProps> = ({
   mdxParseResult,
   faviconsClassName,
 }) => {
   return (
     <Main className={faviconsClassName}>
-      <ArticleViewerContainer>
+      <ArticleContainer>
         <FrontMatter>
           <h1>{mdxParseResult.frontmatter.title}</h1>
           <Time dateTime={mdxParseResult.frontmatter.lastUpdatedAtISO}>
@@ -35,10 +35,10 @@ export const PageContainerTidbit: React.FC<PageContainerTidbitProps> = ({
           </Time>
         </FrontMatter>
 
-        <ArticleViewerContent>
+        <ArticleContent>
           <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-        </ArticleViewerContent>
-      </ArticleViewerContainer>
+        </ArticleContent>
+      </ArticleContainer>
     </Main>
   );
 };

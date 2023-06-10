@@ -8,12 +8,12 @@ import { styled } from 'styled-components';
 
 import {
   ArticleHeading,
-  ArticleViewer,
-  ArticleViewerContainer,
-  ArticleViewerContent,
+  Article,
+  ArticleContainer,
+  ArticleContent,
   FrontMatter,
   Time,
-} from '#pkg/components/article-viewer/index.js';
+} from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
@@ -23,15 +23,15 @@ import type { MDXParseResult } from '#pkg/mdx/index.js';
 import { usePageUrl } from '#pkg/utils/next.utils';
 import type { Webmention } from '#pkg/webmentions/index.js';
 
-export type PageContainerBlogPostPropsBase = {
+export type ArticleContainerBlogPostPropsBase = {
   mdxParseResult: MDXParseResult;
   webmentions: Webmention[];
 };
-export type PageContainerBlogPostProps = PageContainerBlogPostPropsBase & {
+export type ArticleContainerBlogPostProps = ArticleContainerBlogPostPropsBase & {
   faviconsClassName: string;
 };
 
-export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
+export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> = ({
   mdxParseResult,
   webmentions,
   faviconsClassName,
@@ -51,9 +51,9 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
 
   return (
     <Main className={faviconsClassName}>
-      <BlogPostArticleViewerContainer>
+      <ArticleContainer>
         <TocAndArticle>
-          <Aside>
+          <TocAside>
             <TocNav>
               <TocHeading>Table of Contents</TocHeading>
               {mdxParseResult.collectedHeadings.map((heading) => (
@@ -62,9 +62,9 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
                 </TocAnchor>
               ))}
             </TocNav>
-          </Aside>
+          </TocAside>
 
-          <ArticleViewer>
+          <Article>
             <FrontMatter>
               <ArticleHeading>{mdxParseResult.frontmatter.title}</ArticleHeading>
               <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
@@ -73,10 +73,10 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
               </Time>
             </FrontMatter>
 
-            <ArticleViewerContent>
+            <ArticleContent>
               <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-            </ArticleViewerContent>
-          </ArticleViewer>
+            </ArticleContent>
+          </Article>
         </TocAndArticle>
 
         <InteractionSection>
@@ -123,26 +123,26 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
             </WebmentionsList>
           </WebmentionsWrapper>
         )}
-      </BlogPostArticleViewerContainer>
+      </ArticleContainer>
     </Main>
   );
 };
 
 const TocAndArticle = styled.div`
   @media ${TOC_QUERY} {
-    grid-template-areas: 'article-viewer-container aside';
+    grid-template-areas: 'article-components-container aside';
     grid-template-columns: 1fr 250px;
     column-gap: calc(6 * var(--spacing-base));
   }
-  margin-block-start: 100px;
 
+  margin-block-start: 100px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: 'article-viewer-container';
+  grid-template-areas: 'article-components-container';
 `;
 
-const Aside = styled.aside`
+const TocAside = styled.aside`
   @media ${TOC_QUERY} {
     display: block;
   }
@@ -170,10 +170,6 @@ const TocHeading = styled.h2`
 const TocAnchor = styled(Anchor)`
   text-decoration: none;
   font-size: var(--font-size-sm);
-`;
-
-const BlogPostArticleViewerContainer = styled(ArticleViewerContainer)`
-  grid-area: article-viewer-container;
 `;
 
 const InteractionSection = styled.div`
