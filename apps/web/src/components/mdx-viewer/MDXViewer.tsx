@@ -1,33 +1,49 @@
-import { check, numbers } from '@pkerschbaum/ts-utils';
+import { check } from '@pkerschbaum/ts-utils';
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
-import * as ReactIs from 'react-is';
 import { styled } from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
 import { Classes, ColorTheme, DataAttribute } from '#pkg/constants.js';
 import { Anchor, Button } from '#pkg/elements/index.js';
+import { reactUtils } from '#pkg/utils/react.utils';
 
 export type MDXViewerProps = {
   codeOfMdxParseResult: string;
 };
 
 export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) => {
+  let currentSectionHeadingId = {
+    [DataAttribute.SECTION_HEADING_ID]: undefined as string | undefined,
+  };
+
   return (
     <MDXRemote
       compiledSource={codeOfMdxParseResult}
       components={{
+        p: (props) => {
+          return <p {...props} {...currentSectionHeadingId} />;
+        },
+        ul: (props) => {
+          return <ul {...props} {...currentSectionHeadingId} />;
+        },
+        ol: (props) => {
+          return <ol {...props} {...currentSectionHeadingId} />;
+        },
         a: (props) => {
           if (check.isNullishOrEmptyString(props.href)) {
             throw new Error(`the <a> element must have a href, but has not`);
           }
 
-          return <Anchor target="_blank" {...props} href={props.href} />;
+          return (
+            <Anchor target="_blank" {...props} href={props.href} {...currentSectionHeadingId} />
+          );
         },
-        h2: ({ ref: _ignored, ...delegated }) => {
-          return <HeadingWithAnchor as="h2" headingProps={delegated} />;
+        h2: ({ ref: _ignored, id, ...delegated }) => {
+          currentSectionHeadingId = { [DataAttribute.SECTION_HEADING_ID]: id };
+          return <HeadingWithAnchor as="h2" headingProps={{ id, ...delegated }} />;
         },
         h3: ({ ref: _ignored, ...delegated }) => {
           return <HeadingWithAnchor as="h3" headingProps={delegated} />;
@@ -44,7 +60,9 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
         FancyAnchor: (props: FancyAnchorProps) => {
           return <FancyAnchor target="_blank" {...props} />;
         },
-        pre: PreComponent,
+        pre: ({ ref: _ignored, ...delegated }) => {
+          return <PreComponent {...delegated} {...currentSectionHeadingId} />;
+        },
       }}
     />
   );
@@ -60,7 +78,7 @@ const HeadingWithAnchor: React.FC<HeadingWithAnchorProps> = ({ as, headingProps 
   const { children, id, ...delegatedProps } = headingProps;
   invariant(id, `should have got an "id" from parsing the MDX`);
 
-  const headingText = getNodeText(children);
+  const headingText = reactUtils.getNodeText(children);
   const hrefForHeading = `#${id}`;
 
   return (
@@ -102,11 +120,7 @@ const HeadingAnchor = styled(Anchor)`
   }
 `;
 
-const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({
-  children,
-  ref: _ignored,
-  ...delegated
-}) => {
+const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({ children, ...delegated }) => {
   const codePreRef = React.useRef<HTMLPreElement>(null);
   const [codeWasCopied, setCodeWasCopied] = React.useState(false);
 
@@ -162,23 +176,3 @@ const CopyCodeButton = styled(Button)`
   border-radius: var(--prism-border-radius);
   transform: translateY(-60%);
 `;
-
-/**
- * based on https://stackoverflow.com/a/60564620/1700319
- */
-function getNodeText(node: React.ReactNode): string {
-  if (typeof node === 'string') {
-    return node;
-  }
-  if (typeof node === 'number') {
-    return numbers.toString(node);
-  }
-  if (Array.isArray(node)) {
-    return node.map((node) => getNodeText(node as React.ReactNode)).join('');
-  }
-  if (ReactIs.isElement(node)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    return getNodeText(node.props.children);
-  }
-  throw new Error(`should not get here`);
-}

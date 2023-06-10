@@ -33,6 +33,7 @@ export enum DataAttribute {
   THEME = 'data-theme',
   IS_SCROLLED = 'data-is-scrolled',
   IS_ANIMATION_ENABLED = 'data-is-animation-enabled',
+  SECTION_HEADING_ID = 'data-section-heading-id',
 }
 
 export enum LocalStorageKey {
