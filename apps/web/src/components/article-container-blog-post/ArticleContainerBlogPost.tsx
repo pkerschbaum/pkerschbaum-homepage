@@ -13,14 +13,12 @@ import {
   ArticleContent,
   FrontMatter,
   Time,
-  TocAnchor,
   TocAndArticle,
   TocAside,
-  TocHeading,
-  TocNav,
 } from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
+import { TableOfContents } from '#pkg/components/table-of-contents';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
@@ -58,14 +56,7 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
       <ArticleContainer>
         <TocAndArticle>
           <TocAside>
-            <TocNav>
-              <TocHeading>Table of Contents</TocHeading>
-              {mdxParseResult.collectedHeadings.map((heading) => (
-                <TocAnchor key={heading.id} href={`#${heading.id}`}>
-                  {heading.text}
-                </TocAnchor>
-              ))}
-            </TocNav>
+            <TableOfContents headings={mdxParseResult.collectedHeadings} />
           </TocAside>
 
           <Article>
