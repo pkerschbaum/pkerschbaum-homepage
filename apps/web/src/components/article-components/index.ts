@@ -15,16 +15,16 @@ export const ArticleContainer = styled.div`
 
 export const TocAndArticle = styled.div`
   @media ${TOC_QUERY} {
-    grid-template-areas: 'article-components-container aside';
+    grid-template-areas: 'article toc';
     grid-template-columns: 1fr 250px;
     column-gap: calc(6 * var(--spacing-base));
   }
 
-  margin-block-start: 100px;
+  margin-block-start: 85px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: 'article-components-container';
+  grid-template-areas: 'article';
 `;
 
 export const TocAside = styled.aside`
@@ -32,10 +32,14 @@ export const TocAside = styled.aside`
     display: block;
   }
 
+  /* some margin for visual alignment */
+  margin-block-start: 5px;
+
   display: none;
   position: sticky;
+  /* some "top" spacing because of the fixed positioned header */
   top: 85px;
-  grid-area: aside;
+  grid-area: toc;
   height: max-content;
 `;
 
@@ -58,6 +62,7 @@ export const TocAnchor = styled(Anchor)`
 `;
 
 export const Article = styled.article`
+  grid-area: article;
   min-width: 0;
 `;
 

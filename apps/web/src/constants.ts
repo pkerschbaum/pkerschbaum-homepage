@@ -16,7 +16,7 @@ export const RSS_FEED_JSON_PATH = path.join(PATHS.PUBLIC_DIR, RSS_FEED_JSON_SLUG
 const BREAKPOINTS = {
   tabletMin: 600,
   laptopMin: 900,
-  desktopMin: 1100,
+  desktopMin: 1150,
 };
 
 export const QUERIES = {
