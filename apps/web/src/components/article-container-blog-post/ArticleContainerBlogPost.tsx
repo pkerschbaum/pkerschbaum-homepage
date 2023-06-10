@@ -7,28 +7,33 @@ import { Share2, Twitter } from 'react-feather';
 import { styled } from 'styled-components';
 
 import {
-  ArticleViewerContainer,
-  ArticleViewerContent,
+  ArticleHeading,
+  Article,
+  ArticleContainer,
+  ArticleContent,
   FrontMatter,
   Time,
-} from '#pkg/components/article-viewer/index.js';
+  TocAndArticle,
+  TocAside,
+} from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
+import { TableOfContents } from '#pkg/components/table-of-contents';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 import { usePageUrl } from '#pkg/utils/next.utils';
 import type { Webmention } from '#pkg/webmentions/index.js';
 
-export type PageContainerBlogPostPropsBase = {
+export type ArticleContainerBlogPostPropsBase = {
   mdxParseResult: MDXParseResult;
   webmentions: Webmention[];
 };
-export type PageContainerBlogPostProps = PageContainerBlogPostPropsBase & {
+export type ArticleContainerBlogPostProps = ArticleContainerBlogPostPropsBase & {
   faviconsClassName: string;
 };
 
-export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
+export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> = ({
   mdxParseResult,
   webmentions,
   faviconsClassName,
@@ -48,17 +53,26 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
 
   return (
     <Main className={faviconsClassName}>
-      <ArticleViewerContainer>
-        <FrontMatter>
-          <h1>{mdxParseResult.frontmatter.title}</h1>
-          <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-            Published on {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
-          </Time>
-        </FrontMatter>
+      <ArticleContainer>
+        <TocAndArticle>
+          <TocAside>
+            <TableOfContents headings={mdxParseResult.collectedHeadings} />
+          </TocAside>
 
-        <ArticleViewerContent>
-          <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-        </ArticleViewerContent>
+          <Article>
+            <FrontMatter>
+              <ArticleHeading>{mdxParseResult.frontmatter.title}</ArticleHeading>
+              <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+                Published on{' '}
+                {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
+              </Time>
+            </FrontMatter>
+
+            <ArticleContent>
+              <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
+            </ArticleContent>
+          </Article>
+        </TocAndArticle>
 
         <InteractionSection>
           <InteractionAnchor href={twitterShareHref} target="_blank">
@@ -104,7 +118,7 @@ export const PageContainerBlogPost: React.FC<PageContainerBlogPostProps> = ({
             </WebmentionsList>
           </WebmentionsWrapper>
         )}
-      </ArticleViewerContainer>
+      </ArticleContainer>
     </Main>
   );
 };
@@ -129,7 +143,7 @@ const ContactTeaserWrapper = styled(FullBleedWrapper)`
 `;
 
 const ContactTeaser = styled.div`
-  max-width: var(--max-width);
+  max-width: var(--app-box-width);
   margin-inline: auto;
 `;
 

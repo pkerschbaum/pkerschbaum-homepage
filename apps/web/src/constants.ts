@@ -16,12 +16,16 @@ export const RSS_FEED_JSON_PATH = path.join(PATHS.PUBLIC_DIR, RSS_FEED_JSON_SLUG
 const BREAKPOINTS = {
   tabletMin: 600,
   laptopMin: 900,
+  desktopMin: 1150,
 };
 
 export const QUERIES = {
   tabletAndUp: `(min-width: ${BREAKPOINTS.tabletMin / 16}rem)`,
   laptopAndUp: `(min-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
+  desktopAndUp: `(min-width: ${BREAKPOINTS.desktopMin / 16}rem)`,
 };
+
+export const TOC_QUERY = QUERIES.desktopAndUp;
 
 export const BLOG_REFETCH_INTERVAL_SECONDS = 60;
 
@@ -29,6 +33,7 @@ export enum DataAttribute {
   THEME = 'data-theme',
   IS_SCROLLED = 'data-is-scrolled',
   IS_ANIMATION_ENABLED = 'data-is-animation-enabled',
+  SECTION_HEADING_ID = 'data-section-heading-id',
 }
 
 export enum LocalStorageKey {

@@ -1,17 +1,50 @@
 import { styled } from 'styled-components';
 
 import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
+import { TOC_QUERY } from '#pkg/constants';
 
-export const ArticleViewerContainer = styled.article`
-  --max-width: var(--box-width-md);
-
+export const ArticleContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: calc(4 * var(--spacing-base));
   align-self: center;
 
   width: 100%;
-  max-width: var(--max-width);
+`;
+
+export const TocAndArticle = styled.div`
+  @media ${TOC_QUERY} {
+    grid-template-areas: 'article toc';
+    grid-template-columns: 1fr 250px;
+    column-gap: calc(6 * var(--spacing-base));
+  }
+
+  margin-block-start: 85px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'article';
+`;
+
+export const TocAside = styled.aside`
+  @media ${TOC_QUERY} {
+    display: block;
+  }
+
+  /* some margin for visual alignment */
+  margin-block-start: 5px;
+
+  display: none;
+  position: sticky;
+  /* some "top" spacing because of the fixed positioned header */
+  top: 85px;
+  grid-area: toc;
+  height: max-content;
+`;
+
+export const Article = styled.article`
+  grid-area: article;
+  min-width: 0;
 `;
 
 export const FrontMatter = styled.div`
@@ -23,12 +56,16 @@ export const FrontMatter = styled.div`
   text-align: center;
 `;
 
+export const ArticleHeading = styled.h1`
+  margin-block-start: 0;
+`;
+
 export const Time = styled.time`
   color: var(--color-fg-less-emphasized);
   text-transform: uppercase;
 `;
 
-export const ArticleViewerContent = styled.div`
+export const ArticleContent = styled.div`
   & p {
     margin-block: 1em;
   }
