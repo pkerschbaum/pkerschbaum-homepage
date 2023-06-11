@@ -141,8 +141,8 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 - For **Mocks & Spies** use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - For **Fake timers** use [`sinon`](https://www.npmjs.com/package/sinon) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">See code changes</FancyAnchor>).
 - **Code coverage** just needs a simple combination of the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/base-setup...code-coverage">See code changes</FancyAnchor>).
-- **Watch mode** for "headless" mode of Playwright is not supported but there is some activity in the respective issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/21960">AUTOGENERATE</FancyAnchor>.  
-  There are some workarounds in an old issue for watch mode: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
+- There is experimental support for **Watch mode** at the time of writing, see <FancyAnchor href="https://github.com/microsoft/playwright/issues/21960#issuecomment-1483604692">AUTOGENERATE</FancyAnchor>.  
+  Set environment variable `PWTEST_WATCH=1` when running Playwright.
 - Some test frameworks provide a way to **mock CommonJS/ECMAScript modules**.  
   Module mocking allows to replace the "thing" returned by `require`/`import` statements by some fake instance.
 
