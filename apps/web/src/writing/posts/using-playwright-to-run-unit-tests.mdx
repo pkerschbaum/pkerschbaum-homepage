@@ -2,6 +2,7 @@
 title: Using Playwright Test to run Unit Tests
 published: true
 publishedAtISO: '2022-06-17T14:30:00.000Z'
+lastUpdatedAtISO: '2023-06-11T17:58:00.000Z'
 description: Why you might want to use Playwright Test as a test runner for unit tests, and how to fill in missing pieces (e.g. code coverage).
 tags: ['playwright', 'testing', 'unittest', 'webdev']
 ---
@@ -154,23 +155,18 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 
 ## One last thing
 
-Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.
-
-At the time of writing, Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
+Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.  
+Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
 This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but it rarely makes sense in case of textual/binary data.
 
-This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>). An easy workaround is to disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:
+The platform-specific suffix can be removed by setting the `snapshotPathTemplate` configuration parameter:
 
 ```typescript
-import { test as base } from '@playwright/test';
+import { PlaywrightTestConfig } from '@playwright/test';
 
-export const test = base.extend<{ _autoSnapshotSuffix: void }>({
-  _autoSnapshotSuffix: [
-    async ({}, use, testInfo) => {
-      testInfo.snapshotSuffix = '';
-      await use();
-    },
-    { auto: true },
-  ],
-});
+const config: PlaywrightTestConfig = {
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}',
+};
+
+export default config;
 ```
