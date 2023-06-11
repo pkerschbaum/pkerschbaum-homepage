@@ -67,7 +67,7 @@ I think there are some advantages of using Playwright for unit tests:
     });
     ```
 
-  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-advanced#projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
+  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
     For example a while ago I had to make sure that some client/server interaction based on <FancyAnchor href="https://socket.io">socket.io</FancyAnchor> works with both WebSockets and HTTP long-polling.  
     Setting up two Playwright projects with different project parameters allowed me to run the same tests with two configurations, once using WebSockets and once using HTTP long-polling:
 
@@ -141,8 +141,8 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 - For **Mocks & Spies** use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - For **Fake timers** use [`sinon`](https://www.npmjs.com/package/sinon) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">See code changes</FancyAnchor>).
 - **Code coverage** just needs a simple combination of the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/base-setup...code-coverage">See code changes</FancyAnchor>).
-- **Watch mode** is not supported but "planned work" at the time of writing: <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.  
-  There are some workarounds in the related issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
+- **Watch mode** for unit tests is not supported but there is some activity in the respective issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/21960">AUTOGENERATE</FancyAnchor>.  
+  There are some workarounds in an old issue for watch mode: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
 - Some test frameworks provide a way to **mock CommonJS/ECMAScript modules**.  
   Module mocking allows to replace the "thing" returned by `require`/`import` statements by some fake instance.
 
@@ -159,7 +159,7 @@ Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perfor
 Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
 This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but it rarely makes sense in case of textual/binary data.
 
-The platform-specific suffix can be removed by setting the `snapshotPathTemplate` configuration parameter:
+The platform-specific suffix can be removed by setting the <FancyAnchor href="https://playwright.dev/docs/api/class-testconfig#test-config-snapshot-path-template">`snapshotPathTemplate`</FancyAnchor> configuration parameter:
 
 ```typescript
 import { PlaywrightTestConfig } from '@playwright/test';
