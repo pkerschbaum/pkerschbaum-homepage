@@ -2,6 +2,7 @@
 title: Using Playwright Test to run Unit Tests
 published: true
 publishedAtISO: '2022-06-17T14:30:00.000Z'
+lastUpdatedAtISO: '2023-06-11T17:58:00.000Z'
 description: Why you might want to use Playwright Test as a test runner for unit tests, and how to fill in missing pieces (e.g. code coverage).
 tags: ['playwright', 'testing', 'unittest', 'webdev']
 ---
@@ -66,7 +67,7 @@ I think there are some advantages of using Playwright for unit tests:
     });
     ```
 
-  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-advanced#projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
+  - {/* prettier-ignore */}<FancyAnchor href="https://playwright.dev/docs/test-projects">"projects"</FancyAnchor> allow to run "the same or different tests in multiple configurations".  
     For example a while ago I had to make sure that some client/server interaction based on <FancyAnchor href="https://socket.io">socket.io</FancyAnchor> works with both WebSockets and HTTP long-polling.  
     Setting up two Playwright projects with different project parameters allowed me to run the same tests with two configurations, once using WebSockets and once using HTTP long-polling:
 
@@ -140,8 +141,8 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 - For **Mocks & Spies** use [`sinon`](https://www.npmjs.com/package/sinon) or [`jest-mock`](https://www.npmjs.com/package/jest-mock) (the mocking solution shipped with Jest).
 - For **Fake timers** use [`sinon`](https://www.npmjs.com/package/sinon) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/code-coverage...fake-timers">See code changes</FancyAnchor>).
 - **Code coverage** just needs a simple combination of the command-line interface [`nyc`](https://github.com/istanbuljs/nyc) of Istanbul (a code coverage tool for JavaScript) and [`source-map-support`](https://www.npmjs.com/package/source-map-support) (<FancyAnchor href="https://github.com/pkerschbaum/blog-playwright-for-unit-tests_example/compare/base-setup...code-coverage">See code changes</FancyAnchor>).
-- **Watch mode** is not supported but "planned work" at the time of writing: <FancyAnchor href="https://playwright.dev/docs/test-components#planned-work">AUTOGENERATE</FancyAnchor>.  
-  There are some workarounds in the related issue: <FancyAnchor href="https://github.com/microsoft/playwright/issues/7035">AUTOGENERATE</FancyAnchor>.
+- There is experimental support for **Watch mode** at the time of writing, see <FancyAnchor href="https://github.com/microsoft/playwright/issues/21960#issuecomment-1483604692">AUTOGENERATE</FancyAnchor>.  
+  Set environment variable `PWTEST_WATCH=1` when running Playwright.
 - Some test frameworks provide a way to **mock CommonJS/ECMAScript modules**.  
   Module mocking allows to replace the "thing" returned by `require`/`import` statements by some fake instance.
 
@@ -154,23 +155,18 @@ Take a look at <FancyAnchor href="https://github.com/pkerschbaum/blog-playwright
 
 ## One last thing
 
-Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.
-
-At the time of writing, Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
+Playwright Test has a method `expect(...).toMatchSnapshot(...)` which can perform snapshot-comparisons on screenshots but also textual and binary data.  
+Playwright will append a platform-specific suffix (like `linux`) to the name of the file the snapshot is stored in.
 This makes sense for screenshots (since screenshots taken on different platforms will deviate slightly, for example because of text rendering), but it rarely makes sense in case of textual/binary data.
 
-This is an open issue (<FancyAnchor href="https://github.com/microsoft/playwright/issues/11134">AUTOGENERATE</FancyAnchor>). An easy workaround is to disable the suffix by setting up an "auto-fixture" and override `testInfo.snapshotSuffix`:
+The platform-specific suffix can be removed by setting the <FancyAnchor href="https://playwright.dev/docs/api/class-testconfig#test-config-snapshot-path-template">`snapshotPathTemplate`</FancyAnchor> configuration parameter:
 
 ```typescript
-import { test as base } from '@playwright/test';
+import { PlaywrightTestConfig } from '@playwright/test';
 
-export const test = base.extend<{ _autoSnapshotSuffix: void }>({
-  _autoSnapshotSuffix: [
-    async ({}, use, testInfo) => {
-      testInfo.snapshotSuffix = '';
-      await use();
-    },
-    { auto: true },
-  ],
-});
+const config: PlaywrightTestConfig = {
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}',
+};
+
+export default config;
 ```

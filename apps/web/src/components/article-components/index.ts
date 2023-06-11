@@ -60,6 +60,12 @@ export const ArticleHeading = styled.h1`
   margin-block-start: 0;
 `;
 
+export const Timestamps = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Time = styled.time`
   color: var(--color-fg-less-emphasized);
   text-transform: uppercase;

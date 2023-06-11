@@ -15,6 +15,7 @@ import {
   Time,
   TocAndArticle,
   TocAside,
+  Timestamps,
 } from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
 import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
@@ -62,10 +63,18 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
           <Article>
             <FrontMatter>
               <ArticleHeading>{mdxParseResult.frontmatter.title}</ArticleHeading>
-              <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
-                Published on{' '}
-                {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
-              </Time>
+              <Timestamps>
+                <Time dateTime={mdxParseResult.frontmatter.publishedAtISO}>
+                  Published on{' '}
+                  {dayjs(mdxParseResult.frontmatter.publishedAtISO).format('DD MMMM, YYYY')}
+                </Time>
+                {mdxParseResult.frontmatter.lastUpdatedAtISO && (
+                  <Time dateTime={mdxParseResult.frontmatter.lastUpdatedAtISO}>
+                    Last updated on{' '}
+                    {dayjs(mdxParseResult.frontmatter.lastUpdatedAtISO).format('DD MMMM, YYYY')}
+                  </Time>
+                )}
+              </Timestamps>
             </FrontMatter>
 
             <ArticleContent>
