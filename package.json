@@ -7,7 +7,7 @@
     "w:nuke": "pnpm --parallel run pkg:nuke && pnpm run w:nuke:compute-cache && pnpm run w:nuke:node-modules",
     "w:nuke:artifacts": "pnpm --parallel run pkg:nuke:artifacts",
     "w:nuke:node-modules": "del-cli \"**/node_modules\"",
-    "w:nuke:compute-cache": "del-cli \"**/.turbo\"",
+    "w:nuke:compute-cache": "del-cli \"*/**/.turbo\"",
     "w:lint": "turbo pkg:lint",
     "w:lint:fix": "turbo pkg:lint:fix",
     "w:format": "prettier --write --ignore-unknown .",

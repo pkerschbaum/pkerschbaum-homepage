@@ -6,8 +6,9 @@ import invariant from 'tiny-invariant';
 
 import type { Heading } from '@pkerschbaum-homepage/mdx/schema';
 
-import { DataAttribute } from '#pkg/constants';
+import { DataAttribute, TOC_QUERY } from '#pkg/constants';
 import { Anchor } from '#pkg/elements';
+import { useMediaMatch } from '#pkg/utils/react.utils';
 import { uiUtils } from '#pkg/utils/ui.utils';
 
 export type TableOfContentsProps = {
@@ -19,9 +20,14 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
    * Set up state and effect for tracking the section of the article the user has currently scrolled to.
    * This is used to highlight the anchor of the table of contents which links to the heading of that section.
    */
+  const matches = useMediaMatch(TOC_QUERY);
   const [activeHeadingId, setActiveHeadingId] = React.useState<string | undefined>();
   React.useEffect(
     function observeSections() {
+      if (matches === 'SSR' || !matches) {
+        return;
+      }
+
       const $elementsToObserve: HTMLElement[] = [];
       for (const heading of headings) {
         const $elements = [
@@ -59,7 +65,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
         }
       };
     },
-    [headings],
+    [headings, matches],
   );
 
   return (
