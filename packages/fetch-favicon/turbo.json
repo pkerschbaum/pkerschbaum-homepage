@@ -2,7 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
   "pipeline": {
-    "pkg:build": {
+    "build": {
       "cache": true,
       "inputs": [
         "../../tsconfig.workspace.json",
@@ -12,7 +12,7 @@
       ],
       "outputs": ["dist/**", "*.tsbuildinfo"]
     },
-    "pkg:compile:dry-run": {
+    "compile:dry-run": {
       "cache": true,
       "inputs": [
         "../../tsconfig.workspace.json",
@@ -22,7 +22,7 @@
       ],
       "outputs": []
     },
-    "pkg:lint": {
+    "lint": {
       "cache": true,
       "inputs": [
         "../../tsconfig.workspace.json",
@@ -34,7 +34,7 @@
       ],
       "outputs": []
     },
-    "pkg:lint:fix": {
+    "lint:fix": {
       "cache": true,
       "inputs": [
         "../../tsconfig.workspace.json",

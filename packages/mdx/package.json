@@ -16,16 +16,15 @@
   },
   "scripts": {
     "prepare": "ts-patch install -s",
-    "compile": "tsc -p ./tsconfig.project.json",
-    "lint": "eslint --max-warnings 0",
-    "pkg:nuke": "pnpm run pkg:nuke:artifacts && del-cli node_modules",
-    "pkg:nuke:artifacts": "del-cli dist *.tsbuildinfo",
-    "pkg:build": "pnpm run compile",
-    "pkg:lib:watch": "pnpm run pkg:build --watch --preserveWatchOutput",
-    "pkg:lint": "pnpm run lint .",
-    "pkg:lint:fix": "pnpm run pkg:lint --fix",
-    "pkg:lint:file": "pnpm run lint",
-    "pkg:compile:dry-run": "pnpm run compile --noEmit"
+    "internal:compile": "tsc -p ./tsconfig.project.json",
+    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
+    "nuke:artifacts": "del-cli dist *.tsbuildinfo",
+    "build": "pnpm run internal:compile",
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "lint": "pnpm run lint:file .",
+    "lint:file": "eslint --max-warnings 0",
+    "lint:fix": "pnpm run lint --fix",
+    "compile:dry-run": "pnpm run internal:compile --noEmit"
   },
   "dependencies": {
     "@pkerschbaum-homepage/commons": "workspace:*",

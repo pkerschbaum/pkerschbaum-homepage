@@ -31,7 +31,7 @@
 1. **Run an initial build:**
 
    ```sh
-   pnpm run w:build
+   pnpm run build
    ```
 
    > **Note:** This command will also run Puppeteer.  
@@ -43,7 +43,7 @@
 1. **Run watcher for the libraries:**
 
    ```sh
-   pnpm w:libs:watch
+   pnpm dev
    ```
 
 1. **Start a local instance of `@pkerschbaum-homepage/web`:**
