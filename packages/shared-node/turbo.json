@@ -12,16 +12,6 @@
       ],
       "outputs": ["dist/**", "*.tsbuildinfo"]
     },
-    "compile:dry-run": {
-      "cache": true,
-      "inputs": [
-        "../../tsconfig.workspace.json",
-        "src/**",
-        "package.json",
-        "tsconfig.project.json"
-      ],
-      "outputs": []
-    },
     "lint": {
       "cache": true,
       "inputs": [

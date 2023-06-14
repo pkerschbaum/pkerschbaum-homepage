@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd ../../ && pnpm run build",
+  "buildCommand": "cd ../../ && pnpm run build && cd ./apps/web && pnpm run build:next",
   "outputDirectory": "dist",
   "devCommand": "pnpm dev --port $PORT"
 }

@@ -6,10 +6,6 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "compile:dry-run": {
-      "dependsOn": ["^build"],
-      "cache": false
-    },
     "lint": {
       "dependsOn": ["^build"],
       "cache": false

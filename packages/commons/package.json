@@ -23,8 +23,7 @@
     "dev": "pnpm run build --watch --preserveWatchOutput",
     "lint": "pnpm run lint:file .",
     "lint:file": "eslint --max-warnings 0",
-    "lint:fix": "pnpm run lint --fix",
-    "compile:dry-run": "pnpm run internal:compile --noEmit"
+    "lint:fix": "pnpm run lint --fix"
   },
   "dependencies": {
     "@pkerschbaum/ts-utils": "^0.0.1",
