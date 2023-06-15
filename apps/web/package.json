@@ -50,6 +50,7 @@
     "@next/env": "^13.4.5",
     "@next/eslint-plugin-next": "^13.4.5",
     "@pkerschbaum-homepage/config-eslint": "workspace:*",
+    "@pkerschbaum-homepage/config-stylelint": "workspace:*",
     "@pkerschbaum-homepage/config-typescript": "workspace:*",
     "@types/node": "^18.16.16",
     "@types/react": "^18.2.9",
