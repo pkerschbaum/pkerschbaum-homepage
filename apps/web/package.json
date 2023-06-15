@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@fontsource/rubik": "^4.5.14",
-    "@pkerschbaum-homepage/commons": "workspace:*",
+    "@pkerschbaum-homepage/commons-ecma": "workspace:*",
     "@pkerschbaum-homepage/fetch-favicon": "workspace:*",
     "@pkerschbaum-homepage/mdx": "workspace:*",
     "@pkerschbaum-homepage/shared-node": "workspace:*",

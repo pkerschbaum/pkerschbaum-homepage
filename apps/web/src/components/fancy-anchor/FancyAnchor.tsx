@@ -1,7 +1,7 @@
 import type React from 'react';
 import { styled } from 'styled-components';
 
-import { urlUtils } from '@pkerschbaum-homepage/commons/util/url.util';
+import { urlUtils } from '@pkerschbaum-homepage/commons-ecma/util/url.util';
 
 import { Classes } from '#pkg/constants.js';
 import { Anchor, AnchorProps } from '#pkg/elements/index.js';
