@@ -20,6 +20,7 @@
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
+        "../../platform/config-eslint/eslint-next.cjs",
         "scripts/**",
         "src/**",
         "next-env-custom.d.ts",
@@ -36,6 +37,7 @@
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
+        "../../platform/config-eslint/eslint-next.cjs",
         "scripts/**",
         "src/**",
         "next-env-custom.d.ts",

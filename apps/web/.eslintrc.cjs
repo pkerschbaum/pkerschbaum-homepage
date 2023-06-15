@@ -1,18 +1,7 @@
+// @ts-check
 const baseEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-ecma.cjs');
+const nextEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-next.cjs');
 
-const noRestrictedSyntax_noTestBadPatterns = [
-  {
-    selector:
-      "MemberExpression[object.name='it'][property.name='only'], MemberExpression[object.name='test'][property.name='only']",
-    message:
-      'Do not check in spec files with tests using ".only" - the other tests of that spec file would be skipped!',
-  },
-  {
-    selector:
-      "MemberExpression[object.name='it'][property.name='skip'], MemberExpression[object.name='test'][property.name='skip']",
-    message: 'Do not check in dead tests. Either fix or delete them.',
-  },
-];
 const noRestrictedSyntax_preferNextJsImage = [
   {
     selector: "MemberExpression[object.name='styled'][property.name='img']",
@@ -32,62 +21,54 @@ const noRestrictedSyntax_preferElements = [
 ];
 
 let baseNoRestrictedSyntax = baseEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
+let nextNoRestrictedSyntax = nextEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
 
 module.exports = {
   ...baseEslintConfig,
+  ...nextEslintConfig,
   parserOptions: {
     ...baseEslintConfig.parserOptions,
+    ...nextEslintConfig.parserOptions,
     tsconfigRootDir: __dirname,
   },
   extends: [
     ...(baseEslintConfig.extends ?? []),
-    './eslint-config-next-core-web-vitals-fixed.cjs',
-    'plugin:@next/next/core-web-vitals',
+    ...(nextEslintConfig.extends ?? []),
+    './node_modules/@pkerschbaum-homepage/config-eslint/eslint-config-next-core-web-vitals-fixed.cjs',
   ],
   ignorePatterns: [
     ...(baseEslintConfig.ignorePatterns ?? []),
-    'eslint-config-next-core-web-vitals-fixed.cjs',
-    'next.config.js',
+    ...(nextEslintConfig.ignorePatterns ?? []),
     'next-sitemap.cjs',
     'stylelint.config.cjs',
     'dist-tsc/**',
   ],
   rules: {
     ...baseEslintConfig.rules,
+    ...nextEslintConfig.rules,
     'no-restricted-syntax': [
       'error',
       ...baseNoRestrictedSyntax,
-      ...noRestrictedSyntax_noTestBadPatterns,
-      ...noRestrictedSyntax_preferNextJsImage,
+      ...nextNoRestrictedSyntax,
       ...noRestrictedSyntax_preferElements,
     ],
-    // "node:path" etc. is not supported in this Next.js project
-    'unicorn/prefer-node-protocol': 'off',
-    '@next/next/no-html-link-for-pages': ['error', 'src/app/'],
   },
   overrides: [
     ...(baseEslintConfig.overrides ?? []),
-    {
-      // allow default export for Next.js pages
-      files: ['src/pages/**/*', 'src/app/**/{layout,page}.tsx'],
-      rules: {
-        'import/no-default-export': 'off',
-      },
-    },
+    ...(nextEslintConfig.overrides ?? []),
     {
       files: ['src/elements/**/*'],
       rules: {
-        'no-restricted-syntax': [
-          'error',
-          ...noRestrictedSyntax_noTestBadPatterns,
-          ...noRestrictedSyntax_preferNextJsImage,
-        ],
+        'no-restricted-syntax': ['error', ...noRestrictedSyntax_preferNextJsImage],
       },
     },
   ],
   settings: {
     ...baseEslintConfig.settings,
+    ...nextEslintConfig.settings,
     next: {
+      ...baseEslintConfig.settings?.next,
+      ...nextEslintConfig.settings?.next,
       rootDir: 'apps/web/',
     },
   },

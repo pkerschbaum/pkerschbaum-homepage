@@ -105,7 +105,7 @@ importers:
         version: 13.4.5
       '@pkerschbaum-homepage/config-eslint':
         specifier: workspace:*
-        version: link:../../platform/config-eslint
+        version: file:platform/config-eslint(eslint-config-next@13.4.5)
       '@pkerschbaum-homepage/config-typescript':
         specifier: workspace:*
         version: link:../../platform/config-typescript
@@ -202,6 +202,9 @@ importers:
       typescript-transform-paths:
         specifier: ^3.4.6
         version: 3.4.6(typescript@4.9.5)
+    dependenciesMeta:
+      '@pkerschbaum-homepage/config-eslint':
+        injected: true
 
   packages/commons-ecma:
     dependencies:
@@ -7807,4 +7810,17 @@ packages:
       webpod: 0.0.2
       which: 3.0.1
       yaml: 2.3.1
+    dev: true
+
+  file:platform/config-eslint(eslint-config-next@13.4.5):
+    resolution: {directory: platform/config-eslint, type: directory}
+    id: file:platform/config-eslint
+    name: '@pkerschbaum-homepage/config-eslint'
+    peerDependencies:
+      eslint-config-next: ^13
+    peerDependenciesMeta:
+      eslint-config-next:
+        optional: true
+    dependencies:
+      eslint-config-next: 13.4.5(eslint@8.42.0)(typescript@4.9.5)
     dev: true
