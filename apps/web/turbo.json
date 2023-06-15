@@ -5,7 +5,7 @@
     "build": {
       "cache": true,
       "inputs": [
-        "../../tsconfig.workspace.json",
+        "../../platform/config-typescript/tsconfig.json",
         "scripts/**",
         "src/**",
         "next-env-custom.d.ts",
@@ -18,8 +18,8 @@
     "lint": {
       "cache": true,
       "inputs": [
-        "../../tsconfig.workspace.json",
-        "../../eslint-template.cjs",
+        "../../platform/config-typescript/tsconfig.json",
+        "../../platform/config-eslint/eslint-ecma.cjs",
         "scripts/**",
         "src/**",
         "next-env-custom.d.ts",
@@ -34,8 +34,8 @@
     "lint:fix": {
       "cache": true,
       "inputs": [
-        "../../tsconfig.workspace.json",
-        "../../eslint-template.cjs",
+        "../../platform/config-typescript/tsconfig.json",
+        "../../platform/config-eslint/eslint-ecma.cjs",
         "scripts/**",
         "src/**",
         "next-env-custom.d.ts",

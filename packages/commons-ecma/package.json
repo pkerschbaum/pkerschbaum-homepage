@@ -32,6 +32,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@pkerschbaum-homepage/config-eslint": "workspace:*",
+    "@pkerschbaum-homepage/config-typescript": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.59.9",
     "eslint": "^8.42.0",

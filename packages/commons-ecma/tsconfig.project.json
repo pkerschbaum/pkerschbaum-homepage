@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.workspace.json",
+  "extends": "@pkerschbaum-homepage/config-typescript/tsconfig.json",
   "compilerOptions": {
     /* Modules */
     "paths": {

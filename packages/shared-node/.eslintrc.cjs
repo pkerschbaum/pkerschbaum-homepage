@@ -1,4 +1,4 @@
-const baseEslintConfig = require('../../eslint-template.cjs');
+const baseEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-ecma.cjs');
 
 module.exports = {
   ...baseEslintConfig,

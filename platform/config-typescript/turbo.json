@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "cache": true,
+      "inputs": ["no-inputs-for-this-task"],
+      "outputs": []
+    },
+    "lint": {
+      "cache": true,
+      "inputs": ["no-inputs-for-this-task"],
+      "outputs": []
+    },
+    "lint:fix": {
+      "cache": true,
+      "inputs": ["no-inputs-for-this-task"],
+      "outputs": []
+    }
+  }
+}
