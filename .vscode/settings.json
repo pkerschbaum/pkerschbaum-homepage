@@ -1,7 +1,6 @@
 {
   "editor.rulers": [100],
   "typescript.tsdk": "./apps/web/node_modules/typescript/lib",
-  "prettier.prettierPath": "./node_modules/prettier",
   "search.exclude": {
     "**/dist": true
   },

@@ -1,4 +1,4 @@
-export const uiUtils = { getScrollParent, isPartlyInViewport };
+export const uiUtils = { getScrollParent, isEntirelyInViewport, isPartlyInViewport };
 
 /**
  * https://stackoverflow.com/questions/35939886/find-first-scrollable-parent#42543908
@@ -22,6 +22,17 @@ function getScrollParent(element: HTMLElement, includeHidden?: boolean) {
   }
 
   return document.body;
+}
+
+function isEntirelyInViewport(element: HTMLElement): boolean {
+  const rect = element.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
 
 function isPartlyInViewport(element: HTMLElement): boolean {
