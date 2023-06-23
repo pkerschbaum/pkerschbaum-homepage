@@ -22,9 +22,10 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
    * Set up state and effect for tracking the section of the article the user has currently scrolled to.
    * This is used to highlight the anchor of the table of contents which links to the heading of that section.
    */
-  const [lastHeadingAboveTheFold, setLastHeadingAboveTheFold] = React.useState<
-    string | undefined
-  >();
+  const [headingsAboveTheFold, setHeadingsAboveTheFold] = React.useState<{
+    idOfLastHeadingAboveTheFold?: string | undefined;
+    idOfFirstHeadingInViewport?: string | undefined;
+  }>({});
   const [lastScrolledToHeading, setLastScrolledToHeading] = React.useState<
     undefined | { id: string; wentOutOfViewport: boolean }
   >();
@@ -40,7 +41,6 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
       }
 
       let unobserveViewportObserver = startViewportObserver();
-      let unobserveRemovalObserver = startRemovalObserver();
 
       function startViewportObserver() {
         invariant(lastScrolledToHeading);
@@ -49,52 +49,36 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
         invariant($lastScrolledToHeading instanceof HTMLElement);
 
         let firstObserverInvocationHasBeenIgnored = false;
-        const observer = new IntersectionObserver(() => {
-          if (!firstObserverInvocationHasBeenIgnored) {
-            firstObserverInvocationHasBeenIgnored = true;
-            return;
-          }
+        const observer = new IntersectionObserver(
+          () => {
+            if (!firstObserverInvocationHasBeenIgnored) {
+              firstObserverInvocationHasBeenIgnored = true;
+              return;
+            }
 
-          if (uiUtils.isEntirelyInViewport($lastScrolledToHeading)) {
-            return;
-          }
+            if (uiUtils.isEntirelyInViewport($lastScrolledToHeading)) {
+              return;
+            }
 
-          setLastScrolledToHeading({ ...lastScrolledToHeading, wentOutOfViewport: true });
-        });
+            setLastScrolledToHeading({ ...lastScrolledToHeading, wentOutOfViewport: true });
+          },
+          { threshold: 1 },
+        );
 
         observer.observe($lastScrolledToHeading);
+
+        uiUtils.observeRemovalOfElementOnce($lastScrolledToHeading, () => {
+          unobserveViewportObserver();
+          unobserveViewportObserver = startViewportObserver();
+        });
 
         return function unobserve() {
           observer.unobserve($lastScrolledToHeading);
         };
       }
 
-      function startRemovalObserver() {
-        invariant(lastScrolledToHeading);
-
-        const $lastScrolledToHeading = document.querySelector(`#${lastScrolledToHeading.id}`);
-        invariant($lastScrolledToHeading instanceof HTMLElement);
-        invariant($lastScrolledToHeading.parentElement);
-
-        const removalObserver = new MutationObserver((mutationList) => {
-          const removedNodes = mutationList.flatMap((mutation) => [...mutation.removedNodes]);
-          if (removedNodes.includes($lastScrolledToHeading)) {
-            unobserveViewportObserver();
-            unobserveRemovalObserver();
-            unobserveViewportObserver = startViewportObserver();
-            unobserveRemovalObserver = startRemovalObserver();
-          }
-        });
-
-        removalObserver.observe($lastScrolledToHeading.parentElement, { childList: true });
-        return function unobserve() {
-          removalObserver.disconnect();
-        };
-      }
-
       return function cleanup() {
         unobserveViewportObserver();
-        unobserveRemovalObserver();
       };
     },
     [lastScrolledToHeading, matches],
@@ -113,16 +97,27 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
         $headings.push($element);
       }
 
-      const observer = new IntersectionObserver(() => {
-        const $headingsAboveTheFold = $headings.filter(($heading) => {
-          const boundingClientRect = $heading.getBoundingClientRect();
-          return boundingClientRect.top - window.innerHeight <= 0;
-        });
-        const $lastHeadingAboveTheFold = $headingsAboveTheFold.at(-1);
-        if ($lastHeadingAboveTheFold) {
-          setLastHeadingAboveTheFold($lastHeadingAboveTheFold.id);
-        }
-      });
+      const observer = new IntersectionObserver(
+        () => {
+          const $headingsAboveTheFold = $headings.filter(($heading) =>
+            uiUtils.isEntirelyAboveTheFold($heading),
+          );
+          const $firstHeadingInViewport = $headingsAboveTheFold.find(($heading) =>
+            uiUtils.isEntirelyInViewport($heading),
+          );
+          const $lastHeadingAboveTheFold = $headingsAboveTheFold.at(-1);
+
+          if ($lastHeadingAboveTheFold || $firstHeadingInViewport) {
+            setHeadingsAboveTheFold({
+              idOfLastHeadingAboveTheFold: $lastHeadingAboveTheFold?.id,
+              idOfFirstHeadingInViewport: $firstHeadingInViewport?.id,
+            });
+          } else {
+            setHeadingsAboveTheFold({});
+          }
+        },
+        { threshold: 1 },
+      );
 
       for (const $element of $headings) {
         observer.observe($element);
@@ -137,10 +132,11 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
     [headings, matches],
   );
 
-  const highlightedHeadingId =
+  const highlightedHeadingId: string | undefined =
     lastScrolledToHeading && !lastScrolledToHeading.wentOutOfViewport
       ? lastScrolledToHeading.id
-      : lastHeadingAboveTheFold;
+      : headingsAboveTheFold.idOfFirstHeadingInViewport ??
+        headingsAboveTheFold.idOfLastHeadingAboveTheFold;
 
   return (
     <TocNav>
