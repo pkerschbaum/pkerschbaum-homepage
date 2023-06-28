@@ -138,4 +138,8 @@ export const ArticleContent = styled.div`
       -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
     );
   }
+
+  & > *:last-of-type {
+    margin-block-end: 0;
+  }
 `;
