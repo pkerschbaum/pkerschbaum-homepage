@@ -5,10 +5,14 @@ const nextEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-nex
 const noRestrictedSyntax_preferNextJsImage = [
   {
     selector: "MemberExpression[object.name='styled'][property.name='img']",
-    message: 'Do not use the native <img> HTML element; use <Image> from "next/image" instead.',
+    message: 'Do not use the native <img> HTML element; use <Image> from "#pkg/elements" instead.',
   },
 ];
 const noRestrictedSyntax_preferElements = [
+  {
+    selector: "MemberExpression[object.name='styled'][property.name='img']",
+    message: 'Do not use the native <img> HTML element; use <Image> from "#pkg/elements" instead.',
+  },
   {
     selector: "MemberExpression[object.name='styled'][property.name='a']",
     message: 'Do not use the native <a> HTML element; use <Anchor> from "#pkg/elements" instead.',
@@ -22,6 +26,10 @@ const noRestrictedSyntax_preferElements = [
 
 let baseNoRestrictedSyntax = baseEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
 let nextNoRestrictedSyntax = nextEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
+let baseCodeImportPatternsZones =
+  baseEslintConfig.rules?.['code-import-patterns/patterns']?.slice(1)?.zones ?? [];
+let nextCodeImportPatternsZones =
+  nextEslintConfig.rules?.['code-import-patterns/patterns']?.slice(1)?.zones ?? [];
 
 module.exports = {
   ...baseEslintConfig,
@@ -51,6 +59,26 @@ module.exports = {
       ...baseNoRestrictedSyntax,
       ...nextNoRestrictedSyntax,
       ...noRestrictedSyntax_preferElements,
+    ],
+    'code-import-patterns/patterns': [
+      'error',
+      {
+        zones: [
+          ...baseCodeImportPatternsZones,
+          ...nextCodeImportPatternsZones,
+          {
+            target: /.+/,
+            forbiddenPatterns: [
+              {
+                // forbid importing from next/image (should only be allowed in #pkg/elements/Image.tsx)
+                pattern: /next\/image/,
+                errorMessage:
+                  'Don\'t use "Image" from "next/image"; use from "#pkg/elements" instead.',
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   overrides: [

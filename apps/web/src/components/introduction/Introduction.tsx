@@ -1,15 +1,15 @@
-import { css } from '@linaria/core';
 import { styled } from '@linaria/react';
-import Image from 'next/image.js';
 import type React from 'react';
 import { MapPin } from 'react-feather';
 
+import { Image } from '#pkg/elements/Image';
+import { commonStyles } from '#pkg/styles/common.styles.js';
 import profilePic from '../../../public/profile-picture.jpg';
 
 export const Introduction: React.FC = () => {
   return (
     <IntroductionContainer>
-      <VisuallyHiddenHeadline>Patrick Kerschbaum homepage</VisuallyHiddenHeadline>
+      <h1 className={commonStyles.visuallyHidden}>Patrick Kerschbaum homepage</h1>
       <Greeting>👋 Hi, I&apos;m Patrick</Greeting>
       <Message>
         I&apos;m a software developer with a great passion for <strong>web technologies</strong> and{' '}
@@ -30,21 +30,6 @@ export const Introduction: React.FC = () => {
     </IntroductionContainer>
   );
 };
-
-const VisuallyHiddenHeadline = styled.h1`
-  /**
-   * based on https://www.joshwcomeau.com/snippets/react-components/visually-hidden/
-   */
-  position: absolute;
-  display: inline-block;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  border: 0;
-`;
 
 const IntroductionContainer = styled.section`
   display: grid;
@@ -88,15 +73,7 @@ const ProfilePictureWrapper = styled.span`
   margin-block-start: 8px;
 `;
 
-const ProfilePicture: React.FC<React.ComponentProps<typeof Image>> = ({
-  className,
-  alt,
-  ...delegated
-}) => {
-  return <Image alt={alt} className={`${className ?? ''} ${profilePictureCss}`} {...delegated} />;
-};
-
-const profilePictureCss = css`
+const ProfilePicture = styled(Image)`
   border-radius: 50%;
   object-fit: cover;
 `;
