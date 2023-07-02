@@ -1,9 +1,9 @@
+import { css } from '@linaria/core';
+import { styled } from '@linaria/react';
 import Image from 'next/image.js';
 import type React from 'react';
 import { MapPin } from 'react-feather';
-import { styled } from 'styled-components';
 
-import { commonStyles } from '#pkg/styles/common.styles.js';
 import profilePic from '../../../public/profile-picture.jpg';
 
 export const Introduction: React.FC = () => {
@@ -32,8 +32,18 @@ export const Introduction: React.FC = () => {
 };
 
 const VisuallyHiddenHeadline = styled.h1`
-  /* stylelint-disable */
-  ${commonStyles.visuallyHidden}/* stylelint-enable */
+  /**
+   * based on https://www.joshwcomeau.com/snippets/react-components/visually-hidden/
+   */
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
 `;
 
 const IntroductionContainer = styled.section`
@@ -78,7 +88,15 @@ const ProfilePictureWrapper = styled.span`
   margin-block-start: 8px;
 `;
 
-const ProfilePicture = styled(Image)`
+const ProfilePicture: React.FC<React.ComponentProps<typeof Image>> = ({
+  className,
+  alt,
+  ...delegated
+}) => {
+  return <Image alt={alt} className={`${className ?? ''} ${profilePictureCss}`} {...delegated} />;
+};
+
+const profilePictureCss = css`
   border-radius: 50%;
   object-fit: cover;
 `;

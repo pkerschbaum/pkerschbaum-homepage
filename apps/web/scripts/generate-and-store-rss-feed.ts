@@ -10,7 +10,7 @@ import {
   RSS_FEED_JSON_SLUG,
   RSS_FEED_XML_PATH,
   RSS_FEED_XML_SLUG,
-} from '#pkg/constants.js';
+} from '#pkg/constants-server.js';
 import { getAllMarkdownFiles } from '#pkg/mdx/index.js';
 
 const [posts, tidbits] = await Promise.all([

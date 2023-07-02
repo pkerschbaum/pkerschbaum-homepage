@@ -1,6 +1,7 @@
+import { css } from '@linaria/core';
+import { styled } from '@linaria/react';
 import Image from 'next/image.js';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements/index.js';
 import type { Project } from '#pkg/schema.js';
@@ -42,7 +43,15 @@ const ThumbnailWrapper = styled.span`
   max-height: 100%;
 `;
 
-const Thumbnail = styled(Image)`
+const Thumbnail: React.FC<React.ComponentProps<typeof Image>> = ({
+  className,
+  alt,
+  ...delegated
+}) => {
+  return <Image alt={alt} className={`${className ?? ''} ${thumbnailCss}`} {...delegated} />;
+};
+
+const thumbnailCss = css`
   object-fit: cover;
   object-position: top center;
 `;

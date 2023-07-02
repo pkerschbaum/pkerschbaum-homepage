@@ -1,10 +1,10 @@
 import '@fontsource/rubik/variable.css';
+import '#pkg/app/style.linaria.global';
 
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import type React from 'react';
 
-import { StyledComponentsRegistry } from '#pkg/app/registry';
 import { RootLayoutContainer } from '#pkg/app/root-layout-container';
 import { config } from '#pkg/config';
 import {
@@ -15,9 +15,7 @@ import {
   IsAnimationEnabled,
   IsScrolled,
   LocalStorageKey,
-} from '#pkg/constants';
-import { CSSReset } from '#pkg/styles/css-reset.styles';
-import { GlobalAppStyles } from '#pkg/styles/global-app.styles';
+} from '#pkg/constants-browser';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -168,14 +166,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled }} />
 
         <div id="__next">
-          <StyledComponentsRegistry>
-            <CSSReset />
-            <GlobalAppStyles />
+          <RootLayoutContainer>{children}</RootLayoutContainer>
 
-            <RootLayoutContainer>{children}</RootLayoutContainer>
-
-            <Analytics />
-          </StyledComponentsRegistry>
+          <Analytics />
         </div>
       </body>
     </html>

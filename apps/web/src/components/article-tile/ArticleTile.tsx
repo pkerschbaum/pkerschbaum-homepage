@@ -1,5 +1,5 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 

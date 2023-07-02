@@ -6,7 +6,8 @@ import invariant from 'tiny-invariant';
 import styles from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/styles.module.css';
 import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post';
 import { config } from '#pkg/config.js';
-import { PATHS, ClassesAliases } from '#pkg/constants.js';
+import { ClassesAliases } from '#pkg/constants-browser.js';
+import { PATHS } from '#pkg/constants-server.js';
 import { mapMDXParseResultToMetadata, parseMDXFileAndCollectHrefs } from '#pkg/mdx/index.js';
 import { fetchWebmentions } from '#pkg/webmentions/index.js';
 
@@ -41,4 +42,4 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default BlogPostPage;
 
-export { BLOG_REFETCH_INTERVAL_SECONDS as revalidate } from '#pkg/constants.js';
+export { BLOG_REFETCH_INTERVAL_SECONDS as revalidate } from '#pkg/constants-server.js';

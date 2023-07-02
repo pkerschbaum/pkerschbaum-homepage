@@ -1,9 +1,10 @@
+import { css } from '@linaria/core';
+import { styled } from '@linaria/react';
 import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import Image from 'next/image.js';
 import type React from 'react';
 import sanitizeHTML from 'sanitize-html';
-import { styled } from 'styled-components';
 
 import { Anchor } from '#pkg/elements/index.js';
 import type { Webmention } from '#pkg/webmentions/index.js';
@@ -66,7 +67,15 @@ const WebmentionContainer = styled.div`
   grid-column-gap: calc(2 * var(--spacing-base));
 `;
 
-const AuthorAvatar = styled(Image)`
+const AuthorAvatar: React.FC<React.ComponentProps<typeof Image>> = ({
+  className,
+  alt,
+  ...delegated
+}) => {
+  return <Image alt={alt} className={`${className ?? ''} ${authorAvatarCss}`} {...delegated} />;
+};
+
+const authorAvatarCss = css`
   grid-area: avatar;
   border-radius: 50%;
   object-fit: cover;

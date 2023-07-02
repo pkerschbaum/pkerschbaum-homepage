@@ -1,9 +1,9 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 import { urlUtils } from '@pkerschbaum-homepage/commons-ecma/util/url.util';
 
-import { Classes } from '#pkg/constants.js';
+import { Classes } from '#pkg/constants-browser.js';
 import { Anchor, AnchorProps } from '#pkg/elements/index.js';
 
 const MAX_TEXT_LENGTH_TO_BREAK_ICON_WITH_TEXT = 15;
@@ -106,7 +106,17 @@ export function FancyAnchor({
 
 export const StyledAnchor = styled(Anchor)``;
 
-const IconSpan = styled.span.attrs({ className: Classes.FANCY_ANCHOR_ICON })`
+const IconSpanInner: React.FC<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+> = ({ children, className, ...delegated }) => {
+  return (
+    <span className={`${className ?? ''} ${Classes.FANCY_ANCHOR_ICON}`} {...delegated}>
+      {children}
+    </span>
+  );
+};
+
+const IconSpan = styled(IconSpanInner)`
   &::before {
     width: 1em;
     height: calc(1.2 * 1em);

@@ -1,8 +1,8 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
 import { Moon, Sun } from 'react-feather';
-import { styled } from 'styled-components';
 
-import { Animations, Classes, ColorTheme, DataAttribute } from '#pkg/constants.js';
+import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
 import { useColorTheme } from '#pkg/context/color-theme.jsx';
 import { IconButton } from '#pkg/elements/index.js';
 
@@ -40,7 +40,7 @@ const AnimatedMoon = styled(Moon)`
     /* hide */
     transform: translateY(var(--transition-translatey-distance));
 
-    animation-name: ${Animations.HIDE};
+    animation-name: var(--animation-hide);
     animation-duration: 0ms;
     animation-delay: var(--transition-duration);
     animation-fill-mode: forwards;
@@ -54,7 +54,7 @@ const AnimatedSun = styled(Sun)`
     /* hide */
     transform: translateY(calc(-1 * var(--transition-translatey-distance)));
 
-    animation-name: ${Animations.HIDE};
+    animation-name: var(--animation-hide);
     animation-duration: 0ms;
     animation-delay: var(--transition-duration);
     animation-fill-mode: forwards;

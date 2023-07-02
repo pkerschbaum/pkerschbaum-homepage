@@ -1,11 +1,18 @@
 import Link from 'next/link.js';
-import type React from 'react';
-import { styled } from 'styled-components';
+import React from 'react';
 
-export type AnchorProps = React.ComponentPropsWithoutRef<'a'> & {
+export type AnchorProps = React.ComponentProps<typeof Link> & {
   href: string;
+  style?: React.CSSProperties;
 };
 
-export const Anchor = styled(({ children, ...delegated }: React.PropsWithChildren<AnchorProps>) => (
-  <Link {...(delegated as React.ComponentPropsWithoutRef<typeof Link>)}>{children}</Link>
-))``;
+export const Anchor = React.forwardRef<HTMLAnchorElement, AnchorProps>(function AnchorInner(
+  { children, ...delegated },
+  ref,
+) {
+  return (
+    <Link ref={ref} {...delegated}>
+      {children}
+    </Link>
+  );
+});

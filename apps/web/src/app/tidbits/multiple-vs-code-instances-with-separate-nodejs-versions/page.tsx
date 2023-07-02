@@ -5,7 +5,8 @@ import invariant from 'tiny-invariant';
 
 import styles from '#pkg/app/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions/styles.module.css';
 import { ArticleContainerTidbit } from '#pkg/components/article-container-tidbit/index.js';
-import { PATHS, ClassesAliases } from '#pkg/constants.js';
+import { ClassesAliases } from '#pkg/constants-browser.js';
+import { PATHS } from '#pkg/constants-server.js';
 import { mapMDXParseResultToMetadata, parseMDXFileAndCollectHrefs } from '#pkg/mdx/index.js';
 
 const faviconsClassName = styles[ClassesAliases.FAVICONS];
