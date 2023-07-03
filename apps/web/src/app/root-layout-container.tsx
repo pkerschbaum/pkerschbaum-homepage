@@ -1,9 +1,9 @@
 'use client';
 
+import { styled } from '@linaria/react';
 import dayjs from 'dayjs';
 import Link from 'next/link.js';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration';
 import { Header } from '#pkg/components/header';
@@ -11,11 +11,8 @@ import { Nav } from '#pkg/components/nav';
 import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor';
 import { SocialMediaLinks } from '#pkg/components/social-media-links';
 import { ToggleThemeButton } from '#pkg/components/toggle-theme-button';
-import { TOC_QUERY } from '#pkg/constants';
+import { TOC_QUERY } from '#pkg/constants-browser';
 import { ColorThemeProvider } from '#pkg/context/color-theme';
-import { CSSReset } from '#pkg/styles/css-reset.styles';
-import { GlobalAppStyles } from '#pkg/styles/global-app.styles';
-import { PrismStyles } from '#pkg/styles/prism.styles';
 
 type RootLayoutContainerProps = {
   children: React.ReactNode;
@@ -24,9 +21,6 @@ type RootLayoutContainerProps = {
 export const RootLayoutContainer = ({ children }: RootLayoutContainerProps) => {
   return (
     <ColorThemeProvider>
-      <CSSReset />
-      <PrismStyles />
-      <GlobalAppStyles />
       <EnableAnimationsAfterHydration />
 
       <RootContainer>

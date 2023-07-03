@@ -1,8 +1,8 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 import { ProjectTile } from '#pkg/components/project-tile/index.js';
-import { QUERIES } from '#pkg/constants.js';
+import { QUERIES } from '#pkg/constants-browser.js';
 
 type ProjectsOverviewProps = {};
 

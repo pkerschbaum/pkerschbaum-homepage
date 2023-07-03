@@ -1,7 +1,7 @@
+import { styled } from '@linaria/react';
 import React from 'react';
-import { styled } from 'styled-components';
 
-import { Classes } from '#pkg/constants.js';
+import { Classes } from '#pkg/constants-browser.js';
 
 export type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
 

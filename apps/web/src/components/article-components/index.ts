@@ -1,7 +1,7 @@
-import { styled } from 'styled-components';
+import { styled } from '@linaria/react';
 
 import { CodeBlockContainer } from '#pkg/components/mdx-viewer/index.js';
-import { TOC_QUERY } from '#pkg/constants';
+import { TOC_QUERY } from '#pkg/constants-browser';
 
 export const ArticleContainer = styled.div`
   display: flex;

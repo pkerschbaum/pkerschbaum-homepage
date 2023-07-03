@@ -1,5 +1,5 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
-import { styled } from 'styled-components';
 
 type FaviconProps = {
   width: number;

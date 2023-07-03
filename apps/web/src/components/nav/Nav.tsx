@@ -1,11 +1,11 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
 import { PenTool } from 'react-feather';
-import { styled } from 'styled-components';
 
 import { Favicon } from '#pkg/components/favicon/index.js';
 import { Cookie, Topic } from '#pkg/components/icon-library/index.js';
 import { config } from '#pkg/config.js';
-import { Animations, DataAttribute, IsScrolled } from '#pkg/constants.js';
+import { DataAttribute, IsScrolled } from '#pkg/constants-browser.js';
 import { Anchor } from '#pkg/elements/index.js';
 
 export const Nav: React.FC = () => {
@@ -95,7 +95,7 @@ const NavHomeAnchor = styled(NavAnchor)`
   & > * {
     grid-area: container;
 
-    animation-name: ${Animations.SLIDE_RIGHT};
+    animation-name: var(--animation-slide-right);
     animation-duration: var(--animation-duration);
     animation-fill-mode: both;
   }
@@ -103,7 +103,7 @@ const NavHomeAnchor = styled(NavAnchor)`
 
 const NavHomeAnchorText = styled.div`
   *:root[${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}'] & {
-    animation-name: ${Animations.SLIDE_LEFT};
+    animation-name: var(--animation-slide-left);
   }
 `;
 
@@ -114,6 +114,6 @@ const NavHomeAnchorLogo = styled.div`
   width: fit-content;
 
   *:root:not([${DataAttribute.IS_SCROLLED}='${IsScrolled.YES}']) & {
-    animation-name: ${Animations.SLIDE_LEFT};
+    animation-name: var(--animation-slide-left);
   }
 `;

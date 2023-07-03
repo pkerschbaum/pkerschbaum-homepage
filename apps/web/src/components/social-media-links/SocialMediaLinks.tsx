@@ -1,9 +1,9 @@
+import { styled } from '@linaria/react';
 import type React from 'react';
 import { GitHub, Linkedin, Twitter } from 'react-feather';
-import { styled } from 'styled-components';
 
 import { config } from '#pkg/config.js';
-import { Anchor } from '#pkg/elements/index.js';
+import { Anchor, AnchorProps } from '#pkg/elements/index.js';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>
@@ -36,7 +36,10 @@ const LinksList = styled.ul`
 
 const LinkElement = styled.li``;
 
-const SocialMediaAnchor = styled(Anchor).attrs({
-  target: '_blank',
-  rel: 'noopener noreferrer',
-} satisfies React.AnchorHTMLAttributes<HTMLAnchorElement> as any)``;
+const SocialMediaAnchor: React.FC<AnchorProps> = ({ children, ...delegated }) => {
+  return (
+    <Anchor target="_blank" rel="noopener noreferrer" {...delegated}>
+      {children}
+    </Anchor>
+  );
+};

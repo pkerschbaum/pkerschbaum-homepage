@@ -1,10 +1,10 @@
+import { styled } from '@linaria/react';
 import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
-import Image from 'next/image.js';
 import type React from 'react';
 import sanitizeHTML from 'sanitize-html';
-import { styled } from 'styled-components';
 
+import { Image } from '#pkg/elements/Image';
 import { Anchor } from '#pkg/elements/index.js';
 import type { Webmention } from '#pkg/webmentions/index.js';
 

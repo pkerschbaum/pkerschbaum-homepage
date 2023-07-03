@@ -1,12 +1,12 @@
 'use client';
 
+import { styled } from '@linaria/react';
 import React from 'react';
-import { styled } from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import type { Heading } from '@pkerschbaum-homepage/mdx/schema';
 
-import { TOC_QUERY } from '#pkg/constants';
+import { TOC_QUERY } from '#pkg/constants-browser';
 import { Anchor } from '#pkg/elements';
 import { useMediaMatch } from '#pkg/utils/react.utils';
 import { uiUtils } from '#pkg/utils/ui.utils';

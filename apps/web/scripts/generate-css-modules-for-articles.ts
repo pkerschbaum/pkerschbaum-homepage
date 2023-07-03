@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import invariant from 'tiny-invariant';
 
-import { PATHS, Classes, DataAttribute, ColorTheme, ClassesAliases } from '#pkg/constants.js';
+import { Classes, DataAttribute, ColorTheme, ClassesAliases } from '#pkg/constants-browser.js';
+import { PATHS } from '#pkg/constants-server.js';
 import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
 import { parseMDXFileAndCollectHrefs } from '#pkg/mdx/mdx.js';
 

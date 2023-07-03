@@ -1,15 +1,15 @@
-import Image from 'next/image.js';
+import { styled } from '@linaria/react';
 import type React from 'react';
 import { MapPin } from 'react-feather';
-import { styled } from 'styled-components';
 
+import { Image } from '#pkg/elements/Image';
 import { commonStyles } from '#pkg/styles/common.styles.js';
 import profilePic from '../../../public/profile-picture.jpg';
 
 export const Introduction: React.FC = () => {
   return (
     <IntroductionContainer>
-      <VisuallyHiddenHeadline>Patrick Kerschbaum homepage</VisuallyHiddenHeadline>
+      <h1 className={commonStyles.visuallyHidden}>Patrick Kerschbaum homepage</h1>
       <Greeting>👋 Hi, I&apos;m Patrick</Greeting>
       <Message>
         I&apos;m a software developer with a great passion for <strong>web technologies</strong> and{' '}
@@ -30,11 +30,6 @@ export const Introduction: React.FC = () => {
     </IntroductionContainer>
   );
 };
-
-const VisuallyHiddenHeadline = styled.h1`
-  /* stylelint-disable */
-  ${commonStyles.visuallyHidden}/* stylelint-enable */
-`;
 
 const IntroductionContainer = styled.section`
   display: grid;

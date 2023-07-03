@@ -1,10 +1,10 @@
 'use client';
 
+import { styled } from '@linaria/react';
 import { arrays } from '@pkerschbaum/ts-utils';
 import dayjs from 'dayjs';
 import type React from 'react';
 import { Share2, Twitter } from 'react-feather';
-import { styled } from 'styled-components';
 
 import {
   ArticleHeading,

@@ -1,13 +1,13 @@
+import { styled } from '@linaria/react';
 import { check } from '@pkerschbaum/ts-utils';
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
-import { styled } from 'styled-components';
 import invariant from 'tiny-invariant';
 
 import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
-import { Classes, ColorTheme, DataAttribute } from '#pkg/constants.js';
-import { Anchor, Button } from '#pkg/elements/index.js';
+import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
+import { Anchor, AnchorProps, Button } from '#pkg/elements/index.js';
 import { reactUtils } from '#pkg/utils/react.utils';
 
 export type MDXViewerProps = {
@@ -38,7 +38,12 @@ export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) =>
           }
 
           return (
-            <Anchor target="_blank" {...props} href={props.href} {...currentSectionHeadingId} />
+            <Anchor
+              target="_blank"
+              {...(props as AnchorProps)}
+              href={props.href}
+              {...currentSectionHeadingId}
+            />
           );
         },
         h2: ({ ref: _ignored, id, ...delegated }) => {
