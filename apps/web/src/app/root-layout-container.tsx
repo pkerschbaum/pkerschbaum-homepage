@@ -1,5 +1,3 @@
-'use client';
-
 import { styled } from '@linaria/react';
 import dayjs from 'dayjs';
 import Link from 'next/link.js';

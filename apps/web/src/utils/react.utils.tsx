@@ -1,5 +1,5 @@
 import { numbers } from '@pkerschbaum/ts-utils';
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import * as ReactIs from 'react-is';
 
 export const reactUtils = { createContext, getNodeText };
@@ -71,20 +71,20 @@ function getNodeText(node: React.ReactNode): string {
  * @see https://rooks.vercel.app/docs/useMediaMatch
  */
 export function useMediaMatch(query: string): boolean | 'SSR' {
-  const matchMedia = useMemo<MediaQueryList | undefined>(() => {
+  const matchMedia = React.useMemo<MediaQueryList | undefined>(() => {
     if (typeof window === 'undefined') {
       return undefined;
     }
     return window.matchMedia(query);
   }, [query]);
-  const [matches, setMatches] = useState<boolean | 'SSR'>(() => {
+  const [matches, setMatches] = React.useState<boolean | 'SSR'>(() => {
     if (!matchMedia) {
       return 'SSR';
     }
     return matchMedia.matches;
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!matchMedia) {
       return;
     }

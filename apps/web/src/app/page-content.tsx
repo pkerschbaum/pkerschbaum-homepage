@@ -1,5 +1,3 @@
-'use client';
-
 import { styled } from '@linaria/react';
 import type React from 'react';
 import { PenTool } from 'react-feather';

@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 
 import { DataAttribute, IsAnimationEnabled } from '#pkg/constants-browser.js';

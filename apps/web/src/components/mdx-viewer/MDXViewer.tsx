@@ -1,3 +1,4 @@
+'use client';
 import { styled } from '@linaria/react';
 import { check } from '@pkerschbaum/ts-utils';
 import { MDXRemote } from 'next-mdx-remote';
@@ -125,7 +126,7 @@ const HeadingAnchor = styled(Anchor)`
   }
 `;
 
-const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({ children, ...delegated }) => {
+export const PreComponent: React.FC<React.ComponentProps<'pre'>> = ({ children, ...delegated }) => {
   const codePreRef = React.useRef<HTMLPreElement>(null);
   const [codeWasCopied, setCodeWasCopied] = React.useState(false);
 

@@ -1,3 +1,4 @@
+'use client';
 // based on https://sreetamdas.com/blog/the-perfect-dark-mode, https://www.joshwcomeau.com/react/dark-mode
 import React from 'react';
 
