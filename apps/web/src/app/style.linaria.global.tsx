@@ -180,6 +180,8 @@ export const GlobalAppStyles = css`
         5.7px 10.6px 18.1px hsl(var(--shadow-color) / 42%),
         7.8px 14.7px 25px hsl(var(--shadow-color) / 5%),
         10.8px 20.3px 34.5px hsl(var(--shadow-color) / 59%);
+      --shadow-style: 4px 4px 0 0 var(--color-fg);
+      --shadow-style-elevation: 6px 6px 0 0 var(--color-fg);
     }
 
     *:root[data-theme='dark'] {

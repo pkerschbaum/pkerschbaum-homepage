@@ -31,8 +31,8 @@ export const ArticlesList: React.FC<ArticlesListProps> = ({ pathPrefix, articles
 const ArticlesListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: calc(2 * var(--spacing-base));
-  grid-column-gap: calc(2 * var(--spacing-base));
+  grid-row-gap: calc(3 * var(--spacing-base));
+  grid-column-gap: calc(3 * var(--spacing-base));
   align-items: stretch;
 
   @media ${QUERIES.tabletAndUp} {

@@ -16,15 +16,16 @@ export const Tile = styled.article`
   /* hide overflow to "apply" box-shadow to children */
   overflow: hidden;
   color: inherit;
-  border: 1px solid lightgrey;
-  border-radius: 4px;
+  border: 1px solid var(--color-fg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-style);
 
   transition: box-shadow 0.3s ease, border 0.3s ease, background 200ms;
   will-change: transition;
 
   &:hover {
     background-color: var(--color-bg-interactive);
-    border-color: var(--color-bg-interactive);
+    box-shadow: var(--shadow-style-elevation);
   }
 `;
 
