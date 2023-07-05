@@ -189,9 +189,6 @@ export const metadata: Metadata = {
     site: '@pkerschbaum',
     creator: '@pkerschbaum',
   },
-  alternates: {
-    canonical: `https://${config.canonicalTLDPlus1}`,
-  },
 };
 
 // see https://sreetamdas.com/blog/the-perfect-dark-mode#recap
