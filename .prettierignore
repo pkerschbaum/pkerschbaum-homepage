@@ -1,4 +1,5 @@
 **/dist
+**/dist-tsc
 **/public
 
 pnpm-lock.yaml
