@@ -1,10 +1,5 @@
 // @ts-check
-import path from 'path';
-import url from 'url';
-
 import withLinaria from 'next-with-linaria';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {

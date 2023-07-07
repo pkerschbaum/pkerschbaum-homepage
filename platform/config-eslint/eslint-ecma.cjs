@@ -75,8 +75,10 @@ module.exports = {
     'import/no-dynamic-require': 'error',
     'import/no-mutable-exports': 'error',
     'import/no-self-import': 'error',
+    // disable "import/no-unresolved" --> covered by TypeScript
     'import/no-unresolved': 'off',
     'import/no-useless-path-segments': 'error',
+    // "import/order": external dependencies first, workspace dependencies second, internal stuff third
     'import/order': [
       'error',
       {
@@ -99,13 +101,20 @@ module.exports = {
     ],
     'node/handle-callback-err': 'error',
     'node/no-callback-literal': 'error',
+    // disable "node/no-extraneous-import" --> thanks to "isolated mode" of node_modules of pnpm and "public-hoist-pattern" being disabled of this monorepo, there is no possibilty for extraneous imports
     'node/no-extraneous-import': 'off',
+    // disable "node/no-missing-import" --> covered by TypeScript
     'node/no-missing-import': 'off',
     'node/no-process-env': 'error',
     'node/no-sync': 'error',
+    // disable "node/no-unpublished-import" and "node/no-unpublished-require" --> wrong positive for "@vercel/analytics" for whatever reason
     'node/no-unpublished-import': 'off',
     'node/no-unpublished-require': 'off',
+    // disable "node/no-unsupported-features/es-syntax" --> covered by TypeScript
     'node/no-unsupported-features/es-syntax': 'off',
+    // disable "node/no-unsupported-features/es-builtins" --> covered by TypeScript
+    'node/no-unsupported-features/es-builtins': 'off',
+    // disable "node/no-unsupported-features/node-builtins" --> covered by TypeScript
     'node/no-unsupported-features/node-builtins': 'off',
     'unicorn/filename-case': 'off',
     'unicorn/no-negated-condition': 'off',
@@ -132,7 +141,7 @@ module.exports = {
       { overrides: { constructors: 'off' } },
     ],
     '@typescript-eslint/method-signature-style': 'error',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-base-to-string': ['error', { ignoredTypeNames: ['Error'] }],
     '@typescript-eslint/no-confusing-non-null-assertion': 'error',
     '@typescript-eslint/no-duplicate-enum-values': 'error',

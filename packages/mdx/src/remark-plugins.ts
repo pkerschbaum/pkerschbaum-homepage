@@ -17,10 +17,10 @@ export function createCollectHrefsFromJsxElementsPlugin({
 }: CreateCollectHrefsFromJsxElementsPluginArgs) {
   return function collectHrefsFromJsxElementsPlugin() {
     return (tree: Root) => {
-      visit(tree, ['mdxJsxFlowElement', 'mdxJsxTextElement'], (node: any) => {
+      visit(tree, ['mdxJsxFlowElement', 'mdxJsxTextElement'], (node) => {
         let hrefAttribute;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        for (const attribute of node.attributes) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any -- prop "attributes" exist but types do not include that for whatever reason
+        for (const attribute of (node as any).attributes) {
           const parseResult = schema_jsxHrefAttribute.safeParse(attribute);
           if (parseResult.success) {
             hrefAttribute = parseResult.data;
