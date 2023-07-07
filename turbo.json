@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".npmrc", ".nvmrc", "package.json", "pnpm-lock.yaml"],
+  "globalDependencies": [".npmrc", ".nvmrc", "pnpm-lock.yaml"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],

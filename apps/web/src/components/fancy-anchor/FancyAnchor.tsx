@@ -1,7 +1,6 @@
 import { styled } from '@linaria/react';
+import { urlUtils } from '@pkerschbaum/commons-ecma/util/url';
 import type React from 'react';
-
-import { urlUtils } from '@pkerschbaum-homepage/commons-ecma/util/url.util';
 
 import { Classes } from '#pkg/constants-browser.js';
 import { Anchor, AnchorProps } from '#pkg/elements/index.js';

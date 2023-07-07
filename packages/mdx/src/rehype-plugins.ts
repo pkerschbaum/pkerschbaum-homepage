@@ -1,7 +1,6 @@
+import { urlUtils } from '@pkerschbaum/commons-ecma/util/url';
 import type { ElementContent, Root } from 'hast';
 import { visit } from 'unist-util-visit';
-
-import { urlUtils } from '@pkerschbaum-homepage/commons-ecma/util/url.util';
 
 import type { Heading, HeadingLevel } from '#pkg/schema.js';
 

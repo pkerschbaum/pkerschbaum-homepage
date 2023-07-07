@@ -26,7 +26,7 @@
     "lint:fix": "pnpm run lint --fix"
   },
   "dependencies": {
-    "@pkerschbaum-homepage/commons-ecma": "workspace:*",
+    "@pkerschbaum/commons-ecma": "^1.0.0",
     "@pkerschbaum/ts-utils": "^0.0.1",
     "@types/hast": "^2.3.4",
     "@types/mdast": "^3.0.11",

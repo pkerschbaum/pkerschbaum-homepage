@@ -1,7 +1,7 @@
+import { jsonUtil } from '@pkerschbaum/commons-ecma/util/json';
 import fs from 'fs';
 import path from 'path';
 
-import { jsonUtil } from '@pkerschbaum-homepage/commons-ecma/util/json.util';
 import { fetchFaviconsForAllHrefs } from '@pkerschbaum-homepage/fetch-favicon';
 
 import { PATHS } from '#pkg/constants-server.js';
