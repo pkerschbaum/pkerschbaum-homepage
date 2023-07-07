@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type React from 'react';
 
-import { ProjectsPageContent } from '#pkg/app/projects/page-content';
+import { Main } from '#pkg/components/main/index.js';
+import { ProjectsOverview } from '#pkg/components/projects-overview/ProjectsOverview.jsx';
 import { config } from '#pkg/config.js';
 
 const ProjectsPage: React.FC = () => {
@@ -10,7 +11,13 @@ const ProjectsPage: React.FC = () => {
     notFound();
   }
 
-  return <ProjectsPageContent />;
+  return (
+    <Main>
+      <h1>All Projects</h1>
+
+      <ProjectsOverview />
+    </Main>
+  );
 };
 
 export const metadata: Metadata = {
