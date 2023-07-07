@@ -1,6 +1,6 @@
 import { css } from '@linaria/core';
 
-import { Animations } from '#pkg/constants-browser';
+import { Animations, DataAttribute } from '#pkg/constants-browser';
 
 export const CSSReset = css`
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
@@ -184,7 +184,7 @@ export const GlobalAppStyles = css`
       --shadow-style-elevation: 6px 6px 0 0 var(--color-fg);
     }
 
-    *:root[data-theme='dark'] {
+    *:root[${DataAttribute.THEME}='dark'] {
       --color-fg: var(--color-white);
       --color-fg-less-emphasized: var(--color-lightgrey);
       --color-fg-interactive: var(--color-lightteal);
@@ -336,7 +336,7 @@ export const PrismStyles = css`
     }
 
     /* For light theme, use GitHub Light (https://gist.github.com/kyubuns/41ac79a4bfe6f258c5e3f5cf392f5191) */
-    *:root:not([data-theme='dark']) {
+    *:root:not([DataAttribute.THEME='dark']) {
       code,
       code[class*='language-'],
       pre[class*='language-'] {
@@ -383,7 +383,7 @@ export const PrismStyles = css`
     }
 
     /* For dark theme, use Nord (https://github.com/PrismJS/prism-themes/blob/447479fc7b2be2051fe27e561aceed7cc87a589f/themes/prism-nord.css) */
-    *:root[data-theme='dark'] {
+    *:root[DataAttribute.THEME='dark'] {
       code[class*='language-'],
       pre[class*='language-'] {
         color: #f8f8f2;

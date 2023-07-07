@@ -3,16 +3,14 @@ import '#pkg/app/style.linaria.global';
 
 import { styled } from '@linaria/react';
 import { Analytics } from '@vercel/analytics/react';
-import dayjs from 'dayjs';
 import type { Metadata } from 'next';
-import Link from 'next/link.js';
 import type React from 'react';
 
 import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration';
+import { Footer } from '#pkg/components/footer/index.js';
 import { Header } from '#pkg/components/header';
 import { Nav } from '#pkg/components/nav';
 import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor';
-import { SocialMediaLinks } from '#pkg/components/social-media-links';
 import { ToggleThemeButton } from '#pkg/components/toggle-theme-button';
 import { config } from '#pkg/config';
 import {
@@ -190,15 +188,7 @@ export default function RootLayout({ children }: LayoutProps) {
 
             {children}
 
-            <Footer>
-              <SocialMediaLinks />
-
-              <YearAndContact>
-                <span>{dayjs().year()}</span>
-                <span>-</span>
-                <Link href="/">pkerschbaum</Link>
-              </YearAndContact>
-            </Footer>
+            <Footer />
           </RootContainer>
         </div>
 
@@ -250,23 +240,6 @@ const AnchorAndButtonsArea = styled.div`
   display: flex;
   flex-shrink: 0;
   gap: calc(3 * var(--spacing-base));
-`;
-
-const Footer = styled.footer`
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  gap: calc(2 * var(--spacing-base));
-  align-items: center;
-
-  padding-block-start: calc(4 * var(--spacing-base));
-`;
-
-const YearAndContact = styled.div`
-  display: flex;
-  gap: calc(1 * var(--spacing-base));
-  align-items: center;
-  justify-content: center;
 `;
 
 // see https://sreetamdas.com/blog/the-perfect-dark-mode#recap
