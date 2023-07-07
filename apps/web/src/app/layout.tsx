@@ -32,12 +32,6 @@ export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
-
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://twitter.com/pkerschbaum" rel="me" />
         <link
@@ -55,7 +49,6 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
         <meta name="theme-color" content="#ffffff" />
-        <meta property="og:image" content="/favicons/favicon-32x32.png" />
 
         {/* Cascadia Mono Font Faces */}
         <style
@@ -203,7 +196,18 @@ export const metadata: Metadata = {
   viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
   openGraph: {
     type: 'website',
-    images: '/favicons/android-chrome-512x512.png',
+    images: [
+      {
+        url: '/favicons/favicon-32x32.png',
+        height: 32,
+        width: 32,
+      },
+      {
+        url: '/favicons/android-chrome-512x512.png',
+        height: 512,
+        width: 512,
+      },
+    ],
     siteName: config.canonicalTLDPlus1,
     url: '/',
   },
