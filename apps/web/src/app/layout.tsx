@@ -25,7 +25,6 @@ import {
   LocalStorageKey,
   TOC_QUERY,
 } from '#pkg/constants-browser';
-import { ColorThemeProvider } from '#pkg/context/color-theme';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -176,33 +175,31 @@ export default function RootLayout({ children }: LayoutProps) {
         <script dangerouslySetInnerHTML={{ __html: blockingSetDocumentIsScrolled }} />
 
         <div id="__next">
-          <ColorThemeProvider>
-            <EnableAnimationsAfterHydration />
+          <EnableAnimationsAfterHydration />
 
-            <RootContainer>
-              <Header>
-                <Nav />
+          <RootContainer>
+            <Header>
+              <Nav />
 
-                <AnchorAndButtonsArea>
-                  <RssFeedAnchor />
+              <AnchorAndButtonsArea>
+                <RssFeedAnchor />
 
-                  <ToggleThemeButton />
-                </AnchorAndButtonsArea>
-              </Header>
+                <ToggleThemeButton />
+              </AnchorAndButtonsArea>
+            </Header>
 
-              {children}
+            {children}
 
-              <Footer>
-                <SocialMediaLinks />
+            <Footer>
+              <SocialMediaLinks />
 
-                <YearAndContact>
-                  <span>{dayjs().year()}</span>
-                  <span>-</span>
-                  <Link href="/">pkerschbaum</Link>
-                </YearAndContact>
-              </Footer>
-            </RootContainer>
-          </ColorThemeProvider>
+              <YearAndContact>
+                <span>{dayjs().year()}</span>
+                <span>-</span>
+                <Link href="/">pkerschbaum</Link>
+              </YearAndContact>
+            </Footer>
+          </RootContainer>
         </div>
 
         <Analytics />

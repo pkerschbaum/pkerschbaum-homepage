@@ -3,13 +3,10 @@ import { styled } from '@linaria/react';
 import type React from 'react';
 import { Moon, Sun } from 'react-feather';
 
-import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
-import { useColorTheme } from '#pkg/context/color-theme.jsx';
+import { Classes, ColorTheme, DataAttribute, LocalStorageKey } from '#pkg/constants-browser.js';
 import { IconButton } from '#pkg/elements/index.js';
 
 export const ToggleThemeButton: React.FC = () => {
-  const { toggleColorTheme } = useColorTheme();
-
   return (
     <ToggleThemeIconButton onClick={toggleColorTheme} className={Classes.JS_REQUIRED}>
       <AnimatedMoon aria-label="Switch to dark mode" />
@@ -17,6 +14,24 @@ export const ToggleThemeButton: React.FC = () => {
     </ToggleThemeIconButton>
   );
 };
+
+function toggleColorTheme() {
+  const activeColorTheme =
+    document.documentElement.getAttribute(DataAttribute.THEME) === ColorTheme.DARK
+      ? ColorTheme.DARK
+      : ColorTheme.LIGHT;
+  const newTheme = activeColorTheme === ColorTheme.LIGHT ? ColorTheme.DARK : ColorTheme.LIGHT;
+
+  // Set theme as data-attribute to apply new CSS Variables
+  if (newTheme === 'dark') {
+    document.documentElement.setAttribute(DataAttribute.THEME, ColorTheme.DARK);
+  } else {
+    document.documentElement.removeAttribute(DataAttribute.THEME);
+  }
+
+  // Persist theme
+  localStorage.setItem(LocalStorageKey.THEME, newTheme);
+}
 
 const ToggleThemeIconButton = styled(IconButton)`
   --transition-duration: 500ms;
