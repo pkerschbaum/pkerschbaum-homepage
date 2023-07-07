@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { assertIsUnreachable } from '@pkerschbaum/ts-utils';
+import { assertIsUnreachable } from '@pkerschbaum/commons-ecma/util/assert';
 import dayjs from 'dayjs';
 import type React from 'react';
 import sanitizeHTML from 'sanitize-html';

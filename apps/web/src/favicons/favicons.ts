@@ -1,6 +1,5 @@
+import { schema_faviconsForWebsites } from '@pkerschbaum/fetch-favicon';
 import fs from 'fs';
-
-import { schema_faviconsForWebsites } from '@pkerschbaum-homepage/shared-node/schema';
 
 import { PATHS } from '#pkg/constants-server.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';

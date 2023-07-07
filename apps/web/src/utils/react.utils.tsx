@@ -1,4 +1,3 @@
-import { numbers } from '@pkerschbaum/ts-utils';
 import React from 'react';
 import * as ReactIs from 'react-is';
 
@@ -48,7 +47,7 @@ function getNodeText(node: React.ReactNode): string {
     return node;
   }
   if (typeof node === 'number') {
-    return numbers.toString(node);
+    return `${node}`;
   }
   if (Array.isArray(node)) {
     return node.map((node) => getNodeText(node as React.ReactNode)).join('');

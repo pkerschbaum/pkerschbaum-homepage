@@ -1,6 +1,6 @@
 'use client';
 import { styled } from '@linaria/react';
-import { check } from '@pkerschbaum/ts-utils';
+import { check } from '@pkerschbaum/commons-ecma/util/assert';
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';

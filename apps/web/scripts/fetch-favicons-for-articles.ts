@@ -1,8 +1,10 @@
+import { arrays } from '@pkerschbaum/commons-ecma/util/arrays';
 import { jsonUtil } from '@pkerschbaum/commons-ecma/util/json';
+import { fetchFavicons } from '@pkerschbaum/fetch-favicon';
 import fs from 'fs';
 import path from 'path';
 
-import { fetchFaviconsForAllHrefs } from '@pkerschbaum-homepage/fetch-favicon';
+import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 
 import { PATHS } from '#pkg/constants-server.js';
 
@@ -19,7 +21,17 @@ async function fetchFaviconsForAllHrefsAndWriteToFile() {
     .map((basename) => path.join(PATHS.TIDBITS, basename));
   const filesWithAbsolutePaths = [...postsWithAbsolutePaths, ...tidbitsWithAbsolutePaths];
 
-  const finalResult = await fetchFaviconsForAllHrefs(filesWithAbsolutePaths);
+  // Collect all hrefs of all posts (with duplicates removed)
+  let hrefsOfAllPosts: string[] = [];
+  await Promise.all(
+    filesWithAbsolutePaths.map(async (fileAbsolutePath) => {
+      const { collectedHrefs } = await parseMDXFileAndCollectHrefs(fileAbsolutePath);
+      hrefsOfAllPosts.push(...collectedHrefs);
+    }),
+  );
+  hrefsOfAllPosts = arrays.uniqueValues(hrefsOfAllPosts);
+
+  const finalResult = await fetchFavicons(hrefsOfAllPosts);
   await fs.promises.writeFile(
     PATHS.FAVICONS_FOR_WEBSITES,
     jsonUtil.safeStringify(finalResult, undefined, 2),

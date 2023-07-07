@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { arrays } from '@pkerschbaum/ts-utils';
+import { arrays } from '@pkerschbaum/commons-ecma/util/arrays';
 import dayjs from 'dayjs';
 import type React from 'react';
 

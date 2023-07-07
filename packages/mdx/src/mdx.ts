@@ -1,4 +1,4 @@
-import type { ArrayElement } from '@pkerschbaum/ts-utils';
+import type { ArrayElement } from '@pkerschbaum/commons-ecma/util/types';
 import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'node:fs';
 // @ts-expect-error -- it seems like typings of "rehype-prism-plus" are broken if TS is configured with "module": "node16" (ESM modules)
