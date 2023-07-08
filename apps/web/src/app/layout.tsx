@@ -90,7 +90,7 @@ export default function RootLayout({ children }: LayoutProps) {
           defer
           data-domain={config.canonicalTLDPlus1}
           data-api="/p.io/api/event"
-          src="/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js"
+          src="/p.io/js/script.js"
         />
 
         {/* 

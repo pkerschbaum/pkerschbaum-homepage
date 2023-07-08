@@ -33,7 +33,7 @@ let nextConfig = {
      */
     return [
       {
-        source: '/p.io/js/script.hash.outbound-links.file-downloads.exclusions.js',
+        source: '/p.io/js/script.js',
         destination: 'https://analytics.pkerschbaum.com/js/script.js',
       },
       {
