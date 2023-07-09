@@ -27,11 +27,10 @@ export const ArticleTile: React.FC<ArticleTileProps> = ({ article, href }) => (
 );
 
 const ArticleTileContent = styled(TileContent)`
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
 `;
 
 const TagsArea = styled.ul`

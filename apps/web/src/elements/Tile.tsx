@@ -20,7 +20,7 @@ export const Tile = styled.article`
   border-radius: 12px;
   box-shadow: var(--shadow-style);
 
-  transition: box-shadow 0.3s ease, border 0.3s ease, background 200ms;
+  transition: box-shadow 0.3s ease, background 200ms;
   will-change: transition;
 
   &:hover {

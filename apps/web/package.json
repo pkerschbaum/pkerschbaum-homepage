@@ -19,8 +19,8 @@
     "lint": "pnpm run lint:eslint && pnpm run lint:css",
     "lint:eslint": "pnpm run lint:file .",
     "lint:file": "eslint --max-warnings 0",
-    "lint:fix": "pnpm run lint:file . --fix",
-    "lint:css": "stylelint \"./src/**/*.(css|ts|tsx)\""
+    "lint:fix": "pnpm run lint:file . --fix && pnpm run lint:css --fix",
+    "lint:css": "stylelint \"./src/**/*.(css|ts|cts|mts|tsx|ctsx|mtsx)\" \"!./src/app/blog/*/styles.module.css\" \"!./src/app/tidbits/*/styles.module.css\""
   },
   "dependencies": {
     "@fontsource/rubik": "^4.5.14",
@@ -77,10 +77,10 @@
     "postcss": "^8.4.24",
     "postcss-styled-syntax": "^0.4.0",
     "prettier": "2.8.4",
-    "stylelint": "^15.7.0",
-    "stylelint-config-recess-order": "^3.1.0",
-    "stylelint-config-standard": "^33.0.0",
-    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint": "^15.10.1",
+    "stylelint-config-recess-order": "^4.2.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^10.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "typescript": "^4.9.5",
     "typescript-transform-paths": "^3.4.6"

@@ -35,6 +35,7 @@ const ArticlesListContainer = styled.div`
   grid-column-gap: calc(3 * var(--spacing-base));
   align-items: stretch;
 
+  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${QUERIES.tabletAndUp} {
     grid-template-columns: 1fr 1fr;
   }

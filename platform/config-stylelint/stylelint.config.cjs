@@ -5,7 +5,6 @@ module.exports = {
     'stylelint-config-styled-components',
     'stylelint-config-recess-order',
   ],
-  customSyntax: 'postcss-styled-syntax',
   rules: {
     'comment-empty-line-before': null,
     'custom-property-empty-line-before': null,
@@ -15,4 +14,10 @@ module.exports = {
     'rule-empty-line-before': null,
     'selector-id-pattern': null,
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.cts', '*.mts', '*.tsx', '*.ctsx', '*.mtsx'],
+      customSyntax: 'postcss-styled-syntax',
+    },
+  ],
 };

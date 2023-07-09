@@ -13,33 +13,35 @@ export const ArticleContainer = styled.div`
 `;
 
 export const TocAndArticle = styled.div`
+  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${TOC_QUERY} {
     grid-template-areas: 'article toc';
     grid-template-columns: 1fr 250px;
     column-gap: calc(6 * var(--spacing-base));
   }
+  display: grid;
+  grid-template-areas: 'article';
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
 
   margin-block-start: 85px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'article';
 `;
 
 export const TocAside = styled.aside`
+  /* stylelint-disable-next-line media-query-no-invalid */
   @media ${TOC_QUERY} {
     display: block;
   }
-
-  /* some margin for visual alignment */
-  margin-block-start: 5px;
-
-  display: none;
   position: sticky;
   /* some "top" spacing because of the fixed positioned header */
   top: 85px;
+
+  display: none;
   grid-area: toc;
   height: max-content;
+
+  /* some margin for visual alignment */
+  margin-block-start: 5px;
 `;
 
 export const Article = styled.article`

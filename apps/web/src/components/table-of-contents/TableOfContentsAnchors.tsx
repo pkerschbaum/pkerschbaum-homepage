@@ -164,6 +164,6 @@ export const TableOfContentsAnchors: React.FC<TableOfContentsAnchorsProps> = ({ 
 };
 
 const TocAnchor = styled(Anchor)`
-  text-decoration: none;
   font-size: var(--font-size-sm);
+  text-decoration: none;
 `;

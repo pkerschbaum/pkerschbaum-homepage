@@ -21,8 +21,8 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ headings }) =>
 const TocNav = styled.nav`
   display: flex;
   flex-direction: column;
-  align-items: start;
   gap: calc(2 * var(--spacing-base));
+  align-items: start;
 `;
 
 const TocHeading = styled.h2`
