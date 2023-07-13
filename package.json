@@ -2,7 +2,6 @@
   "name": "pkerschbaum-homepage",
   "private": true,
   "scripts": {
-    "preinstall": "npx -y --prefer-online only-allow pnpm",
     "prepare": "husky install",
     "nuke": "pnpm --parallel run nuke && pnpm run nuke:artifacts && pnpm run nuke:compute-cache && pnpm run nuke:node-modules",
     "nuke:artifacts": "pnpm --parallel run nuke:artifacts",
@@ -23,7 +22,8 @@
   },
   "packageManager": "pnpm@8.1.1",
   "engines": {
-    "pnpm": "8.1.1"
+    "pnpm": "8.1.1",
+    "npm": "0.0.0"
   },
   "pnpm": {
     "patchedDependencies": {
