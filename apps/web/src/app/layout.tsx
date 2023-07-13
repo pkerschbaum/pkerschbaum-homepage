@@ -1,4 +1,4 @@
-import '@fontsource/rubik/variable.css';
+import '@fontsource-variable/rubik';
 import '#pkg/app/style.linaria.global';
 
 import { styled } from '@linaria/react';

@@ -27,9 +27,9 @@ importers:
 
   apps/web:
     dependencies:
-      '@fontsource/rubik':
-        specifier: ^4.5.14
-        version: 4.5.14
+      '@fontsource-variable/rubik':
+        specifier: ^5.0.7
+        version: 5.0.7
       '@linaria/babel-preset':
         specifier: ^4.4.5
         version: 4.4.5
@@ -1639,8 +1639,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@fontsource/rubik@4.5.14:
-    resolution: {integrity: sha512-EvMK3kkeAgKkk8qAeT4PjpyAYyu72pIlJm+SXJ5vR/xhCX2yj2xoq3+YS38rPmPcCAnrAVONoQ3ezLxVm6jhBA==}
+  /@fontsource-variable/rubik@5.0.7:
+    resolution: {integrity: sha512-vxJfk+iQg0ojkx0r/3lYdr+bfYod+mOuyREapIIz1mxrOmC1ghG76wwQmuhvM0BKsvqbPDECy+GlHhta3mfljw==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:

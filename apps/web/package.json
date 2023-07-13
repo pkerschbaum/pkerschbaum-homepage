@@ -23,7 +23,7 @@
     "lint:css": "stylelint \"./src/**/*.(css|ts|cts|mts|tsx|ctsx|mtsx)\" \"!./src/app/blog/*/styles.module.css\" \"!./src/app/tidbits/*/styles.module.css\""
   },
   "dependencies": {
-    "@fontsource/rubik": "^4.5.14",
+    "@fontsource-variable/rubik": "^5.0.7",
     "@linaria/babel-preset": "^4.4.5",
     "@linaria/core": "^4.2.10",
     "@linaria/react": "^4.3.8",

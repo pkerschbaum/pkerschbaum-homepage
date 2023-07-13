@@ -10,7 +10,7 @@ type IconProps = {
 };
 
 /**
- * Taken and adapted from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acookie%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024.
+ * Taken and adapted from https://fonts.google.com/icons?selected=Material+Symbols+Outlined:cookie:FILL@0;wght@400;GRAD@0;opsz@24
  * Changes:
  * - Added "viewBox" so that the icon fills its SVG bounding client rect completely without whitespace,
  *   and to make the icon resizable.
@@ -28,7 +28,7 @@ const MDCookie: React.FC<IconProps> = ({ size = 24 }) => {
 };
 
 /**
- * Taken and adapted from  * Taken and adapted from https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acookie%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024.
+ * Taken and adapted from https://fonts.google.com/icons?selected=Material+Symbols+Outlined:cookie:FILL@0;wght@400;GRAD@0;opsz@24
  * Changes:
  * - Added "viewBox" so that the icon fills its SVG bounding client rect completely without whitespace,
  *   and to make the icon resizable.
