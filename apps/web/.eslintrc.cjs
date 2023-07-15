@@ -47,6 +47,7 @@ module.exports = {
   ignorePatterns: [
     ...(baseEslintConfig.ignorePatterns ?? []),
     ...(nextEslintConfig.ignorePatterns ?? []),
+    'linaria.config.cjs',
     'next-sitemap.cjs',
     'stylelint.config.cjs',
     'dist-tsc/**',
