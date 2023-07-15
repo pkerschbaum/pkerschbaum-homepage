@@ -3,7 +3,11 @@ import matter from 'gray-matter';
 import type { Metadata } from 'next';
 import path from 'path';
 
-import { MDXFile, MDXParseResult, schema_frontmatterData } from '@pkerschbaum-homepage/mdx/schema';
+import {
+  type MDXFile,
+  type MDXParseResult,
+  schema_frontmatterData,
+} from '@pkerschbaum-homepage/mdx/schema';
 
 export { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 export type { MDXParseResult } from '@pkerschbaum-homepage/mdx/schema';

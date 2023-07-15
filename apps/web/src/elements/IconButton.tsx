@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react';
 
-import { Button, ButtonProps } from '#pkg/elements/Button.jsx';
+import { Button, type ButtonProps } from '#pkg/elements/Button.jsx';
 
 export type IconButtonProps = ButtonProps;
 

@@ -3,7 +3,7 @@ import type React from 'react';
 import { GitHub, Linkedin, Twitter } from 'react-feather';
 
 import { config } from '#pkg/config.js';
-import { Anchor, AnchorProps } from '#pkg/elements/index.js';
+import { Anchor, type AnchorProps } from '#pkg/elements/index.js';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>

@@ -3,7 +3,7 @@ import { urlUtils } from '@pkerschbaum/commons-ecma/util/url';
 import type React from 'react';
 
 import { Classes } from '#pkg/constants-browser.js';
-import { Anchor, AnchorProps } from '#pkg/elements/index.js';
+import { Anchor, type AnchorProps } from '#pkg/elements/index.js';
 
 const MAX_TEXT_LENGTH_TO_BREAK_ICON_WITH_TEXT = 15;
 

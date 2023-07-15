@@ -7,7 +7,7 @@ import rehypePrismGenerator from 'rehype-prism-plus/generator';
 import { refractor } from '#pkg/prism/refractor.js';
 import { createCollectAndAugmentHeadingsPlugin } from '#pkg/rehype-plugins.js';
 import { createCollectHrefsFromJsxElementsPlugin } from '#pkg/remark-plugins.js';
-import { Heading, MDXParseResult, schema_frontmatterData } from '#pkg/schema.js';
+import { type Heading, type MDXParseResult, schema_frontmatterData } from '#pkg/schema.js';
 
 type BundlerRehypePlugin = ArrayElement<
   Exclude<

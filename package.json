@@ -16,9 +16,9 @@
   "devDependencies": {
     "del-cli": "^5.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
-    "turbo": "^1.9.4"
+    "turbo": "^1.10.7"
   },
   "packageManager": "pnpm@8.1.1",
   "engines": {
@@ -28,6 +28,14 @@
   "pnpm": {
     "patchedDependencies": {
       "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch"
+    },
+    "updateConfig": {
+      "ignoreDependencies": [
+        "next-mdx-remote",
+        "prettier",
+        "ts-patch",
+        "typescript"
+      ]
     }
   }
 }

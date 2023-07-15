@@ -6,9 +6,9 @@ import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import invariant from 'tiny-invariant';
 
-import { FancyAnchor, FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
+import { FancyAnchor, type FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
 import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
-import { Anchor, AnchorProps, Button } from '#pkg/elements/index.js';
+import { Anchor, type AnchorProps, Button } from '#pkg/elements/index.js';
 import { reactUtils } from '#pkg/utils/react.utils';
 
 export type MDXViewerProps = {

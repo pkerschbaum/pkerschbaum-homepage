@@ -1,4 +1,4 @@
-import { Author, Feed } from 'feed';
+import { type Author, Feed } from 'feed';
 import fs from 'fs';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
