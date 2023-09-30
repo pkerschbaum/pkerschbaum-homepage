@@ -15,7 +15,6 @@
     }
   },
   "scripts": {
-    "prepare": "ts-patch install -s",
     "internal:compile": "tsc -p ./tsconfig.project.json",
     "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
     "nuke:artifacts": "del-cli dist *.tsbuildinfo",
@@ -26,7 +25,7 @@
     "lint:fix": "pnpm run lint --fix"
   },
   "dependencies": {
-    "@pkerschbaum/commons-ecma": "^1.0.0",
+    "@pkerschbaum/commons-ecma": "^2.1.1",
     "@types/hast": "^3.0.0",
     "@types/mdast": "^4.0.0",
     "next-mdx-remote": "4.3.0",
@@ -53,8 +52,7 @@
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-regexp": "^1.15.0",
     "eslint-plugin-unicorn": "^48.0.0",
-    "ts-patch": "^2.1.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.2.2",
     "typescript-transform-paths": "^3.4.6"
   }
 }

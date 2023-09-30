@@ -27,14 +27,13 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch"
+      "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch",
+      "typescript@5.2.2": "patches/typescript@5.2.2.patch"
     },
     "updateConfig": {
       "ignoreDependencies": [
         "next-mdx-remote",
-        "prettier",
-        "ts-patch",
-        "typescript"
+        "prettier"
       ]
     }
   }

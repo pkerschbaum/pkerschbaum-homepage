@@ -28,8 +28,8 @@
     "@linaria/core": "^4.5.1",
     "@linaria/react": "^4.5.1",
     "@pkerschbaum-homepage/mdx": "workspace:*",
-    "@pkerschbaum/commons-ecma": "^1.0.0",
-    "@pkerschbaum/fetch-favicon": "^1.0.3",
+    "@pkerschbaum/commons-ecma": "^2.1.1",
+    "@pkerschbaum/fetch-favicon": "^1.0.6",
     "@types/mdast": "^4.0.0",
     "dayjs": "^1.11.9",
     "feed": "^4.2.2",
@@ -82,7 +82,7 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "typescript": "^4.9.5",
+    "typescript": "^5.2.2",
     "typescript-transform-paths": "^3.4.6"
   },
   "dependenciesMeta": {

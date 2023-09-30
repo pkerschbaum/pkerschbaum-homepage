@@ -1,0 +1,19 @@
+{
+  "extends": "@pkerschbaum-homepage/config-typescript/tsconfig.json",
+  "compilerOptions": {
+    /* Modules */
+    "module": "node16",
+    "paths": {
+      "#pkg/*": ["./src/*"]
+    },
+    "rootDir": "./src",
+    "types": ["node"],
+
+    /* Emit */
+    "noEmit": true,
+
+    /* JavaScript Support */
+    "checkJs": true
+  },
+  "include": ["src/**/*"]
+}
