@@ -46,11 +46,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/mdx
       '@pkerschbaum/commons-ecma':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^2.1.2
+        version: 2.1.2
       '@pkerschbaum/fetch-favicon':
-        specifier: ^1.0.6
-        version: 1.0.6(playwright@1.36.1)
+        specifier: ^1.0.7
+        version: 1.0.7(playwright@1.36.1)
       '@types/mdast':
         specifier: ^4.0.0
         version: 4.0.0
@@ -215,8 +215,8 @@ importers:
   packages/mdx:
     dependencies:
       '@pkerschbaum/commons-ecma':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^2.1.2
+        version: 2.1.2
       '@types/hast':
         specifier: ^3.0.0
         version: 3.0.0
@@ -306,11 +306,11 @@ importers:
   platform/pkg-management:
     dependencies:
       '@pkerschbaum/commons-ecma':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^2.1.2
+        version: 2.1.2
       '@pkerschbaum/commons-node':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: ^2.1.2
+        version: 2.1.2
       '@pnpm/find-workspace-dir':
         specifier: ^6.0.2
         version: 6.0.2
@@ -1966,26 +1966,26 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@pkerschbaum/commons-ecma@2.1.1:
-    resolution: {integrity: sha512-rvbPo3wUIBQIb/Jy416kJuErEzSwuZuLoXWctdkEgglu6VkI4QL/nEf+rLOWz2//l5fFlwW9z1+8nrCxIHGIlw==}
+  /@pkerschbaum/commons-ecma@2.1.2:
+    resolution: {integrity: sha512-rLGz+czCbQRr8F+pbf5AHi1S3HijtekSMwYepxayUu6z/0/ZQt4GEo4fi6MuMmT+5MX5OJTYp4A76MJShzNe0w==}
     dependencies:
       safe-stable-stringify: 2.4.3
       tiny-invariant: 1.3.1
     dev: false
 
-  /@pkerschbaum/commons-node@2.1.1:
-    resolution: {integrity: sha512-rKUOb1H6XFevCCISw6yccxCYa+daTcf6fVfflDyBwCEqpOybVV0no27gOhZIZYrv7dJgGNT5kG/XxieRS+s/gQ==}
+  /@pkerschbaum/commons-node@2.1.2:
+    resolution: {integrity: sha512-RRnwJm5ErA8QWJZ91stMdCi3EcL7KmrMMJT/W632PiwWbGdFsklWls5vmDHuqVTgLgdTBZP/4BMhTqZAOI3tKg==}
     dependencies:
-      '@pkerschbaum/commons-ecma': 2.1.1
+      '@pkerschbaum/commons-ecma': 2.1.2
     dev: false
 
-  /@pkerschbaum/fetch-favicon@1.0.6(playwright@1.36.1):
-    resolution: {integrity: sha512-MYuT9goOL/qQZrwFuO/FTfffXpeqARPLpNTptkKit7rQy8FHei1sOY9rNQ8pNMLhi4Ii2+eDkhJqVVy0++YkZw==}
+  /@pkerschbaum/fetch-favicon@1.0.7(playwright@1.36.1):
+    resolution: {integrity: sha512-ak0V7xX+EptOPcmuwJMcqHE1wcxj0rXVJ+Pm3m3x7zt+d3jbPf/n38Z0ho9OJ71sw3BClesqiw8WGGqoRc9N7w==}
     peerDependencies:
       playwright: ^1.35.0
     dependencies:
-      '@pkerschbaum/commons-ecma': 2.1.1
-      '@pkerschbaum/commons-node': 2.1.1
+      '@pkerschbaum/commons-ecma': 2.1.2
+      '@pkerschbaum/commons-node': 2.1.2
       playwright: 1.36.1
       tiny-invariant: 1.3.1
       zod: 3.22.2
