@@ -11,7 +11,8 @@
     "lint:fix": "turbo lint:fix",
     "format": "prettier --write --ignore-unknown .",
     "build": "turbo build",
-    "dev": "pnpm --parallel --filter=\"./packages/*\" run dev"
+    "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
+    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2"
   },
   "devDependencies": {
     "del-cli": "^5.0.0",
