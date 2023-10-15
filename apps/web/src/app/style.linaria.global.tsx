@@ -266,7 +266,7 @@ export const GlobalAppStyles = css`
 
     code {
       /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
-      font-family: CascadiaMonoVariable, 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
+      font-family: var(--font-family-monospace), 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
         'Liberation Mono', Monaco, 'Lucida Console', monospace;
       font-size: var(--font-size-sm);
     }

@@ -4,6 +4,7 @@ import '#pkg/app/style.linaria.global';
 import { styled } from '@linaria/react';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 import type React from 'react';
 
 import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration';
@@ -24,13 +25,30 @@ import {
   TOC_QUERY,
 } from '#pkg/constants-browser';
 
+const fontMonospace = localFont({
+  src: [
+    {
+      path: '../assets/fonts/CascadiaMono.woff2',
+      style: 'normal',
+      weight: '200 700',
+    },
+    {
+      path: '../assets/fonts/CascadiaMonoItalic.woff2',
+      style: 'italic',
+      weight: '200 700',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-family-monospace',
+});
+
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" className={fontMonospace.variable}>
       <head>
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://twitter.com/pkerschbaum" rel="me" />
@@ -49,28 +67,6 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
         <meta name="theme-color" content="#ffffff" />
-
-        {/* Cascadia Mono Font Faces */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-                @font-face {
-                  font-family: 'CascadiaMonoVariable';
-                  font-style: normal;
-                  font-display: swap;
-                  font-weight: 200 700;
-                  src: url(/fonts/CascadiaMono.woff2) format('woff2');
-                }
-                @font-face {
-                  font-family: 'CascadiaMonoVariable';
-                  font-style: italic;
-                  font-display: swap;
-                  font-weight: 200 700;
-                  src: url(/fonts/CascadiaMonoItalic.woff2) format('woff2');
-                }
-              `,
-          }}
-        />
 
         {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
         <noscript>
