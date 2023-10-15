@@ -106,7 +106,7 @@ export const TableOfContentsAnchors: React.FC<TableOfContentsAnchorsProps> = ({ 
           );
           const $lastHeadingAboveTheFold = $headingsAboveTheFold.at(-1);
 
-          if ($lastHeadingAboveTheFold || $firstHeadingInViewport) {
+          if ($lastHeadingAboveTheFold ?? $firstHeadingInViewport) {
             setHeadingsAboveTheFold({
               idOfLastHeadingAboveTheFold: $lastHeadingAboveTheFold?.id,
               idOfFirstHeadingInViewport: $firstHeadingInViewport?.id,

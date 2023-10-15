@@ -23,7 +23,7 @@ function toggleColorTheme() {
   const newTheme = activeColorTheme === ColorTheme.LIGHT ? ColorTheme.DARK : ColorTheme.LIGHT;
 
   // Set theme as data-attribute to apply new CSS Variables
-  if (newTheme === 'dark') {
+  if (newTheme === ColorTheme.DARK) {
     document.documentElement.setAttribute(DataAttribute.THEME, ColorTheme.DARK);
   } else {
     document.documentElement.removeAttribute(DataAttribute.THEME);

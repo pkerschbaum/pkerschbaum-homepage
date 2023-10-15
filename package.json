@@ -15,15 +15,15 @@
     "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2"
   },
   "devDependencies": {
-    "del-cli": "^5.0.0",
+    "del-cli": "^5.1.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^15.0.1",
     "prettier": "^2.8.8",
-    "turbo": "^1.10.7"
+    "turbo": "^1.10.15"
   },
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.9.0",
   "engines": {
-    "pnpm": "8.1.1",
+    "pnpm": "8.9.0",
     "npm": "0.0.0"
   },
   "pnpm": {

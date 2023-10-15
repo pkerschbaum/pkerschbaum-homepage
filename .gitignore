@@ -37,3 +37,4 @@
 
 # turbo cache
 */**/.turbo
+/.turbo/cookies
