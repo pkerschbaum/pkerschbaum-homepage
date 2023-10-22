@@ -15,6 +15,9 @@
     "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2"
   },
   "devDependencies": {
+    "@pkerschbaum-homepage/config-eslint": "workspace:*",
+    "@pkerschbaum-homepage/config-stylelint": "workspace:*",
+    "@pkerschbaum-homepage/config-typescript": "workspace:*",
     "del-cli": "^5.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.1",

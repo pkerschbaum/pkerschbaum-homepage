@@ -42,7 +42,7 @@ module.exports = {
   extends: [
     ...(baseEslintConfig.extends ?? []),
     ...(nextEslintConfig.extends ?? []),
-    './node_modules/@pkerschbaum-homepage/config-eslint/eslint-config-next-core-web-vitals-fixed.cjs',
+    '../../node_modules/@pkerschbaum-homepage/config-eslint/eslint-config-next-core-web-vitals-fixed.cjs',
   ],
   ignorePatterns: [
     ...(baseEslintConfig.ignorePatterns ?? []),

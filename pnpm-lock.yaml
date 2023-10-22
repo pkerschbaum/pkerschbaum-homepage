@@ -16,6 +16,15 @@ importers:
 
   .:
     devDependencies:
+      '@pkerschbaum-homepage/config-eslint':
+        specifier: workspace:*
+        version: link:platform/config-eslint
+      '@pkerschbaum-homepage/config-stylelint':
+        specifier: workspace:*
+        version: link:platform/config-stylelint
+      '@pkerschbaum-homepage/config-typescript':
+        specifier: workspace:*
+        version: link:platform/config-typescript
       del-cli:
         specifier: ^5.1.0
         version: 5.1.0
@@ -113,15 +122,6 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^13.5.4
         version: 13.5.4
-      '@pkerschbaum-homepage/config-eslint':
-        specifier: workspace:*
-        version: file:platform/config-eslint(eslint-config-next@13.5.4)
-      '@pkerschbaum-homepage/config-stylelint':
-        specifier: workspace:*
-        version: link:../../platform/config-stylelint
-      '@pkerschbaum-homepage/config-typescript':
-        specifier: workspace:*
-        version: link:../../platform/config-typescript
       '@types/node':
         specifier: ^18
         version: 18.18.5
@@ -215,9 +215,6 @@ importers:
       typescript-transform-paths:
         specifier: ^3.4.6
         version: 3.4.6(typescript@5.2.2)
-    dependenciesMeta:
-      '@pkerschbaum-homepage/config-eslint':
-        injected: true
 
   packages/mdx:
     dependencies:
@@ -255,12 +252,6 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
-      '@pkerschbaum-homepage/config-eslint':
-        specifier: workspace:*
-        version: link:../../platform/config-eslint
-      '@pkerschbaum-homepage/config-typescript':
-        specifier: workspace:*
-        version: link:../../platform/config-typescript
       '@types/node':
         specifier: ^20.8.6
         version: 20.8.6
@@ -7238,16 +7229,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
-
-  file:platform/config-eslint(eslint-config-next@13.5.4):
-    resolution: {directory: platform/config-eslint, type: directory}
-    id: file:platform/config-eslint
-    name: '@pkerschbaum-homepage/config-eslint'
-    peerDependencies:
-      eslint-config-next: ^13
-    peerDependenciesMeta:
-      eslint-config-next:
-        optional: true
-    dependencies:
-      eslint-config-next: 13.5.4(eslint@8.51.0)(typescript@5.2.2)
-    dev: true
