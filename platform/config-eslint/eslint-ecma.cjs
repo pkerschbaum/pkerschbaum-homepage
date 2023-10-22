@@ -14,7 +14,7 @@ module.exports = {
      */
     'only-warn',
     '@typescript-eslint/eslint-plugin',
-    'node',
+    'n',
     'regexp',
     'code-import-patterns',
   ],
@@ -26,7 +26,7 @@ module.exports = {
     'plugin:regexp/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'plugin:node/recommended',
+    'plugin:n/recommended',
     'plugin:unicorn/recommended',
     'plugin:eslint-comments/recommended',
     'prettier',
@@ -99,23 +99,23 @@ module.exports = {
         ],
       },
     ],
-    'node/handle-callback-err': 'error',
-    'node/no-callback-literal': 'error',
-    // disable "node/no-extraneous-import" --> thanks to "isolated mode" of node_modules of pnpm and "public-hoist-pattern" being disabled of this monorepo, there is no possibilty for extraneous imports
-    'node/no-extraneous-import': 'off',
-    // disable "node/no-missing-import" --> covered by TypeScript
-    'node/no-missing-import': 'off',
-    'node/no-process-env': 'error',
-    'node/no-sync': 'error',
-    // disable "node/no-unpublished-import" and "node/no-unpublished-require" --> wrong positive for "@vercel/analytics" for whatever reason
-    'node/no-unpublished-import': 'off',
-    'node/no-unpublished-require': 'off',
-    // disable "node/no-unsupported-features/es-syntax" --> covered by TypeScript
-    'node/no-unsupported-features/es-syntax': 'off',
-    // disable "node/no-unsupported-features/es-builtins" --> covered by TypeScript
-    'node/no-unsupported-features/es-builtins': 'off',
-    // disable "node/no-unsupported-features/node-builtins" --> covered by TypeScript
-    'node/no-unsupported-features/node-builtins': 'off',
+    'n/handle-callback-err': 'error',
+    'n/no-callback-literal': 'error',
+    // disable "n/no-extraneous-import" --> thanks to "isolated mode" of node_modules of pnpm and "public-hoist-pattern" being disabled of this monorepo, there is no possibilty for extraneous imports
+    'n/no-extraneous-import': 'off',
+    // disable "n/no-missing-import" --> covered by TypeScript
+    'n/no-missing-import': 'off',
+    'n/no-process-env': 'error',
+    'n/no-sync': 'error',
+    // disable "n/no-unpublished-import" and "n/no-unpublished-require" --> wrong positive for "@vercel/analytics" for whatever reason
+    'n/no-unpublished-import': 'off',
+    'n/no-unpublished-require': 'off',
+    // disable "n/no-unsupported-features/es-syntax" --> covered by TypeScript
+    'n/no-unsupported-features/es-syntax': 'off',
+    // disable "n/no-unsupported-features/es-builtins" --> covered by TypeScript
+    'n/no-unsupported-features/es-builtins': 'off',
+    // disable "n/no-unsupported-features/node-builtins" --> covered by TypeScript
+    'n/no-unsupported-features/node-builtins': 'off',
     'unicorn/filename-case': 'off',
     'unicorn/no-negated-condition': 'off',
     'unicorn/no-null': 'off',

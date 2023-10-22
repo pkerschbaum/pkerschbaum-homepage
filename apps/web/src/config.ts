@@ -1,4 +1,4 @@
-/* eslint-disable node/no-process-env -- config.ts is the only place where reading from process.env is allowed */
+/* eslint-disable n/no-process-env -- config.ts is the only place where reading from process.env is allowed */
 
 let deploymentOrigin;
 if (typeof window !== 'undefined') {
