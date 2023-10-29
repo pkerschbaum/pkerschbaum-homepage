@@ -6,9 +6,6 @@
  */
 import { spawn } from 'node:child_process';
 import { argv } from 'node:process';
-import url from 'node:url';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const [_execPath, _jsFilePath, ...commandLineArguments] = argv;
 

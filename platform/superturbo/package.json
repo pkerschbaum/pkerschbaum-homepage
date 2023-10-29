@@ -17,7 +17,7 @@
     "nuke:artifacts": "del-cli --dot=true *.tsbuildinfo"
   },
   "devDependencies": {
-    "@types/node": "^20.8.7",
+    "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.52.0",
