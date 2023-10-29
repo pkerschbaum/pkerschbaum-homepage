@@ -2,17 +2,17 @@
   "name": "pkerschbaum-homepage",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "build": "superturbo build",
+    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2",
+    "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
+    "format": "prettier --write --ignore-unknown .",
+    "lint": "superturbo lint",
+    "lint:fix": "superturbo lint:fix",
     "nuke": "pnpm --parallel run nuke && pnpm run nuke:artifacts && pnpm run nuke:compute-cache && pnpm run nuke:node-modules",
     "nuke:artifacts": "pnpm --parallel run nuke:artifacts",
     "nuke:compute-cache": "del-cli \"*/**/.turbo\"",
     "nuke:node-modules": "del-cli \"**/node_modules\"",
-    "lint": "superturbo lint",
-    "lint:fix": "superturbo lint:fix",
-    "format": "prettier --write --ignore-unknown .",
-    "build": "superturbo build",
-    "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
-    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@pkerschbaum-homepage/config-eslint": "workspace:*",
@@ -22,7 +22,8 @@
     "del-cli": "^5.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-packagejson": "^2.4.6",
     "turbo": "^1.10.16"
   },
   "dependenciesMeta": {
@@ -32,8 +33,8 @@
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {
-    "pnpm": "8.9.0",
-    "npm": "0.0.0"
+    "npm": "0.0.0",
+    "pnpm": "8.9.0"
   },
   "pnpm": {
     "patchedDependencies": {

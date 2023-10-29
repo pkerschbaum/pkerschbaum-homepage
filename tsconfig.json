@@ -7,7 +7,7 @@
       "path": "./packages/mdx/tsconfig.project.json"
     },
     {
-      "path": "./platform/pkg-management/tsconfig.project.json"
+      "path": "./platform/superturbo/tsconfig.project.json"
     }
   ]
 }

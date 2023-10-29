@@ -1,8 +1,8 @@
 {
   "name": "@pkerschbaum-homepage/mdx",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "version": "1.0.0",
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js"
@@ -15,14 +15,14 @@
     }
   },
   "scripts": {
-    "internal:compile": "tsc -p ./tsconfig.project.json",
-    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
-    "nuke:artifacts": "del-cli dist *.tsbuildinfo",
     "build": "pnpm run internal:compile",
     "dev": "pnpm run build --watch --preserveWatchOutput",
+    "internal:compile": "tsc -p ./tsconfig.project.json",
     "lint": "pnpm run lint:file .",
     "lint:file": "eslint --max-warnings 0",
-    "lint:fix": "pnpm run lint --fix"
+    "lint:fix": "pnpm run lint --fix",
+    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
+    "nuke:artifacts": "del-cli dist *.tsbuildinfo"
   },
   "dependencies": {
     "@pkerschbaum/commons-ecma": "^2.1.2",

@@ -201,8 +201,19 @@ export const GlobalAppStyles = css`
     }
 
     #__next {
-      font-family: 'Rubik Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      font-family:
+        'Rubik Variable',
+        'Segoe UI',
+        -apple-system,
+        BlinkMacSystemFont,
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        'Fira Sans',
+        'Droid Sans',
+        'Helvetica Neue',
+        sans-serif;
     }
 
     ul,

@@ -6,15 +6,15 @@
     "superturbo": "./src/turbo-wrapper.mjs"
   },
   "scripts": {
-    "internal:build:compile": "tsc -p ./tsconfig.build.json",
-    "nuke": "pnpm run nuke:artifacts && del-cli --dot=true node_modules",
-    "nuke:artifacts": "del-cli --dot=true *.tsbuildinfo",
     "build": "pnpm run internal:build:compile",
     "dev": "pnpm run internal:build:compile -w --preserveWatchOutput",
+    "internal:build:compile": "tsc -p ./tsconfig.build.json",
     "lint": "pnpm run lint:js",
     "lint:fix": "pnpm run lint:js:file . --fix",
     "lint:js": "pnpm run lint:js:file .",
-    "lint:js:file": "eslint --max-warnings 0"
+    "lint:js:file": "eslint --max-warnings 0",
+    "nuke": "pnpm run nuke:artifacts && del-cli --dot=true node_modules",
+    "nuke:artifacts": "del-cli --dot=true *.tsbuildinfo"
   },
   "devDependencies": {
     "@types/node": "^20.8.7",
