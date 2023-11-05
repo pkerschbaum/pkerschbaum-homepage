@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: ['plugin:react/recommended', 'plugin:@next/next/core-web-vitals'],
-  ignorePatterns: ['next.config.js'],
+  ignorePatterns: ['next.config.js', 'next-env.d.ts'],
   rules: {
     'no-restricted-syntax': [
       'error',

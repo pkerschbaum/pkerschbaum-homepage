@@ -7,21 +7,21 @@ import { PATHS } from '#pkg/constants-server.js';
 import { createFaviconsMapping } from '#pkg/favicons/favicons.js';
 import { parseMDXFileAndCollectHrefs } from '#pkg/mdx/mdx.js';
 
-/* 
-  Generate .module.css files for every blog post & tidbit page containing icons for FancyAnchors.
-  We construct CSS such that we transmit every data URL only once and apply it to the associated
-  FancyAnchors via attribute selectors.
-
-  Idea of those FancyAnchor's is based on https://twitter.com/simevidas/status/1481753210578690064.
-
-  @example
-  .favicons .fancy-anchor[href="https://playwright.dev/docs/test-fixtures"]::before,
-  .favicons .fancy-anchor[href="https://playwright.dev/docs/test-advanced#projects"]::before,
-  .favicons .fancy-anchor[href="https://playwright.dev/docs/test-components#planned-work"]::before {
-    display: inline-block;
-    background-image: url(DATA_URL_OF_PLAYWRIGHT_FAVICON);
-  }
-*/
+/*
+ * Generate .module.css files for every blog post & tidbit page containing icons for FancyAnchors.
+ * We construct CSS such that we transmit every data URL only once and apply it to the associated
+ * FancyAnchors via attribute selectors.
+ *
+ * Idea of those FancyAnchor's is based on https://twitter.com/simevidas/status/1481753210578690064.
+ *
+ * @example
+ * .favicons .fancy-anchor[href="https://playwright.dev/docs/test-fixtures"]::before,
+ * .favicons .fancy-anchor[href="https://playwright.dev/docs/test-advanced#projects"]::before,
+ * .favicons .fancy-anchor[href="https://playwright.dev/docs/test-components#planned-work"]::before {
+ *   display: inline-block;
+ *   background-image: url(DATA_URL_OF_PLAYWRIGHT_FAVICON);
+ * }
+ */
 async function generateCssModulesForArticles() {
   const [postsBasenames, tidbitsBasenames] = await Promise.all([
     fs.promises.readdir(PATHS.POSTS),

@@ -31,9 +31,10 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.cjs', 'eslint-template.cjs', 'dist/**/*'],
+  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*'],
   rules: {
     curly: 'error',
+    'multiline-comment-style': ['error', 'starred-block'],
     'no-console': 'error',
     'no-constant-condition': ['error', { checkLoops: false }],
     'no-promise-executor-return': 'error',
@@ -98,23 +99,30 @@ module.exports = {
     'n/no-callback-literal': 'error',
     // disable "n/no-extraneous-import" --> thanks to "isolated mode" of node_modules of pnpm and "public-hoist-pattern" being disabled of this monorepo, there is no possibilty for extraneous imports
     'n/no-extraneous-import': 'off',
-    // disable "n/no-missing-import" --> covered by TypeScript
+    // disable "n/no-missing-import" and "n/no-missing-require" --> covered by TypeScript
     'n/no-missing-import': 'off',
+    'n/no-missing-require': 'off',
     'n/no-process-env': 'error',
     'n/no-sync': 'error',
     // disable "n/no-unpublished-import" and "n/no-unpublished-require" --> wrong positive for "@vercel/analytics" for whatever reason
-    'n/no-unpublished-import': 'off',
+    'n/no-unpublished-import': ['error', { ignoreTypeImport: true }],
     'n/no-unpublished-require': 'off',
-    // disable "n/no-unsupported-features/es-syntax" --> covered by TypeScript
-    'n/no-unsupported-features/es-syntax': 'off',
     // disable "n/no-unsupported-features/es-builtins" --> covered by TypeScript
     'n/no-unsupported-features/es-builtins': 'off',
+    // disable "n/no-unsupported-features/es-syntax" --> covered by TypeScript
+    'n/no-unsupported-features/es-syntax': 'off',
     // disable "n/no-unsupported-features/node-builtins" --> covered by TypeScript
     'n/no-unsupported-features/node-builtins': 'off',
+    'unicorn/better-regex': 'off',
+    'unicorn/consistent-destructuring': 'off',
+    'unicorn/consistent-function-scoping': 'off',
     'unicorn/filename-case': 'off',
+    'unicorn/no-array-callback-reference': 'off',
+    'unicorn/no-await-expression-member': 'off',
     'unicorn/no-negated-condition': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-useless-undefined': 'off',
+    'unicorn/prefer-dom-node-dataset': 'off',
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-string-replace-all': 'off',
     'unicorn/prefer-top-level-await': 'off',
@@ -133,11 +141,14 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
-      { overrides: { constructors: 'off' } },
+      {
+        accessibility: 'explicit',
+        overrides: { constructors: 'off' },
+      },
     ],
     '@typescript-eslint/method-signature-style': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-base-to-string': ['error', { ignoredTypeNames: ['Error'] }],
+    '@typescript-eslint/no-base-to-string': ['error', { ignoredTypeNames: ['Error', 'Moment'] }],
     '@typescript-eslint/no-confusing-non-null-assertion': 'error',
     '@typescript-eslint/no-duplicate-enum-values': 'error',
     '@typescript-eslint/no-floating-promises': 'error',
@@ -153,6 +164,7 @@ module.exports = {
         allowDeclarations: true,
       },
     ],
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
     '@typescript-eslint/no-require-imports': 'error',
     '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-condition': ['error', { allowConstantLoopConditions: true }],
@@ -182,7 +194,6 @@ module.exports = {
     '@typescript-eslint/prefer-reduce-type-parameter': 'error',
     '@typescript-eslint/prefer-string-starts-ends-with': 'error',
     '@typescript-eslint/prefer-ts-expect-error': 'error',
-    '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/require-array-sort-compare': ['error', { ignoreStringArrays: true }],
     '@typescript-eslint/restrict-template-expressions': [
       'error',
