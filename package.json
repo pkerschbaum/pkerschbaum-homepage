@@ -2,7 +2,7 @@
   "name": "pkerschbaum-homepage",
   "private": true,
   "scripts": {
-    "build": "superturbo build",
+    "build": "superturbo build --filter=\"@pkerschbaum-homepage/superturbo\" && superturbo build --filter=\"!@pkerschbaum-homepage/superturbo\"",
     "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.2.2",
     "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
     "format": "prettier --write --ignore-unknown .",
