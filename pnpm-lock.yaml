@@ -16,9 +16,12 @@ importers:
 
   .:
     devDependencies:
+      '@next/eslint-plugin-next':
+        specifier: ^13.5.6
+        version: 13.5.6
       '@pkerschbaum-homepage/config-eslint':
         specifier: workspace:*
-        version: file:platform/config-eslint
+        version: file:platform/config-eslint(eslint-config-next@13.5.6)
       '@pkerschbaum-homepage/config-stylelint':
         specifier: workspace:*
         version: link:platform/config-stylelint
@@ -31,9 +34,51 @@ importers:
       '@pkerschbaum/pkg-management':
         specifier: ^1.2.0
         version: 1.2.0
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.8.0
+        version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
+      '@typescript-eslint/parser':
+        specifier: ^6.8.0
+        version: 6.8.0(eslint@8.52.0)(typescript@5.2.2)
       del-cli:
         specifier: ^5.1.0
         version: 5.1.0
+      eslint:
+        specifier: ^8.52.0
+        version: 8.52.0
+      eslint-config-next:
+        specifier: ^13.5.6
+        version: 13.5.6(eslint@8.52.0)(typescript@5.2.2)
+      eslint-config-prettier:
+        specifier: ^9.0.0
+        version: 9.0.0(eslint@8.52.0)
+      eslint-plugin-code-import-patterns:
+        specifier: ^3.0.0
+        version: 3.0.0
+      eslint-plugin-eslint-comments:
+        specifier: ^3.2.0
+        version: 3.2.0(eslint@8.52.0)
+      eslint-plugin-import:
+        specifier: ^2.28.1
+        version: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
+      eslint-plugin-n:
+        specifier: ^16.2.0
+        version: 16.2.0(eslint@8.52.0)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-react:
+        specifier: ^7.33.2
+        version: 7.33.2(eslint@8.52.0)
+      eslint-plugin-react-hooks:
+        specifier: ^4.6.0
+        version: 4.6.0(eslint@8.52.0)
+      eslint-plugin-regexp:
+        specifier: ^2.1.0
+        version: 2.1.0(eslint@8.52.0)
+      eslint-plugin-unicorn:
+        specifier: ^48.0.1
+        version: 48.0.1(eslint@8.52.0)
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -46,6 +91,12 @@ importers:
       turbo:
         specifier: ^1.10.16
         version: 1.10.16
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2(patch_hash=ne7pl63axb4w5i5sendwnvsoyu)
+      typescript-transform-paths:
+        specifier: ^3.4.6
+        version: 3.4.6(typescript@5.2.2)
     dependenciesMeta:
       '@pkerschbaum-homepage/config-eslint':
         injected: true
@@ -128,9 +179,6 @@ importers:
       '@next/env':
         specifier: ^13.5.6
         version: 13.5.6
-      '@next/eslint-plugin-next':
-        specifier: ^13.5.6
-        version: 13.5.6
       '@types/node':
         specifier: ^20.8.7
         version: 20.8.7
@@ -146,51 +194,9 @@ importers:
       '@types/sanitize-html':
         specifier: ^2.9.3
         version: 2.9.3
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.8.0
-        version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
-      '@typescript-eslint/parser':
-        specifier: ^6.8.0
-        version: 6.8.0(eslint@8.52.0)(typescript@5.2.2)
       '@vercel/analytics':
         specifier: ^1.1.1
         version: 1.1.1
-      eslint:
-        specifier: ^8.52.0
-        version: 8.52.0
-      eslint-config-next:
-        specifier: ^13.5.6
-        version: 13.5.6(eslint@8.52.0)(typescript@5.2.2)
-      eslint-config-prettier:
-        specifier: ^9.0.0
-        version: 9.0.0(eslint@8.52.0)
-      eslint-plugin-code-import-patterns:
-        specifier: ^3.0.0
-        version: 3.0.0
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint@8.52.0)
-      eslint-plugin-import:
-        specifier: ^2.28.1
-        version: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
-      eslint-plugin-n:
-        specifier: ^16.2.0
-        version: 16.2.0(eslint@8.52.0)
-      eslint-plugin-only-warn:
-        specifier: ^1.1.0
-        version: 1.1.0
-      eslint-plugin-react:
-        specifier: ^7.33.2
-        version: 7.33.2(eslint@8.52.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.0
-        version: 4.6.0(eslint@8.52.0)
-      eslint-plugin-regexp:
-        specifier: ^2.1.0
-        version: 2.1.0(eslint@8.52.0)
-      eslint-plugin-unicorn:
-        specifier: ^48.0.1
-        version: 48.0.1(eslint@8.52.0)
       next-sitemap:
         specifier: ^4.2.3
         version: 4.2.3(next@13.5.6)
@@ -218,12 +224,6 @@ importers:
       stylelint-config-styled-components:
         specifier: ^0.1.1
         version: 0.1.1
-      typescript:
-        specifier: ^5.2.2
-        version: 5.2.2(patch_hash=ne7pl63axb4w5i5sendwnvsoyu)
-      typescript-transform-paths:
-        specifier: ^3.4.6
-        version: 3.4.6(typescript@5.2.2)
 
   packages/mdx:
     dependencies:
@@ -264,45 +264,6 @@ importers:
       '@types/node':
         specifier: ^20.8.7
         version: 20.8.7
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.8.0
-        version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
-      '@typescript-eslint/parser':
-        specifier: ^6.8.0
-        version: 6.8.0(eslint@8.52.0)(typescript@5.2.2)
-      eslint:
-        specifier: ^8.52.0
-        version: 8.52.0
-      eslint-config-prettier:
-        specifier: ^9.0.0
-        version: 9.0.0(eslint@8.52.0)
-      eslint-plugin-code-import-patterns:
-        specifier: ^3.0.0
-        version: 3.0.0
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint@8.52.0)
-      eslint-plugin-import:
-        specifier: ^2.28.1
-        version: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
-      eslint-plugin-n:
-        specifier: ^16.2.0
-        version: 16.2.0(eslint@8.52.0)
-      eslint-plugin-only-warn:
-        specifier: ^1.1.0
-        version: 1.1.0
-      eslint-plugin-regexp:
-        specifier: ^2.1.0
-        version: 2.1.0(eslint@8.52.0)
-      eslint-plugin-unicorn:
-        specifier: ^48.0.1
-        version: 48.0.1(eslint@8.52.0)
-      typescript:
-        specifier: ^5.2.2
-        version: 5.2.2(patch_hash=ne7pl63axb4w5i5sendwnvsoyu)
-      typescript-transform-paths:
-        specifier: ^3.4.6
-        version: 3.4.6(typescript@5.2.2)
 
   platform/config-eslint: {}
 
@@ -315,45 +276,6 @@ importers:
       '@types/node':
         specifier: ^18
         version: 18.18.7
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.8.0
-        version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
-      '@typescript-eslint/parser':
-        specifier: ^6.8.0
-        version: 6.8.0(eslint@8.52.0)(typescript@5.2.2)
-      eslint:
-        specifier: ^8.52.0
-        version: 8.52.0
-      eslint-config-prettier:
-        specifier: ^9.0.0
-        version: 9.0.0(eslint@8.52.0)
-      eslint-plugin-code-import-patterns:
-        specifier: ^3.0.0
-        version: 3.0.0
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint@8.52.0)
-      eslint-plugin-import:
-        specifier: ^2.28.1
-        version: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
-      eslint-plugin-n:
-        specifier: ^16.2.0
-        version: 16.2.0(eslint@8.52.0)
-      eslint-plugin-only-warn:
-        specifier: ^1.1.0
-        version: 1.1.0
-      eslint-plugin-regexp:
-        specifier: ^2.1.0
-        version: 2.1.0(eslint@8.52.0)
-      eslint-plugin-unicorn:
-        specifier: ^48.0.1
-        version: 48.0.1(eslint@8.52.0)
-      typescript:
-        specifier: ^5.2.2
-        version: 5.2.2(patch_hash=ne7pl63axb4w5i5sendwnvsoyu)
-      typescript-transform-paths:
-        specifier: ^3.4.6
-        version: 3.4.6(typescript@5.2.2)
 
 packages:
 
@@ -8292,12 +8214,15 @@ packages:
       yaml: 2.3.4
     dev: true
 
-  file:platform/config-eslint:
+  file:platform/config-eslint(eslint-config-next@13.5.6):
     resolution: {directory: platform/config-eslint, type: directory}
+    id: file:platform/config-eslint
     name: '@pkerschbaum-homepage/config-eslint'
     peerDependencies:
       eslint-config-next: ^13
     peerDependenciesMeta:
       eslint-config-next:
         optional: true
+    dependencies:
+      eslint-config-next: 13.5.6(eslint@8.52.0)(typescript@5.2.2)
     dev: true
