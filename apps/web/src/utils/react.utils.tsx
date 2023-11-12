@@ -63,7 +63,6 @@ function getNodeText(node: React.ReactNode): string {
  * Based on https://github.com/imbhargav5/rooks/blob/76426161edca1f233c8d4dea6ce5e5f97d4ff607/packages/rooks/src/hooks/useMediaMatch.ts
  *
  * A react hook that signals whether or not a media query is matched.
- *
  * @param query The media query to signal on. Example, `"print"` will signal
  * `true` when previewing in print mode, and `false` otherwise.
  * @returns if "window" is not defined, "SSR"; if "window" is defined a boolean whether or not the media query is currently matched.

@@ -17,6 +17,7 @@ module.exports = {
     'n',
     'regexp',
     'code-import-patterns',
+    'jsdoc',
   ],
   extends: [
     'eslint:recommended',
@@ -204,4 +205,28 @@ module.exports = {
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/unified-signatures': 'error',
   },
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.cts', '**/*.mts', '**/*.tsx', '**/*.ctsx', '**/*.mtsx'],
+      extends: ['plugin:jsdoc/recommended-typescript-error'],
+      rules: {
+        'jsdoc/require-jsdoc': 'off',
+        'jsdoc/require-param': 'off',
+        'jsdoc/require-param-description': 'off',
+        'jsdoc/require-returns': 'off',
+        'jsdoc/require-returns-description': 'off',
+      },
+    },
+    {
+      files: ['**/*.js', '**/*.cjs', '**/*.mjs', '**/*.jsx', '**/*.cjsx', '**/*.mjsx'],
+      extends: ['plugin:jsdoc/recommended-typescript-flavor-error'],
+      rules: {
+        'jsdoc/require-jsdoc': 'off',
+        'jsdoc/require-param': 'off',
+        'jsdoc/require-param-description': 'off',
+        'jsdoc/require-returns': 'off',
+        'jsdoc/require-returns-description': 'off',
+      },
+    },
+  ],
 };
