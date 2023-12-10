@@ -76,7 +76,7 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
             <p>
               Great, then let&apos;s keep in touch!{' '}
               <Anchor
-                href="https://twitter.com/pkerschbaum"
+                href="https://twitter.com/intent/follow?screen_name=pkerschbaum"
                 target="_blank"
                 rel="noopener noreferrer"
               >

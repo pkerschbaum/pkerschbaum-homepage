@@ -2,7 +2,7 @@
   "editor.rulers": [100],
   "git.inputValidationLength": 100,
   "git.inputValidationSubjectLength": null,
-  "typescript.tsdk": "./platform/superturbo/node_modules/typescript/lib",
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "search.exclude": {
     "**/dist": true
   },
