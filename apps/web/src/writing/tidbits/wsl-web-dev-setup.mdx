@@ -159,6 +159,14 @@ It shows how to set up
     wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
     ```
 
+  - Set up a multi-architecture Docker builder:
+
+    ```sh
+    # from https://unix.stackexchange.com/a/748634
+    docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
+    docker buildx inspect --bootstrap
+    ```
+
 - **VS Code:** Install the <FancyAnchor href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL extension</FancyAnchor>, then you can run in an Ubuntu terminal `code .` to start VS Code in that folder.
 - **Webstorm:** Follow <FancyAnchor href="https://www.jetbrains.com/help/webstorm/how-to-use-wsl-development-environment-in-product.html#ws_wsl_node_interpreter_configure">AUTOGENERATE</FancyAnchor>.
 
