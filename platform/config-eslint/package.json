@@ -2,7 +2,7 @@
   "name": "@pkerschbaum-homepage/config-eslint",
   "private": true,
   "peerDependencies": {
-    "eslint-config-next": "^13"
+    "eslint-config-next": "^14"
   },
   "peerDependenciesMeta": {
     "eslint-config-next": {
