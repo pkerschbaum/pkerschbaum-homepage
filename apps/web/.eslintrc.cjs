@@ -1,5 +1,6 @@
 // @ts-check
 const baseEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-ecma.cjs');
+const reactEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-react.cjs');
 const nextEslintConfig = require('@pkerschbaum-homepage/config-eslint/eslint-next.cjs');
 
 const noRestrictedSyntax_preferNextJsImage = [
@@ -25,27 +26,39 @@ const noRestrictedSyntax_preferElements = [
 ];
 
 let baseNoRestrictedSyntax = baseEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
+let reactNoRestrictedSyntax = reactEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
 let nextNoRestrictedSyntax = nextEslintConfig.rules?.['no-restricted-syntax']?.slice(1) ?? [];
 let baseCodeImportPatternsZones =
   baseEslintConfig.rules?.['code-import-patterns/patterns']?.slice(1)?.zones ?? [];
+let reactCodeImportPatternsZones =
+  reactEslintConfig.rules?.['code-import-patterns/patterns']?.slice(1)?.zones ?? [];
 let nextCodeImportPatternsZones =
   nextEslintConfig.rules?.['code-import-patterns/patterns']?.slice(1)?.zones ?? [];
 
 module.exports = {
   ...baseEslintConfig,
+  ...reactEslintConfig,
   ...nextEslintConfig,
   parserOptions: {
     ...baseEslintConfig.parserOptions,
+    ...reactEslintConfig.parserOptions,
     ...nextEslintConfig.parserOptions,
     tsconfigRootDir: __dirname,
   },
+  plugins: [
+    ...(baseEslintConfig.plugins ?? []),
+    ...(reactEslintConfig.plugins ?? []),
+    ...(nextEslintConfig.plugins ?? []),
+  ],
   extends: [
     ...(baseEslintConfig.extends ?? []),
+    ...(reactEslintConfig.extends ?? []),
     ...(nextEslintConfig.extends ?? []),
     '../../node_modules/@pkerschbaum-homepage/config-eslint/eslint-config-next-core-web-vitals-fixed.cjs',
   ],
   ignorePatterns: [
     ...(baseEslintConfig.ignorePatterns ?? []),
+    ...(reactEslintConfig.ignorePatterns ?? []),
     ...(nextEslintConfig.ignorePatterns ?? []),
     'linaria.config.cjs',
     'next-sitemap.cjs',
@@ -54,10 +67,12 @@ module.exports = {
   ],
   rules: {
     ...baseEslintConfig.rules,
+    ...reactEslintConfig.rules,
     ...nextEslintConfig.rules,
     'no-restricted-syntax': [
       'error',
       ...baseNoRestrictedSyntax,
+      ...reactNoRestrictedSyntax,
       ...nextNoRestrictedSyntax,
       ...noRestrictedSyntax_preferElements,
     ],
@@ -66,6 +81,7 @@ module.exports = {
       {
         zones: [
           ...baseCodeImportPatternsZones,
+          ...reactCodeImportPatternsZones,
           ...nextCodeImportPatternsZones,
           {
             target: /.+/,
@@ -84,6 +100,7 @@ module.exports = {
   },
   overrides: [
     ...(baseEslintConfig.overrides ?? []),
+    ...(reactEslintConfig.overrides ?? []),
     ...(nextEslintConfig.overrides ?? []),
     {
       files: ['src/elements/**/*'],
@@ -94,9 +111,11 @@ module.exports = {
   ],
   settings: {
     ...baseEslintConfig.settings,
+    ...reactEslintConfig.settings,
     ...nextEslintConfig.settings,
     next: {
       ...baseEslintConfig.settings?.next,
+      ...reactEslintConfig.settings?.next,
       ...nextEslintConfig.settings?.next,
       rootDir: 'apps/web/',
     },

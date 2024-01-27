@@ -20,6 +20,7 @@
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
+        "../../platform/config-eslint/eslint-react.cjs",
         "../../platform/config-eslint/eslint-next.cjs",
         "../../platform/config-stylelint/stylelint.config.cjs",
         "scripts/**",
@@ -38,6 +39,7 @@
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
+        "../../platform/config-eslint/eslint-react.cjs",
         "../../platform/config-eslint/eslint-next.cjs",
         "../../platform/config-stylelint/stylelint.config.cjs",
         "scripts/**",
