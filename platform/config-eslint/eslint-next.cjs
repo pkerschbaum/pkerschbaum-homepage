@@ -17,7 +17,7 @@ module.exports = {
   overrides: [
     {
       // allow default export for Next.js layouts and pages
-      files: ['src/pages/**/*', 'src/app/**/{layout,page}.tsx'],
+      files: ['src/pages/**/*', 'src/app/**/{layout,page,global-error}.tsx'],
       rules: {
         'import/no-default-export': 'off',
       },

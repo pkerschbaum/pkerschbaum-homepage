@@ -4,3 +4,6 @@ public/sitemap.xml
 public/sitemap-*.xml
 public/rss.xml
 public/rss.json
+
+# Sentry Config File
+.sentryclirc

@@ -32,7 +32,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*'],
+  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*', 'sentry.*.config.js'],
   rules: {
     curly: 'error',
     'multiline-comment-style': ['error', 'starred-block'],
@@ -64,6 +64,8 @@ module.exports = {
       },
     ],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+    // disable "import/namespace" --> covered by TypeScript
+    'import/namespace': 'off',
     'import/newline-after-import': 'error',
     'import/no-absolute-path': 'error',
     'import/no-cycle': 'error',
