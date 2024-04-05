@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "superturbo build --filter=\"@pkerschbaum-homepage/superturbo\" && superturbo build --filter=\"!@pkerschbaum-homepage/superturbo\"",
-    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.3.3",
+    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.4.4",
     "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
     "format": "prettier --write --ignore-unknown .",
     "lint": "superturbo lint",
@@ -41,7 +41,7 @@
     "prettier": "^3.0.3",
     "prettier-plugin-packagejson": "^2.4.6",
     "turbo": "^1.10.16",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.4",
     "typescript-transform-paths": "^3.4.6"
   },
   "dependenciesMeta": {
@@ -57,7 +57,7 @@
   "pnpm": {
     "patchedDependencies": {
       "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch",
-      "typescript@5.3.3": "patches/typescript@5.3.3.patch"
+      "typescript@5.4.4": "patches/typescript@5.4.4.patch"
     },
     "updateConfig": {
       "ignoreDependencies": [
