@@ -5,6 +5,7 @@
   - [Code Organization](#code-organization)
   - [Build \& Run](#build--run)
   - [Additional commands for development](#additional-commands-for-development)
+  - [Updating TypeScript](#updating-typescript)
 
 ## Development
 
@@ -66,3 +67,27 @@ To fetch the favicons for all articles, run `internal:fetch-favicons` and `inter
 > One way to get all dependencies is to just install Chrome. For Ubuntu, execute this command in a temporary directory:  
 > `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt install ./google-chrome-stable_current_amd64.deb`  
 > See also this link for more information: <https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md>.
+
+### Updating TypeScript
+
+So to update TypeScript to a new version, do this:
+
+1. Remove current patch:
+
+   ```bash
+   pnpm patch-remove typescript@5.3.3 # <-- look this up in package.json#pnpm#patchedDependencies
+   ```
+
+1. Update `typescript` everywhere:
+
+   ```bash
+   pnpm -r update typescript@5.4.4 # <-- new version here
+   ```
+
+1. Use the new version in the script `create-pnpm-patch-via-ts-patch` of the root package.json [`./package.json`](./package.json).
+
+1. Run:
+
+   ```bash
+   pnpm run create-pnpm-patch-via-ts-patch
+   ```
