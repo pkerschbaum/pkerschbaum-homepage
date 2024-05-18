@@ -1,6 +1,9 @@
 // @ts-check
+import createMDX from '@next/mdx';
 import withLinaria from 'next-with-linaria';
 import { withSentryConfig } from '@sentry/nextjs';
+
+import { createMdxOptions } from '@pkerschbaum-homepage/mdx/mdx';
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
@@ -54,7 +57,16 @@ let nextConfig = {
       },
     ],
   },
+
+  // include .md and .mdx files, see https://nextjs.org/docs/app/building-your-application/configuring/mdx#configure-nextconfigmjs
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
+
+const withMDX = createMDX({
+  options: createMdxOptions({ collectedHrefs: [], collectedHeadings: [] }),
+});
+
+nextConfig = withMDX(nextConfig);
 
 nextConfig = withLinaria(nextConfig);
 

@@ -12,11 +12,11 @@ import {
   TocAside,
 } from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
-import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { TableOfContents } from '#pkg/components/table-of-contents';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 
 export type ArticleContainerTidbitPropsBase = {
+  mdxContent: React.ReactNode;
   mdxParseResult: MDXParseResult;
 };
 export type ArticleContainerTidbitProps = ArticleContainerTidbitPropsBase & {
@@ -24,6 +24,7 @@ export type ArticleContainerTidbitProps = ArticleContainerTidbitPropsBase & {
 };
 
 export const ArticleContainerTidbit: React.FC<ArticleContainerTidbitProps> = ({
+  mdxContent,
   mdxParseResult,
   faviconsClassName,
 }) => {
@@ -44,9 +45,7 @@ export const ArticleContainerTidbit: React.FC<ArticleContainerTidbitProps> = ({
               </Time>
             </FrontMatter>
 
-            <ArticleContent>
-              <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-            </ArticleContent>
+            <ArticleContent>{mdxContent}</ArticleContent>
           </Article>
         </TocAndArticle>
       </ArticleContainer>

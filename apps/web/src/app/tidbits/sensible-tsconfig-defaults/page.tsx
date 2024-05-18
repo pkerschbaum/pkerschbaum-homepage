@@ -3,6 +3,7 @@ import path from 'path';
 import type React from 'react';
 import invariant from 'tiny-invariant';
 
+import { MDXContentClientComponent } from '#pkg/app/tidbits/sensible-tsconfig-defaults/mdx-content-client-component';
 import styles from '#pkg/app/tidbits/sensible-tsconfig-defaults/styles.module.css';
 import { ArticleContainerTidbit } from '#pkg/components/article-container-tidbit/index.js';
 import { ClassesAliases } from '#pkg/constants-browser.js';
@@ -21,7 +22,11 @@ async function TidbitPage() {
   );
 
   return (
-    <ArticleContainerTidbit mdxParseResult={mdxParseResult} faviconsClassName={faviconsClassName} />
+    <ArticleContainerTidbit
+      mdxContent={<MDXContentClientComponent />}
+      mdxParseResult={mdxParseResult}
+      faviconsClassName={faviconsClassName}
+    />
   );
 }
 

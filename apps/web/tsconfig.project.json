@@ -17,7 +17,7 @@
       "#pkg/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": ["node", "@types/mdx"],
 
     /* JavaScript Support */
     "allowJs": true,
@@ -36,6 +36,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "dist/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "dist/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.md", "**/*.mdx"],
   "exclude": ["**/node_modules", "dist-tsc"]
 }
