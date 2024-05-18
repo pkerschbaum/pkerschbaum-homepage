@@ -15,7 +15,7 @@
     "prepare": "node --eval \"process.exit(process.env.CI === 'true' ? 0 : -1)\" || (husky install && pnpm exec add-all-tsconfigs-as-project-references --monorepo-path=.)"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.0.4",
+    "@next/eslint-plugin-next": "^14.2.3",
     "@pkerschbaum-homepage/config-eslint": "workspace:*",
     "@pkerschbaum-homepage/config-stylelint": "workspace:*",
     "@pkerschbaum-homepage/config-typescript": "workspace:*",
@@ -25,7 +25,7 @@
     "@typescript-eslint/parser": "^6.18.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.0.4",
+    "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-code-import-patterns": "^3.0.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -56,12 +56,10 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "next-mdx-remote@4.3.0": "patches/next-mdx-remote@4.3.0.patch",
       "typescript@5.4.4": "patches/typescript@5.4.4.patch"
     },
     "updateConfig": {
       "ignoreDependencies": [
-        "next-mdx-remote",
         "prettier"
       ]
     }

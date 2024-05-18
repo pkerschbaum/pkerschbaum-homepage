@@ -6,7 +6,6 @@ export type MDXFile = {
 };
 
 export type MDXParseResult = {
-  code: string;
   frontmatter: FrontmatterData;
   collectedHrefs: string[];
   collectedHeadings: Heading[];

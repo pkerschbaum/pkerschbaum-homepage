@@ -16,7 +16,6 @@ import {
 } from '#pkg/components/article-components/index.js';
 import { TwitterInteractionSection } from '#pkg/components/article-container-blog-post/TwitterInteractionSection.jsx';
 import { Main } from '#pkg/components/main/index.js';
-import { MDXViewer } from '#pkg/components/mdx-viewer/index.js';
 import { TableOfContents } from '#pkg/components/table-of-contents';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
@@ -24,6 +23,7 @@ import type { MDXParseResult } from '#pkg/mdx/index.js';
 import type { Webmention } from '#pkg/webmentions/index.js';
 
 export type ArticleContainerBlogPostPropsBase = {
+  mdxContent: React.ReactNode;
   mdxParseResult: MDXParseResult;
   webmentions: Webmention[];
 };
@@ -32,6 +32,7 @@ export type ArticleContainerBlogPostProps = ArticleContainerBlogPostPropsBase & 
 };
 
 export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> = ({
+  mdxContent,
   mdxParseResult,
   webmentions,
   faviconsClassName,
@@ -61,9 +62,7 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
               </Timestamps>
             </FrontMatter>
 
-            <ArticleContent>
-              <MDXViewer codeOfMdxParseResult={mdxParseResult.code} />
-            </ArticleContent>
+            <ArticleContent>{mdxContent}</ArticleContent>
           </Article>
         </TocAndArticle>
 

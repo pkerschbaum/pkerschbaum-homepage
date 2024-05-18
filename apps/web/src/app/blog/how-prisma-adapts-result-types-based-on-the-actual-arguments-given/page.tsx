@@ -3,6 +3,7 @@ import path from 'path';
 import type React from 'react';
 import invariant from 'tiny-invariant';
 
+import { MDXContentClientComponent } from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/mdx-content-client-component';
 import styles from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/styles.module.css';
 import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post';
 import { config } from '#pkg/config.js';
@@ -25,6 +26,7 @@ async function BlogPostPage() {
 
   return (
     <ArticleContainerBlogPost
+      mdxContent={<MDXContentClientComponent />}
       mdxParseResult={mdxParseResult}
       webmentions={webmentions}
       faviconsClassName={faviconsClassName}

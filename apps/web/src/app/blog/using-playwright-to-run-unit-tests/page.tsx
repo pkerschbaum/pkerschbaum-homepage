@@ -3,6 +3,7 @@ import path from 'path';
 import type React from 'react';
 import invariant from 'tiny-invariant';
 
+import { MDXContentClientComponent } from '#pkg/app/blog/using-playwright-to-run-unit-tests/mdx-content-client-component';
 import styles from '#pkg/app/blog/using-playwright-to-run-unit-tests/styles.module.css';
 import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post/index.js';
 import { config } from '#pkg/config.js';
@@ -24,6 +25,7 @@ async function BlogPostPage() {
   ]);
   return (
     <ArticleContainerBlogPost
+      mdxContent={<MDXContentClientComponent />}
       mdxParseResult={mdxParseResult}
       webmentions={webmentions}
       faviconsClassName={faviconsClassName}

@@ -1,7 +1,7 @@
 'use client';
 import { styled } from '@linaria/react';
 import { check } from '@pkerschbaum/commons-ecma/util/assert';
-import { MDXRemote } from 'next-mdx-remote';
+import type { MDXComponents } from 'mdx/types';
 import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import invariant from 'tiny-invariant';
@@ -11,68 +11,60 @@ import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
 import { Anchor, type AnchorProps, Button } from '#pkg/elements/index.js';
 import { reactUtils } from '#pkg/utils/react.utils';
 
-export type MDXViewerProps = {
-  codeOfMdxParseResult: string;
-};
-
-export const MDXViewer: React.FC<MDXViewerProps> = ({ codeOfMdxParseResult }) => {
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   let currentSectionHeadingId = {
     [DataAttribute.SECTION_HEADING_ID]: undefined as string | undefined,
   };
 
-  return (
-    <MDXRemote
-      compiledSource={codeOfMdxParseResult}
-      components={{
-        p: (props) => {
-          return <p {...props} {...currentSectionHeadingId} />;
-        },
-        ul: (props) => {
-          return <ul {...props} {...currentSectionHeadingId} />;
-        },
-        ol: (props) => {
-          return <ol {...props} {...currentSectionHeadingId} />;
-        },
-        a: (props) => {
-          if (check.isNullishOrEmptyString(props.href)) {
-            throw new Error(`the <a> element must have a href, but has not`);
-          }
+  return {
+    p: (props) => {
+      return <p {...props} {...currentSectionHeadingId} />;
+    },
+    ul: (props) => {
+      return <ul {...props} {...currentSectionHeadingId} />;
+    },
+    ol: (props) => {
+      return <ol {...props} {...currentSectionHeadingId} />;
+    },
+    a: (props) => {
+      if (check.isNullishOrEmptyString(props.href)) {
+        throw new Error(`the <a> element must have a href, but has not`);
+      }
 
-          return (
-            <Anchor
-              target="_blank"
-              {...(props as AnchorProps)}
-              href={props.href}
-              {...currentSectionHeadingId}
-            />
-          );
-        },
-        h2: ({ ref: _ignored, id, ...delegated }) => {
-          currentSectionHeadingId = { [DataAttribute.SECTION_HEADING_ID]: id };
-          return <HeadingWithAnchor as="h2" headingProps={{ id, ...delegated }} />;
-        },
-        h3: ({ ref: _ignored, ...delegated }) => {
-          return <HeadingWithAnchor as="h3" headingProps={delegated} />;
-        },
-        h4: ({ ref: _ignored, ...delegated }) => {
-          return <HeadingWithAnchor as="h4" headingProps={delegated} />;
-        },
-        h5: ({ ref: _ignored, ...delegated }) => {
-          return <HeadingWithAnchor as="h5" headingProps={delegated} />;
-        },
-        h6: ({ ref: _ignored, ...delegated }) => {
-          return <HeadingWithAnchor as="h6" headingProps={delegated} />;
-        },
-        FancyAnchor: (props: FancyAnchorProps) => {
-          return <FancyAnchor target="_blank" {...props} />;
-        },
-        pre: ({ ref: _ignored, ...delegated }) => {
-          return <PreComponent {...delegated} {...currentSectionHeadingId} />;
-        },
-      }}
-    />
-  );
-};
+      return (
+        <Anchor
+          target="_blank"
+          {...(props as AnchorProps)}
+          href={props.href}
+          {...currentSectionHeadingId}
+        />
+      );
+    },
+    h2: ({ ref: _ignored, id, ...delegated }) => {
+      currentSectionHeadingId = { [DataAttribute.SECTION_HEADING_ID]: id };
+      return <HeadingWithAnchor as="h2" headingProps={{ id, ...delegated }} />;
+    },
+    h3: ({ ref: _ignored, ...delegated }) => {
+      return <HeadingWithAnchor as="h3" headingProps={delegated} />;
+    },
+    h4: ({ ref: _ignored, ...delegated }) => {
+      return <HeadingWithAnchor as="h4" headingProps={delegated} />;
+    },
+    h5: ({ ref: _ignored, ...delegated }) => {
+      return <HeadingWithAnchor as="h5" headingProps={delegated} />;
+    },
+    h6: ({ ref: _ignored, ...delegated }) => {
+      return <HeadingWithAnchor as="h6" headingProps={delegated} />;
+    },
+    FancyAnchor: (props: FancyAnchorProps) => {
+      return <FancyAnchor target="_blank" {...props} />;
+    },
+    pre: ({ ref: _ignored, ...delegated }) => {
+      return <PreComponent {...delegated} {...currentSectionHeadingId} />;
+    },
+    ...components,
+  };
+}
 
 // based on https://tomekdev.com/posts/anchors-for-headings-in-mdx
 type HeadingWithAnchorProps = {
