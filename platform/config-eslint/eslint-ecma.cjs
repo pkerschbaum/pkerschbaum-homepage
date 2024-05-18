@@ -64,6 +64,7 @@ module.exports = {
       },
     ],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+    'import/extensions': ['error', 'ignorePackages'],
     // disable "import/namespace" --> covered by TypeScript
     'import/namespace': 'off',
     'import/newline-after-import': 'error',
@@ -232,4 +233,15 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.cts', '.ctsx', '.mts', '.mtsx'],
+    },
+    'import/resolver:': {
+      typescript: {
+        project: './tsconfig.project.json',
+      },
+      node: true,
+    },
+  },
 };

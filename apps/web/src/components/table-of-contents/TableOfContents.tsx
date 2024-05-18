@@ -3,7 +3,7 @@ import React from 'react';
 
 import type { Heading } from '@pkerschbaum-homepage/mdx/schema';
 
-import { TableOfContentsAnchors } from '#pkg/components/table-of-contents/TableOfContentsAnchors';
+import { TableOfContentsAnchors } from '#pkg/components/table-of-contents/TableOfContentsAnchors.jsx';
 
 export type TableOfContentsProps = {
   headings: Heading[];

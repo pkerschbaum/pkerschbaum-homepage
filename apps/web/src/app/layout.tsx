@@ -7,13 +7,13 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import type React from 'react';
 
-import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration';
+import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration.jsx';
 import { Footer } from '#pkg/components/footer/index.js';
-import { Header } from '#pkg/components/header';
-import { Nav } from '#pkg/components/nav';
-import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor';
-import { ToggleThemeButton } from '#pkg/components/toggle-theme-button';
-import { config } from '#pkg/config';
+import { Header } from '#pkg/components/header/index.js';
+import { Nav } from '#pkg/components/nav/index.js';
+import { RssFeedAnchor } from '#pkg/components/rss-feed-anchor/index.js';
+import { ToggleThemeButton } from '#pkg/components/toggle-theme-button/index.js';
+import { config } from '#pkg/config.js';
 import {
   Animations,
   Classes,
@@ -23,7 +23,7 @@ import {
   IsScrolled,
   LocalStorageKey,
   TOC_QUERY,
-} from '#pkg/constants-browser';
+} from '#pkg/constants-browser.js';
 
 const fontMonospace = localFont({
   src: [

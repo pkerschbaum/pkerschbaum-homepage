@@ -1,7 +1,7 @@
 'use client';
 import { styled } from '@linaria/react';
 import { check } from '@pkerschbaum/commons-ecma/util/assert';
-import type { MDXComponents } from 'mdx/types';
+import type { MDXComponents } from 'mdx/types.js';
 import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import invariant from 'tiny-invariant';
@@ -9,7 +9,7 @@ import invariant from 'tiny-invariant';
 import { FancyAnchor, type FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
 import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
 import { Anchor, type AnchorProps, Button } from '#pkg/elements/index.js';
-import { reactUtils } from '#pkg/utils/react.utils';
+import { reactUtils } from '#pkg/utils/react.utils.jsx';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   let currentSectionHeadingId = {

@@ -3,9 +3,9 @@ import path from 'path';
 import type React from 'react';
 import invariant from 'tiny-invariant';
 
-import { MDXContentClientComponent } from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/mdx-content-client-component';
+import { MDXContentClientComponent } from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/mdx-content-client-component.jsx';
 import styles from '#pkg/app/blog/how-prisma-adapts-result-types-based-on-the-actual-arguments-given/styles.module.css';
-import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post';
+import { ArticleContainerBlogPost } from '#pkg/components/article-container-blog-post/index.js';
 import { config } from '#pkg/config.js';
 import { ClassesAliases } from '#pkg/constants-browser.js';
 import { PATHS } from '#pkg/constants-server.js';

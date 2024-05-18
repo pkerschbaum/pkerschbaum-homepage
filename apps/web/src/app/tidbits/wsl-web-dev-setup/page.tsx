@@ -3,7 +3,7 @@ import path from 'path';
 import type React from 'react';
 import invariant from 'tiny-invariant';
 
-import { MDXContentClientComponent } from '#pkg/app/tidbits/wsl-web-dev-setup/mdx-content-client-component';
+import { MDXContentClientComponent } from '#pkg/app/tidbits/wsl-web-dev-setup/mdx-content-client-component.jsx';
 import styles from '#pkg/app/tidbits/wsl-web-dev-setup/styles.module.css';
 import { ArticleContainerTidbit } from '#pkg/components/article-container-tidbit/index.js';
 import { ClassesAliases } from '#pkg/constants-browser.js';

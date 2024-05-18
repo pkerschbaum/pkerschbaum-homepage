@@ -1,6 +1,6 @@
 import { css } from '@linaria/core';
 
-import { Animations, ColorTheme, DataAttribute } from '#pkg/constants-browser';
+import { Animations, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
 
 export const CSSReset = css`
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */

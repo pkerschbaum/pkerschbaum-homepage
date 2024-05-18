@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 import type React from 'react';
 import { MapPin } from 'react-feather';
 
-import { Image } from '#pkg/elements/Image';
+import { Image } from '#pkg/elements/Image.jsx';
 import { commonStyles } from '#pkg/styles/common.styles.js';
 import profilePic from '../../../public/profile-picture.jpg';
 

@@ -5,7 +5,7 @@ import { Share2, Twitter } from 'react-feather';
 
 import { Anchor } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
-import { usePageUrl } from '#pkg/utils/next.utils';
+import { usePageUrl } from '#pkg/utils/next.utils.js';
 
 export type TwitterInteractionSectionProps = { mdxParseResult: MDXParseResult };
 

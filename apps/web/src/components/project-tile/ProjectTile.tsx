@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import type React from 'react';
 
-import { Image } from '#pkg/elements/Image';
+import { Image } from '#pkg/elements/Image.jsx';
 import { Description, Tile, TileAnchor, TileContent, Title } from '#pkg/elements/index.js';
 import type { Project } from '#pkg/schema.js';
 

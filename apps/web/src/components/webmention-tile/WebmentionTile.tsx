@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import type React from 'react';
 import sanitizeHTML from 'sanitize-html';
 
-import { Image } from '#pkg/elements/Image';
+import { Image } from '#pkg/elements/Image.jsx';
 import { Anchor } from '#pkg/elements/index.js';
 import type { Webmention } from '#pkg/webmentions/index.js';
 

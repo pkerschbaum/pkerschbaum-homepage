@@ -12,7 +12,7 @@ import {
   TocAside,
 } from '#pkg/components/article-components/index.js';
 import { Main } from '#pkg/components/main/index.js';
-import { TableOfContents } from '#pkg/components/table-of-contents';
+import { TableOfContents } from '#pkg/components/table-of-contents/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
 
 export type ArticleContainerTidbitPropsBase = {

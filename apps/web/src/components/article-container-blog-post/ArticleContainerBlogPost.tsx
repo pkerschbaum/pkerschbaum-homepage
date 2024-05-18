@@ -16,7 +16,7 @@ import {
 } from '#pkg/components/article-components/index.js';
 import { TwitterInteractionSection } from '#pkg/components/article-container-blog-post/TwitterInteractionSection.jsx';
 import { Main } from '#pkg/components/main/index.js';
-import { TableOfContents } from '#pkg/components/table-of-contents';
+import { TableOfContents } from '#pkg/components/table-of-contents/index.js';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
