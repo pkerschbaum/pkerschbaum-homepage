@@ -15,6 +15,7 @@ const isDevEnvironment = process.env.NODE_ENV === 'development';
 export const config = {
   isDevEnvironment,
   isServer: typeof window === 'undefined',
+  nextRuntime: process.env['NEXT_RUNTIME'],
   deploymentOrigin,
   featureFlags: {
     projects: isDevEnvironment,

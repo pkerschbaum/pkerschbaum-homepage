@@ -33,7 +33,7 @@
     "@pkerschbaum-homepage/mdx": "workspace:*",
     "@pkerschbaum/commons-ecma": "^2.1.2",
     "@pkerschbaum/fetch-favicon": "^1.0.7",
-    "@sentry/nextjs": "^7.105.0",
+    "@sentry/nextjs": "^8",
     "@types/mdast": "^4.0.2",
     "dayjs": "^1.11.10",
     "feed": "^4.2.2",

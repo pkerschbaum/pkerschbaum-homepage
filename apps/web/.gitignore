@@ -6,4 +6,4 @@ public/rss.xml
 public/rss.json
 
 # Sentry Config File
-.sentryclirc
+.env.sentry-build-plugin

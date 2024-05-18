@@ -1,6 +1,7 @@
 'use client';
 
 import * as Sentry from '@sentry/nextjs';
+import Error from 'next/error';
 import React from 'react';
 
 const GlobalError: React.FC<{ error: Error & { digest?: string }; reset: () => void }> = ({
