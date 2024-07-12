@@ -74,6 +74,6 @@ const ProfilePictureWrapper = styled.span`
 `;
 
 const ProfilePicture = styled(Image)`
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 50%;
 `;

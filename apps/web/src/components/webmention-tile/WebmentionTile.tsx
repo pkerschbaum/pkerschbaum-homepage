@@ -68,8 +68,8 @@ const WebmentionContainer = styled.div`
 
 const AuthorAvatar = styled(Image)`
   grid-area: avatar;
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 50%;
 `;
 
 const Headline = styled.div`

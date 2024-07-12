@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "superturbo build --filter=\"@pkerschbaum-homepage/superturbo\" && superturbo build --filter=\"!@pkerschbaum-homepage/superturbo\"",
-    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@1.1.1\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.4.4",
+    "create-pnpm-patch-via-ts-patch": "pnpm --package=\"@pkerschbaum/pkg-management@2.0.0\" dlx create-pnpm-patch-via-ts-patch --typescript-version=5.5.3 --ts-patch-version=3.2.1",
     "dev": "pnpm --parallel --filter=\"./packages/*\" run dev",
     "format": "prettier --write --ignore-unknown .",
     "lint": "superturbo lint",
@@ -15,35 +15,35 @@
     "prepare": "node --eval \"process.exit(process.env.CI === 'true' ? 0 : -1)\" || (husky install && pnpm exec add-all-tsconfigs-as-project-references --monorepo-path=.)"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^14.2.3",
+    "@next/eslint-plugin-next": "^14.2.5",
     "@pkerschbaum-homepage/config-eslint": "workspace:*",
     "@pkerschbaum-homepage/config-stylelint": "workspace:*",
     "@pkerschbaum-homepage/config-typescript": "workspace:*",
     "@pkerschbaum-homepage/superturbo": "workspace:*",
-    "@pkerschbaum/pkg-management": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^6.18.1",
-    "@typescript-eslint/parser": "^6.18.1",
+    "@pkerschbaum/pkg-management": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
     "del-cli": "^5.1.0",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "^14.2.3",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-code-import-patterns": "^3.0.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^48.0.2",
-    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-jsdoc": "^48.7.0",
+    "eslint-plugin-n": "^17.9.0",
     "eslint-plugin-only-warn": "^1.1.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-regexp": "^2.2.0",
-    "eslint-plugin-unicorn": "^50.0.1",
-    "husky": "^8.0.3",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-regexp": "^2.6.0",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "husky": "^9.0.11",
     "prettier": "^3.0.3",
-    "prettier-plugin-packagejson": "^2.4.6",
-    "turbo": "^1.10.16",
-    "typescript": "^5.4.4",
-    "typescript-transform-paths": "^3.4.6"
+    "prettier-plugin-packagejson": "^2.5.0",
+    "turbo": "^2.0.6",
+    "typescript": "^5.5.3",
+    "typescript-transform-paths": "^3.4.7"
   },
   "dependenciesMeta": {
     "@pkerschbaum-homepage/config-eslint": {
@@ -56,13 +56,13 @@
     "pnpm": "8.15.8"
   },
   "pnpm": {
-    "patchedDependencies": {
-      "typescript@5.4.4": "patches/typescript@5.4.4.patch"
-    },
     "updateConfig": {
       "ignoreDependencies": [
         "prettier"
       ]
+    },
+    "patchedDependencies": {
+      "typescript@5.5.3": "patches/typescript@5.5.3.patch"
     }
   }
 }

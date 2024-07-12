@@ -22,7 +22,9 @@
 
 # turbo cache and cookies
 */**/.turbo
+/.turbo/cache
 /.turbo/cookies
+/.turbo/daemon
 
 # vercel
 **/.vercel
