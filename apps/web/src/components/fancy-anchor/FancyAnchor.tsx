@@ -57,7 +57,7 @@ export function FancyAnchor({
         wrapOpportunity = {
           textToWrapChar: textToDisplay.slice(0, i),
           wrapChar: char,
-          textFromWrapChar: textToDisplay.slice(i + 1, textToDisplay.length),
+          textFromWrapChar: textToDisplay.slice(i + 1),
         };
         break;
       }
