@@ -4,9 +4,7 @@ import type React from 'react';
 import { ProjectTile } from '#pkg/components/project-tile/index.js';
 import { QUERIES } from '#pkg/constants-browser.js';
 
-type ProjectsOverviewProps = {};
-
-export const ProjectsOverview: React.FC<ProjectsOverviewProps> = () => {
+export const ProjectsOverview: React.FC = () => {
   return (
     <ProjectsOverviewContainer>
       <ProjectTile

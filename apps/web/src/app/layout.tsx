@@ -3,7 +3,7 @@ import '#pkg/app/style.linaria.global';
 
 import { styled } from '@linaria/react';
 import { Analytics } from '@vercel/analytics/react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import type React from 'react';
 
@@ -189,7 +189,6 @@ export default function RootLayout({ children }: LayoutProps) {
 
 export const metadata: Metadata = {
   metadataBase: config.deploymentOrigin,
-  viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
   openGraph: {
     type: 'website',
     images: [
@@ -212,6 +211,11 @@ export const metadata: Metadata = {
     site: '@pkerschbaum',
     creator: '@pkerschbaum',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 const RootContainer = styled.div`

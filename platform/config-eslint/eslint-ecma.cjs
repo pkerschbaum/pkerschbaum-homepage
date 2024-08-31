@@ -132,16 +132,6 @@ module.exports = {
     'unicorn/prefer-string-replace-all': 'off',
     'unicorn/prefer-top-level-await': 'off',
     'unicorn/prevent-abbreviations': 'off',
-    '@typescript-eslint/ban-types': [
-      'error',
-      {
-        types: {
-          // empty objects can be useful for Conditional Types
-          '{}': false,
-        },
-        extendDefaults: true,
-      },
-    ],
     '@typescript-eslint/class-literal-property-style': 'error',
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/explicit-member-accessibility': [
@@ -171,7 +161,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-redundant-type-constituents': 'off',
     '@typescript-eslint/no-require-imports': 'error',
-    '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-condition': ['error', { allowConstantLoopConditions: true }],
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
     '@typescript-eslint/no-unnecessary-type-arguments': 'error',
