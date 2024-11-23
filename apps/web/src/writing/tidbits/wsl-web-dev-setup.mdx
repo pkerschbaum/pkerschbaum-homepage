@@ -2,7 +2,7 @@
 title: WSL Web Development Setup
 published: true
 publishedAtISO: '2023-05-29T11:24:00.000Z'
-lastUpdatedAtISO: '2023-05-29T11:24:00.000Z'
+lastUpdatedAtISO: '2024-11-23T10:24:00.000Z'
 description: A guide for how to set up a Windows+WSL2 development environment for the Node.js ecosystem.
 tags: ['WSL', 'git', 'Node.js', 'JavaScript', 'VSCode']
 ---
@@ -84,6 +84,9 @@ It shows how to set up
    # Add your SSH private key to the ssh-agent
    ssh-add "/home/pkerschbaum/.ssh/id_rsa_github"
 
+   # Configure the key for github.com in the SSH config file
+   printf "Host github.com\n    IdentityFile ~/.ssh/id_rsa_github" >> ~/.ssh/config
+
    # copy the public key in Windows clipboard
    cat "/home/pkerschbaum/.ssh/id_rsa_github.pub" | clip.exe
    ```
@@ -95,26 +98,28 @@ It shows how to set up
    1. _Key type:_ Keep `Authentication Key`
    1. _Key:_ Use the content of the clipboard (= the public key).
 
-1. Sometimes after I have set up WSL it had strange network issues for outbound connections.  
-   I found some GitHub issues regarding that and one of them mentioned a misconfigured network interface.  
-   That's why nowadays I always do the following one time after setting up WSL (based on <FancyAnchor href="https://github.com/microsoft/WSL/issues/7254#issuecomment-1202299443">AUTOGENERATE</FancyAnchor>):
+## Network setup
 
-   1. Start PowerShell as administrator.
-   1. List the network interfaces of Windows:
+Sometimes after I have set up WSL it had strange network issues for outbound connections.  
+ I found some GitHub issues regarding that and one of them mentioned a misconfigured network interface.  
+ That's why nowadays I always do the following one time after setting up WSL (based on <FancyAnchor href="https://github.com/microsoft/WSL/issues/7254#issuecomment-1202299443">AUTOGENERATE</FancyAnchor>):
 
-      ```powershell
-      netsh interface ipv4 show subinterfaces
-      ```
+1. Start PowerShell as administrator.
+1. List the network interfaces of Windows:
 
-   1. There should be an interface called `"vEthernet (WSL)"`. Also you must have some WiFi interface, in my case it is called `"WiFi"`. Both interfaces should have the same "MTU" value.  
-      If not, run this:
+   ```powershell
+   netsh interface ipv4 show subinterfaces
+   ```
 
-      ```powershell
-      netsh interface ipv4 set subinterface "vEthernet (WSL)" mtu=<MTU-value-of-wifi-interface> store=persistent
-      wsl --shutdown
-      ```
+1. There should be an interface called `"vEthernet (WSL)"`. Also you must have some WiFi interface, in my case it is called `"WiFi"`. Both interfaces should have the same "MTU" value.  
+   If not, run this:
 
-## Node.js (and related tools)
+   ```powershell
+   netsh interface ipv4 set subinterface "vEthernet (WSL)" mtu=<MTU-value-of-wifi-interface> store=persistent
+   wsl --shutdown
+   ```
+
+## Node.js and C/C++ compiler tool chain
 
 1. Instead of installing Node.js directly I like to use `nvm` to be able to have multiple versions of Node.js installed at the same time (you can read more here: <FancyAnchor href="https://pkerschbaum.com/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions">AUTOGENERATE</FancyAnchor>).  
    Run this to install `nvm`:
@@ -157,9 +162,10 @@ It shows how to set up
     # replace v2.10.0 by the newest version
     # you can look it up here: https://github.com/hadolint/hadolint/releases
     wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
+    sudo chmod 777 /usr/bin/hadolint
     ```
 
-  - Set up a multi-architecture Docker builder:
+  - Set up a multi-architecture Docker builder for cross-platform builds:
 
     ```sh
     # from https://unix.stackexchange.com/a/748634
@@ -176,4 +182,5 @@ It shows how to set up
 - Some tips:
 
   - Run `explorer.exe .` in an Ubuntu terminal to open the Windows Explorer at that directory path.
+  - Run `echo "hello world" | clip.exe` to copy "hello world" to the Windows clipboard.
   - Run `wsl --shutdown` in Windows CMD or PowerShell to shutdown the WSL instance.
