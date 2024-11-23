@@ -58,7 +58,8 @@
   "pnpm": {
     "updateConfig": {
       "ignoreDependencies": [
-        "prettier"
+        "prettier",
+        "typescript"
       ]
     },
     "patchedDependencies": {
