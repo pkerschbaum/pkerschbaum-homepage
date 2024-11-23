@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en" className={fontMonospace.variable}>
       <head>
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
-        <link href="https://twitter.com/pkerschbaum" rel="me" />
+        <link href="https://bsky.app/profile/pkerschbaum.com" rel="me" />
         <link
           rel="webmention"
           href={`https://webmention.io/${config.canonicalTLDPlus1}/webmention`}
@@ -205,11 +205,6 @@ export const metadata: Metadata = {
     ],
     siteName: config.canonicalTLDPlus1,
     url: '/',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@pkerschbaum',
-    creator: '@pkerschbaum',
   },
 };
 

@@ -20,8 +20,12 @@ export const config = {
   featureFlags: {
     projects: isDevEnvironment,
   },
-  socialMediaLinks: {
-    linkedIn: 'https://www.linkedin.com/in/pkerschbaum',
+  socialMedia: {
+    handles: {
+      gitHub: 'pkerschbaum',
+      linkedIn: 'pkerschbaum',
+      bsky: 'pkerschbaum.com',
+    },
   },
   canonicalTLDPlus1: 'pkerschbaum.com',
 };

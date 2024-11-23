@@ -1,27 +1,37 @@
 import { styled } from '@linaria/react';
 import type React from 'react';
-import { GitHub, Linkedin, Twitter } from 'react-feather';
+import { GitHub, Linkedin } from 'react-feather';
 
+import { Bsky } from '#pkg/components/icon-library/index.js';
 import { config } from '#pkg/config.js';
 import { Anchor, type AnchorProps } from '#pkg/elements/index.js';
 
 export const SocialMediaLinks: React.FC = () => (
   <LinksList>
     <LinkElement title="GitHub">
-      <SocialMediaAnchor href="https://github.com/pkerschbaum/" aria-label="GitHub">
+      <SocialMediaAnchor
+        href={`https://github.com/${config.socialMedia.handles.gitHub}/`}
+        aria-label="GitHub"
+      >
         <GitHub />
       </SocialMediaAnchor>
     </LinkElement>
 
     <LinkElement title="LinkedIn">
-      <SocialMediaAnchor href={config.socialMediaLinks.linkedIn} aria-label="LinkedIn">
+      <SocialMediaAnchor
+        href={`https://www.linkedin.com/in/${config.socialMedia.handles.linkedIn}`}
+        aria-label="LinkedIn"
+      >
         <Linkedin />
       </SocialMediaAnchor>
     </LinkElement>
 
-    <LinkElement title="Twitter">
-      <SocialMediaAnchor href="https://twitter.com/pkerschbaum/" aria-label="Twitter">
-        <Twitter />
+    <LinkElement title="Bluesky">
+      <SocialMediaAnchor
+        href={`https://bsky.app/profile/${config.socialMedia.handles.bsky}/`}
+        aria-label="Bluesky"
+      >
+        <Bsky />
       </SocialMediaAnchor>
     </LinkElement>
   </LinksList>
