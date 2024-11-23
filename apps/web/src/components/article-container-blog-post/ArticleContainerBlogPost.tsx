@@ -14,7 +14,7 @@ import {
   TocAside,
   Timestamps,
 } from '#pkg/components/article-components/index.js';
-import { TwitterInteractionSection } from '#pkg/components/article-container-blog-post/TwitterInteractionSection.jsx';
+import { BskyInteractionSection } from '#pkg/components/article-container-blog-post/BskyInteractionSection.jsx';
 import { Main } from '#pkg/components/main/index.js';
 import { TableOfContents } from '#pkg/components/table-of-contents/index.js';
 import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
@@ -66,7 +66,7 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
           </Article>
         </TocAndArticle>
 
-        <TwitterInteractionSection mdxParseResult={mdxParseResult} />
+        <BskyInteractionSection mdxParseResult={mdxParseResult} />
 
         <ContactTeaserWrapper>
           <ContactTeaser>
@@ -75,11 +75,11 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
             <p>
               Great, then let&apos;s keep in touch!{' '}
               <Anchor
-                href="https://twitter.com/intent/follow?screen_name=pkerschbaum"
+                href="https://bsky.app/profile/pkerschbaum.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Follow me on Twitter
+                Follow me on Bluesky
               </Anchor>
               , I tweet about TypeScript, testing and web development in general - and of course
               about updates on my own blog posts.
