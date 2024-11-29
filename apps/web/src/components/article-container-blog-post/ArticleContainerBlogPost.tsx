@@ -76,7 +76,7 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
               >
                 Follow me on Bluesky
               </Anchor>
-              , I tweet about TypeScript, testing and web development in general - and of course
+              , I post about TypeScript, testing and web development in general - and of course
               about updates on my own blog posts.
             </p>
           </ContactTeaser>
