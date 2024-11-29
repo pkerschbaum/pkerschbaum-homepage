@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import { arrays } from '@pkerschbaum/commons-ecma/util/arrays';
 import dayjs from 'dayjs';
 import type React from 'react';

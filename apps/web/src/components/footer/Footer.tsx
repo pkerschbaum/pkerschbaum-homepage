@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import dayjs from 'dayjs';
 import Link from 'next/link.js';
 import type React from 'react';

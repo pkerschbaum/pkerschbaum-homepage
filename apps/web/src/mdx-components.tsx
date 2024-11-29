@@ -1,5 +1,5 @@
 'use client';
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import { check } from '@pkerschbaum/commons-ecma/util/assert';
 import type { MDXComponents } from 'mdx/types.js';
 import React from 'react';
@@ -109,11 +109,11 @@ const HeadingAnchor = styled(Anchor)`
     text-decoration: underline;
   }
 
-  &:not(:hover) ${HeadingAnchorIcon} {
+  &:not(:hover) ${HeadingAnchorIcon as any} {
     opacity: 0;
   }
 
-  &:hover ${HeadingAnchorIcon} {
+  &:hover ${HeadingAnchorIcon as any} {
     opacity: initial;
   }
 `;

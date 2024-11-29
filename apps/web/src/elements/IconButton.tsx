@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 
 import { Button, type ButtonProps } from '#pkg/elements/Button.jsx';
 

@@ -60,7 +60,6 @@ module.exports = {
     ...(baseEslintConfig.ignorePatterns ?? []),
     ...(reactEslintConfig.ignorePatterns ?? []),
     ...(nextEslintConfig.ignorePatterns ?? []),
-    'linaria.config.cjs',
     'next-sitemap.cjs',
     'stylelint.config.cjs',
     'dist-tsc/**',

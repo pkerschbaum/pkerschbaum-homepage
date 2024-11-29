@@ -1,5 +1,5 @@
 'use client';
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import type React from 'react';
 import { Moon, Sun } from 'react-feather';
 

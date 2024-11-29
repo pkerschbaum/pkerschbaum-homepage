@@ -1,7 +1,8 @@
+import '@pigment-css/react/styles.css';
 import '@fontsource-variable/rubik';
 import '#pkg/app/style.linaria.global';
 
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';

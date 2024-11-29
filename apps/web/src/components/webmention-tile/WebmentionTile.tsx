@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import { assertIsUnreachable } from '@pkerschbaum/commons-ecma/util/assert';
 import dayjs from 'dayjs';
 import type React from 'react';

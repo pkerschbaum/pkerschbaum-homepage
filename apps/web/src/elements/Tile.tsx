@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 
 import { Anchor } from '#pkg/elements/Anchor.jsx';
 

@@ -1,6 +1,6 @@
 // @ts-check
 import createMDX from '@next/mdx';
-import withLinaria from 'next-with-linaria';
+import { withPigment } from '@pigment-css/nextjs-plugin';
 import { withSentryConfig } from '@sentry/nextjs';
 
 import { createMdxOptions } from '@pkerschbaum-homepage/mdx/mdx';
@@ -68,7 +68,7 @@ const withMDX = createMDX({
 
 nextConfig = withMDX(nextConfig);
 
-nextConfig = withLinaria(nextConfig);
+nextConfig = withPigment(nextConfig);
 
 nextConfig = withSentryConfig(nextConfig, {
   // For all available options, see:

@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 
 import { TOC_QUERY } from '#pkg/constants-browser.js';
 import { CodeBlockContainer } from '#pkg/mdx-components.jsx';
@@ -98,7 +98,7 @@ export const ArticleContent = styled.div`
     Code blocks should span entire width.
     We have to undo the app padding and margin-inline-start of ul/ol list elements (if a code block is inside such an element).
    */
-  & > ${CodeBlockContainer} {
+  & > ${CodeBlockContainer as any} {
     /* add some margin-block-start so that there is some space between the copy button and any text before the code block. */
     margin-block-start: calc(3 * var(--spacing-base));
     margin-inline-start: calc(-1 * var(--app-padding-inline));
@@ -107,11 +107,11 @@ export const ArticleContent = styled.div`
   &
     ul
     > li
-    > ${/* sc-selector */ CodeBlockContainer},
+    > ${/* sc-selector */ CodeBlockContainer as any},
     &
     ol
     > li
-    > ${/* sc-selector */ CodeBlockContainer} {
+    > ${/* sc-selector */ CodeBlockContainer as any} {
     width: calc(100% + 2 * var(--app-padding-inline) + var(--ul-padding-inline-start));
     margin-inline-start: calc(-1 * (var(--app-padding-inline) + var(--ul-padding-inline-start)));
   }
@@ -119,22 +119,22 @@ export const ArticleContent = styled.div`
     ul
     ul
     > li
-    > ${/* sc-selector */ CodeBlockContainer},
+    > ${/* sc-selector */ CodeBlockContainer as any},
     &
     ol
     ol
     > li
-    > ${/* sc-selector */ CodeBlockContainer},
+    > ${/* sc-selector */ CodeBlockContainer as any},
     &
     ul
     ol
     > li
-    > ${/* sc-selector */ CodeBlockContainer},
+    > ${/* sc-selector */ CodeBlockContainer as any},
     &
     ol
     ul
     > li
-    > ${/* sc-selector */ CodeBlockContainer} {
+    > ${/* sc-selector */ CodeBlockContainer as any} {
     width: calc(100% + 2 * var(--app-padding-inline) + 2 * var(--ul-padding-inline-start));
     margin-inline-start: calc(
       -1 * (var(--app-padding-inline) + 2 * var(--ul-padding-inline-start))
