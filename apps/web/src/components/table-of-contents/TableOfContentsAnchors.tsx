@@ -134,8 +134,8 @@ export const TableOfContentsAnchors: React.FC<TableOfContentsAnchorsProps> = ({ 
   const highlightedHeadingId: string | undefined =
     lastScrolledToHeading && !lastScrolledToHeading.wentOutOfViewport
       ? lastScrolledToHeading.id
-      : headingsAboveTheFold.idOfFirstHeadingInViewport ??
-        headingsAboveTheFold.idOfLastHeadingAboveTheFold;
+      : (headingsAboveTheFold.idOfFirstHeadingInViewport ??
+        headingsAboveTheFold.idOfLastHeadingAboveTheFold);
 
   return (
     <>

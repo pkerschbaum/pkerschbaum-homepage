@@ -48,7 +48,11 @@ type LayoutProps = {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className={fontMonospace.variable}>
+    <html
+      lang="en"
+      className={fontMonospace.variable}
+      {...{ [DataAttribute.IS_SCROLLED]: IsScrolled.NO }}
+    >
       <head>
         {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
         <link href="https://bsky.app/profile/pkerschbaum.com" rel="me" />

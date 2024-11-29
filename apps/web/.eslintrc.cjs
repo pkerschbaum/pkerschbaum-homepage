@@ -97,6 +97,7 @@ module.exports = {
         ],
       },
     ],
+    'unicorn/prefer-global-this': 'off',
   },
   overrides: [
     ...(baseEslintConfig.overrides ?? []),

@@ -21,8 +21,8 @@ export const Footer: React.FC = () => {
 
 const FooterContainer = styled.footer`
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   gap: calc(2 * var(--spacing-base));
   align-items: center;
 

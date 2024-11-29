@@ -343,24 +343,24 @@ export type UserGetPayload<
 > = S extends true
   ? User
   : S extends undefined
-  ? never
-  : S extends UserArgs | UserFindManyArgs
-  ? 'include' extends U
-    ? User & {
-        [P in TrueKeys<S['include']>]: P extends 'orgUnit'
-          ? OrgUnitGetPayload<S['include'][P]>
-          : never;
-      }
-    : 'select' extends U
-    ? {
-        [P in TrueKeys<S['select']>]: P extends 'orgUnit'
-          ? OrgUnitGetPayload<S['select'][P]>
-          : P extends keyof User
-          ? User[P]
-          : never;
-      }
-    : User
-  : User;
+    ? never
+    : S extends UserArgs | UserFindManyArgs
+      ? 'include' extends U
+        ? User & {
+            [P in TrueKeys<S['include']>]: P extends 'orgUnit'
+              ? OrgUnitGetPayload<S['include'][P]>
+              : never;
+          }
+        : 'select' extends U
+          ? {
+              [P in TrueKeys<S['select']>]: P extends 'orgUnit'
+                ? OrgUnitGetPayload<S['select'][P]>
+                : P extends keyof User
+                  ? User[P]
+                  : never;
+            }
+          : User
+      : User;
 ```
 
 Turns out that these type definitions do all sorts of analysis and type mapping.  
