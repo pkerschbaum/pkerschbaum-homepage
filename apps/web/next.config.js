@@ -47,17 +47,6 @@ let nextConfig = {
     ];
   },
 
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'webmention.io',
-        port: '',
-        pathname: '/avatar/**',
-      },
-    ],
-  },
-
   // include .md and .mdx files, see https://nextjs.org/docs/app/building-your-application/configuring/mdx#configure-nextconfigmjs
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };

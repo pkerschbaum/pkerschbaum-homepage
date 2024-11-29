@@ -54,14 +54,6 @@ export default function RootLayout({ children }: LayoutProps) {
       {...{ [DataAttribute.IS_SCROLLED]: IsScrolled.NO }}
     >
       <head>
-        {/* links for IndieAuth and webmention.io (https://mxb.dev/blog/using-webmentions-on-static-sites/, https://webmention.io) */}
-        <link href="https://bsky.app/profile/pkerschbaum.com" rel="me" />
-        <link
-          rel="webmention"
-          href={`https://webmention.io/${config.canonicalTLDPlus1}/webmention`}
-        />
-        <link rel="pingback" href={`https://webmention.io/${config.canonicalTLDPlus1}/xmlrpc`} />
-
         {/* favicons block generated with https://realfavicongenerator.net */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
