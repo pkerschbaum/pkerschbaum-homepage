@@ -95,7 +95,7 @@ Consequently, to update TypeScript to a new version, this procedure is required:
    ```bash
    pnpm --package=\"@pkerschbaum/pkg-management@2.1.0\" dlx create-pnpm-patch-via-ts-patch \
       --typescript-version=5.7.2 \ # <-- new version of `typescript` here
-      --ts-patch-version=3.2.1 # <-- latest version of `ts-patch` here
+      --ts-patch-version=3.3.0 # <-- latest version of `ts-patch` here
    ```
 
 In the future, when all tools (like Node.js, Next.js builds, Playwright, ...) support ["subpath imports"](https://nodejs.org/api/packages.html#subpath-imports) correctly, we can configure `#pkg/*` imports via subpath imports and remove that "patching" approach altogether.
