@@ -47,6 +47,16 @@ let nextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/tidbits/wsl-web-dev-setup',
+        destination: '/tidbits/wsl-and-ubuntu-web-dev-setup',
+        permanent: true,
+      },
+    ];
+  },
+
   // include .md and .mdx files, see https://nextjs.org/docs/app/building-your-application/configuring/mdx#configure-nextconfigmjs
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
