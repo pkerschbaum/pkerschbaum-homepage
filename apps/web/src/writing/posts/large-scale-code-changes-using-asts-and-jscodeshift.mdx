@@ -1,0 +1,178 @@
+---
+title: Large-scale code changes using ASTs and jscodeshift
+published: true
+publishedAtISO: '2024-12-22T13:00:00.000Z'
+description: TODO
+tags: ['TODO']
+---
+
+Recently had a challenge:  
+**CJS to ESM migration of a medium-sized monorepo**
+
+Thing is: Node.js does, in ESM modules, not "guess" the full paths:
+
+```ts
+// assuming "./constants.js" exists, this import works in CJS but not ESM!
+import * as constants from './constants';
+
+// this works in ESM (and CJS)
+import * as constants from './constants.js';
+```
+
+→ Consequence: need to adapt module specifiers during CJS to ESM migration!
+
+**The case: monorepo `mfm-online/mfm-online`**
+
+- **512** TypeScript files, 99% CJS modules
+- **1283** module specifiers to fix
+  - (`import` statements, `export` statements, `declare module`)
+  - e.g.
+    - `import { BREAKPOINTS } from './constants'`
+    - `import { BREAKPOINTS } from '#pkg/constants'`
+
+**First attempt**
+
+Regex search-replace via VS Code.
+
+But that didn't work because the "full path" of a module specifier is not easy to determine:
+
+```ts
+// this "coarse" module specifier...
+import * as constants from './constants';
+
+// ...could be:
+import * as constants from './constants.js';
+import * as constants from './constants.cjs';
+import * as constants from './constants/index.js';
+import * as constants from './constants/index.cjs';
+```
+
+**Idea**
+
+- process each file
+- detect all module specifiers
+- for each module specifier
+  - find out what the specifier _actually_ points to (`.js`, `./index.js`, etc.)
+  - change the specifier accordingly
+
+→ The most sophisticated regex search-replace cannot do this!
+
+**Introducing: Abstract Syntax Tree (AST)**
+
+We can parse code and transform it to a datastructure - an _abstract syntax tree_.
+
+- allows to work with **_nodes_** in a **_precise_** manner
+- (instead of appling **_string/regex pattern matching_**, which is **_fuzzy_**)
+
+Very similar to the DOM tree!
+
+**Analyzing ASTs of code via explorer:**
+
+- [astexplorer.net](http://astexplorer.net)
+  - Set `@typescript-eslint/parser` as parser!
+- [astexplorer example](https://astexplorer.net/#/gist/1f620454416fa13ce88e65d626c32816/eb0b214e68c1c19f35f3cf00e4c29fba2bc824d2)
+
+**Introducing: [facebook/jscodeshift](https://github.com/facebook/jscodeshift)**
+
+JavaScript library to work with code and ASTs.
+
+- can parse code to generate an AST, and transform an AST back to code
+- has helpers:
+  - find and mutate AST nodes
+  - strongly-typed AST node types (e.g. `j.ImportDeclaration`)
+
+Used by
+
+- Nuxt codemods ([source](https://github.com/codemod-com/codemod/blob/3c6da58be44b18c88d7ce05f3257450eabdf72e4/packages/codemod-utils/package.json#L37))
+- Next.js codemods ([source](https://github.com/vercel/next.js/blob/8f99ab20aed876b7436fba3534fe554666a9db46/packages/next-codemod/package.json#L17))
+- Prisma codemods ([source](https://github.com/prisma/codemods/blob/db3fea927c79ef4c48a3df3876d1724e4e451e78/package.json#L39))
+- etc.
+
+**Example:**
+
+```ts
+import fs from 'node:fs';
+import j from 'jscodeshift';
+
+// load code of source file and its AST
+const text = await fs.promises.readFile('./constants.ts', 'utf8');
+const programNode = j.withParser('tsx')(text);
+
+// find all import declarations
+const astNodesImportDeclarations = programNode.find(j.ImportDeclaration, {
+  source: {
+    type: 'Literal',
+  },
+});
+
+// find all module specifiers
+const astNodesModuleSpecifiers = astNodesImportDeclarations.find(j.Literal);
+
+// mutate them in-place
+astNodesModuleSpecifiers.forEach((astPath) => {
+  const astNode = astPath.node;
+
+  const originalModuleSpecifier = astNode.value;
+  // originalModuleSpecifier='./constants', newModuleSpecifier='./constants.js'
+  const newModuleSpecifier = resolveModuleSpecifierToFullPath(originalModuleSpecifier);
+  astNode.value = newModuleSpecifier;
+});
+
+// produce code from AST and write it back
+const newText = programNode.toSource();
+await fs.promises.writeFile('./constants.ts', newText, 'utf8');
+```
+
+Note: other types of nodes to capture:
+
+- `export ... from <MODULE_SPECIFIER>`
+- `declare module <MODULE_SPECIFIER>`
+- `require(<MODULE_SPECIFIER>)`
+- ...actually **9 ways** to use module specifiers as of Nov 2024
+
+Result: `@pkerschbaum/codemod-rewrite-module-specifiers-to-full-paths` ([npmjs.com](https://www.npmjs.com/package/@pkerschbaum/codemod-rewrite-module-specifiers-to-full-paths), [github.com](https://github.com/pkerschbaum/packages/tree/main/packages/codemod-rewrite-module-specifiers-to-full-paths))
+
+- worked for the monorepo migration!
+
+Bonus point: ESLint `no-restricted-syntax`
+
+- allows to forbid code patterns based on AST
+- the CSS-style syntax is <https://github.com/estools/esquery>.
+
+E.g.:
+
+```ts
+{
+  'no-restricted-syntax': [
+			'error',
+			{
+				selector:
+					"VariableDeclarator:has(ObjectPattern):has(MemberExpression:has(Identifier[name='process']):has(Identifier[name='env']))",
+				message:
+					'Do not use destructuring for "process.env".'
+			}
+		]
+}
+```
+
+**Appendix: 3 JavaScript-relevant AST formats**
+
+- ESTree ("ECMAScript Tree", <https://github.com/estree/estree>)
+  - community standard
+  - used by e.g. ESLint, Prettier
+  - "general purpose" AST
+- TypeScript AST
+  - used by TypeScript
+  - optimized for parsing incomplete code and typechecking
+- TSESTree
+  - generated by [`@typescript-eslint/parser`](https://typescript-eslint.io/packages/parser/)
+  - ESTree which is extended with information of the TypeScript AST
+
+**Appendix: some resources**
+
+- <https://typescript-eslint.io/blog/asts-and-typescript-eslint/>
+- <https://typescript-eslint.io/packages/typescript-estree/ast-spec/>
+- <https://explorer.eslint.org/>
+- <https://eslint.org/docs/latest/rules/no-restricted-syntax>
+- <https://github.com/facebook/jscodeshift>
+- <https://github.com/estools/esquery>
