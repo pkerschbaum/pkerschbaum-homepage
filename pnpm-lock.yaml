@@ -143,8 +143,8 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1
       '@pkerschbaum/fetch-favicon':
-        specifier: ^1.0.8
-        version: 1.0.8(playwright@1.49.1)
+        specifier: ^1.1.0
+        version: 1.1.0(playwright@1.49.1)
       '@sentry/nextjs':
         specifier: ^8.47.0
         version: 8.47.0(@opentelemetry/core@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.56.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.0(@opentelemetry/api@1.9.0))(next@14.2.21(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.97.1)
@@ -1433,8 +1433,8 @@ packages:
   '@pkerschbaum/commons-node@2.2.0':
     resolution: {integrity: sha512-WXaB0zbdBCQzRnB9qcbQH0Gs89/cKZj374JeSj/mgnua8ukqQlCDMM60vUhgvFWyilEaXG2VfOeVpgp1JowVKQ==}
 
-  '@pkerschbaum/fetch-favicon@1.0.8':
-    resolution: {integrity: sha512-yiGBYEvuNgprYMESDZC0Gz8wt8eEyfTbbNJTjOkgqJQJ6F/2xfkEsy/YxLmVTo5orjonrmGV/cXUlo3wWxY4ow==}
+  '@pkerschbaum/fetch-favicon@1.1.0':
+    resolution: {integrity: sha512-scdi80L5bcBo/tjYgyocSAVk5iQcUEP2JrhnN6OEaEMUFmKbS6Ur00HjXqUV98cMSufauCrkM20x+QmqyUsMHA==}
     peerDependencies:
       playwright: ^1.35.0
 
@@ -6551,7 +6551,7 @@ snapshots:
     dependencies:
       '@pkerschbaum/commons-ecma': 2.4.1
 
-  '@pkerschbaum/fetch-favicon@1.0.8(playwright@1.49.1)':
+  '@pkerschbaum/fetch-favicon@1.1.0(playwright@1.49.1)':
     dependencies:
       '@pkerschbaum/commons-ecma': 2.4.1
       '@pkerschbaum/commons-node': 2.2.0

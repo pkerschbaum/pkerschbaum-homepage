@@ -35,7 +35,7 @@
     "@opentelemetry/sdk-trace-base": "^1.30.0",
     "@pkerschbaum-homepage/mdx": "workspace:*",
     "@pkerschbaum/commons-ecma": "^2.4.1",
-    "@pkerschbaum/fetch-favicon": "^1.0.8",
+    "@pkerschbaum/fetch-favicon": "^1.1.0",
     "@sentry/nextjs": "^8.47.0",
     "@types/mdast": "^4.0.4",
     "acorn": "^8.14.0",
