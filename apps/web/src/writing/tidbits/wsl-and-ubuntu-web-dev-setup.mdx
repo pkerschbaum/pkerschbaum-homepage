@@ -36,7 +36,7 @@ It shows how to set up
 
    1. Run:
 
-      ```sh
+      ```bash
       sudo visudo
       ```
 
@@ -51,7 +51,7 @@ It shows how to set up
 
 1. Update and upgrade all packages:
 
-   ```sh
+   ```bash
    sudo apt update && sudo apt upgrade
    ```
 
@@ -80,7 +80,7 @@ Sometimes after I have set up WSL it had strange network issues for outbound con
 
 1. Update git to the latest version and add support for git LFS:
 
-   ```sh
+   ```bash
    sudo apt-get install git
    sudo apt-get install git-lfs
    git lfs install
@@ -88,14 +88,14 @@ Sometimes after I have set up WSL it had strange network issues for outbound con
 
 1. Configure git:
 
-   ```sh
+   ```bash
    git config --global user.name "Your Name"
    git config --global user.email "your_email@example.com"
    ```
 
 1. Create a SSH keypair and add the private key to ssh-agent in Ubuntu (based on <FancyAnchor href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux">AUTOGENERATE</FancyAnchor>):
 
-   ```sh
+   ```bash
    # Generate a SSH keypair
    # When asked for a passphrase, I typically omit that.
    ssh-keygen -t ed25519 -C "your_email@example.com" -f "~/.ssh/id_rsa_github"
@@ -125,7 +125,7 @@ Sometimes after I have set up WSL it had strange network issues for outbound con
 1. Instead of installing Node.js directly I like to use `nvm` to be able to have multiple versions of Node.js installed at the same time (you can read more here: <FancyAnchor href="https://pkerschbaum.com/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions">AUTOGENERATE</FancyAnchor>).  
    Run this to install `nvm`:
 
-   ```sh
+   ```bash
    # replace v0.39.3 by the newest version
    # you can look it up here: https://github.com/nvm-sh/nvm/releases
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -133,13 +133,13 @@ Sometimes after I have set up WSL it had strange network issues for outbound con
 
 1. To be able to compile npm packages which include native C++ addons, via `node-gyp`, we need to install a few things:
 
-   ```sh
+   ```bash
    sudo apt-get install build-essential g++ libx11-dev libxkbfile-dev libsecret-1-dev python-is-python3
    ```
 
 1. npm has a feature to complete commands via the tab key, so let's enable that:
 
-   ```sh
+   ```bash
    npm completion >> ~/.bashrc
    ```
 
@@ -195,7 +195,7 @@ Choose one of the following:
 
 - Install <FancyAnchor href="https://github.com/hadolint/hadolint">`hadolint`</FancyAnchor>:
 
-  ```sh
+  ```bash
   # replace v2.10.0 by the newest version
   # you can look it up here: https://github.com/hadolint/hadolint/releases
   wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
@@ -208,7 +208,7 @@ Choose one of the following:
 
 Set up a multi-architecture Docker builder for cross-platform builds:
 
-```sh
+```bash
 # from https://unix.stackexchange.com/a/748634
 docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
 docker buildx inspect --bootstrap
@@ -216,10 +216,7 @@ docker buildx inspect --bootstrap
 
 ## VS Code
 
-- Install the <FancyAnchor href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL extension</FancyAnchor>, then you can run in an Ubuntu terminal `code .` to start VS Code in that folder.
-
-  VS Code will inherit all environment variables from the WSL terminal, and `nvm` uses environment variables to switch Node.js versions.  
-  As a consequence, VS Code started this way will under-the-hood use the exact version of Node.js you want to use for the project, allowing e.g. git hooks invoked by VS Code to work correctly.
+- Install the extension <FancyAnchor href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL</FancyAnchor>, then you can run in an Ubuntu terminal `code .` to start VS Code in that folder.
 
   I use scripts like below to quickly start development:
 
@@ -227,9 +224,19 @@ docker buildx inspect --bootstrap
   alias pkerschbaum_dev='cd ~/workspace/pkerschbaum-homepage && nvm use && code .'
   ```
 
+  Read more about that here: <FancyAnchor href="https://pkerschbaum.com/tidbits/multiple-vs-code-instances-with-separate-nodejs-versions">AUTOGENERATE</FancyAnchor>.
+
+- To configure VS Code as the tool to edit git commit messages run:
+
+  ```bash
+  git config --global core.editor "code --wait"
+  ```
+
+- Extension <FancyAnchor href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph">Git Graph</FancyAnchor> is a great tool to visualize the git history.
+
 ## Additional things
 
-- [`ngrok`](https://ngrok.com/docs/getting-started/?os=linux) is a great tool to expose a local server to the internet (e.g. to open the web application you work on on your mobile phone).
+- <FancyAnchor href="https://ngrok.com/docs/getting-started/?os=linux">`ngrok`</FancyAnchor> is a great tool to expose a local server to the internet (e.g. to open the web application you work on on your mobile phone).
 - To sync the bash history between terminals, run the following in the Ubuntu terminal to add it to your `.bashrc`:
 
   ```bash
@@ -253,3 +260,10 @@ docker buildx inspect --bootstrap
   - Run `explorer.exe .` in an Ubuntu terminal to open the Windows Explorer at that directory path.
   - Run `echo "hello world" | clip.exe` to copy "hello world" to the Windows clipboard.
   - Run `wsl --shutdown` in Windows CMD or PowerShell to shutdown the WSL instance.
+
+- Some Windows tools:
+
+  - <FancyAnchor href="https://getgreenshot.org/">Greenshot</FancyAnchor> for screenshots.
+  - {/* prettier-ignore */}<FancyAnchor href="https://learn.microsoft.com/en-us/windows/powertoys/?WT.mc_id=twitter-0000-docsmsft">Microsoft PowerToys</FancyAnchor> for various tools like a window manager and a color picker.
+  - <FancyAnchor href="https://www.screentogif.com/">ScreenToGif</FancyAnchor> for creating screen
+    recordings (supports creating `.mkv` videos, despite its name).
