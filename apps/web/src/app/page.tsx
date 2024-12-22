@@ -52,10 +52,10 @@ async function HomePage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Homepage of Patrick Kerschbaum',
+  title: 'Patrick Kerschbaum',
   description: 'Homepage of Patrick Kerschbaum',
   openGraph: {
-    title: 'Homepage of Patrick Kerschbaum',
+    title: 'Patrick Kerschbaum',
     description: 'Homepage of Patrick Kerschbaum',
   },
 };

@@ -30,7 +30,7 @@ const author: Author = {
 };
 
 const feed = new Feed({
-  title: 'Homepage of Patrick Kerschbaum',
+  title: 'Patrick Kerschbaum',
   description:
     'I write articles about JavaScript, TypeScript, Testing, and the web platform in general.',
   id: config.deploymentOrigin.href,
