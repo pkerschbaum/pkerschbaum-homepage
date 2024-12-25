@@ -143,8 +143,8 @@ importers:
         specifier: ^2.4.1
         version: 2.4.1
       '@pkerschbaum/fetch-favicon':
-        specifier: ^1.1.0
-        version: 1.1.0(playwright@1.49.1)
+        specifier: ^1.2.0
+        version: 1.2.0(playwright@1.49.1)
       '@sentry/nextjs':
         specifier: ^8.47.0
         version: 8.47.0(@opentelemetry/core@1.30.0(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.56.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.0(@opentelemetry/api@1.9.0))(next@14.2.21(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.97.1)
@@ -1433,8 +1433,8 @@ packages:
   '@pkerschbaum/commons-node@2.2.0':
     resolution: {integrity: sha512-WXaB0zbdBCQzRnB9qcbQH0Gs89/cKZj374JeSj/mgnua8ukqQlCDMM60vUhgvFWyilEaXG2VfOeVpgp1JowVKQ==}
 
-  '@pkerschbaum/fetch-favicon@1.1.0':
-    resolution: {integrity: sha512-scdi80L5bcBo/tjYgyocSAVk5iQcUEP2JrhnN6OEaEMUFmKbS6Ur00HjXqUV98cMSufauCrkM20x+QmqyUsMHA==}
+  '@pkerschbaum/fetch-favicon@1.2.0':
+    resolution: {integrity: sha512-MWrWvRcw2x9dANPVU5ydBVnDso1jJ2JoCdM+mkZBfqS+MWLYLW/+yzHhEWWa27nwW8Gi5l2MHu/DrGHT+kwwDw==}
     peerDependencies:
       playwright: ^1.35.0
 
@@ -5167,8 +5167,8 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  zx@8.2.4:
-    resolution: {integrity: sha512-g9wVU+5+M+zVen/3IyAZfsZFmeqb6vDfjqFggakviz5uLK7OAejOirX+jeTOkyvAh/OYRlCgw+SdqzN7F61QVQ==}
+  zx@8.3.0:
+    resolution: {integrity: sha512-L8mY3yfJwo3a8ZDD6f9jZzAcRWJZYcV8GauZmBxLB/aSTwaMzMIEVpPp2Kyx+7yF0gdvuxKnMxAZRft9UCawiw==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -6551,7 +6551,7 @@ snapshots:
     dependencies:
       '@pkerschbaum/commons-ecma': 2.4.1
 
-  '@pkerschbaum/fetch-favicon@1.1.0(playwright@1.49.1)':
+  '@pkerschbaum/fetch-favicon@1.2.0(playwright@1.49.1)':
     dependencies:
       '@pkerschbaum/commons-ecma': 2.4.1
       '@pkerschbaum/commons-node': 2.2.0
@@ -6568,7 +6568,7 @@ snapshots:
       '@pnpm/logger': 5.2.0
       commander: 12.1.0
       tempy: 3.1.0
-      zx: 8.2.4
+      zx: 8.3.0
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -11141,7 +11141,7 @@ snapshots:
 
   zwitch@2.0.4: {}
 
-  zx@8.2.4:
+  zx@8.3.0:
     optionalDependencies:
       '@types/fs-extra': 11.0.4
       '@types/node': 22.10.2
