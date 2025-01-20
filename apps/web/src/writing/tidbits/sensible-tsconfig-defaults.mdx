@@ -22,6 +22,7 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
     "strict": true,
 
     /* Modules */
+    "noUncheckedSideEffectImports": true,
     "paths": {
       "#pkg/*": ["./src/*"],
     },
@@ -167,6 +168,20 @@ According to a <FancyAnchor href="https://youtu.be/cLxNdLK--yI">Chrome Developer
 {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#incremental">#incremental docs</FancyAnchor>
 
 Will improve compilation times after the first run.
+
+## Enabling `"noUncheckedSideEffectImports"`
+
+{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig/#noUncheckedSideEffectImports">#noUncheckedSideEffectImports docs</FancyAnchor>
+
+By default, TypeScript does not check whether a side-effect imported file like this:
+
+```ts
+import './my-file.js';
+```
+
+...actually exists on the file system.
+
+With the option `noUncheckedSideEffectImports` enabled, TypeScript will check this and emit an error if the file does not exist.
 
 ## And the others?
 
