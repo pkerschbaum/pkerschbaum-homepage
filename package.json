@@ -11,7 +11,7 @@
     "nuke:artifacts": "pnpm --parallel run nuke:artifacts",
     "nuke:compute-cache": "del-cli --dot=true \"*/**/.turbo\"",
     "nuke:node-modules": "del-cli --dot=true \"**/node_modules\"",
-    "prepare": "node --eval \"process.exit(process.env.CI === 'true' ? 0 : -1)\" || (husky install && pnpm exec add-all-tsconfigs-as-project-references --monorepo-path=. --tsconfig-filename=\"tsconfig.project.json\")"
+    "prepare": "node --eval \"process.exit(process.env.CI === 'true' ? 0 : -1)\" || (husky && pnpm exec add-all-tsconfigs-as-project-references --monorepo-path=. --tsconfig-filename=\"tsconfig.project.json\")"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.2.2",
@@ -41,7 +41,7 @@
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.10",
     "turbo": "^2.4.4",
-    "typescript": "~5.7",
+    "typescript": "~5.8.2",
     "typescript-transform-paths": "^3.5.4"
   },
   "dependenciesMeta": {
@@ -65,7 +65,7 @@
       ]
     },
     "patchedDependencies": {
-      "typescript@5.7.2": "patches/typescript@5.7.2.patch"
+      "typescript@5.8.2": "patches/typescript@5.8.2.patch"
     }
   }
 }
