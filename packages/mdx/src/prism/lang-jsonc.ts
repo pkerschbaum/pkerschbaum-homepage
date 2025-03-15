@@ -1,4 +1,4 @@
-import type { refractor } from 'refractor/lib/all.js';
+import type { refractor } from 'refractor/all';
 
 export const jsonc = (arg: unknown) => {
   const Prism = arg as typeof refractor;

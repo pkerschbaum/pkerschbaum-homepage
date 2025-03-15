@@ -165,14 +165,17 @@ export const GlobalAppStyles = css`
 
       /* https://www.joshwcomeau.com/shadow-palette/ */
       --shadow-color: 0deg 0% 63%;
-      --shadow-elevation-low: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      --shadow-elevation-low:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
         0.2px 0.4px 0.7px hsl(var(--shadow-color) / 23%),
         0.4px 0.8px 1.3px hsl(var(--shadow-color) / 46%);
-      --shadow-elevation-medium: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      --shadow-elevation-medium:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
         0.5px 1px 1.7px hsl(var(--shadow-color) / 18%),
         1.1px 2px 3.4px hsl(var(--shadow-color) / 36%),
         2.2px 4.1px 7px hsl(var(--shadow-color) / 54%);
-      --shadow-elevation-high: 0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+      --shadow-elevation-high:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
         1.1px 2.1px 3.6px hsl(var(--shadow-color) / 8%),
         2px 3.7px 6.3px hsl(var(--shadow-color) / 17%),
         2.9px 5.5px 9.3px hsl(var(--shadow-color) / 25%),
@@ -277,7 +280,8 @@ export const GlobalAppStyles = css`
 
     code {
       /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
-      font-family: var(--font-family-monospace), 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
+      font-family:
+        var(--font-family-monospace), 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
         'Liberation Mono', Monaco, 'Lucida Console', monospace;
       font-size: var(--font-size-sm);
     }
@@ -308,15 +312,15 @@ export const PrismStyles = css`
 
     code[class*='language-'],
     pre[class*='language-'] {
-      hyphens: none;
       line-height: 1.5;
       text-align: left;
+      word-spacing: normal;
+      hyphens: none;
       word-break: normal;
       word-wrap: normal;
       tab-size: 4;
       white-space: pre;
       background: none;
-      word-spacing: normal;
     }
 
     /* Code blocks */

@@ -1,4 +1,4 @@
-import type { refractor } from 'refractor/lib/all.js';
+import type { refractor } from 'refractor/all';
 
 // Prisma language configuration for Prism.js taken from https://github.com/prisma/docs/blob/c72eb087fcf57f3c00d153f86c549ef28b3d0f44/src/components/customMdx/prism/prism-prisma.js
 /* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group */
