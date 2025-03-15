@@ -2,9 +2,6 @@
   "extends": "@pkerschbaum-homepage/config-typescript/tsconfig.json",
   "compilerOptions": {
     /* Modules */
-    "paths": {
-      "#pkg/*": ["./src/*"]
-    },
     "rootDir": "./src",
     "types": ["node"],
 

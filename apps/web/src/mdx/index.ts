@@ -1,1 +1,1 @@
-export * from '#pkg/mdx/mdx.js';
+export * from '@pkerschbaum-homepage/mdx-blog/mdx';

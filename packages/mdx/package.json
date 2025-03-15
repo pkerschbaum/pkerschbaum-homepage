@@ -1,18 +1,13 @@
 {
   "name": "@pkerschbaum-homepage/mdx",
-  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*"
-      ]
-    }
   },
   "scripts": {
     "build": "pnpm run internal:compile",

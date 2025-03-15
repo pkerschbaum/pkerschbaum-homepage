@@ -2,13 +2,8 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     /* Modules */
-    "paths": {
-      "#pkg/*": ["./src/*"],
-      "#pkg-test/*": ["./test/*"]
-    },
-    "rootDir": null,
-    "rootDirs": ["./src", "./test"]
+    "rootDir": "./src"
   },
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["**/node_modules"]
 }

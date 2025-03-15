@@ -6,7 +6,6 @@
 
 # build artifacts
 **/dist
-**/dist-tsc
 **/*.tsbuildinfo
 
 # misc

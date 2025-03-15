@@ -3,7 +3,6 @@ pnpm-lock.yaml
 
 # build artifacts
 **/dist
-**/dist-tsc
 **/public
 
 # coverage
