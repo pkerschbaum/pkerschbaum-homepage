@@ -61,6 +61,9 @@
         "next-with-linaria",
         "eslint"
       ]
+    },
+    "patchedDependencies": {
+      "@pigment-css/nextjs-plugin@0.0.30": "patches/@pigment-css__nextjs-plugin@0.0.30.patch"
     }
   }
 }
