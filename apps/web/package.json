@@ -72,6 +72,6 @@
     "stylelint-config-standard-scss": "^14.0.0"
   },
   "engines": {
-    "node": "^22.11.0"
+    "node": "^22.14.0"
   }
 }
