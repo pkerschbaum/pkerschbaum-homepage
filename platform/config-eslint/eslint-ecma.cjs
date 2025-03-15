@@ -32,7 +32,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*', 'sentry.*.config.js'],
+  ignorePatterns: ['.eslintrc.cjs', 'dist/**/*'],
   rules: {
     curly: 'error',
     'multiline-comment-style': ['error', 'starred-block'],
