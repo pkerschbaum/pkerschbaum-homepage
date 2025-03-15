@@ -1,6 +1,6 @@
 // @ts-check
 import createMDX from '@next/mdx';
-import withLinaria from 'next-with-linaria';
+import { withPigment } from '@pigment-css/nextjs-plugin';
 
 import { createMdxOptions } from '@pkerschbaum-homepage/mdx/mdx';
 
@@ -66,6 +66,22 @@ const withMDX = createMDX({
 
 nextConfig = withMDX(nextConfig);
 
-nextConfig = withLinaria(nextConfig);
+nextConfig = withPigment(nextConfig, {
+  /**
+   * see {@link https://github.com/callstack/linaria/blob/10302654006e414bfb52e3b4f07773d71b483abe/docs/CONFIGURATION.md} which also applies to Pigment CSS (uses also @wyw-in-js under-the-hood)
+   */
+  classNameSlug: (hash, title, args) => {
+    let titleToUse;
+    if (title === 'className') {
+      /* this is the case when the result of a `css` function call is directly assigned to a `className` JSX prop */
+      titleToUse = 'INLINE';
+    } else {
+      titleToUse = title;
+    }
+    return process.env.NODE_ENV === 'production'
+      ? hash
+      : `${args.file.substring(0, args.file.length - args.ext.length)}_${titleToUse}_${hash}`;
+  },
+});
 
 export default nextConfig;

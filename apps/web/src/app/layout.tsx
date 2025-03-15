@@ -1,12 +1,14 @@
+import './cascade-layers-definition.css';
+import '@pigment-css/react/styles.css';
 import '@fontsource-variable/rubik';
-import '#pkg/app/style.linaria.global';
 
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import type React from 'react';
 
+import { cssReset, cssBase, cssPrismaTheme } from '#pkg/app/global-styles.js';
 import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration.jsx';
 import { Footer } from '#pkg/components/footer/index.js';
 import { Header } from '#pkg/components/header/index.js';
@@ -84,6 +86,10 @@ export default function RootLayout({ children }: LayoutProps) {
           data-api="/p.io/api/event"
           src="/p.io/js/script.js"
         />
+
+        <style dangerouslySetInnerHTML={{ __html: cssReset }} />
+        <style dangerouslySetInnerHTML={{ __html: cssBase }} />
+        <style dangerouslySetInnerHTML={{ __html: cssPrismaTheme }} />
 
         {/* 
               Some critical CSS which will disable animations until some data attribute is set on the 

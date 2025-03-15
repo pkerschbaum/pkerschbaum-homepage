@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import React from 'react';
 
 import type { Heading } from '@pkerschbaum-homepage/mdx/schema';

@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import React from 'react';
 
 import { Classes } from '#pkg/constants-browser.js';

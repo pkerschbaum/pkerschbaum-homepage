@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react';
+import { styled } from '@pigment-css/react';
 import type React from 'react';
 import type { IconProps as ReactFeatherIconProps } from 'react-feather';
 

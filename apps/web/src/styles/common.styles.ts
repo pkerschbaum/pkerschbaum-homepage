@@ -1,4 +1,4 @@
-import { css } from '@linaria/core';
+import { css } from '@pigment-css/react';
 
 export const commonStyles = {
   /**
