@@ -1,0 +1,50 @@
+import matter from 'gray-matter';
+import fs from 'node:fs';
+import path from 'node:path';
+
+import {
+  type MDXFile,
+  type MDXParseResult,
+  schema_frontmatterData,
+} from '@pkerschbaum-homepage/mdx/schema';
+
+export { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
+export type { MDXParseResult } from '@pkerschbaum-homepage/mdx/schema';
+
+export async function getAllMarkdownFiles(absolutePathToDirectory: string): Promise<MDXFile[]> {
+  let files = await fs.promises.readdir(absolutePathToDirectory);
+  files = files.filter((path) => path.endsWith('.mdx'));
+
+  const markdownFiles = await Promise.all(
+    files.map(async (fileName) => {
+      const source = await fs.promises.readFile(
+        path.join(absolutePathToDirectory, fileName),
+        'utf8',
+      );
+
+      const segment = fileName.replace(/\.mdx$/, '');
+      const frontmatter = schema_frontmatterData.parse(matter(source).data);
+      const markdownFile: MDXFile = {
+        frontmatter,
+        segment,
+      };
+
+      return markdownFile;
+    }),
+  );
+
+  const publishedFiles = markdownFiles.filter((file) => file.frontmatter.published);
+
+  return publishedFiles;
+}
+
+export function mapMDXParseResultToMetadata(mdxParseResult: MDXParseResult) {
+  return {
+    title: mdxParseResult.frontmatter.title,
+    description: mdxParseResult.frontmatter.description,
+    openGraph: {
+      title: mdxParseResult.frontmatter.title,
+      description: mdxParseResult.frontmatter.description,
+    },
+  } as const;
+}

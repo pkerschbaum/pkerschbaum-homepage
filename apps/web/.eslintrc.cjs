@@ -62,7 +62,6 @@ module.exports = {
     ...(nextEslintConfig.ignorePatterns ?? []),
     'next-sitemap.cjs',
     'stylelint.config.cjs',
-    'dist-tsc/**',
   ],
   rules: {
     ...baseEslintConfig.rules,

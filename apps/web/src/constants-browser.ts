@@ -1,3 +1,10 @@
+import {
+  DataAttribute as MDXBlogDataAttribute,
+  Classes as MDXBlogClasses,
+} from '@pkerschbaum-homepage/mdx-blog/constants-browser';
+
+export { ClassesAliases, ColorTheme } from '@pkerschbaum-homepage/mdx-blog/constants-browser';
+
 const BREAKPOINTS = {
   tabletMin: 600,
   laptopMin: 900,
@@ -13,7 +20,8 @@ export const QUERIES = {
 export const TOC_QUERY = QUERIES.desktopAndUp;
 
 export enum DataAttribute {
-  THEME = 'data-theme',
+  // eslint-disable-next-line @typescript-eslint/prefer-literal-enum-member
+  THEME = MDXBlogDataAttribute.THEME,
   IS_SCROLLED = 'data-is-scrolled',
   IS_ANIMATION_ENABLED = 'data-is-animation-enabled',
   SECTION_HEADING_ID = 'data-section-heading-id',
@@ -21,11 +29,6 @@ export enum DataAttribute {
 
 export enum LocalStorageKey {
   THEME = 'theme',
-}
-
-export enum ColorTheme {
-  LIGHT = 'light',
-  DARK = 'dark',
 }
 
 export enum IsScrolled {
@@ -40,12 +43,10 @@ export enum IsAnimationEnabled {
 
 export enum Classes {
   JS_REQUIRED = 'js-required',
-  STYLED_ANCHOR = 'styled-anchor',
-  FANCY_ANCHOR_ICON = 'fancy-anchor-icon',
-}
-
-export enum ClassesAliases {
-  FAVICONS = 'favicons',
+  // eslint-disable-next-line @typescript-eslint/prefer-literal-enum-member
+  STYLED_ANCHOR = MDXBlogClasses.STYLED_ANCHOR,
+  // eslint-disable-next-line @typescript-eslint/prefer-literal-enum-member
+  FANCY_ANCHOR_ICON = MDXBlogClasses.FANCY_ANCHOR_ICON,
 }
 
 export enum Animations {

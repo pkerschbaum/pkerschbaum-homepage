@@ -1,5 +1,4 @@
 import { styled } from '@pigment-css/react';
-import { arrays } from '@pkerschbaum/commons-ecma/util/arrays';
 import dayjs from 'dayjs';
 import type React from 'react';
 
@@ -17,15 +16,12 @@ import {
 import { BskyInteractionSection } from '#pkg/components/article-container-blog-post/BskyInteractionSection.jsx';
 import { Main } from '#pkg/components/main/index.js';
 import { TableOfContents } from '#pkg/components/table-of-contents/index.js';
-import { WebmentionTile } from '#pkg/components/webmention-tile/index.js';
 import { Anchor, FullBleedWrapper } from '#pkg/elements/index.js';
 import type { MDXParseResult } from '#pkg/mdx/index.js';
-import type { Webmention } from '#pkg/webmentions/index.js';
 
 export type ArticleContainerBlogPostPropsBase = {
   mdxContent: React.ReactNode;
   mdxParseResult: MDXParseResult;
-  webmentions: Webmention[];
 };
 export type ArticleContainerBlogPostProps = ArticleContainerBlogPostPropsBase & {
   faviconsClassName: string;
@@ -34,7 +30,6 @@ export type ArticleContainerBlogPostProps = ArticleContainerBlogPostPropsBase & 
 export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> = ({
   mdxContent,
   mdxParseResult,
-  webmentions,
   faviconsClassName,
 }) => {
   return (
@@ -81,25 +76,11 @@ export const ArticleContainerBlogPost: React.FC<ArticleContainerBlogPostProps> =
               >
                 Follow me on Bluesky
               </Anchor>
-              , I tweet about TypeScript, testing and web development in general - and of course
+              , I post about TypeScript, testing and web development in general - and of course
               about updates on my own blog posts.
             </p>
           </ContactTeaser>
         </ContactTeaserWrapper>
-
-        {webmentions.length > 0 && (
-          <WebmentionsWrapper>
-            <WebmentionsHeadline>Webmentions</WebmentionsHeadline>
-            <WebmentionsList>
-              {arrays
-                .shallowCopy(webmentions)
-                .sort((a, b) => b.data.published_ts - a.data.published_ts)
-                .map((webmention) => (
-                  <WebmentionTile key={webmention.id} webmention={webmention} />
-                ))}
-            </WebmentionsList>
-          </WebmentionsWrapper>
-        )}
       </ArticleContainer>
     </Main>
   );
@@ -118,20 +99,4 @@ const ContactTeaser = styled.div`
 
 const ContactTeaserHeadline = styled.h2`
   margin-block-start: 0;
-`;
-
-const WebmentionsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: calc(2 * var(--spacing-base));
-`;
-
-const WebmentionsHeadline = styled.h2`
-  margin-block-start: 0;
-`;
-
-const WebmentionsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: calc(4 * var(--spacing-base));
 `;

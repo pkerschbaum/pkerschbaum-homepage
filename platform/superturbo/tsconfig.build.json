@@ -4,9 +4,6 @@
     /* Modules */
     "module": "node16",
     "types": ["node"],
-    "paths": {
-      "#pkg/*": ["./src/*"]
-    },
     "rootDir": "./src",
 
     /* Emit */

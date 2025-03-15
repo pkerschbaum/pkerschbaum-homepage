@@ -2,6 +2,9 @@
   "name": "@pkerschbaum-homepage/superturbo",
   "private": true,
   "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
   "bin": {
     "superturbo": "./src/turbo-wrapper.mjs"
   },
@@ -17,7 +20,7 @@
     "nuke:artifacts": "del-cli --dot=true *.tsbuildinfo"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1"
+    "@types/node": "^22.13.10"
   },
   "peerDependencies": {
     "turbo": "^1.10.16"

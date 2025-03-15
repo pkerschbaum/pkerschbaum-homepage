@@ -1,9 +1,5 @@
-dist-tsc
 public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
 public/rss.xml
 public/rss.json
-
-# Sentry Config File
-.env.sentry-build-plugin

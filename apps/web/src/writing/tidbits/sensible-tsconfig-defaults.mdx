@@ -22,6 +22,7 @@ When I set up a TypeScript package, this is the `tsconfig.json` configuration I 
     "strict": true,
 
     /* Modules */
+    "noUncheckedSideEffectImports": true,
     "paths": {
       "#pkg/*": ["./src/*"],
     },
@@ -156,7 +157,7 @@ A lower target means the emitted JavaScript is supported by more browsers/runtim
 a higher target will lead to smaller and more performant output because modern ECMAScript features (like `async/await`) do not need to be downleveled to more verbose code.
 
 So what target is the best tradeoff here?  
-According to <FancyAnchor href="https://web.dev/publish-modern-javascript/">an article from web.dev</FancyAnchor> and its accompanying <FancyAnchor href="https://youtu.be/cLxNdLK--yI">Chrome Developers video</FancyAnchor> from late 2020, `ES2017` is a good choice:
+According to a <FancyAnchor href="https://youtu.be/cLxNdLK--yI">Chrome Developers video</FancyAnchor> from late 2020, `ES2017` is a good choice:
 
 - It's supported by >95% of the browser market.
 - It includes most of the commonly used modern syntax features (e.g. `async/await`), resulting in significant smaller and more performant code compared to lower targets.
@@ -167,6 +168,20 @@ According to <FancyAnchor href="https://web.dev/publish-modern-javascript/">an a
 {/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig#incremental">#incremental docs</FancyAnchor>
 
 Will improve compilation times after the first run.
+
+## Enabling `"noUncheckedSideEffectImports"`
+
+{/* prettier-ignore */}<FancyAnchor href="https://www.typescriptlang.org/tsconfig/#noUncheckedSideEffectImports">#noUncheckedSideEffectImports docs</FancyAnchor>
+
+By default, TypeScript does not check whether a side-effect imported file like this:
+
+```ts
+import './my-file.js';
+```
+
+...actually exists on the file system.
+
+With the option `noUncheckedSideEffectImports` enabled, TypeScript will check this and emit an error if the file does not exist.
 
 ## And the others?
 

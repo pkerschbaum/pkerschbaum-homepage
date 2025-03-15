@@ -25,7 +25,6 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "strict": true,
 
@@ -34,18 +33,7 @@
     "incremental": true,
 
     /* Completeness */
-    "skipLibCheck": true,
-
-    /* Editor Support */
-    "plugins": [
-      {
-        "transform": "typescript-transform-paths"
-      },
-      {
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
-    ]
+    "skipLibCheck": true
   },
   "exclude": ["**/node_modules"]
 }
