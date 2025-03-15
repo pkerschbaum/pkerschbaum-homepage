@@ -63,7 +63,6 @@
       ]
     },
     "patchedDependencies": {
-      "@pigment-css/nextjs-plugin@0.0.30": "patches/@pigment-css__nextjs-plugin@0.0.30.patch",
       "@wyw-in-js/transform@0.5.5": "patches/@wyw-in-js__transform@0.5.5.patch"
     }
   }

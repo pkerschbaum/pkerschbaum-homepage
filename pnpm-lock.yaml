@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@pigment-css/nextjs-plugin@0.0.30':
-    hash: vilebaf2swsvsvpelpjynowphi
-    path: patches/@pigment-css__nextjs-plugin@0.0.30.patch
   '@wyw-in-js/transform@0.5.5':
     hash: vxjovanejsd7hhs2m2xao3j3oi
     path: patches/@wyw-in-js__transform@0.5.5.patch
@@ -184,7 +181,7 @@ importers:
         version: 1.9.0
       '@pigment-css/nextjs-plugin':
         specifier: ^0.0.30
-        version: 0.0.30(patch_hash=vilebaf2swsvsvpelpjynowphi)(@types/react@18.3.18)(next@15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(typescript@5.8.2)
+        version: 0.0.30(@types/react@18.3.18)(next@15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(typescript@5.8.2)
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -4856,7 +4853,7 @@ snapshots:
   '@oxc-resolver/binding-win32-x64-msvc@5.0.0':
     optional: true
 
-  '@pigment-css/nextjs-plugin@0.0.30(patch_hash=vilebaf2swsvsvpelpjynowphi)(@types/react@18.3.18)(next@15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(typescript@5.8.2)':
+  '@pigment-css/nextjs-plugin@0.0.30(@types/react@18.3.18)(next@15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(typescript@5.8.2)':
     dependencies:
       '@pigment-css/unplugin': 0.0.30(@types/react@18.3.18)(react@19.0.0)(typescript@5.8.2)
       next: 15.2.2(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
