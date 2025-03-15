@@ -6,30 +6,20 @@
       "cache": true,
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
-        "scripts/**",
         "src/**",
-        "next-env-custom.d.ts",
-        "next-env.d.ts",
         "package.json",
         "tsconfig.project.json"
       ],
-      "outputs": ["*.tsbuildinfo"]
+      "outputs": ["dist/**", "*.tsbuildinfo"]
     },
     "lint": {
       "cache": true,
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
-        "../../platform/config-eslint/eslint-react.cjs",
-        "../../platform/config-eslint/eslint-next.cjs",
-        "../../platform/config-stylelint/stylelint.config.cjs",
-        "scripts/**",
         "src/**",
-        "next-env-custom.d.ts",
-        "next-env.d.ts",
         ".eslintrc.cjs",
         "package.json",
-        "stylelint.config.cjs",
         "tsconfig.project.json"
       ],
       "outputs": []
@@ -39,19 +29,12 @@
       "inputs": [
         "../../platform/config-typescript/tsconfig.json",
         "../../platform/config-eslint/eslint-ecma.cjs",
-        "../../platform/config-eslint/eslint-react.cjs",
-        "../../platform/config-eslint/eslint-next.cjs",
-        "../../platform/config-stylelint/stylelint.config.cjs",
-        "scripts/**",
         "src/**",
-        "next-env-custom.d.ts",
-        "next-env.d.ts",
         ".eslintrc.cjs",
         "package.json",
-        "stylelint.config.cjs",
         "tsconfig.project.json"
       ],
-      "outputs": ["scripts/**", "src/**"]
+      "outputs": ["src/**"]
     }
   }
 }

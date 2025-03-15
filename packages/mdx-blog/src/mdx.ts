@@ -1,7 +1,6 @@
-import fs from 'fs';
 import matter from 'gray-matter';
-import type { Metadata } from 'next';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import {
   type MDXFile,
@@ -39,7 +38,7 @@ export async function getAllMarkdownFiles(absolutePathToDirectory: string): Prom
   return publishedFiles;
 }
 
-export function mapMDXParseResultToMetadata(mdxParseResult: MDXParseResult): Metadata {
+export function mapMDXParseResultToMetadata(mdxParseResult: MDXParseResult) {
   return {
     title: mdxParseResult.frontmatter.title,
     description: mdxParseResult.frontmatter.description,
@@ -47,5 +46,5 @@ export function mapMDXParseResultToMetadata(mdxParseResult: MDXParseResult): Met
       title: mdxParseResult.frontmatter.title,
       description: mdxParseResult.frontmatter.description,
     },
-  };
+  } as const;
 }

@@ -64,7 +64,6 @@ module.exports = {
       },
     ],
     'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
-    'import/extensions': ['error', 'ignorePackages'],
     // disable "import/namespace" --> covered by TypeScript
     'import/namespace': 'off',
     'import/newline-after-import': 'error',

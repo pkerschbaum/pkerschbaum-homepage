@@ -11,13 +11,12 @@
     /* Modules */
     "baseUrl": ".",
     "module": "esnext",
-    "moduleResolution": "node",
-    "outDir": "./dist-tsc",
-    "paths": {
-      "#pkg/*": ["./src/*"]
-    },
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "types": ["node", "@types/mdx"],
+
+    /* Emit */
+    "noEmit": true,
 
     /* JavaScript Support */
     "allowJs": true,
@@ -36,6 +35,13 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "dist/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.md", "**/*.mdx"],
-  "exclude": ["**/node_modules", "dist-tsc"]
+  "include": [
+    "next-env.d.ts",
+    "next-env-custom.d.ts",
+    "dist/types/**/*.ts",
+    "src/**/*",
+    "src/**/*.md",
+    "**/*.mdx"
+  ],
+  "exclude": ["**/node_modules"]
 }

@@ -1,5 +1,5 @@
 import { type Author, Feed } from 'feed';
-import fs from 'fs';
+import fs from 'node:fs';
 
 import type { MDXFile } from '@pkerschbaum-homepage/mdx/schema';
 
@@ -11,7 +11,7 @@ import {
   RSS_FEED_XML_PATH,
   RSS_FEED_XML_SLUG,
 } from '#pkg/constants-server.js';
-import { getAllMarkdownFiles } from '#pkg/mdx/index.js';
+import { getAllMarkdownFiles } from '#pkg/mdx.js';
 
 const [posts, tidbits] = await Promise.all([
   getAllMarkdownFiles(PATHS.POSTS),

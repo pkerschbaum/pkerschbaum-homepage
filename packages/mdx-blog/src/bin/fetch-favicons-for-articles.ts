@@ -1,8 +1,8 @@
 import { arrays } from '@pkerschbaum/commons-ecma/util/arrays';
 import { jsonUtil } from '@pkerschbaum/commons-ecma/util/json';
 import { fetchFavicons } from '@pkerschbaum/fetch-favicon';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { parseMDXFileAndCollectHrefs } from '@pkerschbaum-homepage/mdx/mdx';
 

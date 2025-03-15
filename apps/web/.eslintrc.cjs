@@ -63,7 +63,6 @@ module.exports = {
     'linaria.config.cjs',
     'next-sitemap.cjs',
     'stylelint.config.cjs',
-    'dist-tsc/**',
   ],
   rules: {
     ...baseEslintConfig.rules,

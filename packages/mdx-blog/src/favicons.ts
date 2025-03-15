@@ -1,8 +1,9 @@
 import { schema_faviconsForWebsites } from '@pkerschbaum/fetch-favicon';
-import fs from 'fs';
+import fs from 'node:fs';
+
+import type { MDXParseResult } from '@pkerschbaum-homepage/mdx/schema';
 
 import { PATHS } from '#pkg/constants-server.js';
-import type { MDXParseResult } from '#pkg/mdx/index.js';
 
 type IconURLToAssociatedWebsitesMap = {
   [iconURL in string]?: {
