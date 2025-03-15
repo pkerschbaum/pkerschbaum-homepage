@@ -57,9 +57,6 @@
   "pnpm": {
     "updateConfig": {
       "ignoreDependencies": [
-        "@linaria/core",
-        "@linaria/react",
-        "next-with-linaria",
         "eslint",
         "typescript"
       ]
