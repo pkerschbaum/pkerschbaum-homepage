@@ -1,0 +1,30 @@
+diff --git a/esm/module.js b/esm/module.js
+index ad8141a0a5e3c465ad33ab6399970e1f69f8971d..c8fd25ae9e80ee74982f6e7af67452a1aa8de0b1 100644
+--- a/esm/module.js
++++ b/esm/module.js
+@@ -59,7 +59,9 @@ const builtins = {
+   url: true,
+   util: true,
+   vm: true,
+-  zlib: true
++  zlib: true,
++  "node:fs": false,
++  "node:path": false
+ };
+ const NOOP = () => {};
+ function getUncached(cached, test) {
+diff --git a/lib/module.js b/lib/module.js
+index 5e4c1c856df724289373109c409bd71849f88f65..38af02fe225d724ca645f385e6ce69bca312fbe6 100644
+--- a/lib/module.js
++++ b/lib/module.js
+@@ -66,7 +66,9 @@ const builtins = {
+   url: true,
+   util: true,
+   vm: true,
+-  zlib: true
++  zlib: true,
++  "node:fs": false,
++  "node:path": false
+ };
+ const NOOP = () => {};
+ function getUncached(cached, test) {
