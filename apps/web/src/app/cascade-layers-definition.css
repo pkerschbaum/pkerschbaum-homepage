@@ -1,0 +1,2 @@
+/* pigment-css puts all styles in a CSS layer "pigment" but we want to apply some styles with lower priority --> define some layers with appropriate priority */
+@layer reset, base, pigment;

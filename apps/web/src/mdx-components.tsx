@@ -109,11 +109,19 @@ const HeadingAnchor = styled(Anchor)`
     text-decoration: underline;
   }
 
-  &:not(:hover) ${HeadingAnchorIcon as any} {
+  &:not(:hover)
+    ${
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
+      HeadingAnchorIcon as any
+    } {
     opacity: 0;
   }
 
-  &:hover ${HeadingAnchorIcon as any} {
+  &:hover
+    ${
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
+      HeadingAnchorIcon as any
+    } {
     opacity: initial;
   }
 `;
