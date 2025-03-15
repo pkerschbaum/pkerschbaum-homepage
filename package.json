@@ -41,8 +41,7 @@
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.10",
     "turbo": "^2.4.4",
-    "typescript": "~5.8.2",
-    "typescript-transform-paths": "^3.5.4"
+    "typescript": "~5.8.2"
   },
   "dependenciesMeta": {
     "@pkerschbaum-homepage/config-eslint": {
@@ -63,9 +62,6 @@
         "eslint",
         "typescript"
       ]
-    },
-    "patchedDependencies": {
-      "typescript@5.8.2": "patches/typescript@5.8.2.patch"
     }
   }
 }

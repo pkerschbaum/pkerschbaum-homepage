@@ -67,35 +67,3 @@ To fetch the favicons for all articles, run `internal:fetch-favicons` and `inter
 > One way to get all dependencies is to just install Chrome. For Ubuntu, execute this command in a temporary directory:  
 > `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt install ./google-chrome-stable_current_amd64.deb`  
 > See also this link for more information: <https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md>.
-
-### Updating TypeScript
-
-We use the custom transformer (plugin) [`typescript-transform-paths`](https://github.com/LeDDGroup/typescript-transform-paths) in our TypeScript codebase. This enables authoring TypeScript sources with path aliases but during TypeScript compilation, they are replaced by relative paths.  
-That avoids all sorts of difficulties supporting path aliases in Node.js, Next.js, etc.
-
-Such custom transformers (plugins) are not supported by TypeScript out-of-the-box, so we apply [`ts-patch`](https://github.com/nonara/ts-patch) to the `typescript` package.  
-To better incorporate with pnpm (<https://github.com/pnpm/pnpm/issues/6111>) we create a pnpm patch via `ts-patch`, using [`@pkerschbaum/pkg-management`](https://www.npmjs.com/package/@pkerschbaum/pkg-management).
-
-Consequently, to update TypeScript to a new version, this procedure is required:
-
-1. Remove current patch:
-
-   ```bash
-   pnpm patch-remove typescript@5.5.4 # <-- look this up in package.json#pnpm.patchedDependencies
-   ```
-
-1. Update `typescript` everywhere:
-
-   ```bash
-   pnpm -r update typescript@5.7.2 # <-- new version here
-   ```
-
-1. Run:
-
-   ```bash
-   pnpm --package=\"@pkerschbaum/pkg-management@2.1.0\" dlx create-pnpm-patch-via-ts-patch \
-      --typescript-version=5.7.2 \ # <-- new version of `typescript` here
-      --ts-patch-version=3.3.0 # <-- latest version of `ts-patch` here
-   ```
-
-In the future, when all tools (like Node.js, Next.js builds, Playwright, ...) support ["subpath imports"](https://nodejs.org/api/packages.html#subpath-imports) correctly, we can configure `#pkg/*` imports via subpath imports and remove that "patching" approach altogether.

@@ -2,6 +2,9 @@
   "name": "@pkerschbaum-homepage/superturbo",
   "private": true,
   "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
   "bin": {
     "superturbo": "./src/turbo-wrapper.mjs"
   },
