@@ -34,7 +34,7 @@
     "dist/types/**/*.ts",
     "src/**/*",
     "src/**/*.md",
-    "**/*.mdx"
+    "src/**/*.mdx"
   ],
   "exclude": ["**/node_modules"]
 }

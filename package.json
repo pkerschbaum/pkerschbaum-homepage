@@ -59,8 +59,7 @@
         "@linaria/core",
         "@linaria/react",
         "next-with-linaria",
-        "eslint",
-        "typescript"
+        "eslint"
       ]
     }
   }
