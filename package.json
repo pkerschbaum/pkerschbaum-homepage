@@ -48,10 +48,10 @@
       "injected": true
     }
   },
-  "packageManager": "pnpm@9.14.2",
+  "packageManager": "pnpm@10.6.3",
   "engines": {
     "npm": "0.0.0",
-    "pnpm": "9.14.2"
+    "pnpm": "10.6.3"
   },
   "pnpm": {
     "updateConfig": {

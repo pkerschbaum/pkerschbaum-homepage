@@ -6,12 +6,15 @@ settings:
 
 patchedDependencies:
   '@wyw-in-js/transform@0.5.5':
-    hash: vxjovanejsd7hhs2m2xao3j3oi
+    hash: 2d8239bfeb9106d6ee5d2f2ad78d42fa03af2dffeb31db6832a1e132b5f41831
     path: patches/@wyw-in-js__transform@0.5.5.patch
 
 importers:
 
   .:
+    dependenciesMeta:
+      '@pkerschbaum-homepage/config-eslint':
+        injected: true
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^15.2.2
@@ -97,9 +100,6 @@ importers:
       typescript:
         specifier: ~5.8.2
         version: 5.8.2
-    dependenciesMeta:
-      '@pkerschbaum-homepage/config-eslint':
-        injected: true
 
   apps/web:
     dependencies:
@@ -4879,7 +4879,7 @@ snapshots:
       '@mui/utils': 6.4.6(@types/react@18.3.18)(react@19.0.0)
       '@wyw-in-js/processor-utils': 0.5.5
       '@wyw-in-js/shared': 0.5.5
-      '@wyw-in-js/transform': 0.5.5(patch_hash=vxjovanejsd7hhs2m2xao3j3oi)(typescript@5.8.2)
+      '@wyw-in-js/transform': 0.5.5(patch_hash=2d8239bfeb9106d6ee5d2f2ad78d42fa03af2dffeb31db6832a1e132b5f41831)(typescript@5.8.2)
       clsx: 2.1.1
       cssesc: 3.0.0
       csstype: 3.1.3
@@ -4898,7 +4898,7 @@ snapshots:
       '@babel/core': 7.26.10
       '@pigment-css/react': 0.0.30(@types/react@18.3.18)(react@19.0.0)(typescript@5.8.2)
       '@wyw-in-js/shared': 0.5.5
-      '@wyw-in-js/transform': 0.5.5(patch_hash=vxjovanejsd7hhs2m2xao3j3oi)(typescript@5.8.2)
+      '@wyw-in-js/transform': 0.5.5(patch_hash=2d8239bfeb9106d6ee5d2f2ad78d42fa03af2dffeb31db6832a1e132b5f41831)(typescript@5.8.2)
       babel-plugin-define-var: 0.1.0
       unplugin: 1.16.1
     transitivePeerDependencies:
@@ -5500,7 +5500,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wyw-in-js/transform@0.5.5(patch_hash=vxjovanejsd7hhs2m2xao3j3oi)(typescript@5.8.2)':
+  '@wyw-in-js/transform@0.5.5(patch_hash=2d8239bfeb9106d6ee5d2f2ad78d42fa03af2dffeb31db6832a1e132b5f41831)(typescript@5.8.2)':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/generator': 7.26.10
