@@ -1,6 +1,6 @@
 import { styled } from '@pigment-css/react';
 import dayjs from 'dayjs';
-import Link from 'next/link.js';
+import Link from 'next/link';
 import type React from 'react';
 
 import { SocialMediaLinks } from '#pkg/components/footer/SocialMediaLinks.jsx';

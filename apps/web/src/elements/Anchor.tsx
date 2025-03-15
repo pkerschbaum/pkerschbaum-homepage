@@ -1,4 +1,4 @@
-import Link from 'next/link.js';
+import Link from 'next/link';
 import React from 'react';
 
 export type AnchorProps = React.ComponentProps<typeof Link> & {
