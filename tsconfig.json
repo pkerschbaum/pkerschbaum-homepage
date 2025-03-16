@@ -3,6 +3,7 @@
     { "path": "./apps/web/tsconfig.project.json" },
     { "path": "./packages/mdx/tsconfig.project.json" },
     { "path": "./packages/mdx-blog/tsconfig.project.json" },
-    { "path": "./platform/superturbo/tsconfig.project.json" }
+    { "path": "./platform/superturbo/tsconfig.project.json" },
+    { "path": "./test/e2e-test/tsconfig.project.json" }
   ]
 }

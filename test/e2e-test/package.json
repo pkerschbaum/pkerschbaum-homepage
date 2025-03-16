@@ -1,0 +1,26 @@
+{
+  "name": "@pkerschbaum-homepage/e2e-test",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
+  "scripts": {
+    "build": "pnpm run internal:compile",
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "e2e-test": "playwright test --config ./src/playwright.config.ts",
+    "internal:compile": "tsc -p ./tsconfig.project.json",
+    "lint": "pnpm run lint:file .",
+    "lint:file": "eslint --max-warnings 0",
+    "lint:fix": "pnpm run lint --fix",
+    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
+    "nuke:artifacts": "del-cli dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@pkerschbaum/fetch-sitemap-locations": "^1.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@types/node": "^22.13.10"
+  }
+}
