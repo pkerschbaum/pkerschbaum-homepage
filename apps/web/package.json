@@ -33,6 +33,7 @@
     "@pkerschbaum-homepage/mdx": "workspace:*",
     "@pkerschbaum-homepage/mdx-blog": "workspace:*",
     "@pkerschbaum-homepage/react-utils": "workspace:*",
+    "@pkerschbaum-homepage/ui-utils": "workspace:*",
     "@pkerschbaum/commons-ecma": "^2.4.1",
     "@types/mdast": "^4.0.4",
     "acorn": "^8.14.1",

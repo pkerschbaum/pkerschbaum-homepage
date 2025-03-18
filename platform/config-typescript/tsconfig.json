@@ -3,7 +3,7 @@
 
   "compilerOptions": {
     /* Language and Environment */
-    "target": "ES2018",
+    "target": "ES2019",
 
     /* Modules */
     "module": "node16",

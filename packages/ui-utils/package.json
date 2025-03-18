@@ -1,0 +1,25 @@
+{
+  "name": "@pkerschbaum-homepage/ui-utils",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "scripts": {
+    "build": "pnpm run internal:compile",
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "internal:compile": "tsc -p ./tsconfig.project.json",
+    "lint": "pnpm run lint:file .",
+    "lint:file": "eslint --max-warnings 0",
+    "lint:fix": "pnpm run lint --fix",
+    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
+    "nuke:artifacts": "del-cli dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "tiny-invariant": "^1.3.3"
+  }
+}

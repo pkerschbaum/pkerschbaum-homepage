@@ -1,0 +1,11 @@
+{
+  "extends": "@pkerschbaum-homepage/config-typescript/tsconfig.json",
+  "compilerOptions": {
+    /* Modules */
+    "rootDir": "./src",
+
+    /* Emit */
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"]
+}

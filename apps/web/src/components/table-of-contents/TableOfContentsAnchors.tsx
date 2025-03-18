@@ -5,10 +5,10 @@ import invariant from 'tiny-invariant';
 
 import type { Heading } from '@pkerschbaum-homepage/mdx/schema';
 import { useMediaMatch } from '@pkerschbaum-homepage/react-utils/react.utils.jsx';
+import { uiUtils } from '@pkerschbaum-homepage/ui-utils/ui.utils';
 
 import { TOC_QUERY } from '#pkg/constants-browser.js';
 import { Anchor } from '#pkg/elements/index.js';
-import { uiUtils } from '#pkg/utils/ui.utils.js';
 
 export type TableOfContentsAnchorsProps = {
   headings: Heading[];
