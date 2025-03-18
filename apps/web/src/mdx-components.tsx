@@ -6,10 +6,11 @@ import React from 'react';
 import { CheckCircle, Clipboard } from 'react-feather';
 import invariant from 'tiny-invariant';
 
+import { reactUtils } from '@pkerschbaum-homepage/react-utils/react.utils.jsx';
+
 import { FancyAnchor, type FancyAnchorProps } from '#pkg/components/fancy-anchor/index.js';
 import { Classes, ColorTheme, DataAttribute } from '#pkg/constants-browser.js';
 import { Anchor, type AnchorProps, Button } from '#pkg/elements/index.js';
-import { reactUtils } from '#pkg/utils/react.utils.jsx';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   let currentSectionHeadingId = {

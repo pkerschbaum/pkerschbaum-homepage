@@ -1,0 +1,30 @@
+{
+  "name": "@pkerschbaum-homepage/react-utils",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#pkg/*": "./dist/*"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
+  },
+  "scripts": {
+    "build": "pnpm run internal:compile",
+    "dev": "pnpm run build --watch --preserveWatchOutput",
+    "internal:compile": "tsc -p ./tsconfig.project.json",
+    "lint": "pnpm run lint:file .",
+    "lint:file": "eslint --max-warnings 0",
+    "lint:fix": "pnpm run lint --fix",
+    "nuke": "pnpm run nuke:artifacts && del-cli node_modules",
+    "nuke:artifacts": "del-cli dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-is": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-is": "^19.0.0"
+  }
+}

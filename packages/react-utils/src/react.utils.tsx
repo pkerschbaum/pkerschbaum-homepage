@@ -71,7 +71,7 @@ function getNodeText(node: React.ReactNode): string {
 export function useMediaMatch(query: string): boolean | 'SSR' {
   const matchMedia = React.useMemo<MediaQueryList | undefined>(() => {
     if (typeof window === 'undefined') {
-      return undefined;
+      return;
     }
     return window.matchMedia(query);
   }, [query]);

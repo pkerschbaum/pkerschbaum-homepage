@@ -124,6 +124,9 @@ importers:
       '@pkerschbaum-homepage/mdx-blog':
         specifier: workspace:*
         version: link:../../packages/mdx-blog
+      '@pkerschbaum-homepage/react-utils':
+        specifier: workspace:*
+        version: link:../../packages/react-utils
       '@pkerschbaum/commons-ecma':
         specifier: ^2.4.1
         version: 2.4.1
@@ -307,6 +310,22 @@ importers:
       '@types/node':
         specifier: ^22.13.10
         version: 22.13.10
+
+  packages/react-utils:
+    dependencies:
+      react:
+        specifier: ^19.0.0
+        version: 19.0.0
+      react-is:
+        specifier: ^19.0.0
+        version: 19.0.0
+    devDependencies:
+      '@types/react':
+        specifier: ^18
+        version: 18.3.18
+      '@types/react-is':
+        specifier: ^19.0.0
+        version: 19.0.0
 
   platform/config-eslint: {}
 

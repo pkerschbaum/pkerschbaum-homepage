@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
 
+import { useIsMounted } from '@pkerschbaum-homepage/react-utils/react.utils.jsx';
+
 import { DataAttribute, IsAnimationEnabled } from '#pkg/constants-browser.js';
-import { useIsMounted } from '#pkg/utils/react.utils.jsx';
 
 export const EnableAnimationsAfterHydration: React.FC = () => {
   const isMounted = useIsMounted();
