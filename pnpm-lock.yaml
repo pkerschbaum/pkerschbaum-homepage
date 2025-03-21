@@ -101,7 +101,7 @@ importers:
         specifier: ~5.8.2
         version: 5.8.2
 
-  apps/web:
+  apps/pkerschbaum.com:
     dependencies:
       '@fontsource-variable/rubik':
         specifier: ^5.2.5

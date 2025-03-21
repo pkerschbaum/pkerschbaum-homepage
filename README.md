@@ -26,7 +26,7 @@
 
 ### Code Organization
 
-- [`./apps/web`](./apps/web): the homepage
+- [`./apps/pkerschbaum.com`](./apps/pkerschbaum.com): the homepage
 - [`./packages`](./packages): libraries
 - [`./platform`](./platform): configurations and tools for the monorepo
 
@@ -60,7 +60,7 @@
 
 See `scripts` of [`./package.json`](./package.json) for available scripts in the workspace.
 
-To fetch the favicons for all articles, run `internal:fetch-favicons` and `internal:generate-css-modules` in [`./apps/web`](./apps/web).
+To fetch the favicons for all articles, run `internal:fetch-favicons` and `internal:generate-css-modules` in [`./apps/pkerschbaum.com`](./apps/pkerschbaum.com).
 
 > **Note:** This command will also run Puppeteer.  
 > If you have some errors with Puppeteer, like "error while loading shared libraries: libatk-1.0.so.0", make sure you have installed all dependencies on your system necessary to run Puppeteer/Chrome.  

@@ -116,7 +116,7 @@ module.exports = {
       ...baseEslintConfig.settings?.next,
       ...reactEslintConfig.settings?.next,
       ...nextEslintConfig.settings?.next,
-      rootDir: 'apps/web/',
+      rootDir: 'apps/pkerschbaum.com/',
     },
   },
 };

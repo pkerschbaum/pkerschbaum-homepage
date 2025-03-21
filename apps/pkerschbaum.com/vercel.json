@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd ../../ && pnpm --version && pnpm run build && cd ./apps/web && pnpm run build:next",
+  "buildCommand": "cd ../../ && pnpm --version && pnpm run build && cd ./apps/pkerschbaum.com && pnpm run build:next",
   "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
   "devCommand": "pnpm dev --port $PORT"
