@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "cd ../../ && pnpm --version && pnpm run build && cd ./apps/physio-kerschbaum.at && pnpm run build:next",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "devCommand": "pnpm dev --port $PORT"
+}

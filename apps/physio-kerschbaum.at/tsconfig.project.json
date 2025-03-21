@@ -1,0 +1,33 @@
+{
+  "extends": "@pkerschbaum-homepage/config-typescript/tsconfig.json",
+  "compilerOptions": {
+    /* Type Checking*/
+    "strictNullChecks": true,
+
+    /* Language and Environment */
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+
+    /* Modules */
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
+
+    /* Emit */
+    "noEmit": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Editor Support */
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "next-env-custom.d.ts", "dist/types/**/*.ts", "src/**/*"],
+  "exclude": ["**/node_modules"]
+}
