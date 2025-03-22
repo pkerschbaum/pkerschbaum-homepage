@@ -103,9 +103,6 @@ importers:
 
   apps/physio-kerschbaum.at:
     dependencies:
-      '@fontsource-variable/rubik':
-        specifier: ^5.2.5
-        version: 5.2.5
       '@pigment-css/react':
         specifier: ^0.0.30
         version: 0.0.30(@types/react@18.3.18)(react@19.0.0)(typescript@5.8.2)

@@ -220,7 +220,7 @@ const RootContainer = styled.div`
   --app-box-width: var(--box-width-md);
   --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
 
-  /* stylelint-disable-next-line media-query-no-invalid */
+  /* stylelint-disable-next-line media-query-no-invalid -- works */
   @media ${TOC_QUERY} {
     --app-box-width: var(--box-width-lg);
   }

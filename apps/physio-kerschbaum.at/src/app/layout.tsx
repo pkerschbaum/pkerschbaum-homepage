@@ -1,11 +1,9 @@
 import './cascade-layers-definition.css';
 import '@pigment-css/react/styles.css';
-import '@fontsource-variable/rubik';
 
-import { styled } from '@pigment-css/react';
+import { css } from '@pigment-css/react';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
 import type React from 'react';
 
 import { cssReset, cssBase } from '#pkg/app/global-styles.js';
@@ -14,30 +12,13 @@ import { Header } from '#pkg/components/header/index.js';
 import { config } from '#pkg/config.js';
 import { Classes, DataAttribute, IsAnimationEnabled } from '#pkg/constants-browser.js';
 
-const fontMonospace = localFont({
-  src: [
-    {
-      path: '../assets/fonts/CascadiaMono.woff2',
-      style: 'normal',
-      weight: '200 700',
-    },
-    {
-      path: '../assets/fonts/CascadiaMonoItalic.woff2',
-      style: 'italic',
-      weight: '200 700',
-    },
-  ],
-  display: 'swap',
-  variable: '--font-family-monospace',
-});
-
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className={fontMonospace.variable}>
+    <html lang="en">
       <head>
         {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
         <noscript>
@@ -87,13 +68,30 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body>
         <div id="__next">
-          <RootContainer>
+          <div
+            className={css`
+              --app-padding-inline: calc(2 * var(--spacing-base));
+              --app-box-width: 800px;
+              --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
+
+              display: flex;
+              flex-direction: column;
+              gap: calc(2 * var(--spacing-base));
+              align-items: stretch;
+
+              max-width: var(--app-max-width);
+              min-height: 100%;
+              padding-block-start: calc(2 * var(--spacing-base));
+              padding-block-end: calc(3 * var(--spacing-base));
+              margin: 0 auto;
+            `}
+          >
             <Header>TODO</Header>
 
-            {children}
+            <main>{children}</main>
 
             <Footer />
-          </RootContainer>
+          </div>
         </div>
 
         <Analytics />
@@ -115,21 +113,3 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
-
-const RootContainer = styled.div`
-  --app-padding-inline: calc(2 * var(--spacing-base));
-  --app-box-width: var(--box-width-md);
-  --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
-
-  display: flex;
-  flex-direction: column;
-  gap: calc(2 * var(--spacing-base));
-  align-items: stretch;
-
-  max-width: var(--app-max-width);
-  min-height: 100%;
-  padding-block-start: calc(2 * var(--spacing-base));
-  padding-block-end: calc(3 * var(--spacing-base));
-  padding-inline: var(--app-padding-inline);
-  margin: 0 auto;
-`;
