@@ -1,8 +1,11 @@
+import type { Route } from 'next';
 import Link from 'next/link';
 import React from 'react';
 
+export type AnchorRoute = Route;
+
 export type AnchorProps = React.ComponentProps<typeof Link> & {
-  href: string;
+  href: AnchorRoute | URL;
   style?: React.CSSProperties;
 };
 

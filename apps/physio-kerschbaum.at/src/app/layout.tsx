@@ -9,6 +9,8 @@ import type React from 'react';
 import { cssReset, cssBase } from '#pkg/app/global-styles.js';
 import { Footer } from '#pkg/components/footer/index.js';
 import { Header } from '#pkg/components/header/index.js';
+import { HeaderNav } from '#pkg/components/header-nav/index.js';
+import { Sidenav, SidenavContextProvider } from '#pkg/components/sidenav/index.js';
 import { config } from '#pkg/config.js';
 import { Classes, DataAttribute, IsAnimationEnabled } from '#pkg/constants-browser.js';
 
@@ -68,30 +70,37 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body>
         <div id="__next">
-          <div
-            className={css`
-              --app-padding-inline: calc(2 * var(--spacing-base));
-              --app-box-width: 800px;
-              --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
+          <SidenavContextProvider>
+            <div
+              className={css`
+                --app-padding-block: calc(2 * var(--spacing-base));
+                --app-padding-inline: calc(2 * var(--spacing-base));
+                --app-box-width: 800px;
+                --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
 
-              display: flex;
-              flex-direction: column;
-              gap: calc(2 * var(--spacing-base));
-              align-items: stretch;
+                display: flex;
+                flex-direction: column;
+                gap: calc(2 * var(--spacing-base));
+                align-items: stretch;
 
-              max-width: var(--app-max-width);
-              min-height: 100%;
-              padding-block-start: calc(2 * var(--spacing-base));
-              padding-block-end: calc(3 * var(--spacing-base));
-              margin: 0 auto;
-            `}
-          >
-            <Header>TODO</Header>
+                max-width: var(--app-max-width);
+                min-height: 100%;
+                padding-block-start: calc(2 * var(--spacing-base));
+                padding-block-end: calc(3 * var(--spacing-base));
+                margin: 0 auto;
+              `}
+            >
+              <Header>
+                <HeaderNav />
+              </Header>
 
-            <main>{children}</main>
+              <Sidenav />
 
-            <Footer />
-          </div>
+              <main>{children}</main>
+
+              <Footer />
+            </div>
+          </SidenavContextProvider>
         </div>
 
         <Analytics />

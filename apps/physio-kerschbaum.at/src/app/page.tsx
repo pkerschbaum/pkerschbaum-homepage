@@ -2,11 +2,13 @@ import { css } from '@pigment-css/react';
 import type { Metadata } from 'next';
 import type React from 'react';
 
+import { headingIds } from './page-constants';
+
 function HomePage() {
   return (
     <>
       <Section>
-        <h1>Herzlich Willkommen!</h1>
+        <h1 id={headingIds.welcome}>Herzlich Willkommen!</h1>
         <p>
           Gemeinsam an alltäglichen Problemen arbeiten, mit Herz und Spaß bei der Sache - dafür
           stehe ich in der Physiotherapie!
@@ -33,7 +35,7 @@ function HomePage() {
       </Section>
 
       <Section>
-        <h2>Über mich</h2>
+        <h2 id={headingIds.ueberMich}>Über mich</h2>
         <p>
           Mein Name ist Jasmin Kerschbaum. Ich komme ursprünglich aus dem Waldviertel und wohne seit
           einigen Jahren in Wien. Im Jahr 2022 habe ich das Bachelor-Studium Physiotherapie an der
@@ -85,7 +87,7 @@ function HomePage() {
       </Section>
 
       <Section>
-        <h2>Der Weg zur Physiotherapie</h2>
+        <h2 id={headingIds.derWegZurPhysiotherapie}>Der Weg zur Physiotherapie</h2>
         <ol>
           <li>
             <strong>Verordnung vom Arzt:</strong> 10x Neurophysiotherapie/Physiotherapie à 45 Min
@@ -125,7 +127,7 @@ function HomePage() {
       </Section>
 
       <Section>
-        <h2>Kooperierende Ärzt*innen:</h2>
+        <h2 id={headingIds.kooperierendeAerztInnen}>Kooperierende Ärzt*innen:</h2>
         <p>
           Priv.-Doz. Mag. Dr. Georg Dirnberger - Facharzt für Neurologie & Psychologe
           Dominikanerbastei 3, 1010 Wien
@@ -135,7 +137,7 @@ function HomePage() {
       </Section>
 
       <Section>
-        <h2>Leistungen</h2>
+        <h2 id={headingIds.leistungen}>Leistungen</h2>
         <table>
           <tbody>
             <tr>
@@ -159,7 +161,7 @@ function HomePage() {
       </Section>
 
       <Section>
-        <h2>Standort & Kontakt</h2>
+        <h2 id={headingIds.standortKontakt}>Standort & Kontakt</h2>
         <p>
           <strong>Gemeinschaftspraxis &quot;Körperfunk&quot;</strong>
           <br />
@@ -200,11 +202,11 @@ const Section: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       className={css`
         padding-inline: var(--app-padding-inline);
 
-        & > *:is(ol, ul) {
+        & > *:where(ol, ul) {
           margin-block-start: 0.25em;
         }
 
-        & > *:is(h1, h2, h3, h4, h5, h6) {
+        & > *:where(h1, h2, h3, h4, h5, h6) {
           padding-block-start: 32px;
         }
         & > *:first-child {

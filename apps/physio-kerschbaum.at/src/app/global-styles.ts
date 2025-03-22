@@ -150,6 +150,29 @@ export const cssBase = css`
       --animation-hide: ${Animations.HIDE};
       --animation-slide-left: ${Animations.SLIDE_LEFT};
       --animation-slide-right: ${Animations.SLIDE_RIGHT};
+
+      /* https://www.joshwcomeau.com/shadow-palette/ */
+      --shadow-color: 0deg 0% 63%;
+      --shadow-elevation-low:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+        0.2px 0.4px 0.7px hsl(var(--shadow-color) / 23%),
+        0.4px 0.8px 1.3px hsl(var(--shadow-color) / 46%);
+      --shadow-elevation-medium:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+        0.5px 1px 1.7px hsl(var(--shadow-color) / 18%),
+        1.1px 2px 3.4px hsl(var(--shadow-color) / 36%),
+        2.2px 4.1px 7px hsl(var(--shadow-color) / 54%);
+      --shadow-elevation-high:
+        0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0%),
+        1.1px 2.1px 3.6px hsl(var(--shadow-color) / 8%),
+        2px 3.7px 6.3px hsl(var(--shadow-color) / 17%),
+        2.9px 5.5px 9.3px hsl(var(--shadow-color) / 25%),
+        4.1px 7.6px 13px hsl(var(--shadow-color) / 34%),
+        5.7px 10.6px 18.1px hsl(var(--shadow-color) / 42%),
+        7.8px 14.7px 25px hsl(var(--shadow-color) / 5%),
+        10.8px 20.3px 34.5px hsl(var(--shadow-color) / 59%);
+      --shadow-style: 4px 4px 0 0 var(--color-fg);
+      --shadow-style-elevation: 6px 6px 0 0 var(--color-fg);
     }
 
     #__next {
