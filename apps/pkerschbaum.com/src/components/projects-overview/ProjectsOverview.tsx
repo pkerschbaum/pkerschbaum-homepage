@@ -27,7 +27,7 @@ const ProjectsOverviewContainer = styled.div`
 
   width: 100%;
 
-  /* stylelint-disable-next-line media-query-no-invalid */
+  /* stylelint-disable-next-line media-query-no-invalid -- works */
   @media ${QUERIES.laptopAndUp} {
     grid-template-columns: 1fr 1fr;
   }

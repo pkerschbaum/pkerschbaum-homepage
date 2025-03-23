@@ -5,7 +5,6 @@
   - [Code Organization](#code-organization)
   - [Build \& Run](#build--run)
   - [Additional commands for development](#additional-commands-for-development)
-  - [Updating TypeScript](#updating-typescript)
 
 ## Development
 

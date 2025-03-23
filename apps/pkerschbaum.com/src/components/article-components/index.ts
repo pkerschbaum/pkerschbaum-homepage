@@ -13,7 +13,7 @@ export const ArticleContainer = styled.div`
 `;
 
 export const TocAndArticle = styled.div`
-  /* stylelint-disable-next-line media-query-no-invalid */
+  /* stylelint-disable-next-line media-query-no-invalid -- works */
   @media ${TOC_QUERY} {
     grid-template-areas: 'article toc';
     grid-template-columns: 1fr 250px;
@@ -28,7 +28,7 @@ export const TocAndArticle = styled.div`
 `;
 
 export const TocAside = styled.aside`
-  /* stylelint-disable-next-line media-query-no-invalid */
+  /* stylelint-disable-next-line media-query-no-invalid -- works */
   @media ${TOC_QUERY} {
     display: block;
   }

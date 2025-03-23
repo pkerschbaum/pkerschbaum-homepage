@@ -56,6 +56,9 @@ export default function RootLayout({ children }: LayoutProps) {
       {...{ [DataAttribute.IS_SCROLLED]: IsScrolled.NO }}
     >
       <head>
+        {/* disable automatic (faulty) detection of phone numbers on Safari */}
+        <meta name="format-detection" content="telephone=no" />
+
         {/* favicons block generated with https://realfavicongenerator.net */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
@@ -220,7 +223,7 @@ const RootContainer = styled.div`
   --app-box-width: var(--box-width-md);
   --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
 
-  /* stylelint-disable-next-line media-query-no-invalid */
+  /* stylelint-disable-next-line media-query-no-invalid -- works */
   @media ${TOC_QUERY} {
     --app-box-width: var(--box-width-lg);
   }

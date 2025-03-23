@@ -16,7 +16,7 @@ export const cssReset = css`
     /*
      * 2. Remove default margin
      */
-    * {
+    *:not(p, ul, ol) {
       margin: 0;
     }
 
@@ -121,25 +121,21 @@ export const cssBase = css`
 
       /* design tokens */
       --color-white: rgb(250 250 250); /* https://web.dev/prefers-color-scheme/#avoid-pure-white */
-      --color-black-hsl: 225, 6%, 13%;
-      --color-black: hsl(var(--color-black-hsl));
-      --color-bluegray-hsl: 230, 16%, 17%;
-      --color-bluegray: hsl(var(--color-bluegray-hsl));
+      --color-black: hsl(225deg 6% 13%);
       --color-darkgrey: hsl(0deg 0% 30%);
-      --color-grey: hsl(0deg 0% 65%);
-      --color-lightgrey: hsl(0deg 0% 85%);
       --color-verylightgrey: hsl(0deg 0% 88%);
-      --color-darkteal: hsl(180deg 100% 25%);
-      --color-teal: hsl(180deg 100% 29%);
-      --color-lightteal: hsl(180deg 100% 45%);
-      --color-verylightteal: hsl(180deg 100% 75%);
+
+      --color-primary: #296257;
+      --color-secondary: #5fb0a1;
+      --color-tertiary: #c6e7e1;
+      --color-quaternary: #eaf6f4;
 
       --color-fg: var(--color-black);
       --color-fg-less-emphasized: var(--color-darkgrey);
-      --color-fg-interactive: var(--color-teal);
+      --color-fg-interactive: var(--color-primary);
       --color-bg: var(--color-white);
       --color-bg-emphasized: var(--color-verylightgrey);
-      --color-bg-interactive: var(--color-verylightteal);
+      --color-bg-interactive: var(--color-secondary);
 
       --font-size-sm: 0.85rem;
       --font-size-base: 1rem;
@@ -150,10 +146,6 @@ export const cssBase = css`
       --font-size-xxxxl: 2rem;
       --font-weight-bold: 700;
       --spacing-base: 8px;
-      --box-width-lg: 1050px;
-      --box-width-md: 800px;
-      --box-width-sm: 600px;
-      --image-filter: grayscale(0%);
 
       --animation-hide: ${Animations.HIDE};
       --animation-slide-left: ${Animations.SLIDE_LEFT};
@@ -183,39 +175,6 @@ export const cssBase = css`
       --shadow-style-elevation: 6px 6px 0 0 var(--color-fg);
     }
 
-    /* re-colorize and darken photographic images (https://web.dev/prefers-color-scheme/#re-colorize-and-darken-photographic-images) */
-    img:not([src*='.svg']) {
-      filter: var(--image-filter);
-    }
-
-    #__next {
-      font-family:
-        'Rubik Variable',
-        'Segoe UI',
-        -apple-system,
-        BlinkMacSystemFont,
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        'Fira Sans',
-        'Droid Sans',
-        'Helvetica Neue',
-        sans-serif;
-    }
-
-    ul,
-    ol {
-      padding: 0;
-    }
-    ul > li {
-      text-indent: 0;
-      list-style-type: none;
-    }
-    ol > li {
-      text-indent: 0;
-    }
-
     a {
       color: inherit;
     }
@@ -237,12 +196,6 @@ export const cssBase = css`
       cursor: pointer;
     }
 
-    p,
-    ul,
-    ol {
-      font-size: var(--font-size-base);
-    }
-
     h1,
     h2,
     h3 {
@@ -259,23 +212,25 @@ export const cssBase = css`
       font-size: var(--font-size-xl);
     }
 
-    h1 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       text-wrap: balance;
     }
 
-    code {
-      /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
-      font-family:
-        var(--font-family-monospace), 'Fira Mono', 'DejaVu Sans Mono', Menlo, Consolas,
-        'Liberation Mono', Monaco, 'Lucida Console', monospace;
-      font-size: var(--font-size-sm);
+    /* table border of 1px solid var(--color-black) */
+    table {
+      border-spacing: 0;
+      border-collapse: collapse;
     }
-
-    *:not(pre) > code {
-      padding: calc(0.5 * var(--spacing-base)) calc(0.75 * var(--spacing-base));
-      font-size: 0.9em;
-      background-color: var(--color-bg-emphasized);
-      border-radius: 4px;
+    th,
+    td {
+      padding-block: 0.2em;
+      padding-inline: 0.5em;
+      border: 1px solid var(--color-fg);
     }
   }
 `;

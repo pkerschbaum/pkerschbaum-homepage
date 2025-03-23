@@ -1,35 +1,19 @@
 import './cascade-layers-definition.css';
 import '@pigment-css/react/styles.css';
-import '@fontsource-variable/rubik';
 
-import { styled } from '@pigment-css/react';
+import { css } from '@pigment-css/react';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
 import type React from 'react';
 
+import { manrope } from '#pkg/app/fonts.jsx';
 import { cssReset, cssBase } from '#pkg/app/global-styles.js';
-import { Footer } from '#pkg/components/footer/index.js';
+import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration.jsx';
 import { Header } from '#pkg/components/header/index.js';
+import { HeaderNav } from '#pkg/components/header-nav/index.js';
+import { Sidenav, SidenavContextProvider } from '#pkg/components/sidenav/index.js';
 import { config } from '#pkg/config.js';
 import { Classes, DataAttribute, IsAnimationEnabled } from '#pkg/constants-browser.js';
-
-const fontMonospace = localFont({
-  src: [
-    {
-      path: '../assets/fonts/CascadiaMono.woff2',
-      style: 'normal',
-      weight: '200 700',
-    },
-    {
-      path: '../assets/fonts/CascadiaMonoItalic.woff2',
-      style: 'italic',
-      weight: '200 700',
-    },
-  ],
-  display: 'swap',
-  variable: '--font-family-monospace',
-});
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -37,8 +21,11 @@ type LayoutProps = {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" className={fontMonospace.variable}>
+    <html lang="en" className={manrope.className}>
       <head>
+        {/* disable automatic (faulty) detection of phone numbers on Safari */}
+        <meta name="format-detection" content="telephone=no" />
+
         {/* if JS is disabled, apply "display: none" to all elements which the JS_REQUIRED class is applied to */}
         <noscript>
           <style
@@ -86,14 +73,39 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body>
-        <div id="__next">
-          <RootContainer>
-            <Header>TODO</Header>
+        <div
+          id="__next"
+          className={css`
+            --app-padding-block: calc(2 * var(--spacing-base));
+            --app-padding-inline: calc(2 * var(--spacing-base));
+            --app-box-width: 800px;
+            --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
 
-            {children}
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
 
-            <Footer />
-          </RootContainer>
+            min-height: 100%;
+          `}
+        >
+          <EnableAnimationsAfterHydration />
+
+          <SidenavContextProvider>
+            <Header>
+              <HeaderNav />
+            </Header>
+
+            <Sidenav />
+
+            <main
+              className={css`
+                position: relative;
+                top: 64px;
+              `}
+            >
+              {children}
+            </main>
+          </SidenavContextProvider>
         </div>
 
         <Analytics />
@@ -115,21 +127,3 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
 };
-
-const RootContainer = styled.div`
-  --app-padding-inline: calc(2 * var(--spacing-base));
-  --app-box-width: var(--box-width-md);
-  --app-max-width: calc(var(--app-box-width) + 2 * var(--app-padding-inline));
-
-  display: flex;
-  flex-direction: column;
-  gap: calc(2 * var(--spacing-base));
-  align-items: stretch;
-
-  max-width: var(--app-max-width);
-  min-height: 100%;
-  padding-block-start: calc(2 * var(--spacing-base));
-  padding-block-end: calc(3 * var(--spacing-base));
-  padding-inline: var(--app-padding-inline);
-  margin: 0 auto;
-`;

@@ -10,6 +10,7 @@ module.exports = {
     'rule-empty-line-before': null,
     'selector-id-pattern': null,
     'no-empty-source': null,
+    'no-descending-specificity': null,
   },
   overrides: [
     {
