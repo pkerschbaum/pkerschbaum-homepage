@@ -23,7 +23,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fontsource-variable/rubik": "^5.2.5",
     "@pigment-css/react": "^0.0.30",
     "@pkerschbaum-homepage/react-utils": "workspace:*",
     "@pkerschbaum-homepage/ui-utils": "workspace:*",
