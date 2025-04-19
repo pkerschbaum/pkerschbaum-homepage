@@ -1,0 +1,200 @@
+---
+title: Testing Package Consumption Scenarios with pkg-consumption-test
+published: true
+publishedAtISO: '2025-04-19T12:00:00.000Z' # Assuming today's date
+lastUpdatedAtISO: '2025-04-19T12:00:00.000Z' # Assuming today's date
+description: How to automatically test if your npm package works correctly in various JavaScript environments like Node.js CJS/ESM, TypeScript, browsers, etc.
+tags: ['testing', 'npm', 'package', 'nodejs', 'typescript', 'javascript', 'pkg-consumption-test']
+---
+
+As package authors, we often need our creations to be versatile, working seamlessly across a variety of project setups and JavaScript runtimes. Maybe your package needs to function correctly in:
+
+- Node.js using CommonJS (CJS) modules.
+- Node.js using ECMAScript Modules (ESM).
+- A TypeScript project targeting CJS, compiling without errors.
+- A TypeScript project targeting ESM, compiling without errors.
+- Modern web browsers.
+- The Deno runtime.
+- ...and potentially many other environments.
+
+Manually testing your package in each of these "consumption scenarios" can quickly become tedious and error-prone. Automating this process is desirable.
+
+## Automating Consumption Tests with `@pkerschbaum/pkg-consumption-test`
+
+One tool that can help automate this is <FancyAnchor href="https://www.npmjs.com/package/@pkerschbaum/pkg-consumption-test">`@pkerschbaum/pkg-consumption-test`</FancyAnchor>. It is designed to automate the testing of these package consumption scenarios.
+
+Here's how it works under the hood:
+
+1.  **Starts a private package registry:** It spins up a local instance of <FancyAnchor href="https://verdaccio.org/">Verdaccio</FancyAnchor>.
+2.  **Publishes your package:** It publishes the package you're testing to this private registry.
+3.  **Runs consumption scenarios:** It executes predefined test scenarios one by one. Each scenario typically involves setting up a minimal project that installs _your_ package from the private registry and then tries to use it.
+4.  **Stops the registry:** Once all scenarios are complete, it shuts down the private registry.
+
+This approach mimics how users consume your package – by installing it from a registry (<FancyAnchor href="https://npmjs.com">npmjs.com</FancyAnchor> in the real world, the private Verdaccio instance during testing). This helps ensure that your package behaves as expected for your consumers.
+
+You can see a real-world example of how this tool was integrated into the `tiny-invariant` package in <FancyAnchor href="https://github.com/alexreardon/tiny-invariant/pull/164">this pull request</FancyAnchor>.
+
+## Setup
+
+The setup involves the following steps:
+
+1.  Install the package as a dev dependency:
+
+    ```bash
+    npm add --save-dev @pkerschbaum/pkg-consumption-test
+    # or using pnpm
+    pnpm add --save-dev @pkerschbaum/pkg-consumption-test
+    # or using yarn
+    yarn add --dev @pkerschbaum/pkg-consumption-test
+    ```
+
+2.  Add a script to your `package.json` to run the tests. You'll need to specify your package's name and the directory where your test scenarios will live.
+
+    ```jsonc
+    {
+      // ... other package.json contents
+      "scripts": {
+        // ... other scripts
+        "test:pkg-consumption": "pkg-consumption-test --packageName="your-package-name" --pathToScenariosDirectory="./test-pkg-consumption-scenarios""
+      }
+      // ...
+    }
+    ```
+
+    Replace `"your-package-name"` with the actual name of your package and adjust the path to the scenarios directory if needed.
+
+At this point, you can run `npm run test:pkg-consumption` (or the equivalent for your package manager). You'll see the tool start the private registry and attempt to publish your package. It won't run any tests yet, because we haven't defined any scenarios.
+
+## Adding Scenarios
+
+Scenarios live in the directory specified by `--pathToScenariosDirectory`. Each subdirectory within this directory represents a single consumption scenario.
+
+Common scenarios include testing:
+
+- **Runtime Execution:** Does the package run correctly in Node.js (both CJS and ESM), Deno, or even a browser environment (potentially using a tool like Playwright within the scenario)?
+- **TypeScript Compilation:** Does the package integrate correctly into a TypeScript project without causing compilation errors when targeting different module systems or configurations?
+
+You can see several examples of such scenarios in <FancyAnchor href="https://github.com/pkerschbaum/packages/tree/main/packages/typescript-eslint-rules-requiring-type-info/test-pkg-consumption-scenarios">this repository</FancyAnchor>.
+
+Let's look at a couple of examples.
+
+### Example 1: Testing Runtime in Node.js ESM
+
+Let's create a scenario to test importing and using the package in a Node.js ESM environment. Assume our package is named `my-awesome-lib` and exports `someFunction`.
+
+1.  **Create the scenario directory:**
+
+    ```bash
+    mkdir -p ./test-pkg-consumption-scenarios/run-node-esm/src
+    ```
+
+2.  **Add a `package.json` for the scenario:** This file defines the dependencies needed for the test, primarily your package. Create `./test-pkg-consumption-scenarios/run-node-esm/package.json`:
+
+    ```json
+    {
+      "name": "scenario-run-node-esm",
+      "type": "module", // Important for Node.js ESM
+      "private": true,
+      "dependencies": {
+        "my-awesome-lib": "*" // Install the package being tested
+      },
+      "scripts": {
+        "execute-scenario": "node ./src/test.mjs"
+      }
+    }
+    ```
+
+3.  **Add the test file:** Create `./test-pkg-consumption-scenarios/run-node-esm/src/test.mjs`:
+
+    ```javascript
+    // src/test.mjs
+    import { someFunction } from 'my-awesome-lib';
+    import assert from 'node:assert/strict';
+
+    console.log('Running Node.js ESM scenario...');
+
+    // Example: Call a function from your library and assert its behavior
+    const input = 'world';
+    const expectedOutput = 'Hello, world!';
+    const result = someFunction(input);
+    assert.equal(result, expectedOutput, `someFunction('${input}') failed.`);
+
+    console.log('Node.js ESM scenario passed!');
+    ```
+
+    Replace `someFunction` and the assertions with actual code that uses your library's exports and verifies they work correctly in this ESM context.
+
+### Example 2: Testing TypeScript Compilation (CJS)
+
+Let's create a scenario to verify that our package types work correctly in a TypeScript project targeting CommonJS.
+
+1.  **Create the scenario directory:**
+
+    ```bash
+    mkdir -p ./test-pkg-consumption-scenarios/compile-typescript-cjs/src
+    ```
+
+2.  **Add a `package.json` for the scenario:** Create `./test-pkg-consumption-scenarios/compile-typescript-cjs/package.json`:
+
+    ```json
+    {
+      "name": "scenario-compile-typescript-cjs",
+      "private": true,
+      "dependencies": {
+        "my-awesome-lib": "*"
+      },
+      "devDependencies": {
+        "typescript": "5.8.3" // Use a relevant TypeScript version
+      },
+      "scripts": {
+        "execute-scenario": "tsc"
+      }
+    }
+    ```
+
+3.  **Add a `tsconfig.json`:** Create `./test-pkg-consumption-scenarios/compile-typescript-cjs/tsconfig.json`:
+
+    ```json
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "target": "ES2016",
+        "strict": true,
+        "esModuleInterop": true,
+        "noEmit": true // We only care about type checking, not emitting JS
+      },
+      "include": ["src/**/*"]
+    }
+    ```
+
+4.  **Add the test file:** Create `./test-pkg-consumption-scenarios/compile-typescript-cjs/src/index.ts`:
+
+    ```typescript
+    import { someFunction } from 'my-awesome-lib';
+
+    // Use the imported function to ensure types are checked correctly.
+    // The specific logic isn't crucial; the goal is to make sure
+    // the import resolves and the function signature matches.
+    const result: string = someFunction('test');
+
+    console.log('TypeScript CJS compilation check successful for:', result);
+    ```
+
+Now, when you run `npm run test:pkg-consumption` again, the tool will execute both scenarios.
+It will:
+
+- Start the registry.
+- Publish `my-awesome-lib`.
+- Navigate into the scenario directories.
+- For each scenario:
+  - Run `npm install` which fetches `my-awesome-lib` from the private registry.
+  - Run `npm run execute-scenario`.
+    - If the script exits successfully (exit code 0), the scenario passes. Otherwise, it fails.
+- Stop the registry.
+
+You can add more subdirectories for other scenarios (Node.js CJS, browser environment using Playwright, etc.), each with its own `package.json` and test logic.
+
+## Conclusion
+
+`@pkerschbaum/pkg-consumption-test` provides a structured and automated way to test if your npm packages work reliably across the diverse JavaScript ecosystem. By simulating real-world consumption patterns using a private registry, it helps catch integration issues early before publishing new versions.
