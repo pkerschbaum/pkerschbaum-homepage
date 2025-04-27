@@ -3,11 +3,104 @@ import type { Metadata } from 'next';
 import type React from 'react';
 
 import { merriweather } from '#pkg/app/fonts.jsx';
-import { headingIds } from './page-constants';
+import { headingIds } from '#pkg/app/page-constants.js';
+import photoshooting_11DSC0068 from '#pkg/assets/11-DSC_0068.jpg';
+import photoshooting_15DSC0081 from '#pkg/assets/15-DSC_0081.jpg';
+import photoshooting_20DSC0108 from '#pkg/assets/20-DSC_0108.jpg';
+import photoshooting_24DSC01312 from '#pkg/assets/24-DSC_0131-2.jpg';
+import photoshooting_3DSC0018 from '#pkg/assets/3-DSC_0018.jpg';
+import photoshooting_7DSC0039 from '#pkg/assets/7-DSC_0039.jpg';
+import photoshooting_8DSC0042 from '#pkg/assets/8-DSC_0042.jpg';
+import { ImageCarousel, Slide } from '#pkg/components/image-carousel/index.js';
+import { Image } from '#pkg/elements/Image.jsx';
 
 function HomePage() {
   return (
     <>
+      <Section
+        disablePadding
+        slots={{
+          div: {
+            cssClassName: css`
+              height: 280px;
+
+              @container section (min-width: 570px) {
+                & {
+                  height: 400px;
+                }
+              }
+            `,
+          },
+        }}
+      >
+        <ImageCarousel>
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_3DSC0018}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_7DSC0039}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_8DSC0042}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_11DSC0068}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_15DSC0081}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_20DSC0108}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+        </ImageCarousel>
+      </Section>
       <Section>
         <Heading as="h1" id={headingIds.welcome}>
           Herzlich Willkommen!
@@ -41,6 +134,23 @@ function HomePage() {
         <Heading as="h2" id={headingIds.ueberMich}>
           Über mich
         </Heading>
+        <div
+          className={css`
+            position: relative;
+            height: 400px;
+            margin-inline: calc(-1 * var(--padding-inline));
+          `}
+        >
+          <Image
+            src={photoshooting_24DSC01312}
+            alt=""
+            fill
+            className={css`
+              object-fit: cover;
+              object-position: 50% 25%;
+            `}
+          />
+        </div>
         <p>
           Mein Name ist Jasmin Kerschbaum. Ich komme ursprünglich aus dem Waldviertel und wohne seit
           einigen Jahren in Wien. Im Jahr 2022 habe ich das Bachelor-Studium Physiotherapie an der
@@ -213,10 +323,23 @@ export const metadata: Metadata = {
 
 export default HomePage;
 
-const Section: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+type SectionProps = {
+  children: React.ReactNode;
+  disablePadding?: boolean;
+  slots?: {
+    div?: {
+      cssClassName?: string;
+    };
+  };
+};
+
+const Section: React.FC<SectionProps> = ({ children, disablePadding, slots }) => {
   return (
     <section
       className={css`
+        container-name: section;
+        container-type: inline-size;
+
         &:nth-last-of-type(even) {
           background-color: var(--color-tertiary);
         }
@@ -226,9 +349,9 @@ const Section: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       `}
     >
       <div
-        className={css`
+        className={`${css`
           max-width: var(--app-box-width);
-          padding-inline: var(--app-padding-inline);
+          padding-inline: var(--padding-inline);
           margin-inline: auto;
 
           & > *:where(ol, ul) {
@@ -242,10 +365,14 @@ const Section: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             margin-block-start: 0;
           }
           & > *:last-child {
-            padding-block-end: 32px;
+            padding-block-end: var(--padding-block);
             margin-block-end: 0;
           }
-        `}
+        `} ${slots?.div?.cssClassName}`}
+        style={{
+          '--padding-inline': disablePadding ? '0' : 'var(--app-padding-inline)',
+          '--padding-block': disablePadding ? '0' : '32px',
+        }}
       >
         {children}
       </div>
