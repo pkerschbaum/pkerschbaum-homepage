@@ -139,6 +139,9 @@ function HomePage() {
             position: relative;
             height: 400px;
             margin-inline: calc(-1 * var(--padding-inline));
+            /* Define the container */
+            container-type: size;
+            container-name: image-container;
           `}
         >
           <Image
@@ -147,7 +150,15 @@ function HomePage() {
             fill
             className={css`
               object-fit: cover;
-              object-position: 50% 25%;
+              object-position: 50% 50%;
+
+              @container image-container (aspect-ratio > 1.10) {
+                object-position: 50% 40%;
+              }
+
+              @container image-container (aspect-ratio > 1.25) {
+                object-position: 50% 25%;
+              }
             `}
           />
         </div>
@@ -349,26 +360,31 @@ const Section: React.FC<SectionProps> = ({ children, disablePadding, slots }) =>
       `}
     >
       <div
-        className={`${css`
-          max-width: var(--app-box-width);
-          padding-inline: var(--padding-inline);
-          margin-inline: auto;
+        className={
+          // eslint-disable-next-line prefer-template
+          css`
+            max-width: var(--app-box-width);
+            padding-inline: var(--padding-inline);
+            margin-inline: auto;
 
-          & > *:where(ol, ul) {
-            margin-block-start: 0.25em;
-          }
+            & > *:where(ol, ul) {
+              margin-block-start: 0.25em;
+            }
 
-          & > *:where(h1, h2, h3, h4, h5, h6) {
-            padding-block-start: 32px;
-          }
-          & > *:first-child {
-            margin-block-start: 0;
-          }
-          & > *:last-child {
-            padding-block-end: var(--padding-block);
-            margin-block-end: 0;
-          }
-        `} ${slots?.div?.cssClassName}`}
+            & > *:where(h1, h2, h3, h4, h5, h6) {
+              padding-block-start: 32px;
+            }
+            & > *:first-child {
+              margin-block-start: 0;
+            }
+            & > *:last-child {
+              padding-block-end: var(--padding-block);
+              margin-block-end: 0;
+            }
+          ` +
+          ' ' +
+          slots?.div?.cssClassName
+        }
         style={{
           '--padding-inline': disablePadding ? '0' : 'var(--app-padding-inline)',
           '--padding-block': disablePadding ? '0' : '32px',

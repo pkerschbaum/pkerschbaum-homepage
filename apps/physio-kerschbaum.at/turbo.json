@@ -48,7 +48,15 @@
         "stylelint.config.cjs",
         "tsconfig.project.json"
       ],
-      "outputs": ["src/**"]
+      "outputs": [
+        "src/**",
+        "!src/**/*.jpeg",
+        "!src/**/*.jpg",
+        "!src/**/*.png",
+        "!src/**/*.svg",
+        "!src/**/*.webp",
+        "!src/**/*.gif"
+      ]
     }
   }
 }
