@@ -264,9 +264,18 @@ function HomePage() {
         </Heading>
         <p>
           Priv.-Doz. Mag. Dr. Georg Dirnberger - Facharzt für Neurologie & Psychologe
+          <br />
           Dominikanerbastei 3, 1010 Wien
           <br />
           <a href="https://neurologe-dirnberger.at">https://neurologe-dirnberger.at</a>
+        </p>
+        <p>
+          Dr. Bernadette Calabek-Wohinz - Fachärztin für Neurologie / Traditionell chinesische
+          Medizin
+          <br />
+          Darwingasse 9/5, 1020 Wien
+          <br />
+          <a href="https://www.neurotcm.net">https://www.neurotcm.net</a>
         </p>
       </Section>
 
