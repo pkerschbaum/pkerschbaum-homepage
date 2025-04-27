@@ -37,28 +37,6 @@ function HomePage() {
           <Slide>
             <Image
               alt=""
-              src={photoshooting_3DSC0018}
-              fill
-              style={{
-                objectFit: 'cover',
-              }}
-            />
-          </Slide>
-
-          <Slide>
-            <Image
-              alt=""
-              src={photoshooting_7DSC0039}
-              fill
-              style={{
-                objectFit: 'cover',
-              }}
-            />
-          </Slide>
-
-          <Slide>
-            <Image
-              alt=""
               src={photoshooting_8DSC0042}
               fill
               style={{
@@ -81,7 +59,7 @@ function HomePage() {
           <Slide>
             <Image
               alt=""
-              src={photoshooting_15DSC0081}
+              src={photoshooting_20DSC0108}
               fill
               style={{
                 objectFit: 'cover',
@@ -92,7 +70,29 @@ function HomePage() {
           <Slide>
             <Image
               alt=""
-              src={photoshooting_20DSC0108}
+              src={photoshooting_7DSC0039}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_3DSC0018}
+              fill
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </Slide>
+
+          <Slide>
+            <Image
+              alt=""
+              src={photoshooting_15DSC0081}
               fill
               style={{
                 objectFit: 'cover',
