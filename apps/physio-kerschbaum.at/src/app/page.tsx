@@ -310,7 +310,7 @@ function HomePage() {
           1030 Wien
           <br />
           <br />
-          <strong>Termine:</strong> Montags 14 - 19 Uhr
+          <strong>Termine:</strong> Montags ab 13:30 Uhr
           <br />
           <strong>Terminbuchung unter:</strong>
           <br />
