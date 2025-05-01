@@ -300,7 +300,7 @@ function HomePage() {
           </tbody>
         </table>
         <p>
-          → bei <strong>Hausbesuchen</strong> wird pro Einheit eine zusätzliche Pauschale von 35€
+          → bei <strong>Hausbesuchen</strong> wird pro Einheit eine zusätzliche Pauschale
           verrechnet!
         </p>
       </Section>
