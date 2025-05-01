@@ -323,7 +323,10 @@ function HomePage() {
           <br />
           <strong>Terminbuchung unter:</strong>
           <br />
-          online: Link zur Gemeinschaftspraxis
+          online:{' '}
+          <a href="https://www.koerperfunk.at/termin-buchen-1030">
+            www.koerperfunk.at/termin-buchen-1030
+          </a>
           <br />
           E-Mail: <a href="mailto:physio.kerschbaum@gmx.at">physio.kerschbaum@gmx.at</a>
           <br />
