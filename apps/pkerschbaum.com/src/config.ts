@@ -1,4 +1,5 @@
-/* eslint-disable n/no-process-env -- config.ts is the only place where reading from process.env is allowed */
+/* eslint-disable n/no-process-env -- configs are the only place where reading from process.env is allowed */
+
 import { config as MDXBlogConfig } from '@pkerschbaum-homepage/mdx-blog/config';
 
 const isDevEnvironment = process.env.NODE_ENV === 'development';

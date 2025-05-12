@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import type React from 'react';
 
+import { EnableRRWebRecording } from '#pkg/app/enable-rrweb-recording.jsx';
 import { cssReset, cssBase, cssPrismaTheme } from '#pkg/app/global-styles.js';
 import { EnableAnimationsAfterHydration } from '#pkg/components/enable-animations-after-hydration/EnableAnimationsAfterHydration.jsx';
 import { Footer } from '#pkg/components/footer/index.js';
@@ -186,6 +187,7 @@ export default function RootLayout({ children }: LayoutProps) {
           </RootContainer>
         </div>
 
+        <EnableRRWebRecording />
         <Analytics />
       </body>
     </html>
