@@ -274,6 +274,22 @@ export const cssBase = css`
       text-wrap: balance;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      /*
+        The <header> is absolutely positioned. Without any scroll-margin-top, if a user goes to our website
+        using a fragment pointing to a heading, the user agent would set the scroll position just enough
+        to reveal the heading - but the absolutely-positioned <header> would be over that heading, hiding it.
+
+        That's why we set some scroll-margin-top to so that the user agent scrolls enough to reveal the heading.
+      */
+      scroll-margin-top: 100px;
+    }
+
     code {
       /* monospace font family string taken from @codesandbox/sandpack-themes GitHub Light Theme. Plus Cascadia Code. */
       font-family:

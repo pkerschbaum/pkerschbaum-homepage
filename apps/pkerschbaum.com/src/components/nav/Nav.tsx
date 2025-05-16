@@ -2,9 +2,9 @@ import { styled } from '@pigment-css/react';
 import type React from 'react';
 import { PenTool } from 'react-feather';
 
+import { headingIds } from '#pkg/app/heading-ids.js';
 import { Favicon } from '#pkg/components/favicon/index.js';
-import { Cookie, Topic } from '#pkg/components/icon-library/index.js';
-import { config } from '#pkg/config.js';
+import { Cookie } from '#pkg/components/icon-library/index.js';
 import { DataAttribute, IsScrolled } from '#pkg/constants-browser.js';
 import { Anchor } from '#pkg/elements/index.js';
 
@@ -19,20 +19,14 @@ export const Nav: React.FC = () => {
       </NavHomeAnchor>
 
       <SubNavContainer>
-        <NavAnchor href="/blog">
+        <NavAnchor href={`/#${headingIds.blog}`}>
           <PenTool size="1em" />
           Blog
         </NavAnchor>
-        <NavAnchor href="/tidbits">
+        <NavAnchor href={`/#${headingIds.tidbits}`}>
           <Cookie size="1em" />
           Tidbits
         </NavAnchor>
-        {config.featureFlags.projects && (
-          <NavAnchor href="/projects">
-            <Topic size="1em" />
-            Projects
-          </NavAnchor>
-        )}
       </SubNavContainer>
     </NavContainer>
   );

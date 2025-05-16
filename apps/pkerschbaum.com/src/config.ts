@@ -8,9 +8,6 @@ export const config = {
   isServer: typeof window === 'undefined',
   nextRuntime: process.env['NEXT_RUNTIME'],
   deploymentOrigin: MDXBlogConfig.deploymentOrigin,
-  featureFlags: {
-    projects: isDevEnvironment,
-  },
   socialMedia: {
     handles: {
       gitHub: 'pkerschbaum',
